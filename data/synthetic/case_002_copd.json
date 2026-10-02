@@ -1,0 +1,62 @@
+{
+  "case_id": "CASE-002",
+  "condition": "CO",
+  "diagnoses": [
+    "COPD exacerbation",
+    "Hypertension"
+  ],
+  "medications": [
+    {
+      "name": "Albuterol inhaler",
+      "dose": "2 puffs",
+      "frequency": "as needed"
+    },
+    {
+      "name": "Prednisone",
+      "dose": "40 mg",
+      "frequency": "daily"
+    }
+  ],
+  "labs": {
+    "wbc": "10.8 K/uL",
+    "creatinine": "0.9 mg/dL"
+  },
+  "pending_labs": [
+    "Sputum culture"
+  ],
+  "pending_imaging": [],
+  "pending_consult": [],
+  "medical_stability_status": "stable",
+  "medication_reconciliation_status": "complete",
+  "medication_education_status": "incomplete",
+  "medication_availability_status": "available",
+  "patient_education_status": "complete",
+  "diet_education_status": "not_required",
+  "medical_device_education_status": "complete",
+  "followup_appointment_status": "scheduled",
+  "caregiver_status": "available",
+  "transport_status": "arranged",
+  "financial_status": "no_concern",
+  "case_manager_status": "available",
+  "discharge_summary_status": "signed",
+  "pcp_notification_status": "complete",
+  "physical_function_status": "independent",
+  "home_safety_status": "safe",
+  "outpatient_therapy_status": "not_required",
+  "planned_discharge_window": "morning",
+  "discharge_summary": "Respiratory status improved and patient is stable for discharge.",
+  "free_text_notes": {
+    "case_manager_note": "Patient has not yet received education on the new prednisone prescription."
+  },
+  "expected_barriers": [
+    "B-C02",
+    "B-E01"
+  ],
+  "expected_tasks": [
+    "T-MD02",
+    "T-RN01"
+  ],
+  "distractors": [
+    "The patient experienced mild nausea on the morning of day 2. This was managed with a standard anti-nausea medication and the patient has been eating and drinking normally since."
+  ]
+}
