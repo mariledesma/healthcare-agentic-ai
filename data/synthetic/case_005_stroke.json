@@ -1,0 +1,71 @@
+{
+  "case_id": "CASE-005",
+  "condition": "ST",
+  "diagnoses": [
+    "Ischemic stroke",
+    "Hypertension"
+  ],
+  "medications": [
+    {
+      "name": "Aspirin",
+      "dose": "81 mg",
+      "frequency": "daily"
+    },
+    {
+      "name": "Atorvastatin",
+      "dose": "40 mg",
+      "frequency": "nightly"
+    }
+  ],
+  "labs": {
+    "sodium": "139 mmol/L",
+    "creatinine": "0.9 mg/dL"
+  },
+  "pending_labs": [],
+  "pending_imaging": [],
+  "pending_consult": [],
+  "medical_stability_status": "stable",
+  "medication_reconciliation_status": "complete",
+  "medication_education_status": "complete",
+  "medication_availability_status": "available",
+  "patient_education_status": "incomplete",
+  "diet_education_status": "incomplete",
+  "medical_device_education_status": "complete",
+  "followup_appointment_status": "not_scheduled",
+  "caregiver_status": "unavailable",
+  "transport_status": "arranged",
+  "financial_status": "no_concern",
+  "case_manager_status": "available",
+  "discharge_summary_status": "signed",
+  "pcp_notification_status": "not_complete",
+  "physical_function_status": "requires_assistance",
+  "home_safety_status": "safe",
+  "outpatient_therapy_status": "not_arranged",
+  "planned_discharge_window": "afternoon",
+  "discharge_summary": "Patient is medically stable following ischemic stroke but requires continued rehabilitation and discharge education.",
+  "free_text_notes": {
+    "case_manager_note": "No reliable caregiver is available. Outpatient therapy has not been arranged and stroke education remains incomplete."
+  },
+  "expected_barriers": [
+    "B-C05",
+    "B-E03",
+    "B-E04",
+    "B-F01",
+    "B-F03",
+    "B-F04",
+    "B-F05"
+  ],
+  "expected_tasks": [
+    "T-RN02",
+    "T-RN03",
+    "T-RN06",
+    "T-CM01",
+    "T-CM02",
+    "T-CM03",
+    "T-CM08"
+  ],
+  "distractors": [
+    "The patient had a cataract removed from one eye two years ago. The result was successful. Vision in both eyes is stable and this has no current clinical significance.",
+    "The patient reports a mild seasonal allergy that is well controlled with an over-the-counter antihistamine. This was noted and confirmed to have no interaction with current medications."
+  ]
+}
