@@ -1,0 +1,59 @@
+{
+  "case_id": "CASE-004",
+  "condition": "OR",
+  "diagnoses": [
+    "Status post total hip arthroplasty",
+    "Osteoarthritis"
+  ],
+  "medications": [
+    {
+      "name": "Acetaminophen",
+      "dose": "650 mg",
+      "frequency": "every 6 hours as needed"
+    }
+  ],
+  "labs": {
+    "hemoglobin": "10.8 g/dL",
+    "creatinine": "0.8 mg/dL"
+  },
+  "pending_labs": [],
+  "pending_imaging": [],
+  "pending_consult": [],
+  "medical_stability_status": "stable",
+  "medication_reconciliation_status": "complete",
+  "medication_education_status": "complete",
+  "medication_availability_status": "available",
+  "patient_education_status": "complete",
+  "mobile_device_education_status": "incomplete",
+  "followup_appointment_status": "scheduled",
+  "caregiver_status": "available",
+  "transport_status": "arranged",
+  "financial_status": "no_concern",
+  "case_manager_status": "available",
+  "discharge_summary_status": "signed",
+  "pcp_notification_status": "complete",
+  "physical_function_status": "requires_assistance",
+  "home_safety_status": "unsafe_stairs_no_grab_bars",
+  "outpatient_therapy_status": "not_arranged",
+  "planned_discharge_window": "morning",
+  "wound_status": "stable",
+  "discharge_summary": "Patient is medically stable after surgery but has ongoing mobility limitations.",
+  "free_text_notes": {
+    "case_manager_note": "Patient requires a walker, has not completed walker education, and home stairs have no grab bars."
+  },
+  "expected_barriers": [
+    "B-C05",
+    "B-E05",
+    "B-F04",
+    "B-S03"
+  ],
+  "expected_tasks": [
+    "T-RN06",
+    "T-RN07",
+    "T-CM03",
+    "T-CM05"
+  ],
+  "distractors": [
+    "The patient had a hernia repaired surgically four years ago. The repair was successful and the patient has had no recurrence. This is not relevant to the current discharge plan."
+  ]
+}
