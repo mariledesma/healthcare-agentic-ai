@@ -1,0 +1,58 @@
+{
+  "case_id": "CASE-001",
+  "condition": "HF",
+  "diagnoses": [
+    "Acute decompensated heart failure",
+    "Hypertension"
+  ],
+  "medications": [
+    {
+      "name": "Furosemide",
+      "dose": "40 mg",
+      "frequency": "daily"
+    },
+    {
+      "name": "Lisinopril",
+      "dose": "10 mg",
+      "frequency": "daily"
+    }
+  ],
+  "labs": {
+    "sodium": "138 mmol/L",
+    "potassium": "4.1 mmol/L",
+    "creatinine": "1.0 mg/dL"
+  },
+  "pending_labs": [],
+  "pending_imaging": [],
+  "pending_consult": [],
+  "medical_stability_status": "stable",
+  "medication_reconciliation_status": "complete",
+  "medication_education_status": "complete",
+  "medication_availability_status": "available",
+  "patient_education_status": "complete",
+  "diet_education_status": "complete",
+  "followup_appointment_status": "not_scheduled",
+  "caregiver_status": "available",
+  "transport_status": "not_arranged",
+  "financial_status": "no_concern",
+  "case_manager_status": "available",
+  "discharge_summary_status": "signed",
+  "pcp_notification_status": "complete",
+  "physical_function_status": "independent",
+  "home_safety_status": "safe",
+  "outpatient_therapy_status": "not_required",
+  "planned_discharge_window": "afternoon",
+  "discharge_summary": "Patient improved after diuresis and is medically stable for discharge.",
+  "free_text_notes": {
+    "case_manager_note": "Patient has no confirmed ride home and follow-up appointment has not yet been scheduled."
+  },
+  "expected_barriers": [
+    "B-F01",
+    "B-S02"
+  ],
+  "expected_tasks": [
+    "T-CM01",
+    "T-CM04"
+  ],
+  "distractors": []
+}
