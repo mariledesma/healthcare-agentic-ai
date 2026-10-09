@@ -4,7 +4,11 @@
   "pipeline": [
     "InputReader",
     "CaseAnalyzer",
-    "BarrierDetector"
+    "BarrierDetector",
+    "TaskDetector",
+    "RecommendationAgent",
+    "PolicyEngine",
+    "ApprovalGate"
   ],
   "input_reader": {
     "agent": "InputReader",
@@ -169,20 +173,143 @@
       }
     ]
   },
+  "task_detector": {
+    "agent": "TaskDetector",
+    "status": "success",
+    "finding": "2 pending task(s) detected.",
+    "supporting_evidence": {
+      "task_count": 2
+    },
+    "confidence": 0.95,
+    "source_field": "detected_barriers",
+    "tasks": [
+      {
+        "task_id": "T-MD02",
+        "task_name": "Review pending labs and imaging",
+        "owner_role": "Physician",
+        "resolves_barriers": [
+          "B-C02",
+          "B-C03"
+        ],
+        "priority": "high",
+        "source_field": "pending_labs, pending_imaging"
+      },
+      {
+        "task_id": "T-RN01",
+        "task_name": "Conduct medication education",
+        "owner_role": "Nurse",
+        "resolves_barriers": [
+          "B-E01"
+        ],
+        "priority": "high",
+        "source_field": "medication_education_status"
+      }
+    ]
+  },
+  "recommendation_agent": {
+    "agent": "RecommendationAgent",
+    "status": "success",
+    "finding": "2 recommendation(s) generated.",
+    "supporting_evidence": {
+      "barriers_reviewed": 2,
+      "tasks_reviewed": 2
+    },
+    "confidence": 0.95,
+    "source_field": "detected_tasks",
+    "recommendations": [
+      {
+        "recommendation_id": "R-T-MD02",
+        "action": "Review pending labs and imaging",
+        "owner_role": "Physician",
+        "priority": "high",
+        "resolves_barriers": [
+          "B-C02",
+          "B-C03"
+        ],
+        "source_field": "pending_labs, pending_imaging",
+        "rationale": "This action is recommended because it addresses the discharge barrier(s): B-C02, B-C03."
+      },
+      {
+        "recommendation_id": "R-T-RN01",
+        "action": "Conduct medication education",
+        "owner_role": "Nurse",
+        "priority": "high",
+        "resolves_barriers": [
+          "B-E01"
+        ],
+        "source_field": "medication_education_status",
+        "rationale": "This action is recommended because it addresses the discharge barrier(s): B-E01."
+      }
+    ]
+  },
+  "governance": {
+    "status": "completed",
+    "recommendations_reviewed": 2,
+    "results": [
+      {
+        "recommendation_id": "R-T-MD02",
+        "action": "Review pending labs and imaging",
+        "policy": {
+          "policy_status": "allowed",
+          "action": "Review pending labs and imaging",
+          "reason": "Action is permitted by the governance policy."
+        },
+        "approval": {
+          "approval_status": "requires_human_approval",
+          "requires_human_approval": true,
+          "action": "Review pending labs and imaging",
+          "reason": "Clinical or discharge-sensitive action requires human review."
+        }
+      },
+      {
+        "recommendation_id": "R-T-RN01",
+        "action": "Conduct medication education",
+        "policy": {
+          "policy_status": "allowed",
+          "action": "Conduct medication education",
+          "reason": "Action is permitted by the governance policy."
+        },
+        "approval": {
+          "approval_status": "auto_safe",
+          "requires_human_approval": false,
+          "action": "Conduct medication education",
+          "reason": "Coordination action may be proposed without clinical execution."
+        }
+      }
+    ]
+  },
   "evaluation": {
-    "expected_barriers": [
-      "B-C02",
-      "B-E01"
-    ],
-    "detected_barriers": [
-      "B-C02",
-      "B-E01"
-    ],
-    "matched_barriers": [
-      "B-C02",
-      "B-E01"
-    ],
-    "missed_barriers": [],
-    "extra_barriers": []
+    "barriers": {
+      "expected": [
+        "B-C02",
+        "B-E01"
+      ],
+      "detected": [
+        "B-C02",
+        "B-E01"
+      ],
+      "matched": [
+        "B-C02",
+        "B-E01"
+      ],
+      "missed": [],
+      "extra": []
+    },
+    "tasks": {
+      "expected": [
+        "T-MD02",
+        "T-RN01"
+      ],
+      "detected": [
+        "T-MD02",
+        "T-RN01"
+      ],
+      "matched": [
+        "T-MD02",
+        "T-RN01"
+      ],
+      "missed": [],
+      "extra": []
+    }
   }
 }

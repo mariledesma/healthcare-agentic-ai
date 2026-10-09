@@ -4,7 +4,13 @@
   "pipeline": [
     "InputReader",
     "CaseAnalyzer",
-    "BarrierDetector"
+    "BarrierDetector",
+    "TaskDetector",
+    "RecommendationAgent",
+    "PolicyEngine",
+    "ApprovalGate",
+    "AuditLogger",
+    "OutputComposer"
   ],
   "input_reader": {
     "agent": "InputReader",
@@ -162,20 +168,257 @@
       }
     ]
   },
+  "task_detector": {
+    "agent": "TaskDetector",
+    "status": "success",
+    "finding": "2 pending task(s) detected.",
+    "supporting_evidence": {
+      "task_count": 2
+    },
+    "confidence": 0.95,
+    "source_field": "detected_barriers",
+    "tasks": [
+      {
+        "task_id": "T-CM01",
+        "task_name": "Schedule follow-up appointment",
+        "owner_role": "Case Manager",
+        "resolves_barriers": [
+          "B-F01",
+          "B-F02"
+        ],
+        "priority": "high",
+        "source_field": "followup_appointment_status"
+      },
+      {
+        "task_id": "T-CM04",
+        "task_name": "Arrange patient transport",
+        "owner_role": "Case Manager",
+        "resolves_barriers": [
+          "B-S02",
+          "B-S07"
+        ],
+        "priority": "high",
+        "source_field": "transport_status"
+      }
+    ]
+  },
+  "recommendation_agent": {
+    "agent": "RecommendationAgent",
+    "status": "success",
+    "finding": "2 recommendation(s) generated.",
+    "supporting_evidence": {
+      "barriers_reviewed": 2,
+      "tasks_reviewed": 2
+    },
+    "confidence": 0.95,
+    "source_field": "detected_tasks",
+    "recommendations": [
+      {
+        "recommendation_id": "R-T-CM01",
+        "action": "Schedule follow-up appointment",
+        "owner_role": "Case Manager",
+        "priority": "high",
+        "resolves_barriers": [
+          "B-F01",
+          "B-F02"
+        ],
+        "source_field": "followup_appointment_status",
+        "rationale": "This action is recommended because it addresses the discharge barrier(s): B-F01, B-F02."
+      },
+      {
+        "recommendation_id": "R-T-CM04",
+        "action": "Arrange patient transport",
+        "owner_role": "Case Manager",
+        "priority": "high",
+        "resolves_barriers": [
+          "B-S02",
+          "B-S07"
+        ],
+        "source_field": "transport_status",
+        "rationale": "This action is recommended because it addresses the discharge barrier(s): B-S02, B-S07."
+      }
+    ]
+  },
+  "governance": {
+    "status": "completed",
+    "recommendations_reviewed": 2,
+    "results": [
+      {
+        "recommendation_id": "R-T-CM01",
+        "action": "Schedule follow-up appointment",
+        "policy": {
+          "policy_status": "allowed",
+          "action": "Schedule follow-up appointment",
+          "reason": "Action is permitted by the governance policy."
+        },
+        "approval": {
+          "approval_status": "auto_safe",
+          "requires_human_approval": false,
+          "action": "Schedule follow-up appointment",
+          "reason": "Coordination action may be proposed without clinical execution."
+        }
+      },
+      {
+        "recommendation_id": "R-T-CM04",
+        "action": "Arrange patient transport",
+        "policy": {
+          "policy_status": "allowed",
+          "action": "Arrange patient transport",
+          "reason": "Action is permitted by the governance policy."
+        },
+        "approval": {
+          "approval_status": "auto_safe",
+          "requires_human_approval": false,
+          "action": "Arrange patient transport",
+          "reason": "Coordination action may be proposed without clinical execution."
+        }
+      }
+    ]
+  },
+  "final_output": {
+    "case_id": "CASE-001",
+    "condition": "HF",
+    "discharge_coordination_summary": {
+      "barrier_count": 2,
+      "task_count": 2,
+      "recommendation_count": 2,
+      "human_approval_required_count": 0
+    },
+    "barriers": [
+      {
+        "barrier_id": "B-F01",
+        "finding": "Follow-up appointment has not been scheduled.",
+        "supporting_evidence": "not_scheduled",
+        "confidence": 0.95,
+        "priority": "high",
+        "source_field": "followup_appointment_status"
+      },
+      {
+        "barrier_id": "B-S02",
+        "finding": "Transportation home has not been arranged.",
+        "supporting_evidence": "not_arranged",
+        "confidence": 0.95,
+        "priority": "high",
+        "source_field": "transport_status"
+      }
+    ],
+    "pending_tasks": [
+      {
+        "task_id": "T-CM01",
+        "task_name": "Schedule follow-up appointment",
+        "owner_role": "Case Manager",
+        "resolves_barriers": [
+          "B-F01",
+          "B-F02"
+        ],
+        "priority": "high",
+        "source_field": "followup_appointment_status"
+      },
+      {
+        "task_id": "T-CM04",
+        "task_name": "Arrange patient transport",
+        "owner_role": "Case Manager",
+        "resolves_barriers": [
+          "B-S02",
+          "B-S07"
+        ],
+        "priority": "high",
+        "source_field": "transport_status"
+      }
+    ],
+    "recommendations": [
+      {
+        "recommendation_id": "R-T-CM01",
+        "action": "Schedule follow-up appointment",
+        "owner_role": "Case Manager",
+        "priority": "high",
+        "resolves_barriers": [
+          "B-F01",
+          "B-F02"
+        ],
+        "source_field": "followup_appointment_status",
+        "rationale": "This action is recommended because it addresses the discharge barrier(s): B-F01, B-F02."
+      },
+      {
+        "recommendation_id": "R-T-CM04",
+        "action": "Arrange patient transport",
+        "owner_role": "Case Manager",
+        "priority": "high",
+        "resolves_barriers": [
+          "B-S02",
+          "B-S07"
+        ],
+        "source_field": "transport_status",
+        "rationale": "This action is recommended because it addresses the discharge barrier(s): B-S02, B-S07."
+      }
+    ],
+    "governance": [
+      {
+        "recommendation_id": "R-T-CM01",
+        "action": "Schedule follow-up appointment",
+        "policy": {
+          "policy_status": "allowed",
+          "action": "Schedule follow-up appointment",
+          "reason": "Action is permitted by the governance policy."
+        },
+        "approval": {
+          "approval_status": "auto_safe",
+          "requires_human_approval": false,
+          "action": "Schedule follow-up appointment",
+          "reason": "Coordination action may be proposed without clinical execution."
+        }
+      },
+      {
+        "recommendation_id": "R-T-CM04",
+        "action": "Arrange patient transport",
+        "policy": {
+          "policy_status": "allowed",
+          "action": "Arrange patient transport",
+          "reason": "Action is permitted by the governance policy."
+        },
+        "approval": {
+          "approval_status": "auto_safe",
+          "requires_human_approval": false,
+          "action": "Arrange patient transport",
+          "reason": "Coordination action may be proposed without clinical execution."
+        }
+      }
+    ],
+    "human_approval_required": [],
+    "final_status": "discharge_barriers_present"
+  },
   "evaluation": {
-    "expected_barriers": [
-      "B-F01",
-      "B-S02"
-    ],
-    "detected_barriers": [
-      "B-F01",
-      "B-S02"
-    ],
-    "matched_barriers": [
-      "B-F01",
-      "B-S02"
-    ],
-    "missed_barriers": [],
-    "extra_barriers": []
+    "barriers": {
+      "expected": [
+        "B-F01",
+        "B-S02"
+      ],
+      "detected": [
+        "B-F01",
+        "B-S02"
+      ],
+      "matched": [
+        "B-F01",
+        "B-S02"
+      ],
+      "missed": [],
+      "extra": []
+    },
+    "tasks": {
+      "expected": [
+        "T-CM01",
+        "T-CM04"
+      ],
+      "detected": [
+        "T-CM01",
+        "T-CM04"
+      ],
+      "matched": [
+        "T-CM01",
+        "T-CM04"
+      ],
+      "missed": [],
+      "extra": []
+    }
   }
 }

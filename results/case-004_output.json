@@ -4,7 +4,11 @@
   "pipeline": [
     "InputReader",
     "CaseAnalyzer",
-    "BarrierDetector"
+    "BarrierDetector",
+    "TaskDetector",
+    "RecommendationAgent",
+    "PolicyEngine",
+    "ApprovalGate"
   ],
   "input_reader": {
     "agent": "InputReader",
@@ -173,26 +177,225 @@
       }
     ]
   },
+  "task_detector": {
+    "agent": "TaskDetector",
+    "status": "success",
+    "finding": "4 pending task(s) detected.",
+    "supporting_evidence": {
+      "task_count": 4
+    },
+    "confidence": 0.95,
+    "source_field": "detected_barriers",
+    "tasks": [
+      {
+        "task_id": "T-RN06",
+        "task_name": "Mobility and functional assessment",
+        "owner_role": "Nurse / PT",
+        "resolves_barriers": [
+          "B-C05"
+        ],
+        "priority": "high",
+        "source_field": "physical_function_status"
+      },
+      {
+        "task_id": "T-RN07",
+        "task_name": "Mobility device education",
+        "owner_role": "Nurse",
+        "resolves_barriers": [
+          "B-E05"
+        ],
+        "priority": "high",
+        "source_field": "mobile_device_education_status"
+      },
+      {
+        "task_id": "T-CM03",
+        "task_name": "Arrange outpatient therapy referrals",
+        "owner_role": "Case Manager",
+        "resolves_barriers": [
+          "B-F04"
+        ],
+        "priority": "medium",
+        "source_field": "outpatient_therapy_status"
+      },
+      {
+        "task_id": "T-CM05",
+        "task_name": "Conduct home safety assessment",
+        "owner_role": "Case Manager / SW",
+        "resolves_barriers": [
+          "B-S03"
+        ],
+        "priority": "high",
+        "source_field": "home_safety_status"
+      }
+    ]
+  },
+  "recommendation_agent": {
+    "agent": "RecommendationAgent",
+    "status": "success",
+    "finding": "4 recommendation(s) generated.",
+    "supporting_evidence": {
+      "barriers_reviewed": 4,
+      "tasks_reviewed": 4
+    },
+    "confidence": 0.95,
+    "source_field": "detected_tasks",
+    "recommendations": [
+      {
+        "recommendation_id": "R-T-RN06",
+        "action": "Mobility and functional assessment",
+        "owner_role": "Nurse / PT",
+        "priority": "high",
+        "resolves_barriers": [
+          "B-C05"
+        ],
+        "source_field": "physical_function_status",
+        "rationale": "This action is recommended because it addresses the discharge barrier(s): B-C05."
+      },
+      {
+        "recommendation_id": "R-T-RN07",
+        "action": "Mobility device education",
+        "owner_role": "Nurse",
+        "priority": "high",
+        "resolves_barriers": [
+          "B-E05"
+        ],
+        "source_field": "mobile_device_education_status",
+        "rationale": "This action is recommended because it addresses the discharge barrier(s): B-E05."
+      },
+      {
+        "recommendation_id": "R-T-CM05",
+        "action": "Conduct home safety assessment",
+        "owner_role": "Case Manager / SW",
+        "priority": "high",
+        "resolves_barriers": [
+          "B-S03"
+        ],
+        "source_field": "home_safety_status",
+        "rationale": "This action is recommended because it addresses the discharge barrier(s): B-S03."
+      },
+      {
+        "recommendation_id": "R-T-CM03",
+        "action": "Arrange outpatient therapy referrals",
+        "owner_role": "Case Manager",
+        "priority": "medium",
+        "resolves_barriers": [
+          "B-F04"
+        ],
+        "source_field": "outpatient_therapy_status",
+        "rationale": "This action is recommended because it addresses the discharge barrier(s): B-F04."
+      }
+    ]
+  },
+  "governance": {
+    "status": "completed",
+    "recommendations_reviewed": 4,
+    "results": [
+      {
+        "recommendation_id": "R-T-RN06",
+        "action": "Mobility and functional assessment",
+        "policy": {
+          "policy_status": "allowed",
+          "action": "Mobility and functional assessment",
+          "reason": "Action is permitted by the governance policy."
+        },
+        "approval": {
+          "approval_status": "auto_safe",
+          "requires_human_approval": false,
+          "action": "Mobility and functional assessment",
+          "reason": "Coordination action may be proposed without clinical execution."
+        }
+      },
+      {
+        "recommendation_id": "R-T-RN07",
+        "action": "Mobility device education",
+        "policy": {
+          "policy_status": "allowed",
+          "action": "Mobility device education",
+          "reason": "Action is permitted by the governance policy."
+        },
+        "approval": {
+          "approval_status": "auto_safe",
+          "requires_human_approval": false,
+          "action": "Mobility device education",
+          "reason": "Coordination action may be proposed without clinical execution."
+        }
+      },
+      {
+        "recommendation_id": "R-T-CM05",
+        "action": "Conduct home safety assessment",
+        "policy": {
+          "policy_status": "allowed",
+          "action": "Conduct home safety assessment",
+          "reason": "Action is permitted by the governance policy."
+        },
+        "approval": {
+          "approval_status": "auto_safe",
+          "requires_human_approval": false,
+          "action": "Conduct home safety assessment",
+          "reason": "Coordination action may be proposed without clinical execution."
+        }
+      },
+      {
+        "recommendation_id": "R-T-CM03",
+        "action": "Arrange outpatient therapy referrals",
+        "policy": {
+          "policy_status": "allowed",
+          "action": "Arrange outpatient therapy referrals",
+          "reason": "Action is permitted by the governance policy."
+        },
+        "approval": {
+          "approval_status": "auto_safe",
+          "requires_human_approval": false,
+          "action": "Arrange outpatient therapy referrals",
+          "reason": "Coordination action may be proposed without clinical execution."
+        }
+      }
+    ]
+  },
   "evaluation": {
-    "expected_barriers": [
-      "B-C05",
-      "B-E05",
-      "B-F04",
-      "B-S03"
-    ],
-    "detected_barriers": [
-      "B-C05",
-      "B-E05",
-      "B-F04",
-      "B-S03"
-    ],
-    "matched_barriers": [
-      "B-C05",
-      "B-E05",
-      "B-F04",
-      "B-S03"
-    ],
-    "missed_barriers": [],
-    "extra_barriers": []
+    "barriers": {
+      "expected": [
+        "B-C05",
+        "B-E05",
+        "B-F04",
+        "B-S03"
+      ],
+      "detected": [
+        "B-C05",
+        "B-E05",
+        "B-F04",
+        "B-S03"
+      ],
+      "matched": [
+        "B-C05",
+        "B-E05",
+        "B-F04",
+        "B-S03"
+      ],
+      "missed": [],
+      "extra": []
+    },
+    "tasks": {
+      "expected": [
+        "T-RN06",
+        "T-RN07",
+        "T-CM03",
+        "T-CM05"
+      ],
+      "detected": [
+        "T-RN06",
+        "T-RN07",
+        "T-CM03",
+        "T-CM05"
+      ],
+      "matched": [
+        "T-CM03",
+        "T-CM05",
+        "T-RN06",
+        "T-RN07"
+      ],
+      "missed": [],
+      "extra": []
+    }
   }
 }

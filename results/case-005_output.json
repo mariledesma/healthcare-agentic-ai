@@ -4,7 +4,11 @@
   "pipeline": [
     "InputReader",
     "CaseAnalyzer",
-    "BarrierDetector"
+    "BarrierDetector",
+    "TaskDetector",
+    "RecommendationAgent",
+    "PolicyEngine",
+    "ApprovalGate"
   ],
   "input_reader": {
     "agent": "InputReader",
@@ -214,35 +218,353 @@
       }
     ]
   },
+  "task_detector": {
+    "agent": "TaskDetector",
+    "status": "success",
+    "finding": "7 pending task(s) detected.",
+    "supporting_evidence": {
+      "task_count": 7
+    },
+    "confidence": 0.95,
+    "source_field": "detected_barriers",
+    "tasks": [
+      {
+        "task_id": "T-RN06",
+        "task_name": "Mobility and functional assessment",
+        "owner_role": "Nurse / PT",
+        "resolves_barriers": [
+          "B-C05"
+        ],
+        "priority": "high",
+        "source_field": "physical_function_status"
+      },
+      {
+        "task_id": "T-RN02",
+        "task_name": "Conduct disease-specific patient education",
+        "owner_role": "Nurse",
+        "resolves_barriers": [
+          "B-E03"
+        ],
+        "priority": "high",
+        "source_field": "patient_education_status"
+      },
+      {
+        "task_id": "T-RN03",
+        "task_name": "Teach diet and fluid restrictions",
+        "owner_role": "Nurse",
+        "resolves_barriers": [
+          "B-E04"
+        ],
+        "priority": "high",
+        "source_field": "diet_education_status"
+      },
+      {
+        "task_id": "T-CM01",
+        "task_name": "Schedule follow-up appointment",
+        "owner_role": "Case Manager",
+        "resolves_barriers": [
+          "B-F01",
+          "B-F02"
+        ],
+        "priority": "high",
+        "source_field": "followup_appointment_status"
+      },
+      {
+        "task_id": "T-CM02",
+        "task_name": "Confirm caregiver availability and brief caregiver",
+        "owner_role": "Case Manager / SW",
+        "resolves_barriers": [
+          "B-F03"
+        ],
+        "priority": "high",
+        "source_field": "caregiver_status"
+      },
+      {
+        "task_id": "T-CM03",
+        "task_name": "Arrange outpatient therapy referrals",
+        "owner_role": "Case Manager",
+        "resolves_barriers": [
+          "B-F04"
+        ],
+        "priority": "medium",
+        "source_field": "outpatient_therapy_status"
+      },
+      {
+        "task_id": "T-CM08",
+        "task_name": "Notify primary care provider",
+        "owner_role": "Case Manager",
+        "resolves_barriers": [
+          "B-F05"
+        ],
+        "priority": "medium",
+        "source_field": "pcp_notification_status"
+      }
+    ]
+  },
+  "recommendation_agent": {
+    "agent": "RecommendationAgent",
+    "status": "success",
+    "finding": "7 recommendation(s) generated.",
+    "supporting_evidence": {
+      "barriers_reviewed": 7,
+      "tasks_reviewed": 7
+    },
+    "confidence": 0.95,
+    "source_field": "detected_tasks",
+    "recommendations": [
+      {
+        "recommendation_id": "R-T-RN06",
+        "action": "Mobility and functional assessment",
+        "owner_role": "Nurse / PT",
+        "priority": "high",
+        "resolves_barriers": [
+          "B-C05"
+        ],
+        "source_field": "physical_function_status",
+        "rationale": "This action is recommended because it addresses the discharge barrier(s): B-C05."
+      },
+      {
+        "recommendation_id": "R-T-RN02",
+        "action": "Conduct disease-specific patient education",
+        "owner_role": "Nurse",
+        "priority": "high",
+        "resolves_barriers": [
+          "B-E03"
+        ],
+        "source_field": "patient_education_status",
+        "rationale": "This action is recommended because it addresses the discharge barrier(s): B-E03."
+      },
+      {
+        "recommendation_id": "R-T-RN03",
+        "action": "Teach diet and fluid restrictions",
+        "owner_role": "Nurse",
+        "priority": "high",
+        "resolves_barriers": [
+          "B-E04"
+        ],
+        "source_field": "diet_education_status",
+        "rationale": "This action is recommended because it addresses the discharge barrier(s): B-E04."
+      },
+      {
+        "recommendation_id": "R-T-CM01",
+        "action": "Schedule follow-up appointment",
+        "owner_role": "Case Manager",
+        "priority": "high",
+        "resolves_barriers": [
+          "B-F01",
+          "B-F02"
+        ],
+        "source_field": "followup_appointment_status",
+        "rationale": "This action is recommended because it addresses the discharge barrier(s): B-F01, B-F02."
+      },
+      {
+        "recommendation_id": "R-T-CM02",
+        "action": "Confirm caregiver availability and brief caregiver",
+        "owner_role": "Case Manager / SW",
+        "priority": "high",
+        "resolves_barriers": [
+          "B-F03"
+        ],
+        "source_field": "caregiver_status",
+        "rationale": "This action is recommended because it addresses the discharge barrier(s): B-F03."
+      },
+      {
+        "recommendation_id": "R-T-CM03",
+        "action": "Arrange outpatient therapy referrals",
+        "owner_role": "Case Manager",
+        "priority": "medium",
+        "resolves_barriers": [
+          "B-F04"
+        ],
+        "source_field": "outpatient_therapy_status",
+        "rationale": "This action is recommended because it addresses the discharge barrier(s): B-F04."
+      },
+      {
+        "recommendation_id": "R-T-CM08",
+        "action": "Notify primary care provider",
+        "owner_role": "Case Manager",
+        "priority": "medium",
+        "resolves_barriers": [
+          "B-F05"
+        ],
+        "source_field": "pcp_notification_status",
+        "rationale": "This action is recommended because it addresses the discharge barrier(s): B-F05."
+      }
+    ]
+  },
+  "governance": {
+    "status": "completed",
+    "recommendations_reviewed": 7,
+    "results": [
+      {
+        "recommendation_id": "R-T-RN06",
+        "action": "Mobility and functional assessment",
+        "policy": {
+          "policy_status": "allowed",
+          "action": "Mobility and functional assessment",
+          "reason": "Action is permitted by the governance policy."
+        },
+        "approval": {
+          "approval_status": "auto_safe",
+          "requires_human_approval": false,
+          "action": "Mobility and functional assessment",
+          "reason": "Coordination action may be proposed without clinical execution."
+        }
+      },
+      {
+        "recommendation_id": "R-T-RN02",
+        "action": "Conduct disease-specific patient education",
+        "policy": {
+          "policy_status": "allowed",
+          "action": "Conduct disease-specific patient education",
+          "reason": "Action is permitted by the governance policy."
+        },
+        "approval": {
+          "approval_status": "auto_safe",
+          "requires_human_approval": false,
+          "action": "Conduct disease-specific patient education",
+          "reason": "Coordination action may be proposed without clinical execution."
+        }
+      },
+      {
+        "recommendation_id": "R-T-RN03",
+        "action": "Teach diet and fluid restrictions",
+        "policy": {
+          "policy_status": "allowed",
+          "action": "Teach diet and fluid restrictions",
+          "reason": "Action is permitted by the governance policy."
+        },
+        "approval": {
+          "approval_status": "auto_safe",
+          "requires_human_approval": false,
+          "action": "Teach diet and fluid restrictions",
+          "reason": "Coordination action may be proposed without clinical execution."
+        }
+      },
+      {
+        "recommendation_id": "R-T-CM01",
+        "action": "Schedule follow-up appointment",
+        "policy": {
+          "policy_status": "allowed",
+          "action": "Schedule follow-up appointment",
+          "reason": "Action is permitted by the governance policy."
+        },
+        "approval": {
+          "approval_status": "auto_safe",
+          "requires_human_approval": false,
+          "action": "Schedule follow-up appointment",
+          "reason": "Coordination action may be proposed without clinical execution."
+        }
+      },
+      {
+        "recommendation_id": "R-T-CM02",
+        "action": "Confirm caregiver availability and brief caregiver",
+        "policy": {
+          "policy_status": "allowed",
+          "action": "Confirm caregiver availability and brief caregiver",
+          "reason": "Action is permitted by the governance policy."
+        },
+        "approval": {
+          "approval_status": "auto_safe",
+          "requires_human_approval": false,
+          "action": "Confirm caregiver availability and brief caregiver",
+          "reason": "Coordination action may be proposed without clinical execution."
+        }
+      },
+      {
+        "recommendation_id": "R-T-CM03",
+        "action": "Arrange outpatient therapy referrals",
+        "policy": {
+          "policy_status": "allowed",
+          "action": "Arrange outpatient therapy referrals",
+          "reason": "Action is permitted by the governance policy."
+        },
+        "approval": {
+          "approval_status": "auto_safe",
+          "requires_human_approval": false,
+          "action": "Arrange outpatient therapy referrals",
+          "reason": "Coordination action may be proposed without clinical execution."
+        }
+      },
+      {
+        "recommendation_id": "R-T-CM08",
+        "action": "Notify primary care provider",
+        "policy": {
+          "policy_status": "allowed",
+          "action": "Notify primary care provider",
+          "reason": "Action is permitted by the governance policy."
+        },
+        "approval": {
+          "approval_status": "auto_safe",
+          "requires_human_approval": false,
+          "action": "Notify primary care provider",
+          "reason": "Coordination action may be proposed without clinical execution."
+        }
+      }
+    ]
+  },
   "evaluation": {
-    "expected_barriers": [
-      "B-C05",
-      "B-E03",
-      "B-E04",
-      "B-F01",
-      "B-F03",
-      "B-F04",
-      "B-F05"
-    ],
-    "detected_barriers": [
-      "B-C05",
-      "B-E03",
-      "B-E04",
-      "B-F01",
-      "B-F03",
-      "B-F04",
-      "B-F05"
-    ],
-    "matched_barriers": [
-      "B-C05",
-      "B-E03",
-      "B-E04",
-      "B-F01",
-      "B-F03",
-      "B-F04",
-      "B-F05"
-    ],
-    "missed_barriers": [],
-    "extra_barriers": []
+    "barriers": {
+      "expected": [
+        "B-C05",
+        "B-E03",
+        "B-E04",
+        "B-F01",
+        "B-F03",
+        "B-F04",
+        "B-F05"
+      ],
+      "detected": [
+        "B-C05",
+        "B-E03",
+        "B-E04",
+        "B-F01",
+        "B-F03",
+        "B-F04",
+        "B-F05"
+      ],
+      "matched": [
+        "B-C05",
+        "B-E03",
+        "B-E04",
+        "B-F01",
+        "B-F03",
+        "B-F04",
+        "B-F05"
+      ],
+      "missed": [],
+      "extra": []
+    },
+    "tasks": {
+      "expected": [
+        "T-RN02",
+        "T-RN03",
+        "T-RN06",
+        "T-CM01",
+        "T-CM02",
+        "T-CM03",
+        "T-CM08"
+      ],
+      "detected": [
+        "T-RN06",
+        "T-RN02",
+        "T-RN03",
+        "T-CM01",
+        "T-CM02",
+        "T-CM03",
+        "T-CM08"
+      ],
+      "matched": [
+        "T-CM01",
+        "T-CM02",
+        "T-CM03",
+        "T-CM08",
+        "T-RN02",
+        "T-RN03",
+        "T-RN06"
+      ],
+      "missed": [],
+      "extra": []
+    }
   }
 }

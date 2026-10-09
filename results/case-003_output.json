@@ -4,7 +4,11 @@
   "pipeline": [
     "InputReader",
     "CaseAnalyzer",
-    "BarrierDetector"
+    "BarrierDetector",
+    "TaskDetector",
+    "RecommendationAgent",
+    "PolicyEngine",
+    "ApprovalGate"
   ],
   "input_reader": {
     "agent": "InputReader",
@@ -151,20 +155,141 @@
       }
     ]
   },
+  "task_detector": {
+    "agent": "TaskDetector",
+    "status": "success",
+    "finding": "2 pending task(s) detected.",
+    "supporting_evidence": {
+      "task_count": 2
+    },
+    "confidence": 0.95,
+    "source_field": "detected_barriers",
+    "tasks": [
+      {
+        "task_id": "T-PH02",
+        "task_name": "Fill discharge prescriptions",
+        "owner_role": "Pharmacist",
+        "resolves_barriers": [
+          "B-E02"
+        ],
+        "priority": "high",
+        "source_field": "medication_availability_status"
+      },
+      {
+        "task_id": "T-CM02",
+        "task_name": "Confirm caregiver availability and brief caregiver",
+        "owner_role": "Case Manager / SW",
+        "resolves_barriers": [
+          "B-F03"
+        ],
+        "priority": "high",
+        "source_field": "caregiver_status"
+      }
+    ]
+  },
+  "recommendation_agent": {
+    "agent": "RecommendationAgent",
+    "status": "success",
+    "finding": "2 recommendation(s) generated.",
+    "supporting_evidence": {
+      "barriers_reviewed": 2,
+      "tasks_reviewed": 2
+    },
+    "confidence": 0.95,
+    "source_field": "detected_tasks",
+    "recommendations": [
+      {
+        "recommendation_id": "R-T-PH02",
+        "action": "Fill discharge prescriptions",
+        "owner_role": "Pharmacist",
+        "priority": "high",
+        "resolves_barriers": [
+          "B-E02"
+        ],
+        "source_field": "medication_availability_status",
+        "rationale": "This action is recommended because it addresses the discharge barrier(s): B-E02."
+      },
+      {
+        "recommendation_id": "R-T-CM02",
+        "action": "Confirm caregiver availability and brief caregiver",
+        "owner_role": "Case Manager / SW",
+        "priority": "high",
+        "resolves_barriers": [
+          "B-F03"
+        ],
+        "source_field": "caregiver_status",
+        "rationale": "This action is recommended because it addresses the discharge barrier(s): B-F03."
+      }
+    ]
+  },
+  "governance": {
+    "status": "completed",
+    "recommendations_reviewed": 2,
+    "results": [
+      {
+        "recommendation_id": "R-T-PH02",
+        "action": "Fill discharge prescriptions",
+        "policy": {
+          "policy_status": "allowed",
+          "action": "Fill discharge prescriptions",
+          "reason": "Action is permitted by the governance policy."
+        },
+        "approval": {
+          "approval_status": "requires_human_approval",
+          "requires_human_approval": true,
+          "action": "Fill discharge prescriptions",
+          "reason": "Clinical or discharge-sensitive action requires human review."
+        }
+      },
+      {
+        "recommendation_id": "R-T-CM02",
+        "action": "Confirm caregiver availability and brief caregiver",
+        "policy": {
+          "policy_status": "allowed",
+          "action": "Confirm caregiver availability and brief caregiver",
+          "reason": "Action is permitted by the governance policy."
+        },
+        "approval": {
+          "approval_status": "auto_safe",
+          "requires_human_approval": false,
+          "action": "Confirm caregiver availability and brief caregiver",
+          "reason": "Coordination action may be proposed without clinical execution."
+        }
+      }
+    ]
+  },
   "evaluation": {
-    "expected_barriers": [
-      "B-E02",
-      "B-F03"
-    ],
-    "detected_barriers": [
-      "B-E02",
-      "B-F03"
-    ],
-    "matched_barriers": [
-      "B-E02",
-      "B-F03"
-    ],
-    "missed_barriers": [],
-    "extra_barriers": []
+    "barriers": {
+      "expected": [
+        "B-E02",
+        "B-F03"
+      ],
+      "detected": [
+        "B-E02",
+        "B-F03"
+      ],
+      "matched": [
+        "B-E02",
+        "B-F03"
+      ],
+      "missed": [],
+      "extra": []
+    },
+    "tasks": {
+      "expected": [
+        "T-PH02",
+        "T-CM02"
+      ],
+      "detected": [
+        "T-PH02",
+        "T-CM02"
+      ],
+      "matched": [
+        "T-CM02",
+        "T-PH02"
+      ],
+      "missed": [],
+      "extra": []
+    }
   }
 }
