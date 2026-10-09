@@ -1,75 +1,125 @@
+from llm.llm_client import LLMClient
+
+
 class CaseAnalyzer:
+    def __init__(self):
+        self.llm = LLMClient()
+
     def analyze(self, patient_record):
-        clinical_context = {
-            "condition": patient_record.get("condition"),
-            "diagnoses": patient_record.get("diagnoses", []),
-            "medications": patient_record.get("medications", []),
-            "labs": patient_record.get("labs", {}),
-            "pending_labs": patient_record.get("pending_labs", []),
-            "pending_imaging": patient_record.get("pending_imaging", []),
-            "pending_consult": patient_record.get("pending_consult", []),
-            "medical_stability_status": patient_record.get(
-                "medical_stability_status"
-            ),
-            "physical_function_status": patient_record.get(
-                "physical_function_status"
-            )
+        system_prompt = """
+You are the Case Analyzer in a supervised hospital discharge-coordination
+research prototype.
+
+Your job is to analyze the supplied synthetic patient record and produce a
+structured summary of the patient's clinical, discharge, and social context.
+
+Rules:
+1. Only use information explicitly present in the patient record.
+2. Do not invent diagnoses, treatments, tasks, or barriers.
+3. Do not recommend medication changes.
+4. Do not authorize discharge.
+5. Do not assign formal barrier IDs.
+6. Identify potential discharge concerns, but leave final barrier classification
+   to the deterministic Barrier Detector.
+7. For each concern, include the exact source field from the patient record.
+"""
+
+        schema = {
+            "type": "object",
+            "properties": {
+                "clinical_summary": {
+                    "type": "string"
+                },
+                "discharge_summary": {
+                    "type": "string"
+                },
+                "social_summary": {
+                    "type": "string"
+                },
+                "potential_concerns": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "finding": {
+                                "type": "string"
+                            },
+                            "supporting_evidence": {
+                                "type": "string"
+                            },
+                            "source_field": {
+                                "type": "string"
+                            },
+                            "priority": {
+                                "type": "string",
+                                "enum": [
+                                    "high",
+                                    "medium",
+                                    "low"
+                                ]
+                            }
+                        },
+                        "required": [
+                            "finding",
+                            "supporting_evidence",
+                            "source_field",
+                            "priority"
+                        ],
+                        "additionalProperties": False
+                    }
+                },
+                "information_gaps": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "required": [
+                "clinical_summary",
+                "discharge_summary",
+                "social_summary",
+                "potential_concerns",
+                "information_gaps"
+            ],
+            "additionalProperties": False
         }
 
-        discharge_context = {
-            "medication_reconciliation_status": patient_record.get(
-                "medication_reconciliation_status"
-            ),
-            "medication_education_status": patient_record.get(
-                "medication_education_status"
-            ),
-            "medication_availability_status": patient_record.get(
-                "medication_availability_status"
-            ),
-            "patient_education_status": patient_record.get(
-                "patient_education_status"
-            ),
-            "diet_education_status": patient_record.get(
-                "diet_education_status"
-            ),
-            "mobile_device_education_status": patient_record.get(
-                "mobile_device_education_status"
-            ),
-            "medical_device_education_status": patient_record.get(
-                "medical_device_education_status"
-            ),
-            "followup_appointment_status": patient_record.get(
-                "followup_appointment_status"
-            ),
-            "caregiver_status": patient_record.get("caregiver_status"),
-            "transport_status": patient_record.get("transport_status"),
-            "financial_status": patient_record.get("financial_status"),
-            "case_manager_status": patient_record.get("case_manager_status"),
-            "home_safety_status": patient_record.get("home_safety_status"),
-            "outpatient_therapy_status": patient_record.get(
-                "outpatient_therapy_status"
-            ),
-            "pcp_notification_status": patient_record.get(
-                "pcp_notification_status"
-            ),
-            "discharge_summary_status": patient_record.get(
-                "discharge_summary_status"
-            ),
-            "planned_discharge_window": patient_record.get(
-                "planned_discharge_window"
-            )
-        }
+        result = self.llm.generate_json(
+            system_prompt=system_prompt,
+            user_data=patient_record,
+            schema_name="case_analysis",
+            schema=schema
+        )
 
         return {
             "agent": "CaseAnalyzer",
             "status": "success",
-            "finding": "Clinical and discharge context extracted.",
+            "llm": self.llm.get_metadata(),
+            "finding": "Clinical, discharge, and social context analyzed by LLM.",
             "supporting_evidence": {
-                "clinical_fields_reviewed": len(clinical_context),
-                "discharge_fields_reviewed": len(discharge_context)
+                "concern_count": len(
+                    result["potential_concerns"]
+                ),
+                "information_gap_count": len(
+                    result["information_gaps"]
+                )
             },
-            "confidence": 1.0,
+            "confidence": 0.90,
             "source_field": "patient_record",
-            "clinical_context": clinical_context,
-            "discharge_context": discharge_context
+            "clinical_summary": result[
+                "clinical_summary"
+            ],
+            "discharge_summary": result[
+                "discharge_summary"
+            ],
+            "social_summary": result[
+                "social_summary"
+            ],
+            "potential_concerns": result[
+                "potential_concerns"
+            ],
+            "information_gaps": result[
+                "information_gaps"
+            ]
         }

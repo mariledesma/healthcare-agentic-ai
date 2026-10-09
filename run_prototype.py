@@ -26,6 +26,10 @@ def run_pipeline(case_file):
     output_composer = OutputComposer()
     audit_logger = AuditLogger()
 
+    # -------------------------------------------------
+    # 1. Input Reader
+    # -------------------------------------------------
+
     input_result = input_reader.read(case_file)
 
     case_id = input_result.get(
@@ -50,7 +54,13 @@ def run_pipeline(case_file):
 
     patient_record = input_result["patient_record"]
 
-    analysis_result = case_analyzer.analyze(patient_record)
+    # -------------------------------------------------
+    # 2. LLM Case Analyzer
+    # -------------------------------------------------
+
+    analysis_result = case_analyzer.analyze(
+        patient_record
+    )
 
     audit_logger.log(
         case_id=patient_record["case_id"],
@@ -58,9 +68,19 @@ def run_pipeline(case_file):
         action="analyze_case",
         status=analysis_result["status"],
         details={
-            "finding": analysis_result["finding"]
+            "finding": analysis_result["finding"],
+            "llm_provider": analysis_result[
+                "llm"
+            ]["provider"],
+            "llm_model": analysis_result[
+                "llm"
+            ]["model"]
         }
     )
+
+    # -------------------------------------------------
+    # 3. Barrier Detector
+    # -------------------------------------------------
 
     barrier_result = barrier_detector.detect(
         patient_record,
@@ -83,6 +103,10 @@ def run_pipeline(case_file):
         }
     )
 
+    # -------------------------------------------------
+    # 4. Task Detector
+    # -------------------------------------------------
+
     task_result = task_detector.detect(
         patient_record,
         barrier_result["barriers"]
@@ -104,6 +128,10 @@ def run_pipeline(case_file):
         }
     )
 
+    # -------------------------------------------------
+    # 5. LLM Recommendation Agent
+    # -------------------------------------------------
+
     recommendation_result = recommendation_agent.generate(
         barrier_result["barriers"],
         task_result["tasks"]
@@ -116,25 +144,47 @@ def run_pipeline(case_file):
         status=recommendation_result["status"],
         details={
             "recommendation_count": len(
-                recommendation_result["recommendations"]
-            )
+                recommendation_result[
+                    "recommendations"
+                ]
+            ),
+            "llm_provider": recommendation_result[
+                "llm"
+            ]["provider"],
+            "llm_model": recommendation_result[
+                "llm"
+            ]["model"]
         }
     )
 
+    # -------------------------------------------------
+    # 6. Governance
+    # -------------------------------------------------
+
     governance_results = []
 
-    for recommendation in recommendation_result["recommendations"]:
-        policy_result = policy_engine.evaluate(recommendation)
+    for recommendation in recommendation_result[
+        "recommendations"
+    ]:
+        policy_result = policy_engine.evaluate(
+            recommendation
+        )
 
         if policy_result["policy_status"] == "forbidden":
             approval_result = {
                 "approval_status": "blocked",
                 "requires_human_approval": True,
                 "action": recommendation["action"],
-                "reason": "Action was blocked by the policy engine."
+                "reason": (
+                    "Action was blocked by the "
+                    "policy engine."
+                )
             }
+
         else:
-            approval_result = approval_gate.evaluate(recommendation)
+            approval_result = approval_gate.evaluate(
+                recommendation
+            )
 
         audit_logger.log(
             case_id=patient_record["case_id"],
@@ -151,9 +201,11 @@ def run_pipeline(case_file):
                 "approval_status": approval_result[
                     "approval_status"
                 ],
-                "requires_human_approval": approval_result[
-                    "requires_human_approval"
-                ]
+                "requires_human_approval": (
+                    approval_result[
+                        "requires_human_approval"
+                    ]
+                )
             }
         )
 
@@ -166,11 +218,17 @@ def run_pipeline(case_file):
             "approval": approval_result
         })
 
+    # -------------------------------------------------
+    # 7. Final Output Composer
+    # -------------------------------------------------
+
     final_output = output_composer.compose(
         patient_record=patient_record,
         barriers=barrier_result["barriers"],
         tasks=task_result["tasks"],
-        recommendations=recommendation_result["recommendations"],
+        recommendations=recommendation_result[
+            "recommendations"
+        ],
         governance_results=governance_results
     )
 
@@ -180,9 +238,15 @@ def run_pipeline(case_file):
         action="compose_final_output",
         status="success",
         details={
-            "final_status": final_output["final_status"]
+            "final_status": final_output[
+                "final_status"
+            ]
         }
     )
+
+    # -------------------------------------------------
+    # 8. Barrier Evaluation
+    # -------------------------------------------------
 
     expected_barriers = patient_record.get(
         "expected_barriers",
@@ -195,16 +259,23 @@ def run_pipeline(case_file):
     ]
 
     matched_barriers = sorted(
-        set(expected_barriers) & set(detected_barriers)
+        set(expected_barriers)
+        & set(detected_barriers)
     )
 
     missed_barriers = sorted(
-        set(expected_barriers) - set(detected_barriers)
+        set(expected_barriers)
+        - set(detected_barriers)
     )
 
     extra_barriers = sorted(
-        set(detected_barriers) - set(expected_barriers)
+        set(detected_barriers)
+        - set(expected_barriers)
     )
+
+    # -------------------------------------------------
+    # 9. Task Evaluation
+    # -------------------------------------------------
 
     expected_tasks = patient_record.get(
         "expected_tasks",
@@ -217,20 +288,37 @@ def run_pipeline(case_file):
     ]
 
     matched_tasks = sorted(
-        set(expected_tasks) & set(detected_tasks)
+        set(expected_tasks)
+        & set(detected_tasks)
     )
 
     missed_tasks = sorted(
-        set(expected_tasks) - set(detected_tasks)
+        set(expected_tasks)
+        - set(detected_tasks)
     )
 
     extra_tasks = sorted(
-        set(detected_tasks) - set(expected_tasks)
+        set(detected_tasks)
+        - set(expected_tasks)
     )
+
+    # -------------------------------------------------
+    # 10. Complete Pipeline Result
+    # -------------------------------------------------
 
     return {
         "case_id": patient_record["case_id"],
         "condition": patient_record["condition"],
+
+        "llm_configuration": {
+            "case_analyzer": analysis_result[
+                "llm"
+            ],
+            "recommendation_agent": recommendation_result[
+                "llm"
+            ]
+        },
+
         "pipeline": [
             "InputReader",
             "CaseAnalyzer",
@@ -242,11 +330,17 @@ def run_pipeline(case_file):
             "AuditLogger",
             "OutputComposer"
         ],
+
         "input_reader": input_result,
+
         "case_analyzer": analysis_result,
+
         "barrier_detector": barrier_result,
+
         "task_detector": task_result,
+
         "recommendation_agent": recommendation_result,
+
         "governance": {
             "status": "completed",
             "recommendations_reviewed": len(
@@ -254,7 +348,9 @@ def run_pipeline(case_file):
             ),
             "results": governance_results
         },
+
         "final_output": final_output,
+
         "evaluation": {
             "barriers": {
                 "expected": expected_barriers,
@@ -263,6 +359,7 @@ def run_pipeline(case_file):
                 "missed": missed_barriers,
                 "extra": extra_barriers
             },
+
             "tasks": {
                 "expected": expected_tasks,
                 "detected": detected_tasks,
@@ -275,8 +372,13 @@ def run_pipeline(case_file):
 
 
 def save_result(result):
-    results_directory = Path("results")
-    results_directory.mkdir(exist_ok=True)
+    results_directory = Path(
+        "results"
+    )
+
+    results_directory.mkdir(
+        exist_ok=True
+    )
 
     case_id = result.get(
         "case_id",

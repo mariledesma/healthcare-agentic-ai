@@ -1,0 +1,1 @@
+{"timestamp": "2026-10-09T16:20:45.424852+00:00", "case_id": "UNKNOWN", "module": "InputReader", "action": "read_and_validate_case", "status": "error", "details": {"finding": "Patient case file was not found."}}

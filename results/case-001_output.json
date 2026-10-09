@@ -1,6 +1,16 @@
 {
   "case_id": "CASE-001",
   "condition": "HF",
+  "llm_configuration": {
+    "case_analyzer": {
+      "provider": "groq",
+      "model": "openai/gpt-oss-20b"
+    },
+    "recommendation_agent": {
+      "provider": "groq",
+      "model": "openai/gpt-oss-20b"
+    }
+  },
   "pipeline": [
     "InputReader",
     "CaseAnalyzer",
@@ -84,61 +94,38 @@
   "case_analyzer": {
     "agent": "CaseAnalyzer",
     "status": "success",
-    "finding": "Clinical and discharge context extracted.",
+    "llm": {
+      "provider": "groq",
+      "model": "openai/gpt-oss-20b"
+    },
+    "finding": "Clinical, discharge, and social context analyzed by LLM.",
     "supporting_evidence": {
-      "clinical_fields_reviewed": 9,
-      "discharge_fields_reviewed": 17
+      "concern_count": 2,
+      "information_gap_count": 2
     },
-    "confidence": 1.0,
+    "confidence": 0.9,
     "source_field": "patient_record",
-    "clinical_context": {
-      "condition": "HF",
-      "diagnoses": [
-        "Acute decompensated heart failure",
-        "Hypertension"
-      ],
-      "medications": [
-        {
-          "name": "Furosemide",
-          "dose": "40 mg",
-          "frequency": "daily"
-        },
-        {
-          "name": "Lisinopril",
-          "dose": "10 mg",
-          "frequency": "daily"
-        }
-      ],
-      "labs": {
-        "sodium": "138 mmol/L",
-        "potassium": "4.1 mmol/L",
-        "creatinine": "1.0 mg/dL"
+    "clinical_summary": "Acute decompensated heart failure with hypertension; medically stable after diuresis; on furosemide 40 mg daily and lisinopril 10 mg daily; electrolytes and renal function normal.",
+    "discharge_summary": "Patient improved after diuresis and is medically stable for discharge.",
+    "social_summary": "Caregiver available; transportation not arranged; follow-up appointment not scheduled; financial status no concern; case manager available; patient independent and home safe.",
+    "potential_concerns": [
+      {
+        "finding": "Transportation to home not arranged",
+        "priority": "high",
+        "source_field": "transport_status",
+        "supporting_evidence": "transport_status: not_arranged and case manager note indicating no confirmed ride home"
       },
-      "pending_labs": [],
-      "pending_imaging": [],
-      "pending_consult": [],
-      "medical_stability_status": "stable",
-      "physical_function_status": "independent"
-    },
-    "discharge_context": {
-      "medication_reconciliation_status": "complete",
-      "medication_education_status": "complete",
-      "medication_availability_status": "available",
-      "patient_education_status": "complete",
-      "diet_education_status": "complete",
-      "mobile_device_education_status": null,
-      "medical_device_education_status": null,
-      "followup_appointment_status": "not_scheduled",
-      "caregiver_status": "available",
-      "transport_status": "not_arranged",
-      "financial_status": "no_concern",
-      "case_manager_status": "available",
-      "home_safety_status": "safe",
-      "outpatient_therapy_status": "not_required",
-      "pcp_notification_status": "complete",
-      "discharge_summary_status": "signed",
-      "planned_discharge_window": "afternoon"
-    }
+      {
+        "finding": "Follow-up appointment not scheduled",
+        "priority": "high",
+        "source_field": "followup_appointment_status",
+        "supporting_evidence": "followup_appointment_status: not_scheduled and case manager note indicating follow-up appointment has not yet been scheduled"
+      }
+    ],
+    "information_gaps": [
+      "Follow-up appointment not scheduled",
+      "Transportation to home not arranged"
+    ]
   },
   "barrier_detector": {
     "agent": "BarrierDetector",
@@ -205,37 +192,51 @@
   "recommendation_agent": {
     "agent": "RecommendationAgent",
     "status": "success",
-    "finding": "2 recommendation(s) generated.",
+    "llm": {
+      "provider": "groq",
+      "model": "openai/gpt-oss-20b"
+    },
+    "finding": "2 LLM-generated recommendation(s).",
     "supporting_evidence": {
       "barriers_reviewed": 2,
       "tasks_reviewed": 2
     },
-    "confidence": 0.95,
-    "source_field": "detected_tasks",
+    "confidence": 0.9,
+    "source_field": "detected_barriers_and_tasks",
     "recommendations": [
       {
         "recommendation_id": "R-T-CM01",
         "action": "Schedule follow-up appointment",
+        "rationale": "Follow-up appointment not scheduled; scheduling will resolve barrier B-F01 and B-F02.",
         "owner_role": "Case Manager",
         "priority": "high",
         "resolves_barriers": [
           "B-F01",
           "B-F02"
         ],
-        "source_field": "followup_appointment_status",
-        "rationale": "This action is recommended because it addresses the discharge barrier(s): B-F01, B-F02."
+        "supporting_task_ids": [
+          "T-CM01"
+        ],
+        "source_fields": [
+          "followup_appointment_status"
+        ]
       },
       {
         "recommendation_id": "R-T-CM04",
         "action": "Arrange patient transport",
+        "rationale": "Transportation to home not arranged; arranging transport will resolve barrier B-S02 and B-S07.",
         "owner_role": "Case Manager",
         "priority": "high",
         "resolves_barriers": [
           "B-S02",
           "B-S07"
         ],
-        "source_field": "transport_status",
-        "rationale": "This action is recommended because it addresses the discharge barrier(s): B-S02, B-S07."
+        "supporting_task_ids": [
+          "T-CM04"
+        ],
+        "source_fields": [
+          "transport_status"
+        ]
       }
     ]
   },
@@ -330,26 +331,36 @@
       {
         "recommendation_id": "R-T-CM01",
         "action": "Schedule follow-up appointment",
+        "rationale": "Follow-up appointment not scheduled; scheduling will resolve barrier B-F01 and B-F02.",
         "owner_role": "Case Manager",
         "priority": "high",
         "resolves_barriers": [
           "B-F01",
           "B-F02"
         ],
-        "source_field": "followup_appointment_status",
-        "rationale": "This action is recommended because it addresses the discharge barrier(s): B-F01, B-F02."
+        "supporting_task_ids": [
+          "T-CM01"
+        ],
+        "source_fields": [
+          "followup_appointment_status"
+        ]
       },
       {
         "recommendation_id": "R-T-CM04",
         "action": "Arrange patient transport",
+        "rationale": "Transportation to home not arranged; arranging transport will resolve barrier B-S02 and B-S07.",
         "owner_role": "Case Manager",
         "priority": "high",
         "resolves_barriers": [
           "B-S02",
           "B-S07"
         ],
-        "source_field": "transport_status",
-        "rationale": "This action is recommended because it addresses the discharge barrier(s): B-S02, B-S07."
+        "supporting_task_ids": [
+          "T-CM04"
+        ],
+        "source_fields": [
+          "transport_status"
+        ]
       }
     ],
     "governance": [
