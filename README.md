@@ -1,6 +1,8 @@
 # Healthcare Agentic AI
 
 A supervised Agentic AI prototype for hospital discharge coordination.
+By: Maria Vargas-Ledesma, MTSU MSCS Student
+Project Mentor: Dr. Khem Poudel
 
 ## Project Goal
 
