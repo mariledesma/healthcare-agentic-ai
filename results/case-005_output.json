@@ -1,0 +1,248 @@
+{
+  "case_id": "CASE-005",
+  "condition": "ST",
+  "pipeline": [
+    "InputReader",
+    "CaseAnalyzer",
+    "BarrierDetector"
+  ],
+  "input_reader": {
+    "agent": "InputReader",
+    "status": "success",
+    "finding": "Patient case successfully loaded and validated.",
+    "supporting_evidence": {
+      "case_id": "CASE-005",
+      "condition": "ST"
+    },
+    "confidence": 1.0,
+    "source_field": "patient_json",
+    "patient_record": {
+      "case_id": "CASE-005",
+      "condition": "ST",
+      "diagnoses": [
+        "Ischemic stroke",
+        "Hypertension"
+      ],
+      "medications": [
+        {
+          "name": "Aspirin",
+          "dose": "81 mg",
+          "frequency": "daily"
+        },
+        {
+          "name": "Atorvastatin",
+          "dose": "40 mg",
+          "frequency": "nightly"
+        }
+      ],
+      "labs": {
+        "sodium": "139 mmol/L",
+        "creatinine": "0.9 mg/dL"
+      },
+      "pending_labs": [],
+      "pending_imaging": [],
+      "pending_consult": [],
+      "medical_stability_status": "stable",
+      "medication_reconciliation_status": "complete",
+      "medication_education_status": "complete",
+      "medication_availability_status": "available",
+      "patient_education_status": "incomplete",
+      "diet_education_status": "incomplete",
+      "medical_device_education_status": "complete",
+      "followup_appointment_status": "not_scheduled",
+      "caregiver_status": "unavailable",
+      "transport_status": "arranged",
+      "financial_status": "no_concern",
+      "case_manager_status": "available",
+      "discharge_summary_status": "signed",
+      "pcp_notification_status": "not_complete",
+      "physical_function_status": "requires_assistance",
+      "home_safety_status": "safe",
+      "outpatient_therapy_status": "not_arranged",
+      "planned_discharge_window": "afternoon",
+      "discharge_summary": "Patient is medically stable following ischemic stroke but requires continued rehabilitation and discharge education.",
+      "free_text_notes": {
+        "case_manager_note": "No reliable caregiver is available. Outpatient therapy has not been arranged and stroke education remains incomplete."
+      },
+      "expected_barriers": [
+        "B-C05",
+        "B-E03",
+        "B-E04",
+        "B-F01",
+        "B-F03",
+        "B-F04",
+        "B-F05"
+      ],
+      "expected_tasks": [
+        "T-RN02",
+        "T-RN03",
+        "T-RN06",
+        "T-CM01",
+        "T-CM02",
+        "T-CM03",
+        "T-CM08"
+      ],
+      "distractors": [
+        "The patient had a cataract removed from one eye two years ago. The result was successful. Vision in both eyes is stable and this has no current clinical significance.",
+        "The patient reports a mild seasonal allergy that is well controlled with an over-the-counter antihistamine. This was noted and confirmed to have no interaction with current medications."
+      ]
+    }
+  },
+  "case_analyzer": {
+    "agent": "CaseAnalyzer",
+    "status": "success",
+    "finding": "Clinical and discharge context extracted.",
+    "supporting_evidence": {
+      "clinical_fields_reviewed": 9,
+      "discharge_fields_reviewed": 17
+    },
+    "confidence": 1.0,
+    "source_field": "patient_record",
+    "clinical_context": {
+      "condition": "ST",
+      "diagnoses": [
+        "Ischemic stroke",
+        "Hypertension"
+      ],
+      "medications": [
+        {
+          "name": "Aspirin",
+          "dose": "81 mg",
+          "frequency": "daily"
+        },
+        {
+          "name": "Atorvastatin",
+          "dose": "40 mg",
+          "frequency": "nightly"
+        }
+      ],
+      "labs": {
+        "sodium": "139 mmol/L",
+        "creatinine": "0.9 mg/dL"
+      },
+      "pending_labs": [],
+      "pending_imaging": [],
+      "pending_consult": [],
+      "medical_stability_status": "stable",
+      "physical_function_status": "requires_assistance"
+    },
+    "discharge_context": {
+      "medication_reconciliation_status": "complete",
+      "medication_education_status": "complete",
+      "medication_availability_status": "available",
+      "patient_education_status": "incomplete",
+      "diet_education_status": "incomplete",
+      "mobile_device_education_status": null,
+      "medical_device_education_status": "complete",
+      "followup_appointment_status": "not_scheduled",
+      "caregiver_status": "unavailable",
+      "transport_status": "arranged",
+      "financial_status": "no_concern",
+      "case_manager_status": "available",
+      "home_safety_status": "safe",
+      "outpatient_therapy_status": "not_arranged",
+      "pcp_notification_status": "not_complete",
+      "discharge_summary_status": "signed",
+      "planned_discharge_window": "afternoon"
+    }
+  },
+  "barrier_detector": {
+    "agent": "BarrierDetector",
+    "status": "success",
+    "finding": "7 discharge barrier(s) detected.",
+    "supporting_evidence": {
+      "barrier_count": 7
+    },
+    "confidence": 0.95,
+    "source_field": "patient_record",
+    "barriers": [
+      {
+        "barrier_id": "B-C05",
+        "finding": "Patient has functional or physical limitations.",
+        "supporting_evidence": "requires_assistance",
+        "confidence": 0.95,
+        "priority": "high",
+        "source_field": "physical_function_status"
+      },
+      {
+        "barrier_id": "B-E03",
+        "finding": "Patient education is incomplete.",
+        "supporting_evidence": "incomplete",
+        "confidence": 0.95,
+        "priority": "high",
+        "source_field": "patient_education_status"
+      },
+      {
+        "barrier_id": "B-E04",
+        "finding": "Diet restrictions have not been fully taught.",
+        "supporting_evidence": "incomplete",
+        "confidence": 0.95,
+        "priority": "high",
+        "source_field": "diet_education_status"
+      },
+      {
+        "barrier_id": "B-F01",
+        "finding": "Follow-up appointment has not been scheduled.",
+        "supporting_evidence": "not_scheduled",
+        "confidence": 0.95,
+        "priority": "high",
+        "source_field": "followup_appointment_status"
+      },
+      {
+        "barrier_id": "B-F03",
+        "finding": "Reliable caregiver support is unavailable.",
+        "supporting_evidence": "unavailable",
+        "confidence": 0.95,
+        "priority": "high",
+        "source_field": "caregiver_status"
+      },
+      {
+        "barrier_id": "B-F04",
+        "finding": "Required outpatient therapy has not been arranged.",
+        "supporting_evidence": "not_arranged",
+        "confidence": 0.95,
+        "priority": "medium",
+        "source_field": "outpatient_therapy_status"
+      },
+      {
+        "barrier_id": "B-F05",
+        "finding": "Primary care provider has not been notified.",
+        "supporting_evidence": "not_complete",
+        "confidence": 0.95,
+        "priority": "medium",
+        "source_field": "pcp_notification_status"
+      }
+    ]
+  },
+  "evaluation": {
+    "expected_barriers": [
+      "B-C05",
+      "B-E03",
+      "B-E04",
+      "B-F01",
+      "B-F03",
+      "B-F04",
+      "B-F05"
+    ],
+    "detected_barriers": [
+      "B-C05",
+      "B-E03",
+      "B-E04",
+      "B-F01",
+      "B-F03",
+      "B-F04",
+      "B-F05"
+    ],
+    "matched_barriers": [
+      "B-C05",
+      "B-E03",
+      "B-E04",
+      "B-F01",
+      "B-F03",
+      "B-F04",
+      "B-F05"
+    ],
+    "missed_barriers": [],
+    "extra_barriers": []
+  }
+}

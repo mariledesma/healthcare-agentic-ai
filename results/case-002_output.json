@@ -1,0 +1,188 @@
+{
+  "case_id": "CASE-002",
+  "condition": "CO",
+  "pipeline": [
+    "InputReader",
+    "CaseAnalyzer",
+    "BarrierDetector"
+  ],
+  "input_reader": {
+    "agent": "InputReader",
+    "status": "success",
+    "finding": "Patient case successfully loaded and validated.",
+    "supporting_evidence": {
+      "case_id": "CASE-002",
+      "condition": "CO"
+    },
+    "confidence": 1.0,
+    "source_field": "patient_json",
+    "patient_record": {
+      "case_id": "CASE-002",
+      "condition": "CO",
+      "diagnoses": [
+        "COPD exacerbation",
+        "Hypertension"
+      ],
+      "medications": [
+        {
+          "name": "Albuterol inhaler",
+          "dose": "2 puffs",
+          "frequency": "as needed"
+        },
+        {
+          "name": "Prednisone",
+          "dose": "40 mg",
+          "frequency": "daily"
+        }
+      ],
+      "labs": {
+        "wbc": "10.8 K/uL",
+        "creatinine": "0.9 mg/dL"
+      },
+      "pending_labs": [
+        "Sputum culture"
+      ],
+      "pending_imaging": [],
+      "pending_consult": [],
+      "medical_stability_status": "stable",
+      "medication_reconciliation_status": "complete",
+      "medication_education_status": "incomplete",
+      "medication_availability_status": "available",
+      "patient_education_status": "complete",
+      "diet_education_status": "not_required",
+      "medical_device_education_status": "complete",
+      "followup_appointment_status": "scheduled",
+      "caregiver_status": "available",
+      "transport_status": "arranged",
+      "financial_status": "no_concern",
+      "case_manager_status": "available",
+      "discharge_summary_status": "signed",
+      "pcp_notification_status": "complete",
+      "physical_function_status": "independent",
+      "home_safety_status": "safe",
+      "outpatient_therapy_status": "not_required",
+      "planned_discharge_window": "morning",
+      "discharge_summary": "Respiratory status improved and patient is stable for discharge.",
+      "free_text_notes": {
+        "case_manager_note": "Patient has not yet received education on the new prednisone prescription."
+      },
+      "expected_barriers": [
+        "B-C02",
+        "B-E01"
+      ],
+      "expected_tasks": [
+        "T-MD02",
+        "T-RN01"
+      ],
+      "distractors": [
+        "The patient experienced mild nausea on the morning of day 2. This was managed with a standard anti-nausea medication and the patient has been eating and drinking normally since."
+      ]
+    }
+  },
+  "case_analyzer": {
+    "agent": "CaseAnalyzer",
+    "status": "success",
+    "finding": "Clinical and discharge context extracted.",
+    "supporting_evidence": {
+      "clinical_fields_reviewed": 9,
+      "discharge_fields_reviewed": 17
+    },
+    "confidence": 1.0,
+    "source_field": "patient_record",
+    "clinical_context": {
+      "condition": "CO",
+      "diagnoses": [
+        "COPD exacerbation",
+        "Hypertension"
+      ],
+      "medications": [
+        {
+          "name": "Albuterol inhaler",
+          "dose": "2 puffs",
+          "frequency": "as needed"
+        },
+        {
+          "name": "Prednisone",
+          "dose": "40 mg",
+          "frequency": "daily"
+        }
+      ],
+      "labs": {
+        "wbc": "10.8 K/uL",
+        "creatinine": "0.9 mg/dL"
+      },
+      "pending_labs": [
+        "Sputum culture"
+      ],
+      "pending_imaging": [],
+      "pending_consult": [],
+      "medical_stability_status": "stable",
+      "physical_function_status": "independent"
+    },
+    "discharge_context": {
+      "medication_reconciliation_status": "complete",
+      "medication_education_status": "incomplete",
+      "medication_availability_status": "available",
+      "patient_education_status": "complete",
+      "diet_education_status": "not_required",
+      "mobile_device_education_status": null,
+      "medical_device_education_status": "complete",
+      "followup_appointment_status": "scheduled",
+      "caregiver_status": "available",
+      "transport_status": "arranged",
+      "financial_status": "no_concern",
+      "case_manager_status": "available",
+      "home_safety_status": "safe",
+      "outpatient_therapy_status": "not_required",
+      "pcp_notification_status": "complete",
+      "discharge_summary_status": "signed",
+      "planned_discharge_window": "morning"
+    }
+  },
+  "barrier_detector": {
+    "agent": "BarrierDetector",
+    "status": "success",
+    "finding": "2 discharge barrier(s) detected.",
+    "supporting_evidence": {
+      "barrier_count": 2
+    },
+    "confidence": 0.95,
+    "source_field": "patient_record",
+    "barriers": [
+      {
+        "barrier_id": "B-C02",
+        "finding": "Lab or test results are pending.",
+        "supporting_evidence": [
+          "Sputum culture"
+        ],
+        "confidence": 0.95,
+        "priority": "high",
+        "source_field": "pending_labs"
+      },
+      {
+        "barrier_id": "B-E01",
+        "finding": "Medication education is incomplete.",
+        "supporting_evidence": "incomplete",
+        "confidence": 0.95,
+        "priority": "high",
+        "source_field": "medication_education_status"
+      }
+    ]
+  },
+  "evaluation": {
+    "expected_barriers": [
+      "B-C02",
+      "B-E01"
+    ],
+    "detected_barriers": [
+      "B-C02",
+      "B-E01"
+    ],
+    "matched_barriers": [
+      "B-C02",
+      "B-E01"
+    ],
+    "missed_barriers": [],
+    "extra_barriers": []
+  }
+}

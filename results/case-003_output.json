@@ -1,0 +1,170 @@
+{
+  "case_id": "CASE-003",
+  "condition": "PN",
+  "pipeline": [
+    "InputReader",
+    "CaseAnalyzer",
+    "BarrierDetector"
+  ],
+  "input_reader": {
+    "agent": "InputReader",
+    "status": "success",
+    "finding": "Patient case successfully loaded and validated.",
+    "supporting_evidence": {
+      "case_id": "CASE-003",
+      "condition": "PN"
+    },
+    "confidence": 1.0,
+    "source_field": "patient_json",
+    "patient_record": {
+      "case_id": "CASE-003",
+      "condition": "PN",
+      "diagnoses": [
+        "Community-acquired pneumonia",
+        "Type 2 diabetes mellitus"
+      ],
+      "medications": [
+        {
+          "name": "Amoxicillin-clavulanate",
+          "dose": "875 mg",
+          "frequency": "twice daily"
+        }
+      ],
+      "labs": {
+        "wbc": "9.5 K/uL",
+        "glucose": "142 mg/dL"
+      },
+      "pending_labs": [],
+      "pending_imaging": [],
+      "pending_consult": [],
+      "medical_stability_status": "stable",
+      "medication_reconciliation_status": "complete",
+      "medication_education_status": "complete",
+      "medication_availability_status": "not_available",
+      "patient_education_status": "complete",
+      "followup_appointment_status": "scheduled",
+      "caregiver_status": "unavailable",
+      "transport_status": "arranged",
+      "financial_status": "no_concern",
+      "case_manager_status": "available",
+      "discharge_summary_status": "signed",
+      "pcp_notification_status": "complete",
+      "physical_function_status": "independent",
+      "home_safety_status": "safe",
+      "outpatient_therapy_status": "not_required",
+      "planned_discharge_window": "afternoon",
+      "discharge_summary": "Patient clinically improved after treatment and no longer requires inpatient care.",
+      "free_text_notes": {
+        "case_manager_note": "Discharge antibiotic is not currently available at the patient's pharmacy. No caregiver is available to assist with medication pickup or daily support."
+      },
+      "expected_barriers": [
+        "B-E02",
+        "B-F03"
+      ],
+      "expected_tasks": [
+        "T-PH02",
+        "T-CM02"
+      ],
+      "distractors": [
+        "The patient had a previous hospital admission for the same condition eighteen months ago. That episode was fully resolved and is not relevant to the current discharge plan."
+      ]
+    }
+  },
+  "case_analyzer": {
+    "agent": "CaseAnalyzer",
+    "status": "success",
+    "finding": "Clinical and discharge context extracted.",
+    "supporting_evidence": {
+      "clinical_fields_reviewed": 9,
+      "discharge_fields_reviewed": 17
+    },
+    "confidence": 1.0,
+    "source_field": "patient_record",
+    "clinical_context": {
+      "condition": "PN",
+      "diagnoses": [
+        "Community-acquired pneumonia",
+        "Type 2 diabetes mellitus"
+      ],
+      "medications": [
+        {
+          "name": "Amoxicillin-clavulanate",
+          "dose": "875 mg",
+          "frequency": "twice daily"
+        }
+      ],
+      "labs": {
+        "wbc": "9.5 K/uL",
+        "glucose": "142 mg/dL"
+      },
+      "pending_labs": [],
+      "pending_imaging": [],
+      "pending_consult": [],
+      "medical_stability_status": "stable",
+      "physical_function_status": "independent"
+    },
+    "discharge_context": {
+      "medication_reconciliation_status": "complete",
+      "medication_education_status": "complete",
+      "medication_availability_status": "not_available",
+      "patient_education_status": "complete",
+      "diet_education_status": null,
+      "mobile_device_education_status": null,
+      "medical_device_education_status": null,
+      "followup_appointment_status": "scheduled",
+      "caregiver_status": "unavailable",
+      "transport_status": "arranged",
+      "financial_status": "no_concern",
+      "case_manager_status": "available",
+      "home_safety_status": "safe",
+      "outpatient_therapy_status": "not_required",
+      "pcp_notification_status": "complete",
+      "discharge_summary_status": "signed",
+      "planned_discharge_window": "afternoon"
+    }
+  },
+  "barrier_detector": {
+    "agent": "BarrierDetector",
+    "status": "success",
+    "finding": "2 discharge barrier(s) detected.",
+    "supporting_evidence": {
+      "barrier_count": 2
+    },
+    "confidence": 0.95,
+    "source_field": "patient_record",
+    "barriers": [
+      {
+        "barrier_id": "B-E02",
+        "finding": "Discharge medication is not available.",
+        "supporting_evidence": "not_available",
+        "confidence": 0.95,
+        "priority": "high",
+        "source_field": "medication_availability_status"
+      },
+      {
+        "barrier_id": "B-F03",
+        "finding": "Reliable caregiver support is unavailable.",
+        "supporting_evidence": "unavailable",
+        "confidence": 0.95,
+        "priority": "high",
+        "source_field": "caregiver_status"
+      }
+    ]
+  },
+  "evaluation": {
+    "expected_barriers": [
+      "B-E02",
+      "B-F03"
+    ],
+    "detected_barriers": [
+      "B-E02",
+      "B-F03"
+    ],
+    "matched_barriers": [
+      "B-E02",
+      "B-F03"
+    ],
+    "missed_barriers": [],
+    "extra_barriers": []
+  }
+}

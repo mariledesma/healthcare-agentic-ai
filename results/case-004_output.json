@@ -1,0 +1,198 @@
+{
+  "case_id": "CASE-004",
+  "condition": "OR",
+  "pipeline": [
+    "InputReader",
+    "CaseAnalyzer",
+    "BarrierDetector"
+  ],
+  "input_reader": {
+    "agent": "InputReader",
+    "status": "success",
+    "finding": "Patient case successfully loaded and validated.",
+    "supporting_evidence": {
+      "case_id": "CASE-004",
+      "condition": "OR"
+    },
+    "confidence": 1.0,
+    "source_field": "patient_json",
+    "patient_record": {
+      "case_id": "CASE-004",
+      "condition": "OR",
+      "diagnoses": [
+        "Status post total hip arthroplasty",
+        "Osteoarthritis"
+      ],
+      "medications": [
+        {
+          "name": "Acetaminophen",
+          "dose": "650 mg",
+          "frequency": "every 6 hours as needed"
+        }
+      ],
+      "labs": {
+        "hemoglobin": "10.8 g/dL",
+        "creatinine": "0.8 mg/dL"
+      },
+      "pending_labs": [],
+      "pending_imaging": [],
+      "pending_consult": [],
+      "medical_stability_status": "stable",
+      "medication_reconciliation_status": "complete",
+      "medication_education_status": "complete",
+      "medication_availability_status": "available",
+      "patient_education_status": "complete",
+      "mobile_device_education_status": "incomplete",
+      "followup_appointment_status": "scheduled",
+      "caregiver_status": "available",
+      "transport_status": "arranged",
+      "financial_status": "no_concern",
+      "case_manager_status": "available",
+      "discharge_summary_status": "signed",
+      "pcp_notification_status": "complete",
+      "physical_function_status": "requires_assistance",
+      "home_safety_status": "unsafe_stairs_no_grab_bars",
+      "outpatient_therapy_status": "not_arranged",
+      "planned_discharge_window": "morning",
+      "wound_status": "stable",
+      "discharge_summary": "Patient is medically stable after surgery but has ongoing mobility limitations.",
+      "free_text_notes": {
+        "case_manager_note": "Patient requires a walker, has not completed walker education, and home stairs have no grab bars."
+      },
+      "expected_barriers": [
+        "B-C05",
+        "B-E05",
+        "B-F04",
+        "B-S03"
+      ],
+      "expected_tasks": [
+        "T-RN06",
+        "T-RN07",
+        "T-CM03",
+        "T-CM05"
+      ],
+      "distractors": [
+        "The patient had a hernia repaired surgically four years ago. The repair was successful and the patient has had no recurrence. This is not relevant to the current discharge plan."
+      ]
+    }
+  },
+  "case_analyzer": {
+    "agent": "CaseAnalyzer",
+    "status": "success",
+    "finding": "Clinical and discharge context extracted.",
+    "supporting_evidence": {
+      "clinical_fields_reviewed": 9,
+      "discharge_fields_reviewed": 17
+    },
+    "confidence": 1.0,
+    "source_field": "patient_record",
+    "clinical_context": {
+      "condition": "OR",
+      "diagnoses": [
+        "Status post total hip arthroplasty",
+        "Osteoarthritis"
+      ],
+      "medications": [
+        {
+          "name": "Acetaminophen",
+          "dose": "650 mg",
+          "frequency": "every 6 hours as needed"
+        }
+      ],
+      "labs": {
+        "hemoglobin": "10.8 g/dL",
+        "creatinine": "0.8 mg/dL"
+      },
+      "pending_labs": [],
+      "pending_imaging": [],
+      "pending_consult": [],
+      "medical_stability_status": "stable",
+      "physical_function_status": "requires_assistance"
+    },
+    "discharge_context": {
+      "medication_reconciliation_status": "complete",
+      "medication_education_status": "complete",
+      "medication_availability_status": "available",
+      "patient_education_status": "complete",
+      "diet_education_status": null,
+      "mobile_device_education_status": "incomplete",
+      "medical_device_education_status": null,
+      "followup_appointment_status": "scheduled",
+      "caregiver_status": "available",
+      "transport_status": "arranged",
+      "financial_status": "no_concern",
+      "case_manager_status": "available",
+      "home_safety_status": "unsafe_stairs_no_grab_bars",
+      "outpatient_therapy_status": "not_arranged",
+      "pcp_notification_status": "complete",
+      "discharge_summary_status": "signed",
+      "planned_discharge_window": "morning"
+    }
+  },
+  "barrier_detector": {
+    "agent": "BarrierDetector",
+    "status": "success",
+    "finding": "4 discharge barrier(s) detected.",
+    "supporting_evidence": {
+      "barrier_count": 4
+    },
+    "confidence": 0.95,
+    "source_field": "patient_record",
+    "barriers": [
+      {
+        "barrier_id": "B-C05",
+        "finding": "Patient has functional or physical limitations.",
+        "supporting_evidence": "requires_assistance",
+        "confidence": 0.95,
+        "priority": "high",
+        "source_field": "physical_function_status"
+      },
+      {
+        "barrier_id": "B-E05",
+        "finding": "Mobility device education is incomplete.",
+        "supporting_evidence": "incomplete",
+        "confidence": 0.95,
+        "priority": "high",
+        "source_field": "mobile_device_education_status"
+      },
+      {
+        "barrier_id": "B-F04",
+        "finding": "Required outpatient therapy has not been arranged.",
+        "supporting_evidence": "not_arranged",
+        "confidence": 0.95,
+        "priority": "medium",
+        "source_field": "outpatient_therapy_status"
+      },
+      {
+        "barrier_id": "B-S03",
+        "finding": "Home safety concerns may prevent safe discharge.",
+        "supporting_evidence": "unsafe_stairs_no_grab_bars",
+        "confidence": 0.95,
+        "priority": "high",
+        "source_field": "home_safety_status"
+      }
+    ]
+  },
+  "evaluation": {
+    "expected_barriers": [
+      "B-C05",
+      "B-E05",
+      "B-F04",
+      "B-S03"
+    ],
+    "detected_barriers": [
+      "B-C05",
+      "B-E05",
+      "B-F04",
+      "B-S03"
+    ],
+    "matched_barriers": [
+      "B-C05",
+      "B-E05",
+      "B-F04",
+      "B-S03"
+    ],
+    "missed_barriers": [],
+    "extra_barriers": []
+  }
+}
