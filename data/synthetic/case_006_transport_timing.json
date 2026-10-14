@@ -1,0 +1,53 @@
+{
+  "case_id": "CASE-006",
+  "condition": "Heart Failure",
+  "diagnoses": [
+    "Heart failure",
+    "Hypertension"
+  ],
+  "medications": [
+    {
+      "name": "furosemide",
+      "dose": "40 mg",
+      "frequency": "daily"
+    }
+  ],
+  "labs": [],
+  "pending_labs": [],
+  "pending_imaging": [],
+  "pending_consults": [],
+  "medical_stability": "stable",
+  "physical_function_status": "independent",
+
+  "medication_reconciliation_status": "complete",
+  "medication_education_status": "complete",
+  "medication_availability": "available",
+
+  "patient_education_status": "complete",
+  "diet_education_status": "complete",
+  "mobility_device_education_status": "complete",
+  "medical_device_education_status": "complete",
+
+  "followup_appointment_status": "scheduled",
+  "caregiver_status": "available",
+
+  "transport_status": "arranged",
+  "transport_time": "18:00",
+  "planned_discharge_window": "morning",
+
+  "financial_status": "no_barrier",
+  "case_manager_status": "available",
+  "home_safety_status": "safe",
+  "outpatient_therapy_status": "not_needed",
+  "pcp_notification_status": "complete",
+
+  "discharge_summary": "Patient is clinically stable and planned for morning discharge.",
+
+  "expected_barriers": [
+    "B-S07"
+  ],
+
+  "expected_tasks": [
+    "T-CM04"
+  ]
+}

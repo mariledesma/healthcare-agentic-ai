@@ -171,13 +171,27 @@ class TaskDetector:
                 priority="medium"
             )
 
-        if "B-S02" in barrier_ids or "B-S07" in barrier_ids:
+        transport_barriers = [
+            barrier_id
+            for barrier_id in ["B-S02", "B-S07"]
+            if barrier_id in barrier_ids
+        ]
+
+        if transport_barriers:
+            if "B-S07" in transport_barriers:
+                source_field = (
+                    "planned_discharge_window + "
+                    "transport_time"
+                )
+            else:
+                source_field = "transport_status"
+
             add_task(
                 "T-CM04",
                 "Arrange patient transport",
                 "Case Manager",
-                ["B-S02", "B-S07"],
-                "transport_status"
+                transport_barriers,
+                source_field
             )
 
         if "B-S03" in barrier_ids:

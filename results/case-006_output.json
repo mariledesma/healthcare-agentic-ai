@@ -1,0 +1,304 @@
+{
+  "case_id": "CASE-006",
+  "condition": "Heart Failure",
+  "llm_configuration": {
+    "case_analyzer": {
+      "provider": "groq",
+      "model": "openai/gpt-oss-20b"
+    },
+    "recommendation_agent": {
+      "provider": "groq",
+      "model": "openai/gpt-oss-20b"
+    }
+  },
+  "pipeline": [
+    "InputReader",
+    "CaseAnalyzer",
+    "BarrierDetector",
+    "TaskDetector",
+    "RecommendationAgent",
+    "PolicyEngine",
+    "ApprovalGate",
+    "AuditLogger",
+    "OutputComposer"
+  ],
+  "input_reader": {
+    "agent": "InputReader",
+    "status": "success",
+    "finding": "Patient case successfully loaded and validated.",
+    "supporting_evidence": {
+      "case_id": "CASE-006",
+      "condition": "Heart Failure"
+    },
+    "confidence": 1.0,
+    "source_field": "patient_json",
+    "patient_record": {
+      "case_id": "CASE-006",
+      "condition": "Heart Failure",
+      "diagnoses": [
+        "Heart failure",
+        "Hypertension"
+      ],
+      "medications": [
+        {
+          "name": "furosemide",
+          "dose": "40 mg",
+          "frequency": "daily"
+        }
+      ],
+      "labs": [],
+      "pending_labs": [],
+      "pending_imaging": [],
+      "pending_consults": [],
+      "medical_stability": "stable",
+      "physical_function_status": "independent",
+      "medication_reconciliation_status": "complete",
+      "medication_education_status": "complete",
+      "medication_availability": "available",
+      "patient_education_status": "complete",
+      "diet_education_status": "complete",
+      "mobility_device_education_status": "complete",
+      "medical_device_education_status": "complete",
+      "followup_appointment_status": "scheduled",
+      "caregiver_status": "available",
+      "transport_status": "arranged",
+      "transport_time": "18:00",
+      "planned_discharge_window": "morning",
+      "financial_status": "no_barrier",
+      "case_manager_status": "available",
+      "home_safety_status": "safe",
+      "outpatient_therapy_status": "not_needed",
+      "pcp_notification_status": "complete",
+      "discharge_summary": "Patient is clinically stable and planned for morning discharge.",
+      "expected_barriers": [
+        "B-S07"
+      ],
+      "expected_tasks": [
+        "T-CM04"
+      ]
+    }
+  },
+  "case_analyzer": {
+    "agent": "CaseAnalyzer",
+    "status": "success",
+    "llm": {
+      "provider": "groq",
+      "model": "openai/gpt-oss-20b"
+    },
+    "finding": "Clinical, discharge, and social context analyzed by LLM.",
+    "supporting_evidence": {
+      "concern_count": 1,
+      "information_gap_count": 0
+    },
+    "confidence": 0.9,
+    "source_field": "patient_record",
+    "clinical_summary": "Patient diagnosed with heart failure and hypertension. Medications include furosemide 40 mg daily. No pending labs or imaging. Medical stability is stable and physical function independent. Medication reconciliation, education, and availability are complete.",
+    "discharge_summary": "Patient is clinically stable and planned for morning discharge.",
+    "social_summary": "Caregiver available. Transportation arranged for 18:00. Financial status no barrier. Home safety safe. Case manager available.",
+    "potential_concerns": [
+      {
+        "finding": "Transportation scheduled for 18:00 conflicts with planned morning discharge window.",
+        "priority": "high",
+        "source_field": "planned_discharge_window",
+        "supporting_evidence": "planned_discharge_window: morning and transport_time: 18:00"
+      }
+    ],
+    "information_gaps": []
+  },
+  "barrier_detector": {
+    "agent": "BarrierDetector",
+    "status": "success",
+    "finding": "1 discharge barrier(s) detected.",
+    "supporting_evidence": {
+      "barrier_count": 1,
+      "barrier_ids": [
+        "B-S07"
+      ]
+    },
+    "confidence": 0.95,
+    "source_field": "patient_record",
+    "barriers": [
+      {
+        "barrier_id": "B-S07",
+        "finding": "Transportation timing conflicts with the planned discharge window.",
+        "evidence": "Discharge is planned for morning, but transportation is scheduled for 18:00.",
+        "confidence": 0.95,
+        "priority": "high",
+        "source_field": "planned_discharge_window + transport_time"
+      }
+    ]
+  },
+  "task_detector": {
+    "agent": "TaskDetector",
+    "status": "success",
+    "finding": "1 pending task(s) detected.",
+    "supporting_evidence": {
+      "task_count": 1
+    },
+    "confidence": 0.95,
+    "source_field": "detected_barriers",
+    "tasks": [
+      {
+        "task_id": "T-CM04",
+        "task_name": "Arrange patient transport",
+        "owner_role": "Case Manager",
+        "resolves_barriers": [
+          "B-S07"
+        ],
+        "priority": "high",
+        "source_field": "planned_discharge_window + transport_time"
+      }
+    ]
+  },
+  "recommendation_agent": {
+    "agent": "RecommendationAgent",
+    "status": "success",
+    "llm": {
+      "provider": "groq",
+      "model": "openai/gpt-oss-20b"
+    },
+    "finding": "1 LLM-generated recommendation(s).",
+    "supporting_evidence": {
+      "barriers_reviewed": 1,
+      "tasks_reviewed": 1
+    },
+    "confidence": 0.9,
+    "source_field": "detected_barriers_and_tasks",
+    "recommendations": [
+      {
+        "recommendation_id": "R-T-CM04",
+        "action": "Arrange patient transport",
+        "rationale": "The transportation service is scheduled at 18:00, conflicting with the morning discharge window. Rescheduling transport to an earlier time will ensure the patient can be safely transported within the discharge timeframe.",
+        "owner_role": "Case Manager",
+        "priority": "high",
+        "resolves_barriers": [
+          "B-S07"
+        ],
+        "supporting_task_ids": [
+          "T-CM04"
+        ],
+        "source_fields": [
+          "planned_discharge_window + transport_time"
+        ]
+      }
+    ]
+  },
+  "governance": {
+    "status": "completed",
+    "recommendations_reviewed": 1,
+    "results": [
+      {
+        "recommendation_id": "R-T-CM04",
+        "action": "Arrange patient transport",
+        "policy": {
+          "policy_status": "allowed",
+          "action": "Arrange patient transport",
+          "reason": "Action is permitted by the governance policy."
+        },
+        "approval": {
+          "approval_status": "auto_safe",
+          "requires_human_approval": false,
+          "action": "Arrange patient transport",
+          "reason": "Coordination action may be proposed without clinical execution."
+        }
+      }
+    ]
+  },
+  "final_output": {
+    "case_id": "CASE-006",
+    "condition": "Heart Failure",
+    "discharge_coordination_summary": {
+      "barrier_count": 1,
+      "task_count": 1,
+      "recommendation_count": 1,
+      "human_approval_required_count": 0
+    },
+    "barriers": [
+      {
+        "barrier_id": "B-S07",
+        "finding": "Transportation timing conflicts with the planned discharge window.",
+        "evidence": "Discharge is planned for morning, but transportation is scheduled for 18:00.",
+        "confidence": 0.95,
+        "priority": "high",
+        "source_field": "planned_discharge_window + transport_time"
+      }
+    ],
+    "pending_tasks": [
+      {
+        "task_id": "T-CM04",
+        "task_name": "Arrange patient transport",
+        "owner_role": "Case Manager",
+        "resolves_barriers": [
+          "B-S07"
+        ],
+        "priority": "high",
+        "source_field": "planned_discharge_window + transport_time"
+      }
+    ],
+    "recommendations": [
+      {
+        "recommendation_id": "R-T-CM04",
+        "action": "Arrange patient transport",
+        "rationale": "The transportation service is scheduled at 18:00, conflicting with the morning discharge window. Rescheduling transport to an earlier time will ensure the patient can be safely transported within the discharge timeframe.",
+        "owner_role": "Case Manager",
+        "priority": "high",
+        "resolves_barriers": [
+          "B-S07"
+        ],
+        "supporting_task_ids": [
+          "T-CM04"
+        ],
+        "source_fields": [
+          "planned_discharge_window + transport_time"
+        ]
+      }
+    ],
+    "governance": [
+      {
+        "recommendation_id": "R-T-CM04",
+        "action": "Arrange patient transport",
+        "policy": {
+          "policy_status": "allowed",
+          "action": "Arrange patient transport",
+          "reason": "Action is permitted by the governance policy."
+        },
+        "approval": {
+          "approval_status": "auto_safe",
+          "requires_human_approval": false,
+          "action": "Arrange patient transport",
+          "reason": "Coordination action may be proposed without clinical execution."
+        }
+      }
+    ],
+    "human_approval_required": [],
+    "final_status": "discharge_barriers_present"
+  },
+  "evaluation": {
+    "barriers": {
+      "expected": [
+        "B-S07"
+      ],
+      "detected": [
+        "B-S07"
+      ],
+      "matched": [
+        "B-S07"
+      ],
+      "missed": [],
+      "extra": []
+    },
+    "tasks": {
+      "expected": [
+        "T-CM04"
+      ],
+      "detected": [
+        "T-CM04"
+      ],
+      "matched": [
+        "T-CM04"
+      ],
+      "missed": [],
+      "extra": []
+    }
+  }
+}
