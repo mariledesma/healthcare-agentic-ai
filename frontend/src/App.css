@@ -1,0 +1,1305 @@
+#root {
+  min-height: 100vh;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+
+  background: #e6e6e6;
+  color: #000000;
+
+  font-family:
+    "Times New Roman",
+    Times,
+    serif;
+}
+
+button,
+select,
+input,
+textarea {
+  font-family:
+    "Times New Roman",
+    Times,
+    serif;
+}
+
+
+/* =========================================
+   APPLICATION
+   ========================================= */
+
+.ehr-app {
+  min-height: 100vh;
+
+  background: #e6e6e6;
+  color: #000000;
+}
+
+
+/* =========================================
+   HEADER
+   ========================================= */
+
+.application-header {
+  height: 62px;
+
+  padding: 0 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: #202020;
+  color: #ffffff;
+
+  border-bottom: 1px solid #000000;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+}
+
+.brand-mark {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #ffffff;
+  color: #000000;
+
+  border: 1px solid #ffffff;
+
+  font-size: 0.78rem;
+  font-weight: bold;
+}
+
+.brand strong {
+  display: block;
+
+  color: #ffffff;
+
+  font-size: 1rem;
+}
+
+.brand span {
+  display: block;
+
+  margin-top: 2px;
+
+  color: #ffffff;
+
+  font-size: 0.75rem;
+}
+
+.research-label {
+  padding: 6px 10px;
+
+  background: #333333;
+  color: #ffffff;
+
+  border: 1px solid #ffffff;
+
+  font-size: 0.68rem;
+  font-weight: bold;
+
+  letter-spacing: 0.08em;
+}
+
+
+/* =========================================
+   CASE TOOLBAR
+   ========================================= */
+
+.case-toolbar {
+  background: #ffffff;
+
+  border-bottom: 1px solid #888888;
+}
+
+.case-selector {
+  min-height: 56px;
+
+  padding: 9px 20px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+}
+
+.case-selector label {
+  margin-right: 5px;
+
+  color: #000000;
+
+  font-size: 0.82rem;
+  font-weight: bold;
+}
+
+.case-selector select {
+  min-width: 310px;
+
+  padding: 8px 10px;
+
+  background: #ffffff;
+  color: #000000;
+
+  border: 1px solid #666666;
+
+  font-size: 0.84rem;
+}
+
+.case-selector button {
+  padding: 8px 17px;
+
+  background: #383838;
+  color: #ffffff;
+
+  border: 1px solid #000000;
+
+  font-size: 0.82rem;
+  font-weight: bold;
+
+  cursor: pointer;
+}
+
+.case-selector button:hover {
+  background: #000000;
+}
+
+.case-selector button:disabled {
+  background: #999999;
+  color: #ffffff;
+
+  cursor: default;
+}
+
+
+/* =========================================
+   PATIENT BANNER
+   ========================================= */
+
+.patient-banner {
+  min-height: 66px;
+
+  padding: 10px 22px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 42px;
+
+  background: #f2f2f2;
+
+  border-top: 1px solid #cccccc;
+  border-bottom: 1px solid #888888;
+}
+
+.patient-banner > div {
+  min-width: 90px;
+}
+
+.banner-label {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: #000000;
+
+  font-size: 0.67rem;
+  font-weight: bold;
+
+  text-transform: uppercase;
+}
+
+.patient-banner strong {
+  color: #000000;
+
+  font-size: 0.88rem;
+}
+
+
+/* =========================================
+   MAIN LAYOUT
+   ========================================= */
+
+.main-layout {
+  min-height: calc(100vh - 184px);
+
+  display: grid;
+
+  grid-template-columns:
+    195px 1fr;
+}
+
+
+/* =========================================
+   SIDEBAR
+   ========================================= */
+
+.sidebar {
+  padding-top: 12px;
+
+  background: #d9d9d9;
+
+  border-right: 1px solid #777777;
+}
+
+.nav-item {
+  width: 100%;
+
+  padding: 11px 15px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: transparent;
+  color: #000000;
+
+  border: none;
+  border-left: 5px solid transparent;
+
+  text-align: left;
+
+  font-size: 0.84rem;
+
+  cursor: pointer;
+}
+
+.nav-item:hover {
+  background: #c9c9c9;
+}
+
+.nav-item.active {
+  background: #bcbcbc;
+  color: #000000;
+
+  border-left-color: #000000;
+
+  font-weight: bold;
+}
+
+.nav-count {
+  min-width: 22px;
+
+  padding: 2px 6px;
+
+  background: #ffffff;
+  color: #000000;
+
+  border: 1px solid #666666;
+
+  text-align: center;
+
+  font-size: 0.7rem;
+}
+
+.sidebar-model {
+  margin: 26px 13px 0;
+
+  padding: 13px 4px;
+
+  border-top: 1px solid #777777;
+
+  color: #000000;
+
+  font-size: 0.7rem;
+
+  overflow-wrap: anywhere;
+}
+
+.sidebar-model span,
+.sidebar-model strong {
+  display: block;
+
+  color: #000000;
+}
+
+.sidebar-model strong {
+  margin: 3px 0 11px;
+
+  font-size: 0.74rem;
+}
+
+
+/* =========================================
+   WORKSPACE
+   ========================================= */
+
+.workspace {
+  padding: 20px;
+
+  background: #eeeeee;
+
+  overflow-x: auto;
+}
+
+
+/* =========================================
+   WELCOME SCREEN
+   ========================================= */
+
+.welcome-state {
+  padding: 50px;
+
+  background: #ffffff;
+
+  border: 1px solid #888888;
+
+  color: #000000;
+
+  text-align: center;
+}
+
+.welcome-state h2 {
+  margin-top: 0;
+}
+
+.welcome-state p {
+  color: #000000;
+}
+
+
+/* =========================================
+   PANELS
+   ========================================= */
+
+.clinical-panel {
+  margin-bottom: 18px;
+
+  background: #ffffff;
+
+  border: 1px solid #888888;
+}
+
+.panel-header {
+  min-height: 40px;
+
+  padding: 9px 13px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  background: #d7d7d7;
+
+  border-bottom: 1px solid #888888;
+}
+
+.panel-header h2 {
+  margin: 0;
+
+  color: #000000;
+
+  font-size: 0.95rem;
+}
+
+.panel-subtitle {
+  color: #000000;
+
+  font-size: 0.72rem;
+}
+
+.count-badge {
+  min-width: 22px;
+
+  padding: 2px 6px;
+
+  background: #ffffff;
+  color: #000000;
+
+  border: 1px solid #666666;
+
+  font-size: 0.7rem;
+
+  text-align: center;
+}
+
+
+/* =========================================
+   PATIENT SUMMARY
+   ========================================= */
+
+.clinical-summary-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+}
+
+.summary-column {
+  min-height: 130px;
+
+  padding: 14px 15px;
+
+  border-right: 1px solid #b5b5b5;
+}
+
+.summary-column:last-child {
+  border-right: none;
+}
+
+.summary-column h3 {
+  margin: 0 0 8px;
+
+  padding-bottom: 5px;
+
+  color: #000000;
+
+  border-bottom: 1px solid #cccccc;
+
+  font-size: 0.82rem;
+}
+
+.summary-column p {
+  margin: 0;
+
+  color: #000000;
+
+  font-size: 0.82rem;
+
+  line-height: 1.55;
+}
+
+
+/* =========================================
+   SPLIT WORKSPACE
+   ========================================= */
+
+.workspace-columns {
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap: 18px;
+}
+
+
+/* =========================================
+   TABLES
+   ========================================= */
+
+.clinical-table {
+  width: 100%;
+}
+
+.table-header,
+.table-row {
+  display: grid;
+
+  grid-template-columns:
+    95px
+    minmax(220px, 1.4fr)
+    100px
+    minmax(250px, 2fr);
+
+  align-items: center;
+
+  gap: 12px;
+}
+
+.table-header {
+  padding: 8px 12px;
+
+  background: #c9c9c9;
+  color: #000000;
+
+  border-bottom: 1px solid #777777;
+
+  font-size: 0.7rem;
+  font-weight: bold;
+
+  text-transform: uppercase;
+}
+
+.table-row {
+  min-height: 48px;
+
+  padding: 9px 12px;
+
+  color: #000000;
+
+  border-bottom: 1px solid #cccccc;
+
+  font-size: 0.81rem;
+}
+
+.table-row:nth-child(odd) {
+  background: #f4f4f4;
+}
+
+.table-row:nth-child(even) {
+  background: #ffffff;
+}
+
+.table-row:hover {
+  background: #dddddd;
+}
+
+.table-row:last-child {
+  border-bottom: none;
+}
+
+
+/* =========================================
+   TABLE GRID TYPES
+   ========================================= */
+
+.barrier-detail-grid {
+  grid-template-columns:
+    210px
+    minmax(260px, 1.4fr)
+    110px
+    minmax(220px, 1fr)
+    minmax(260px, 1.6fr);
+}
+
+.task-grid {
+  grid-template-columns:
+    90px
+    minmax(220px, 1.5fr)
+    140px
+    90px
+    minmax(150px, 1fr);
+}
+
+.governance-grid {
+  grid-template-columns:
+    minmax(250px, 2fr)
+    130px
+    150px
+    150px;
+}
+
+
+/* =========================================
+   IDS / METADATA
+   ========================================= */
+
+.clinical-id {
+  margin-right: 8px;
+
+  color: #000000;
+
+  font-size: 0.78rem;
+  font-weight: bold;
+
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.table-evidence {
+  color: #000000;
+
+  line-height: 1.45;
+}
+
+.compact-meta {
+  color: #000000;
+
+  font-size: 0.74rem;
+}
+
+
+/* =========================================
+   PRIORITY BADGES
+   ========================================= */
+
+.priority-badge {
+  display: inline-block;
+
+  padding: 4px 8px;
+
+  background: #ffffff;
+  color: #000000;
+
+  border: 2px solid #777777;
+
+  font-size: 0.66rem;
+  font-weight: bold;
+}
+
+/* High priority */
+.priority-high {
+  border-color: #c62828;
+}
+
+/* Medium priority */
+.priority-medium {
+  border-color: #d6a700;
+}
+
+/* Low priority */
+.priority-low {
+  border-color: #2e7d32;
+}
+
+
+/* =========================================
+   GENERAL STATUS BADGES
+   ========================================= */
+
+.status-badge {
+  display: inline-block;
+
+  padding: 4px 8px;
+
+  background: #ffffff;
+  color: #000000;
+
+  border: 2px solid #777777;
+
+  font-size: 0.72rem;
+  font-weight: bold;
+}
+
+/* Safe / complete / allowed */
+.status-success {
+  border-color: #2e7d32;
+}
+
+/* Pending / caution */
+.status-warning {
+  border-color: #d6a700;
+}
+
+/* Blocked / high risk / human review */
+.status-danger {
+  border-color: #c62828;
+}
+
+/* Unknown / informational */
+.status-neutral {
+  border-color: #666666;
+}
+
+
+/* =========================================
+   TASK LIST
+   ========================================= */
+
+.compact-item {
+  min-height: 52px;
+
+  padding: 10px 13px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+
+  color: #000000;
+
+  border-bottom: 1px solid #cccccc;
+}
+
+.compact-item:nth-child(even) {
+  background: #f3f3f3;
+}
+
+.compact-item:last-child {
+  border-bottom: none;
+}
+
+.compact-right {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+}
+
+
+/* =========================================
+   RECOMMENDATIONS
+   ========================================= */
+
+.recommendation-item {
+  padding: 12px 13px;
+
+  color: #000000;
+
+  border-bottom: 1px solid #cccccc;
+}
+
+.recommendation-item:nth-child(even) {
+  background: #f3f3f3;
+}
+
+.recommendation-item:last-child {
+  border-bottom: none;
+}
+
+.recommendation-title {
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  color: #000000;
+
+  font-size: 0.83rem;
+}
+
+.recommendation-item p,
+.recommendation-detail p {
+  margin: 8px 0;
+
+  color: #000000;
+
+  font-size: 0.81rem;
+
+  line-height: 1.55;
+}
+
+.recommendation-detail {
+  padding: 15px;
+
+  color: #000000;
+
+  border-bottom: 1px solid #bbbbbb;
+}
+
+.recommendation-detail:nth-child(even) {
+  background: #f3f3f3;
+}
+
+.detail-footer {
+  display: flex;
+
+  gap: 30px;
+
+  color: #000000;
+
+  font-size: 0.74rem;
+}
+
+
+/* =========================================
+   GOVERNANCE SUMMARY
+   ========================================= */
+
+.governance-summary-row {
+  padding: 12px 14px;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(220px, 2fr)
+    minmax(150px, 1fr)
+    minmax(180px, 1fr);
+
+  align-items: center;
+
+  gap: 15px;
+
+  border-bottom: 1px solid #cccccc;
+
+  color: #000000;
+
+  font-size: 0.8rem;
+}
+
+.governance-summary-row:last-child {
+  border-bottom: none;
+}
+
+
+/* =========================================
+   EVALUATION
+   ========================================= */
+
+.evaluation-columns {
+  padding: 14px;
+
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap: 22px;
+}
+
+.evaluation-columns h3 {
+  margin: 0 0 10px;
+
+  padding-bottom: 5px;
+
+  color: #000000;
+
+  border-bottom: 1px solid #999999;
+
+  font-size: 0.85rem;
+}
+
+.evaluation-row {
+  padding: 8px 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+
+  color: #000000;
+
+  border-bottom: 1px solid #d0d0d0;
+
+  font-size: 0.8rem;
+}
+
+.evaluation-row span,
+.evaluation-row strong {
+  color: #000000;
+}
+
+.evaluation-success,
+.evaluation-warning,
+.evaluation-alert {
+  padding: 3px 7px;
+
+  background: #ffffff;
+  color: #000000;
+
+  border: 2px solid #777777;
+}
+
+.evaluation-success {
+  border-color: #2e7d32;
+}
+
+.evaluation-warning {
+  border-color: #d6a700;
+}
+
+.evaluation-alert {
+  border-color: #c62828;
+}
+
+
+/* =========================================
+   EMPTY / SUCCESS
+   ========================================= */
+
+.empty-state {
+  padding: 17px;
+
+  background: #f7f7f7;
+  color: #000000;
+
+  font-size: 0.81rem;
+}
+
+.success-outline {
+  margin: 10px;
+
+  border: 2px solid #2e7d32;
+}
+
+
+/* =========================================
+   ERROR
+   ========================================= */
+
+.global-error {
+  margin: 12px 18px;
+
+  padding: 11px 13px;
+
+  background: #ffffff;
+  color: #000000;
+
+  border: 2px solid #c62828;
+
+  font-size: 0.82rem;
+  font-weight: bold;
+}
+
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+
+@media (max-width: 900px) {
+
+  .main-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    display: flex;
+
+    border-right: none;
+    border-bottom: 1px solid #777777;
+
+    overflow-x: auto;
+  }
+
+  .nav-item {
+    width: auto;
+    min-width: 110px;
+
+    border-left: none;
+    border-bottom: 4px solid transparent;
+  }
+
+  .nav-item.active {
+    border-left: none;
+    border-bottom-color: #000000;
+  }
+
+  .sidebar-model {
+    display: none;
+  }
+
+  .clinical-summary-grid,
+  .workspace-columns,
+  .evaluation-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .patient-banner {
+    flex-wrap: wrap;
+
+    gap: 18px;
+  }
+
+  .governance-summary-row {
+    grid-template-columns: 1fr;
+  }
+
+  .table-header,
+  .table-row,
+  .barrier-detail-grid,
+  .task-grid,
+  .governance-grid {
+    min-width: 760px;
+  }
+
+}
+/* =========================================
+   HUMAN REVIEW
+   ========================================= */
+
+.human-review-card {
+  padding: 16px;
+
+  background: #ffffff;
+  color: #000000;
+
+  border-bottom: 1px solid #aaaaaa;
+}
+
+.human-review-card:last-child {
+  border-bottom: none;
+}
+
+
+.human-review-heading {
+  padding-bottom: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  border-bottom: 1px solid #cccccc;
+}
+
+
+.review-warning {
+  margin: 13px 0;
+
+  padding: 10px 12px;
+
+  background: #ffffff;
+  color: #000000;
+
+  border: 2px solid #c62828;
+
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+
+.review-details-grid {
+  display: grid;
+
+  grid-template-columns:
+    2fr 1fr 1fr 1fr;
+
+  gap: 16px;
+
+  padding: 12px 0;
+}
+
+
+.review-details-grid > div {
+  min-width: 0;
+}
+
+
+.review-label {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: #000000;
+
+  font-size: 0.69rem;
+  font-weight: bold;
+
+  text-transform: uppercase;
+}
+
+
+.review-details-grid p {
+  margin: 0;
+
+  color: #000000;
+
+  font-size: 0.8rem;
+
+  line-height: 1.45;
+}
+
+
+.review-reason {
+  margin-top: 8px;
+
+  padding: 11px 12px;
+
+  background: #f3f3f3;
+
+  border: 1px solid #aaaaaa;
+}
+
+
+.review-reason strong {
+  color: #000000;
+
+  font-size: 0.78rem;
+}
+
+
+.review-reason p {
+  margin: 5px 0 0;
+
+  color: #000000;
+
+  font-size: 0.8rem;
+
+  line-height: 1.45;
+}
+
+
+/* =========================================
+   REVIEW NOTES
+   ========================================= */
+
+.review-notes {
+  margin-top: 14px;
+}
+
+
+.review-notes label {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: #000000;
+
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+
+.review-notes textarea {
+  width: 100%;
+  min-height: 72px;
+
+  padding: 9px;
+
+  resize: vertical;
+
+  background: #ffffff;
+  color: #000000;
+
+  border: 1px solid #777777;
+
+  font-size: 0.8rem;
+}
+
+
+/* =========================================
+   REVIEW ACTIONS
+   ========================================= */
+
+.review-actions {
+  margin-top: 12px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+}
+
+
+.review-button {
+  padding: 8px 15px;
+
+  background: #ffffff;
+  color: #000000;
+
+  border: 2px solid #777777;
+
+  font-weight: bold;
+  font-size: 0.78rem;
+
+  cursor: pointer;
+}
+
+
+.review-button:hover {
+  background: #eeeeee;
+}
+
+
+.review-button:disabled {
+  background: #eeeeee;
+  color: #777777;
+
+  cursor: default;
+}
+
+
+/* Approve */
+.review-approve {
+  border-color: #2e7d32;
+}
+
+
+/* Reject */
+.review-reject {
+  border-color: #c62828;
+}
+
+
+/* Flag */
+.review-flag {
+  border-color: #d6a700;
+}
+
+
+.review-saving {
+  margin-top: 10px;
+
+  color: #000000;
+
+  font-size: 0.75rem;
+}
+
+
+/* =========================================
+   RECORDED REVIEW
+   ========================================= */
+
+.recorded-review {
+  margin-top: 14px;
+
+  padding: 12px;
+
+  background: #f5f5f5;
+
+  border: 1px solid #888888;
+}
+
+
+.recorded-review p {
+  margin: 8px 0 0;
+
+  color: #000000;
+
+  font-size: 0.8rem;
+}
+
+
+/* =========================================
+   SUPERVISION BOUNDARY
+   ========================================= */
+
+.supervision-note {
+  padding: 15px;
+
+  background: #ffffff;
+  color: #000000;
+}
+
+
+.supervision-note strong {
+  color: #000000;
+
+  font-size: 0.85rem;
+}
+
+
+.supervision-note p {
+  margin: 8px 0 0;
+
+  color: #000000;
+
+  font-size: 0.8rem;
+
+  line-height: 1.55;
+}
+
+
+/* Human-review queue indicator */
+
+.review-count {
+  border-color: #c62828;
+}
+
+
+/* =========================================
+   HUMAN REVIEW RESPONSIVE
+   ========================================= */
+
+@media (max-width: 1100px) {
+
+  .review-details-grid {
+    grid-template-columns:
+      1fr 1fr;
+  }
+
+}
+
+
+@media (max-width: 700px) {
+
+  .review-details-grid {
+    grid-template-columns:
+      1fr;
+  }
+
+  .review-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+}

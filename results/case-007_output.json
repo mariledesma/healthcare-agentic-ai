@@ -1,0 +1,342 @@
+{
+  "case_id": "CASE-007",
+  "condition": "Atrial Fibrillation",
+  "llm_configuration": {
+    "case_analyzer": {
+      "provider": "ollama",
+      "model": "medgemma1.5:4b"
+    },
+    "recommendation_agent": {
+      "provider": "ollama",
+      "model": "medgemma1.5:4b"
+    }
+  },
+  "pipeline": [
+    "InputReader",
+    "CaseAnalyzer",
+    "BarrierDetector",
+    "TaskDetector",
+    "RecommendationAgent",
+    "PolicyEngine",
+    "ApprovalGate",
+    "AuditLogger",
+    "OutputComposer",
+    "PostgreSQLPersistence"
+  ],
+  "input_reader": {
+    "agent": "InputReader",
+    "status": "success",
+    "finding": "Patient case successfully loaded and validated.",
+    "supporting_evidence": {
+      "case_id": "CASE-007",
+      "condition": "Atrial Fibrillation"
+    },
+    "confidence": 1.0,
+    "source_field": "patient_json",
+    "patient_record": {
+      "case_id": "CASE-007",
+      "condition": "Atrial Fibrillation",
+      "diagnoses": [
+        "Atrial fibrillation",
+        "Hypertension"
+      ],
+      "medications": [
+        {
+          "name": "Apixaban",
+          "dose": "5 mg",
+          "frequency": "twice daily"
+        },
+        {
+          "name": "Metoprolol",
+          "dose": "25 mg",
+          "frequency": "twice daily"
+        }
+      ],
+      "labs": {
+        "creatinine": "0.9 mg/dL",
+        "potassium": "4.2 mmol/L"
+      },
+      "pending_labs": [],
+      "pending_imaging": [],
+      "pending_consult": [],
+      "medical_stability_status": "stable",
+      "medication_reconciliation_status": "incomplete",
+      "medication_education_status": "complete",
+      "medication_availability": "available",
+      "patient_education_status": "complete",
+      "diet_education_status": "not_required",
+      "mobility_device_education_status": "not_required",
+      "medical_device_education_status": "not_required",
+      "followup_status": "scheduled",
+      "caregiver_status": "available",
+      "transport_status": "arranged",
+      "transport_time": "14:00",
+      "planned_discharge_window": "afternoon",
+      "financial_status": "no_concern",
+      "case_manager_status": "available",
+      "home_safety_status": "safe",
+      "outpatient_therapy_status": "not_required",
+      "pcp_notification_status": "complete",
+      "physical_function": "independent",
+      "discharge_summary_status": "signed",
+      "discharge_summary": "Patient is clinically stable for discharge, but medication reconciliation has not been completed.",
+      "free_text_notes": {
+        "case_manager_note": "All major discharge arrangements are complete. Medication reconciliation remains incomplete and requires clinical review before discharge."
+      },
+      "expected_barriers": [
+        "med_reconciliation_missing"
+      ],
+      "expected_tasks": [
+        "reconcile_meds"
+      ],
+      "distractors": []
+    }
+  },
+  "case_analyzer": {
+    "agent": "CaseAnalyzer",
+    "status": "success",
+    "llm": {
+      "provider": "ollama",
+      "model": "medgemma1.5:4b"
+    },
+    "finding": "Clinical, discharge, and social context analyzed by LLM.",
+    "supporting_evidence": {
+      "concern_count": 1,
+      "information_gap_count": 0
+    },
+    "confidence": 0.9,
+    "source_field": "patient_record",
+    "clinical_summary": "The patient has a history of Atrial fibrillation and Hypertension. The patient is medically stable. The patient is taking Apixaban and Metoprolol. Laboratory results show normal creatinine and potassium levels.",
+    "discharge_summary": "The patient is clinically stable for discharge. The discharge summary is signed. The patient is ready for discharge.",
+    "social_summary": "The patient has caregiver support available. Transportation is arranged. The patient's financial status is not a concern. The patient's home is safe. The case manager is available. The patient is physically independent.",
+    "potential_concerns": [
+      {
+        "finding": "medication_reconciliation_status",
+        "supporting_evidence": "medication_reconciliation_status",
+        "source_field": "medication_reconciliation_status",
+        "priority": "medium"
+      }
+    ],
+    "information_gaps": []
+  },
+  "barrier_detector": {
+    "agent": "BarrierDetector",
+    "status": "success",
+    "finding": "1 discharge barrier(s) detected.",
+    "supporting_evidence": {
+      "barrier_count": 1,
+      "barrier_ids": [
+        "med_reconciliation_missing"
+      ]
+    },
+    "confidence": 0.95,
+    "source_field": "patient_record",
+    "barriers": [
+      {
+        "barrier_id": "med_reconciliation_missing",
+        "finding": "Medication reconciliation is incomplete.",
+        "evidence": "incomplete",
+        "confidence": 0.95,
+        "priority": "high",
+        "source_field": "medication_reconciliation_status"
+      }
+    ]
+  },
+  "task_detector": {
+    "agent": "TaskDetector",
+    "status": "success",
+    "finding": "1 pending task(s) detected.",
+    "supporting_evidence": {
+      "task_count": 1,
+      "task_ids": [
+        "reconcile_meds"
+      ]
+    },
+    "confidence": 0.95,
+    "source_field": "detected_barriers",
+    "tasks": [
+      {
+        "task_id": "reconcile_meds",
+        "task_name": "Complete medication reconciliation",
+        "owner_role": "Pharmacist",
+        "resolves_barriers": [
+          "med_reconciliation_missing"
+        ],
+        "priority": "high",
+        "source_field": "medication_reconciliation_status"
+      }
+    ]
+  },
+  "recommendation_agent": {
+    "agent": "RecommendationAgent",
+    "status": "success",
+    "llm": {
+      "provider": "ollama",
+      "model": "medgemma1.5:4b"
+    },
+    "finding": "1 LLM-generated recommendation(s).",
+    "supporting_evidence": {
+      "barriers_reviewed": 1,
+      "tasks_reviewed": 1
+    },
+    "confidence": 0.9,
+    "source_field": "detected_barriers_and_tasks",
+    "recommendations": [
+      {
+        "recommendation_id": "recommendation_reconcile_meds",
+        "task_id": "reconcile_meds",
+        "action": "Complete medication reconciliation",
+        "rationale": "The finding indicates incomplete medication reconciliation, which is a barrier to discharge. This task directly addresses the identified barrier.",
+        "owner_role": "Pharmacist",
+        "priority": "high",
+        "resolves_barriers": [
+          "med_reconciliation_missing"
+        ],
+        "supporting_task_ids": [
+          "reconcile_meds"
+        ],
+        "source_fields": [
+          "medication_reconciliation_status"
+        ]
+      }
+    ]
+  },
+  "governance": {
+    "status": "completed",
+    "recommendations_reviewed": 1,
+    "results": [
+      {
+        "recommendation_id": "recommendation_reconcile_meds",
+        "task_id": "reconcile_meds",
+        "action": "Complete medication reconciliation",
+        "policy": {
+          "policy_status": "allowed",
+          "task_id": "reconcile_meds",
+          "action": "Complete medication reconciliation",
+          "reason": "The recommendation is permitted to continue through the supervised workflow."
+        },
+        "approval": {
+          "approval_status": "requires_human_approval",
+          "requires_human_approval": true,
+          "task_id": "reconcile_meds",
+          "action": "Complete medication reconciliation",
+          "reason": "This recommendation involves clinical or discharge-sensitive work and requires human review."
+        }
+      }
+    ]
+  },
+  "final_output": {
+    "case_id": "CASE-007",
+    "condition": "Atrial Fibrillation",
+    "discharge_coordination_summary": {
+      "barrier_count": 1,
+      "task_count": 1,
+      "recommendation_count": 1,
+      "human_approval_required_count": 1
+    },
+    "barriers": [
+      {
+        "barrier_id": "med_reconciliation_missing",
+        "finding": "Medication reconciliation is incomplete.",
+        "evidence": "incomplete",
+        "confidence": 0.95,
+        "priority": "high",
+        "source_field": "medication_reconciliation_status"
+      }
+    ],
+    "pending_tasks": [
+      {
+        "task_id": "reconcile_meds",
+        "task_name": "Complete medication reconciliation",
+        "owner_role": "Pharmacist",
+        "resolves_barriers": [
+          "med_reconciliation_missing"
+        ],
+        "priority": "high",
+        "source_field": "medication_reconciliation_status"
+      }
+    ],
+    "recommendations": [
+      {
+        "recommendation_id": "recommendation_reconcile_meds",
+        "task_id": "reconcile_meds",
+        "action": "Complete medication reconciliation",
+        "rationale": "The finding indicates incomplete medication reconciliation, which is a barrier to discharge. This task directly addresses the identified barrier.",
+        "owner_role": "Pharmacist",
+        "priority": "high",
+        "resolves_barriers": [
+          "med_reconciliation_missing"
+        ],
+        "supporting_task_ids": [
+          "reconcile_meds"
+        ],
+        "source_fields": [
+          "medication_reconciliation_status"
+        ]
+      }
+    ],
+    "governance": [
+      {
+        "recommendation_id": "recommendation_reconcile_meds",
+        "task_id": "reconcile_meds",
+        "action": "Complete medication reconciliation",
+        "policy": {
+          "policy_status": "allowed",
+          "task_id": "reconcile_meds",
+          "action": "Complete medication reconciliation",
+          "reason": "The recommendation is permitted to continue through the supervised workflow."
+        },
+        "approval": {
+          "approval_status": "requires_human_approval",
+          "requires_human_approval": true,
+          "task_id": "reconcile_meds",
+          "action": "Complete medication reconciliation",
+          "reason": "This recommendation involves clinical or discharge-sensitive work and requires human review."
+        }
+      }
+    ],
+    "human_approval_required": [
+      {
+        "recommendation_id": "recommendation_reconcile_meds",
+        "action": "Complete medication reconciliation",
+        "approval_status": "requires_human_approval"
+      }
+    ],
+    "final_status": "human_review_required"
+  },
+  "evaluation": {
+    "barriers": {
+      "expected": [
+        "med_reconciliation_missing"
+      ],
+      "detected": [
+        "med_reconciliation_missing"
+      ],
+      "matched": [
+        "med_reconciliation_missing"
+      ],
+      "missed": [],
+      "extra": []
+    },
+    "tasks": {
+      "expected": [
+        "reconcile_meds"
+      ],
+      "detected": [
+        "reconcile_meds"
+      ],
+      "matched": [
+        "reconcile_meds"
+      ],
+      "missed": [],
+      "extra": []
+    }
+  },
+  "database": {
+    "status": "saved",
+    "run_id": "5e68d8b9-86ca-4a75-be77-5a487f137133",
+    "case_id": "CASE-007",
+    "barriers_saved": 1,
+    "tasks_saved": 1
+  }
+}

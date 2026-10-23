@@ -1,6 +1,6 @@
 {
   "case_id": "CASE-005",
-  "condition": "ST",
+  "condition": "Ischemic Stroke",
   "diagnoses": [
     "Ischemic stroke",
     "Hypertension"
@@ -25,45 +25,58 @@
   "pending_imaging": [],
   "pending_consult": [],
   "medical_stability_status": "stable",
+
   "medication_reconciliation_status": "complete",
   "medication_education_status": "complete",
-  "medication_availability_status": "available",
+  "medication_availability": "available",
+
   "patient_education_status": "incomplete",
   "diet_education_status": "incomplete",
+  "mobility_device_education_status": "not_required",
   "medical_device_education_status": "complete",
-  "followup_appointment_status": "not_scheduled",
+
+  "followup_status": "not_scheduled",
   "caregiver_status": "unavailable",
+
   "transport_status": "arranged",
+  "transport_time": "14:00",
+  "planned_discharge_window": "afternoon",
+
   "financial_status": "no_concern",
   "case_manager_status": "available",
-  "discharge_summary_status": "signed",
-  "pcp_notification_status": "not_complete",
-  "physical_function_status": "requires_assistance",
   "home_safety_status": "safe",
   "outpatient_therapy_status": "not_arranged",
-  "planned_discharge_window": "afternoon",
+  "pcp_notification_status": "not_complete",
+
+  "physical_function": "needs_assistance",
+  "discharge_summary_status": "signed",
+
   "discharge_summary": "Patient is medically stable following ischemic stroke but requires continued rehabilitation and discharge education.",
+
   "free_text_notes": {
     "case_manager_note": "No reliable caregiver is available. Outpatient therapy has not been arranged and stroke education remains incomplete."
   },
+
   "expected_barriers": [
-    "B-C05",
-    "B-E03",
-    "B-E04",
-    "B-F01",
-    "B-F03",
-    "B-F04",
-    "B-F05"
+    "physical_support_needed",
+    "patient_education_missing",
+    "diet_education_missing",
+    "followup_missing",
+    "caregiver_missing",
+    "therapy_missing",
+    "pcp_notification_missing"
   ],
+
   "expected_tasks": [
-    "T-RN02",
-    "T-RN03",
-    "T-RN06",
-    "T-CM01",
-    "T-CM02",
-    "T-CM03",
-    "T-CM08"
+    "assess_function",
+    "teach_condition",
+    "teach_diet",
+    "schedule_followup",
+    "confirm_caregiver",
+    "arrange_therapy",
+    "notify_pcp"
   ],
+
   "distractors": [
     "The patient had a cataract removed from one eye two years ago. The result was successful. Vision in both eyes is stable and this has no current clinical significance.",
     "The patient reports a mild seasonal allergy that is well controlled with an over-the-counter antihistamine. This was noted and confirmed to have no interaction with current medications."

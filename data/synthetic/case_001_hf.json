@@ -1,6 +1,6 @@
 {
   "case_id": "CASE-001",
-  "condition": "HF",
+  "condition": "Heart Failure",
   "diagnoses": [
     "Acute decompensated heart failure",
     "Hypertension"
@@ -26,33 +26,47 @@
   "pending_imaging": [],
   "pending_consult": [],
   "medical_stability_status": "stable",
+
   "medication_reconciliation_status": "complete",
   "medication_education_status": "complete",
-  "medication_availability_status": "available",
+  "medication_availability": "available",
+
   "patient_education_status": "complete",
   "diet_education_status": "complete",
-  "followup_appointment_status": "not_scheduled",
+  "mobility_device_education_status": "not_required",
+  "medical_device_education_status": "not_required",
+
+  "followup_status": "not_scheduled",
   "caregiver_status": "available",
+
   "transport_status": "not_arranged",
+  "transport_time": null,
+  "planned_discharge_window": "afternoon",
+
   "financial_status": "no_concern",
   "case_manager_status": "available",
-  "discharge_summary_status": "signed",
-  "pcp_notification_status": "complete",
-  "physical_function_status": "independent",
   "home_safety_status": "safe",
   "outpatient_therapy_status": "not_required",
-  "planned_discharge_window": "afternoon",
+  "pcp_notification_status": "complete",
+
+  "physical_function": "independent",
+  "discharge_summary_status": "signed",
+
   "discharge_summary": "Patient improved after diuresis and is medically stable for discharge.",
+
   "free_text_notes": {
     "case_manager_note": "Patient has no confirmed ride home and follow-up appointment has not yet been scheduled."
   },
+
   "expected_barriers": [
-    "B-F01",
-    "B-S02"
+    "followup_missing",
+    "transport_missing"
   ],
+
   "expected_tasks": [
-    "T-CM01",
-    "T-CM04"
+    "schedule_followup",
+    "arrange_transport"
   ],
+
   "distractors": []
 }

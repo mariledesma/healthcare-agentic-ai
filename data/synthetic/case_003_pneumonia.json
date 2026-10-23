@@ -1,6 +1,6 @@
 {
   "case_id": "CASE-003",
-  "condition": "PN",
+  "condition": "Pneumonia",
   "diagnoses": [
     "Community-acquired pneumonia",
     "Type 2 diabetes mellitus"
@@ -20,33 +20,48 @@
   "pending_imaging": [],
   "pending_consult": [],
   "medical_stability_status": "stable",
+
   "medication_reconciliation_status": "complete",
   "medication_education_status": "complete",
-  "medication_availability_status": "not_available",
+  "medication_availability": "not_available",
+
   "patient_education_status": "complete",
-  "followup_appointment_status": "scheduled",
+  "diet_education_status": "not_required",
+  "mobility_device_education_status": "not_required",
+  "medical_device_education_status": "not_required",
+
+  "followup_status": "scheduled",
   "caregiver_status": "unavailable",
+
   "transport_status": "arranged",
+  "transport_time": "14:00",
+  "planned_discharge_window": "afternoon",
+
   "financial_status": "no_concern",
   "case_manager_status": "available",
-  "discharge_summary_status": "signed",
-  "pcp_notification_status": "complete",
-  "physical_function_status": "independent",
   "home_safety_status": "safe",
   "outpatient_therapy_status": "not_required",
-  "planned_discharge_window": "afternoon",
+  "pcp_notification_status": "complete",
+
+  "physical_function": "independent",
+  "discharge_summary_status": "signed",
+
   "discharge_summary": "Patient clinically improved after treatment and no longer requires inpatient care.",
+
   "free_text_notes": {
     "case_manager_note": "Discharge antibiotic is not currently available at the patient's pharmacy. No caregiver is available to assist with medication pickup or daily support."
   },
+
   "expected_barriers": [
-    "B-E02",
-    "B-F03"
+    "med_unavailable",
+    "caregiver_missing"
   ],
+
   "expected_tasks": [
-    "T-PH02",
-    "T-CM02"
+    "fill_meds",
+    "confirm_caregiver"
   ],
+
   "distractors": [
     "The patient had a previous hospital admission for the same condition eighteen months ago. That episode was fully resolved and is not relevant to the current discharge plan."
   ]

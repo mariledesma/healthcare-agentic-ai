@@ -1,0 +1,37 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+
+  width: 100%;
+  min-width: 100%;
+
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+
+  font-family:
+    "Times New Roman",
+    Times,
+    serif;
+
+  background: #e6e6e6;
+
+  color: #000000;
+}
+
+button,
+select,
+input,
+textarea {
+  font-family:
+    "Times New Roman",
+    Times,
+    serif;
+}

@@ -2,7 +2,7 @@ import json
 import os
 
 from dotenv import load_dotenv
-from groq import Groq
+from ollama import Client
 
 
 load_dotenv()
@@ -10,25 +10,23 @@ load_dotenv()
 
 class LLMClient:
     def __init__(self):
-        api_key = os.getenv("GROQ_API_KEY")
-
-        if not api_key:
-            raise ValueError(
-                "GROQ_API_KEY was not found. Add it to the .env file."
-            )
-
         self.provider = os.getenv(
             "LLM_PROVIDER",
-            "groq"
+            "ollama"
         )
 
         self.model = os.getenv(
-            "GROQ_MODEL",
-            "openai/gpt-oss-20b"
+            "OLLAMA_MODEL",
+            "medgemma1.5:4b"
         )
 
-        self.client = Groq(
-            api_key=api_key
+        self.host = os.getenv(
+            "OLLAMA_HOST",
+            "http://localhost:11434"
+        )
+
+        self.client = Client(
+            host=self.host
         )
 
     def generate_json(
@@ -38,7 +36,15 @@ class LLMClient:
         schema_name,
         schema
     ):
-        response = self.client.chat.completions.create(
+        user_prompt = (
+            f"Schema name: {schema_name}\n\n"
+            "Analyze the following input data.\n\n"
+            "Use only information supported by the supplied data.\n\n"
+            "INPUT DATA:\n"
+            f"{json.dumps(user_data, indent=2)}"
+        )
+
+        response = self.client.chat(
             model=self.model,
             messages=[
                 {
@@ -47,25 +53,29 @@ class LLMClient:
                 },
                 {
                     "role": "user",
-                    "content": json.dumps(
-                        user_data,
-                        indent=2
-                    )
+                    "content": user_prompt
                 }
             ],
-            response_format={
-                "type": "json_schema",
-                "json_schema": {
-                    "name": schema_name,
-                    "strict": True,
-                    "schema": schema
-                }
+            format=schema,
+            options={
+                "temperature": 0
             }
         )
 
-        content = response.choices[0].message.content
+        content = response.message.content
 
-        return json.loads(content)
+        if not content:
+            raise ValueError(
+                "MedGemma returned an empty response."
+            )
+
+        try:
+            return json.loads(content)
+
+        except json.JSONDecodeError as error:
+            raise ValueError(
+                "MedGemma did not return valid JSON."
+            ) from error
 
     def get_metadata(self):
         return {
