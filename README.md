@@ -23,7 +23,9 @@ The prototype combines local language-model reasoning with rule-based barrier an
 - Structured JSON results, JSONL audit logs, and expected-versus-detected evaluation.
 - PostgreSQL storage for cases, individual pipeline runs, detected barriers, and detected tasks.
 
-## Architecture
+<img width="2070" height="1322" alt="image" src="https://github.com/user-attachments/assets/54399a02-ad92-4d0c-8b70-82d10c760539" />
+
+The current prototype implements the following pipeline:
 
 ```text
 React / TypeScript Clinical Hub
@@ -254,4 +256,9 @@ healthcare-agentic-ai/
 
 ## Future MIMIC Work
 
-Planned data sources include MIMIC-IV, MIMIC-IV-Note, and MIMIC-IV-ED. MIMIC integration is future work. Restricted patient data will not be stored in this public repository.
+- Expand synthetic case coverage
+- Add more governance test cases
+- Add forbidden-action test scenarios
+- Improve recommendation logic
+- Add automated evaluation metrics across all cases
+- Begin MIMIC-informed preprocessing workflow
