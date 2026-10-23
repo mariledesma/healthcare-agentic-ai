@@ -561,11 +561,11 @@ textarea {
 
 .barrier-detail-grid {
   grid-template-columns:
-    85px
-    minmax(200px, 1.2fr)
-    90px
-    minmax(180px, 1fr)
-    minmax(260px, 1.8fr);
+    210px
+    minmax(260px, 1.4fr)
+    110px
+    minmax(220px, 1fr)
+    minmax(260px, 1.6fr);
 }
 
 .task-grid {
@@ -597,6 +597,9 @@ textarea {
 
   font-size: 0.78rem;
   font-weight: bold;
+
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .table-evidence {
@@ -985,6 +988,318 @@ textarea {
   .task-grid,
   .governance-grid {
     min-width: 760px;
+  }
+
+}
+/* =========================================
+   HUMAN REVIEW
+   ========================================= */
+
+.human-review-card {
+  padding: 16px;
+
+  background: #ffffff;
+  color: #000000;
+
+  border-bottom: 1px solid #aaaaaa;
+}
+
+.human-review-card:last-child {
+  border-bottom: none;
+}
+
+
+.human-review-heading {
+  padding-bottom: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  border-bottom: 1px solid #cccccc;
+}
+
+
+.review-warning {
+  margin: 13px 0;
+
+  padding: 10px 12px;
+
+  background: #ffffff;
+  color: #000000;
+
+  border: 2px solid #c62828;
+
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+
+.review-details-grid {
+  display: grid;
+
+  grid-template-columns:
+    2fr 1fr 1fr 1fr;
+
+  gap: 16px;
+
+  padding: 12px 0;
+}
+
+
+.review-details-grid > div {
+  min-width: 0;
+}
+
+
+.review-label {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: #000000;
+
+  font-size: 0.69rem;
+  font-weight: bold;
+
+  text-transform: uppercase;
+}
+
+
+.review-details-grid p {
+  margin: 0;
+
+  color: #000000;
+
+  font-size: 0.8rem;
+
+  line-height: 1.45;
+}
+
+
+.review-reason {
+  margin-top: 8px;
+
+  padding: 11px 12px;
+
+  background: #f3f3f3;
+
+  border: 1px solid #aaaaaa;
+}
+
+
+.review-reason strong {
+  color: #000000;
+
+  font-size: 0.78rem;
+}
+
+
+.review-reason p {
+  margin: 5px 0 0;
+
+  color: #000000;
+
+  font-size: 0.8rem;
+
+  line-height: 1.45;
+}
+
+
+/* =========================================
+   REVIEW NOTES
+   ========================================= */
+
+.review-notes {
+  margin-top: 14px;
+}
+
+
+.review-notes label {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: #000000;
+
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+
+.review-notes textarea {
+  width: 100%;
+  min-height: 72px;
+
+  padding: 9px;
+
+  resize: vertical;
+
+  background: #ffffff;
+  color: #000000;
+
+  border: 1px solid #777777;
+
+  font-size: 0.8rem;
+}
+
+
+/* =========================================
+   REVIEW ACTIONS
+   ========================================= */
+
+.review-actions {
+  margin-top: 12px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+}
+
+
+.review-button {
+  padding: 8px 15px;
+
+  background: #ffffff;
+  color: #000000;
+
+  border: 2px solid #777777;
+
+  font-weight: bold;
+  font-size: 0.78rem;
+
+  cursor: pointer;
+}
+
+
+.review-button:hover {
+  background: #eeeeee;
+}
+
+
+.review-button:disabled {
+  background: #eeeeee;
+  color: #777777;
+
+  cursor: default;
+}
+
+
+/* Approve */
+.review-approve {
+  border-color: #2e7d32;
+}
+
+
+/* Reject */
+.review-reject {
+  border-color: #c62828;
+}
+
+
+/* Flag */
+.review-flag {
+  border-color: #d6a700;
+}
+
+
+.review-saving {
+  margin-top: 10px;
+
+  color: #000000;
+
+  font-size: 0.75rem;
+}
+
+
+/* =========================================
+   RECORDED REVIEW
+   ========================================= */
+
+.recorded-review {
+  margin-top: 14px;
+
+  padding: 12px;
+
+  background: #f5f5f5;
+
+  border: 1px solid #888888;
+}
+
+
+.recorded-review p {
+  margin: 8px 0 0;
+
+  color: #000000;
+
+  font-size: 0.8rem;
+}
+
+
+/* =========================================
+   SUPERVISION BOUNDARY
+   ========================================= */
+
+.supervision-note {
+  padding: 15px;
+
+  background: #ffffff;
+  color: #000000;
+}
+
+
+.supervision-note strong {
+  color: #000000;
+
+  font-size: 0.85rem;
+}
+
+
+.supervision-note p {
+  margin: 8px 0 0;
+
+  color: #000000;
+
+  font-size: 0.8rem;
+
+  line-height: 1.55;
+}
+
+
+/* Human-review queue indicator */
+
+.review-count {
+  border-color: #c62828;
+}
+
+
+/* =========================================
+   HUMAN REVIEW RESPONSIVE
+   ========================================= */
+
+@media (max-width: 1100px) {
+
+  .review-details-grid {
+    grid-template-columns:
+      1fr 1fr;
+  }
+
+}
+
+
+@media (max-width: 700px) {
+
+  .review-details-grid {
+    grid-template-columns:
+      1fr;
+  }
+
+  .review-actions {
+    flex-direction: column;
+    align-items: stretch;
   }
 
 }

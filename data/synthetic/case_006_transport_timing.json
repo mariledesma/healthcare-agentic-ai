@@ -7,17 +7,16 @@
   ],
   "medications": [
     {
-      "name": "furosemide",
+      "name": "Furosemide",
       "dose": "40 mg",
       "frequency": "daily"
     }
   ],
-  "labs": [],
+  "labs": {},
   "pending_labs": [],
   "pending_imaging": [],
-  "pending_consults": [],
-  "medical_stability": "stable",
-  "physical_function_status": "independent",
+  "pending_consult": [],
+  "medical_stability_status": "stable",
 
   "medication_reconciliation_status": "complete",
   "medication_education_status": "complete",
@@ -28,26 +27,35 @@
   "mobility_device_education_status": "complete",
   "medical_device_education_status": "complete",
 
-  "followup_appointment_status": "scheduled",
+  "followup_status": "scheduled",
   "caregiver_status": "available",
 
   "transport_status": "arranged",
   "transport_time": "18:00",
   "planned_discharge_window": "morning",
 
-  "financial_status": "no_barrier",
+  "financial_status": "no_concern",
   "case_manager_status": "available",
   "home_safety_status": "safe",
-  "outpatient_therapy_status": "not_needed",
+  "outpatient_therapy_status": "not_required",
   "pcp_notification_status": "complete",
+
+  "physical_function": "independent",
+  "discharge_summary_status": "signed",
 
   "discharge_summary": "Patient is clinically stable and planned for morning discharge.",
 
+  "free_text_notes": {
+    "case_manager_note": "Transportation is confirmed for 18:00, but the patient is planned for discharge during the morning."
+  },
+
   "expected_barriers": [
-    "B-S07"
+    "transport_timing"
   ],
 
   "expected_tasks": [
-    "T-CM04"
-  ]
+    "arrange_transport"
+  ],
+
+  "distractors": []
 }

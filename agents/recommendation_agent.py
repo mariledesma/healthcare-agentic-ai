@@ -19,14 +19,15 @@ Rules:
 1. Do not invent new barriers.
 2. Do not invent new tasks.
 3. Every recommendation must correspond to one supplied task.
-4. Preserve the exact task_name as the recommendation action.
-5. Preserve the supplied owner_role.
-6. Do not prescribe medications.
-7. Do not change medication doses.
-8. Do not authorize discharge.
-9. Do not execute clinical actions.
-10. Recommendations are proposals only and will be checked by
-    a deterministic Policy Engine and Approval Gate.
+4. Preserve the exact task_id.
+5. Preserve the exact task_name as the recommendation action.
+6. Preserve the supplied owner_role.
+7. Do not prescribe medications.
+8. Do not change medication doses.
+9. Do not authorize discharge.
+10. Do not execute clinical actions.
+11. Recommendations are proposals only.
+12. Every recommendation will be checked by deterministic governance.
 """
 
         input_data = {
@@ -111,27 +112,57 @@ Rules:
         for item in result["recommendations"]:
             task_id = item["task_id"]
 
+            # Ignore anything the LLM invents.
             if task_id not in task_lookup:
                 continue
 
-            canonical_task = task_lookup[task_id]
+            canonical_task = task_lookup[
+                task_id
+            ]
 
-            recommendations.append({
-                "recommendation_id": f"R-{task_id}",
-                "action": canonical_task["task_name"],
-                "rationale": item["rationale"],
-                "owner_role": canonical_task["owner_role"],
-                "priority": item["priority"],
-                "resolves_barriers": canonical_task[
-                    "resolves_barriers"
-                ],
-                "supporting_task_ids": [
-                    task_id
-                ],
-                "source_fields": [
-                    canonical_task["source_field"]
-                ]
-            })
+            recommendations.append(
+                {
+                    "recommendation_id": (
+                        f"recommendation_{task_id}"
+                    ),
+
+                    # Stable machine-readable ID
+                    "task_id": task_id,
+
+                    # Human-readable action
+                    "action": canonical_task[
+                        "task_name"
+                    ],
+
+                    "rationale": item[
+                        "rationale"
+                    ],
+
+                    "owner_role": canonical_task[
+                        "owner_role"
+                    ],
+
+                    "priority": item[
+                        "priority"
+                    ],
+
+                    "resolves_barriers": (
+                        canonical_task[
+                            "resolves_barriers"
+                        ]
+                    ),
+
+                    "supporting_task_ids": [
+                        task_id
+                    ],
+
+                    "source_fields": [
+                        canonical_task[
+                            "source_field"
+                        ]
+                    ]
+                }
+            )
 
         priority_order = {
             "high": 1,
@@ -150,15 +181,25 @@ Rules:
             "agent": "RecommendationAgent",
             "status": "success",
             "llm": self.llm.get_metadata(),
+
             "finding": (
                 f"{len(recommendations)} "
                 "LLM-generated recommendation(s)."
             ),
+
             "supporting_evidence": {
-                "barriers_reviewed": len(barriers),
-                "tasks_reviewed": len(tasks)
+                "barriers_reviewed": len(
+                    barriers
+                ),
+                "tasks_reviewed": len(
+                    tasks
+                )
             },
+
             "confidence": 0.90,
-            "source_field": "detected_barriers_and_tasks",
+            "source_field": (
+                "detected_barriers_and_tasks"
+            ),
+
             "recommendations": recommendations
         }

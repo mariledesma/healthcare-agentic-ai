@@ -1,0 +1,69 @@
+{
+  "case_id": "CASE-007",
+  "condition": "Atrial Fibrillation",
+  "diagnoses": [
+    "Atrial fibrillation",
+    "Hypertension"
+  ],
+  "medications": [
+    {
+      "name": "Apixaban",
+      "dose": "5 mg",
+      "frequency": "twice daily"
+    },
+    {
+      "name": "Metoprolol",
+      "dose": "25 mg",
+      "frequency": "twice daily"
+    }
+  ],
+  "labs": {
+    "creatinine": "0.9 mg/dL",
+    "potassium": "4.2 mmol/L"
+  },
+  "pending_labs": [],
+  "pending_imaging": [],
+  "pending_consult": [],
+  "medical_stability_status": "stable",
+
+  "medication_reconciliation_status": "incomplete",
+  "medication_education_status": "complete",
+  "medication_availability": "available",
+
+  "patient_education_status": "complete",
+  "diet_education_status": "not_required",
+  "mobility_device_education_status": "not_required",
+  "medical_device_education_status": "not_required",
+
+  "followup_status": "scheduled",
+  "caregiver_status": "available",
+
+  "transport_status": "arranged",
+  "transport_time": "14:00",
+  "planned_discharge_window": "afternoon",
+
+  "financial_status": "no_concern",
+  "case_manager_status": "available",
+  "home_safety_status": "safe",
+  "outpatient_therapy_status": "not_required",
+  "pcp_notification_status": "complete",
+
+  "physical_function": "independent",
+  "discharge_summary_status": "signed",
+
+  "discharge_summary": "Patient is clinically stable for discharge, but medication reconciliation has not been completed.",
+
+  "free_text_notes": {
+    "case_manager_note": "All major discharge arrangements are complete. Medication reconciliation remains incomplete and requires clinical review before discharge."
+  },
+
+  "expected_barriers": [
+    "med_reconciliation_missing"
+  ],
+
+  "expected_tasks": [
+    "reconcile_meds"
+  ],
+
+  "distractors": []
+}
