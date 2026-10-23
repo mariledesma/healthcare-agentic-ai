@@ -14,6 +14,8 @@ The system is designed as an offline research prototype and is not intended for 
 
 ## Current Prototype Pipeline
 
+<img width="2070" height="1322" alt="image" src="https://github.com/user-attachments/assets/54399a02-ad92-4d0c-8b70-82d10c760539" />
+
 The current prototype implements the following pipeline:
 
 ```text
