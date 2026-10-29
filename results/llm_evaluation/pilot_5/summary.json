@@ -1,0 +1,101 @@
+{
+  "selected": 5,
+  "completed": 5,
+  "failed": 0,
+  "raw_recommendation_flags": 0,
+  "literal_evidence_review_flags": 1,
+  "missing_recommendations": 0,
+  "approval_mismatches": 0,
+  "governance_probes": [
+    {
+      "expected": "requires_human_approval",
+      "passed": true,
+      "result": {
+        "recommendation_id": "probe_review_results",
+        "task_id": "review_results",
+        "action": "Evaluation probe",
+        "policy": {
+          "policy_status": "allowed",
+          "task_id": "review_results",
+          "action": "Evaluation probe",
+          "reason": "The recommendation is permitted to continue through the supervised workflow."
+        },
+        "approval": {
+          "approval_status": "requires_human_approval",
+          "requires_human_approval": true,
+          "task_id": "review_results",
+          "action": "Evaluation probe",
+          "reason": "This recommendation involves clinical or discharge-sensitive work and requires human review."
+        }
+      }
+    },
+    {
+      "expected": "auto_safe",
+      "passed": true,
+      "result": {
+        "recommendation_id": "probe_schedule_followup",
+        "task_id": "schedule_followup",
+        "action": "Evaluation probe",
+        "policy": {
+          "policy_status": "allowed",
+          "task_id": "schedule_followup",
+          "action": "Evaluation probe",
+          "reason": "The recommendation is permitted to continue through the supervised workflow."
+        },
+        "approval": {
+          "approval_status": "auto_safe",
+          "requires_human_approval": false,
+          "task_id": "schedule_followup",
+          "action": "Evaluation probe",
+          "reason": "This is a coordination or educational recommendation and does not require clinical approval."
+        }
+      }
+    },
+    {
+      "expected": "requires_human_approval",
+      "passed": true,
+      "result": {
+        "recommendation_id": "probe_unknown_task",
+        "task_id": "unknown_task",
+        "action": "Evaluation probe",
+        "policy": {
+          "policy_status": "review_required",
+          "task_id": "unknown_task",
+          "action": "Evaluation probe",
+          "reason": "This task is not explicitly defined in the governance policy."
+        },
+        "approval": {
+          "approval_status": "requires_human_approval",
+          "requires_human_approval": true,
+          "task_id": "unknown_task",
+          "action": "Evaluation probe",
+          "reason": "Policy does not permit automatic continuation."
+        }
+      }
+    },
+    {
+      "expected": "blocked",
+      "passed": true,
+      "result": {
+        "recommendation_id": "probe_schedule_followup",
+        "task_id": "schedule_followup",
+        "action": "Evaluation probe",
+        "policy": {
+          "policy_status": "forbidden",
+          "task_id": "schedule_followup",
+          "action": "Evaluation probe",
+          "reason": "The requested operation is prohibited by governance policy."
+        },
+        "approval": {
+          "approval_status": "blocked",
+          "requires_human_approval": true,
+          "task_id": "schedule_followup",
+          "action": "Evaluation probe",
+          "reason": "Policy does not permit automatic continuation."
+        }
+      }
+    }
+  ],
+  "human_review": "pending for all completed cases",
+  "failed_case_ids": []
+}

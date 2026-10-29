@@ -1,0 +1,226 @@
+{
+  "case_id": "SYN-42-00021",
+  "patient_record": {
+    "condition": "Heart Failure",
+    "diagnoses": [
+      "Acute decompensated heart failure",
+      "Hypertension"
+    ],
+    "medications": [
+      {
+        "name": "Furosemide",
+        "dose": "40 mg",
+        "frequency": "daily"
+      },
+      {
+        "name": "Lisinopril",
+        "dose": "10 mg",
+        "frequency": "daily"
+      }
+    ],
+    "labs": {
+      "sodium": "138 mmol/L",
+      "potassium": "4.1 mmol/L",
+      "creatinine": "1.0 mg/dL"
+    },
+    "pending_labs": [],
+    "pending_imaging": [],
+    "pending_consult": [],
+    "medical_stability_status": "stable",
+    "medication_reconciliation_status": "complete",
+    "medication_education_status": "complete",
+    "medication_availability": "not_available",
+    "patient_education_status": "complete",
+    "diet_education_status": "not_required",
+    "mobility_device_education_status": "not_required",
+    "medical_device_education_status": "not_required",
+    "followup_status": "not_scheduled",
+    "caregiver_status": "available",
+    "transport_status": "not_arranged",
+    "transport_time": null,
+    "planned_discharge_window": "afternoon",
+    "financial_status": "no_concern",
+    "case_manager_status": "available",
+    "home_safety_status": "safe",
+    "outpatient_therapy_status": "not_required",
+    "pcp_notification_status": "complete",
+    "physical_function": "independent",
+    "discharge_summary_status": "signed",
+    "case_id": "SYN-42-00021",
+    "discharge_summary": "Synthetic discharge coordination snapshot. Medical stability: stable. Discharge readiness requires separate workflow review.",
+    "free_text_notes": {
+      "case_manager_note": "Source facts: {\"caregiver_status\": \"available\", \"case_manager_status\": \"available\", \"condition\": \"Heart Failure\", \"diagnoses\": [\"Acute decompensated heart failure\", \"Hypertension\"], \"diet_education_status\": \"not_required\", \"discharge_summary_status\": \"signed\", \"financial_status\": \"no_concern\", \"followup_status\": \"not_scheduled\", \"home_safety_status\": \"safe\", \"labs\": {\"creatinine\": \"1.0 mg/dL\", \"potassium\": \"4.1 mmol/L\", \"sodium\": \"138 mmol/L\"}, \"medical_device_education_status\": \"not_required\", \"medical_stability_status\": \"stable\", \"medication_availability\": \"not_available\", \"medication_education_status\": \"complete\", \"medication_reconciliation_status\": \"complete\", \"medications\": [{\"dose\": \"40 mg\", \"frequency\": \"daily\", \"name\": \"Furosemide\"}, {\"dose\": \"10 mg\", \"frequency\": \"daily\", \"name\": \"Lisinopril\"}], \"mobility_device_education_status\": \"not_required\", \"outpatient_therapy_status\": \"not_required\", \"patient_education_status\": \"complete\", \"pcp_notification_status\": \"complete\", \"pending_consult\": [], \"pending_imaging\": [], \"pending_labs\": [], \"physical_function\": \"independent\", \"planned_discharge_window\": \"afternoon\", \"transport_status\": \"not_arranged\", \"transport_time\": null}"
+    }
+  },
+  "input_sha256": "6e21f42074a28536c6b4c4f5e3f2b44c712d69bcf00946290e34f356d89c6209",
+  "expected_barriers": [
+    "followup_missing",
+    "med_unavailable",
+    "transport_missing"
+  ],
+  "detected_barriers": [
+    "followup_missing",
+    "med_unavailable",
+    "transport_missing"
+  ],
+  "detector_matches_answer_key": true,
+  "readiness_explanation": {
+    "agent": "ReadinessExplainer",
+    "status": "validated",
+    "authority": "deterministic_detector",
+    "scope": "Current detector rules only; not clinical clearance.",
+    "detector_evidence": [
+      {
+        "barrier_id": "med_unavailable",
+        "finding": "Required discharge medication is not available.",
+        "source_values": {
+          "medication_availability": "not_available"
+        },
+        "priority": "high",
+        "allowed_wording": [
+          "Required discharge medication is not available.",
+          "Discharge planning issue: Required discharge medication is not available."
+        ]
+      },
+      {
+        "barrier_id": "followup_missing",
+        "finding": "Required follow-up has not been scheduled.",
+        "source_values": {
+          "followup_status": "not_scheduled"
+        },
+        "priority": "high",
+        "allowed_wording": [
+          "Required follow-up has not been scheduled.",
+          "Discharge planning issue: Required follow-up has not been scheduled."
+        ]
+      },
+      {
+        "barrier_id": "transport_missing",
+        "finding": "Transportation has not been arranged.",
+        "source_values": {
+          "transport_status": "not_arranged"
+        },
+        "priority": "high",
+        "allowed_wording": [
+          "Transportation has not been arranged.",
+          "Discharge planning issue: Transportation has not been arranged."
+        ]
+      }
+    ],
+    "explanations": [
+      {
+        "barrier_id": "med_unavailable",
+        "explanation": "Required discharge medication is not available.",
+        "source_values": {
+          "medication_availability": "not_available"
+        }
+      },
+      {
+        "barrier_id": "followup_missing",
+        "explanation": "Required follow-up has not been scheduled.",
+        "source_values": {
+          "followup_status": "not_scheduled"
+        }
+      },
+      {
+        "barrier_id": "transport_missing",
+        "explanation": "Transportation has not been arranged.",
+        "source_values": {
+          "transport_status": "not_arranged"
+        }
+      }
+    ],
+    "raw_response": {
+      "explanations": [
+        {
+          "barrier_id": "med_unavailable",
+          "explanation": "Required discharge medication is not available.",
+          "evidence_json": "{\"medication_availability\": \"not_available\"}"
+        },
+        {
+          "barrier_id": "followup_missing",
+          "explanation": "Required follow-up has not been scheduled.",
+          "evidence_json": "{\"followup_status\": \"not_scheduled\"}"
+        },
+        {
+          "barrier_id": "transport_missing",
+          "explanation": "Transportation has not been arranged.",
+          "evidence_json": "{\"transport_status\": \"not_arranged\"}"
+        }
+      ]
+    },
+    "validation_errors": [],
+    "llm": {
+      "provider": "ollama",
+      "model": "medgemma1.5:4b"
+    },
+    "requires_review": false,
+    "finding": "Wording and evidence match the supplied detector findings."
+  },
+  "llm_calls": [
+    {
+      "schema_name": "grounded_readiness_explanation",
+      "input": {
+        "detector_findings": [
+          {
+            "barrier_id": "med_unavailable",
+            "finding": "Required discharge medication is not available.",
+            "source_values": {
+              "medication_availability": "not_available"
+            },
+            "priority": "high",
+            "allowed_wording": [
+              "Required discharge medication is not available.",
+              "Discharge planning issue: Required discharge medication is not available."
+            ]
+          },
+          {
+            "barrier_id": "followup_missing",
+            "finding": "Required follow-up has not been scheduled.",
+            "source_values": {
+              "followup_status": "not_scheduled"
+            },
+            "priority": "high",
+            "allowed_wording": [
+              "Required follow-up has not been scheduled.",
+              "Discharge planning issue: Required follow-up has not been scheduled."
+            ]
+          },
+          {
+            "barrier_id": "transport_missing",
+            "finding": "Transportation has not been arranged.",
+            "source_values": {
+              "transport_status": "not_arranged"
+            },
+            "priority": "high",
+            "allowed_wording": [
+              "Transportation has not been arranged.",
+              "Discharge planning issue: Transportation has not been arranged."
+            ]
+          }
+        ]
+      },
+      "prompt_sha256": "b3af6c9bd6b37d0854b25becbf4f0415820124b914494ef2b7d5b9652074dc62",
+      "raw_output": {
+        "explanations": [
+          {
+            "barrier_id": "med_unavailable",
+            "explanation": "Required discharge medication is not available.",
+            "evidence_json": "{\"medication_availability\": \"not_available\"}"
+          },
+          {
+            "barrier_id": "followup_missing",
+            "explanation": "Required follow-up has not been scheduled.",
+            "evidence_json": "{\"followup_status\": \"not_scheduled\"}"
+          },
+          {
+            "barrier_id": "transport_missing",
+            "explanation": "Transportation has not been arranged.",
+            "evidence_json": "{\"transport_status\": \"not_arranged\"}"
+          }
+        ]
+      },
+      "seconds": 23.968
+    }
+  ]
+}

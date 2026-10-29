@@ -72,6 +72,21 @@ type EvaluationResult = {
 };
 
 
+type ReadinessExplanation = {
+  status: string;
+  requires_review: boolean;
+  finding?: string;
+  validation_errors: string[];
+  detector_evidence: {
+    barrier_id: string;
+    finding: string;
+    source_values: Record<string, unknown>;
+  }[];
+  explanations: { barrier_id: string; explanation: string }[];
+  raw_response?: unknown;
+};
+
+
 type CaseResult = {
   case_id: string;
   condition: string;
@@ -80,6 +95,8 @@ type CaseResult = {
     case_analyzer?: LLMInfo;
     recommendation_agent?: LLMInfo;
   };
+
+  readiness_explanation?: ReadinessExplanation;
 
   case_analyzer?: {
     status?: string;
@@ -558,6 +575,41 @@ function App() {
     return (
       <>
 
+        {result.readiness_explanation && (
+          <section className="clinical-panel">
+            <div className="panel-header">
+              <h2>Discharge planning evidence</h2>
+              <span className="panel-subtitle">
+                {result.readiness_explanation.requires_review
+                  ? "Model explanation needs review"
+                  : "Based on the rule-based assessment"}
+              </span>
+            </div>
+            <p>This assessment covers the current rules and does not authorize discharge.</p>
+            {result.readiness_explanation.finding && <p>{result.readiness_explanation.finding}</p>}
+            {result.readiness_explanation.detector_evidence.map((item) => (
+              <div key={item.barrier_id} className="summary-column">
+                <h3>{item.finding}</h3>
+                {Object.entries(item.source_values).map(([field, value]) => (
+                  <p key={field}>{field.replaceAll("_", " ")}: {typeof value === "string" ? value : JSON.stringify(value)}</p>
+                ))}
+                {result.readiness_explanation?.status === "validated" && (
+                  <p>{result.readiness_explanation.explanations.find((entry) => entry.barrier_id === item.barrier_id)?.explanation}</p>
+                )}
+              </div>
+            ))}
+            {result.readiness_explanation.requires_review && (
+              <>
+                <p>The model response was not accepted. The source findings above remain available for review.</p>
+                <details>
+                  <summary>Review the unverified response</summary>
+                  <pre>{JSON.stringify({ response: result.readiness_explanation.raw_response, reasons: result.readiness_explanation.validation_errors }, null, 2)}</pre>
+                </details>
+              </>
+            )}
+          </section>
+        )}
+
         <section className="clinical-panel">
 
           <div className="panel-header">
@@ -567,11 +619,13 @@ function App() {
             </h2>
 
             <span className="panel-subtitle">
-              MedGemma Case Analysis
+              Standalone MedGemma analysis — unverified
             </span>
 
           </div>
 
+
+          <p>Research comparison only. These summaries can contain errors; use the source evidence above when reviewing discharge issues.</p>
 
           <div className="clinical-summary-grid">
 

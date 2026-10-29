@@ -1,0 +1,36 @@
+{
+  "condition": "Fictional post-observation discharge",
+  "diagnoses": [
+    "Symptoms resolved following observation (fictional workflow context)"
+  ],
+  "medications": [],
+  "labs": {},
+  "pending_labs": [],
+  "pending_imaging": [],
+  "pending_consult": [],
+  "medical_stability_status": "stable",
+  "medication_reconciliation_status": "complete",
+  "medication_education_status": "not_required",
+  "medication_availability": "available",
+  "patient_education_status": "complete",
+  "diet_education_status": "not_required",
+  "mobility_device_education_status": "not_required",
+  "medical_device_education_status": "not_required",
+  "followup_status": "scheduled",
+  "caregiver_status": "available",
+  "transport_status": "unknown",
+  "transport_time": null,
+  "planned_discharge_window": "afternoon",
+  "financial_status": "no_concern",
+  "case_manager_status": "available",
+  "home_safety_status": "safe",
+  "outpatient_therapy_status": "not_required",
+  "pcp_notification_status": "complete",
+  "physical_function": "independent",
+  "discharge_summary_status": "signed",
+  "discharge_summary": "Fictional case for reviewing discharge coordination. Clinical treatment details are outside this vignette.",
+  "case_id": "CHAL-006",
+  "free_text_notes": {
+    "case_manager_note": "At 13:10 the booked driver cancelled. The transport desk confirms there is no replacement ride. The transport field has not yet been reconciled."
+  }
+}

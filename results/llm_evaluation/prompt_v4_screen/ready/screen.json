@@ -1,0 +1,114 @@
+{
+  "usage": {
+    "prompt_eval_count": 1998,
+    "eval_count": 271
+  },
+  "case_id": "SYN-42-00001",
+  "analysis": {
+    "agent": "CaseAnalyzer",
+    "status": "success",
+    "llm": {
+      "provider": "ollama",
+      "model": "medgemma1.5:4b"
+    },
+    "finding": "Clinical, discharge, and social context analyzed by LLM.",
+    "supporting_evidence": {
+      "concern_count": 1,
+      "information_gap_count": 0
+    },
+    "confidence": 0.9,
+    "source_field": "patient_record",
+    "clinical_summary": "The patient has a history of Acute decompensated heart failure and Hypertension. Their medical stability is stable. Current medications include Furosemide and Lisinopril, both are available. Laboratory results show sodium 138 mmol/L, potassium 4.1 mmol/L, and creatinine 1.0 mg/dL. Physical function is independent.",
+    "discharge_summary": "The patient's discharge summary is signed. Discharge readiness requires separate workflow review.",
+    "social_summary": "The patient has an available caregiver. Transportation is arranged for 14:00. Financial status is no_concern. Case management is available. Home safety is safe. Outpatient therapy is not required. Patient education, diet education, mobility device education, and medical device education are not required. PCP notification is complete.",
+    "potential_concerns": [
+      {
+        "finding": "Transportation timing conflicts with planned discharge window.",
+        "supporting_evidence": "transport_time = \"14:00\" and planned_discharge_window = \"afternoon\"",
+        "source_field": "transport_time",
+        "priority": "medium"
+      }
+    ],
+    "information_gaps": []
+  },
+  "llm_calls": [
+    {
+      "schema_name": "case_analysis",
+      "input": {
+        "condition": "Heart Failure",
+        "diagnoses": [
+          "Acute decompensated heart failure",
+          "Hypertension"
+        ],
+        "medications": [
+          {
+            "name": "Furosemide",
+            "dose": "40 mg",
+            "frequency": "daily"
+          },
+          {
+            "name": "Lisinopril",
+            "dose": "10 mg",
+            "frequency": "daily"
+          }
+        ],
+        "labs": {
+          "sodium": "138 mmol/L",
+          "potassium": "4.1 mmol/L",
+          "creatinine": "1.0 mg/dL"
+        },
+        "pending_labs": [],
+        "pending_imaging": [],
+        "pending_consult": [],
+        "medical_stability_status": "stable",
+        "medication_reconciliation_status": "complete",
+        "medication_education_status": "complete",
+        "medication_availability": "available",
+        "patient_education_status": "complete",
+        "diet_education_status": "not_required",
+        "mobility_device_education_status": "not_required",
+        "medical_device_education_status": "not_required",
+        "followup_status": "scheduled",
+        "caregiver_status": "available",
+        "transport_status": "arranged",
+        "transport_time": "14:00",
+        "planned_discharge_window": "afternoon",
+        "financial_status": "no_concern",
+        "case_manager_status": "available",
+        "home_safety_status": "safe",
+        "outpatient_therapy_status": "not_required",
+        "pcp_notification_status": "complete",
+        "physical_function": "independent",
+        "discharge_summary_status": "signed",
+        "case_id": "SYN-42-00001",
+        "discharge_summary": "Synthetic case for discharge workflow testing. Medical stability: stable. Discharge readiness requires separate workflow review.",
+        "free_text_notes": {
+          "case_manager_note": "Source facts: {\"caregiver_status\": \"available\", \"case_manager_status\": \"available\", \"condition\": \"Heart Failure\", \"diagnoses\": [\"Acute decompensated heart failure\", \"Hypertension\"], \"diet_education_status\": \"not_required\", \"discharge_summary_status\": \"signed\", \"financial_status\": \"no_concern\", \"followup_status\": \"scheduled\", \"home_safety_status\": \"safe\", \"labs\": {\"creatinine\": \"1.0 mg/dL\", \"potassium\": \"4.1 mmol/L\", \"sodium\": \"138 mmol/L\"}, \"medical_device_education_status\": \"not_required\", \"medical_stability_status\": \"stable\", \"medication_availability\": \"available\", \"medication_education_status\": \"complete\", \"medication_reconciliation_status\": \"complete\", \"medications\": [{\"dose\": \"40 mg\", \"frequency\": \"daily\", \"name\": \"Furosemide\"}, {\"dose\": \"10 mg\", \"frequency\": \"daily\", \"name\": \"Lisinopril\"}], \"mobility_device_education_status\": \"not_required\", \"outpatient_therapy_status\": \"not_required\", \"patient_education_status\": \"complete\", \"pcp_notification_status\": \"complete\", \"pending_consult\": [], \"pending_imaging\": [], \"pending_labs\": [], \"physical_function\": \"independent\", \"planned_discharge_window\": \"afternoon\", \"transport_status\": \"arranged\", \"transport_time\": \"14:00\"}"
+        }
+      },
+      "prompt_sha256": "094121cd3b68cf73933926cc447346e26ab04cbbdc7f8bb8f2a9d22b2ea54d2c",
+      "raw_output": {
+        "clinical_summary": "The patient has a history of Acute decompensated heart failure and Hypertension. Their medical stability is stable. Current medications include Furosemide and Lisinopril, both are available. Laboratory results show sodium 138 mmol/L, potassium 4.1 mmol/L, and creatinine 1.0 mg/dL. Physical function is independent.",
+        "discharge_summary": "The patient's discharge summary is signed. Discharge readiness requires separate workflow review.",
+        "social_summary": "The patient has an available caregiver. Transportation is arranged for 14:00. Financial status is no_concern. Case management is available. Home safety is safe. Outpatient therapy is not required. Patient education, diet education, mobility device education, and medical device education are not required. PCP notification is complete.",
+        "potential_concerns": [
+          {
+            "finding": "Transportation timing conflicts with planned discharge window.",
+            "supporting_evidence": "transport_time = \"14:00\" and planned_discharge_window = \"afternoon\"",
+            "source_field": "transport_time",
+            "priority": "medium"
+          }
+        ],
+        "information_gaps": []
+      },
+      "seconds": 80.369
+    }
+  ],
+  "evidence_format_issues": [
+    {
+      "concern": 0,
+      "reason": "Evidence is not a JSON object with field values."
+    }
+  ],
+  "scope": "Analyzer-only screening on reused development case; no recommender, database or audit writes"
+}

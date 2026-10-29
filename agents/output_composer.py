@@ -5,7 +5,8 @@ class OutputComposer:
         barriers,
         tasks,
         recommendations,
-        governance_results
+        governance_results,
+        readiness_explanation=None
     ):
         human_approval_required = []
 
@@ -22,6 +23,10 @@ class OutputComposer:
         return {
             "case_id": patient_record["case_id"],
             "condition": patient_record["condition"],
+            "readiness_explanation": readiness_explanation,
+            "explanation_review_required": bool(
+                readiness_explanation and readiness_explanation["requires_review"]
+            ),
             "discharge_coordination_summary": {
                 "barrier_count": len(barriers),
                 "task_count": len(tasks),

@@ -1,14 +1,14 @@
 {
   "case_id": "CASE-001",
-  "condition": "HF",
+  "condition": "Heart Failure",
   "llm_configuration": {
     "case_analyzer": {
-      "provider": "groq",
-      "model": "openai/gpt-oss-20b"
+      "provider": "ollama",
+      "model": "medgemma1.5:4b"
     },
     "recommendation_agent": {
-      "provider": "groq",
-      "model": "openai/gpt-oss-20b"
+      "provider": "ollama",
+      "model": "medgemma1.5:4b"
     }
   },
   "pipeline": [
@@ -20,7 +20,8 @@
     "PolicyEngine",
     "ApprovalGate",
     "AuditLogger",
-    "OutputComposer"
+    "OutputComposer",
+    "PostgreSQLPersistence"
   ],
   "input_reader": {
     "agent": "InputReader",
@@ -28,13 +29,13 @@
     "finding": "Patient case successfully loaded and validated.",
     "supporting_evidence": {
       "case_id": "CASE-001",
-      "condition": "HF"
+      "condition": "Heart Failure"
     },
     "confidence": 1.0,
     "source_field": "patient_json",
     "patient_record": {
       "case_id": "CASE-001",
-      "condition": "HF",
+      "condition": "Heart Failure",
       "diagnoses": [
         "Acute decompensated heart failure",
         "Hypertension"
@@ -62,93 +63,88 @@
       "medical_stability_status": "stable",
       "medication_reconciliation_status": "complete",
       "medication_education_status": "complete",
-      "medication_availability_status": "available",
+      "medication_availability": "available",
       "patient_education_status": "complete",
       "diet_education_status": "complete",
-      "followup_appointment_status": "not_scheduled",
+      "mobility_device_education_status": "not_required",
+      "medical_device_education_status": "not_required",
+      "followup_status": "not_scheduled",
       "caregiver_status": "available",
       "transport_status": "not_arranged",
+      "transport_time": null,
+      "planned_discharge_window": "afternoon",
       "financial_status": "no_concern",
       "case_manager_status": "available",
-      "discharge_summary_status": "signed",
-      "pcp_notification_status": "complete",
-      "physical_function_status": "independent",
       "home_safety_status": "safe",
       "outpatient_therapy_status": "not_required",
-      "planned_discharge_window": "afternoon",
+      "pcp_notification_status": "complete",
+      "physical_function": "independent",
+      "discharge_summary_status": "signed",
       "discharge_summary": "Patient improved after diuresis and is medically stable for discharge.",
       "free_text_notes": {
         "case_manager_note": "Patient has no confirmed ride home and follow-up appointment has not yet been scheduled."
-      },
-      "expected_barriers": [
-        "B-F01",
-        "B-S02"
-      ],
-      "expected_tasks": [
-        "T-CM01",
-        "T-CM04"
-      ],
-      "distractors": []
+      }
     }
   },
   "case_analyzer": {
     "agent": "CaseAnalyzer",
     "status": "success",
     "llm": {
-      "provider": "groq",
-      "model": "openai/gpt-oss-20b"
+      "provider": "ollama",
+      "model": "medgemma1.5:4b"
     },
     "finding": "Clinical, discharge, and social context analyzed by LLM.",
     "supporting_evidence": {
       "concern_count": 2,
-      "information_gap_count": 2
+      "information_gap_count": 0
     },
     "confidence": 0.9,
     "source_field": "patient_record",
-    "clinical_summary": "Acute decompensated heart failure with hypertension; medically stable after diuresis; on furosemide 40 mg daily and lisinopril 10 mg daily; electrolytes and renal function normal.",
-    "discharge_summary": "Patient improved after diuresis and is medically stable for discharge.",
-    "social_summary": "Caregiver available; transportation not arranged; follow-up appointment not scheduled; financial status no concern; case manager available; patient independent and home safe.",
+    "clinical_summary": "The patient has a history of Acute decompensated heart failure and Hypertension. Current labs show sodium 138 mmol/L, potassium 4.1 mmol/L, and creatinine 1.0 mg/dL. The patient's medical stability is stable. Medications include Furosemide 40 mg daily and Lisinopril 10 mg daily. Physical function is independent.",
+    "discharge_summary": "The patient is medically stable for discharge. The discharge summary is signed. The patient improved after diuresis.",
+    "social_summary": "The patient has available caregiver support. The patient's financial status is no_concern. The patient's home safety is safe. The patient's case manager is available. Transportation is not arranged. The patient's outpatient therapy is not required.",
     "potential_concerns": [
       {
-        "finding": "Transportation to home not arranged",
-        "priority": "high",
+        "finding": "transport_status is not_arranged",
+        "supporting_evidence": "transport_status is not_arranged",
         "source_field": "transport_status",
-        "supporting_evidence": "transport_status: not_arranged and case manager note indicating no confirmed ride home"
+        "priority": "low"
       },
       {
-        "finding": "Follow-up appointment not scheduled",
-        "priority": "high",
-        "source_field": "followup_appointment_status",
-        "supporting_evidence": "followup_appointment_status: not_scheduled and case manager note indicating follow-up appointment has not yet been scheduled"
+        "finding": "followup_status is not_scheduled",
+        "supporting_evidence": "followup_status is not_scheduled",
+        "source_field": "followup_status",
+        "priority": "low"
       }
     ],
-    "information_gaps": [
-      "Follow-up appointment not scheduled",
-      "Transportation to home not arranged"
-    ]
+    "information_gaps": []
   },
   "barrier_detector": {
     "agent": "BarrierDetector",
     "status": "success",
     "finding": "2 discharge barrier(s) detected.",
     "supporting_evidence": {
-      "barrier_count": 2
+      "barrier_count": 2,
+      "barrier_ids": [
+        "followup_missing",
+        "transport_missing"
+      ]
     },
     "confidence": 0.95,
     "source_field": "patient_record",
     "barriers": [
       {
-        "barrier_id": "B-F01",
-        "finding": "Follow-up appointment has not been scheduled.",
-        "supporting_evidence": "not_scheduled",
+        "barrier_id": "followup_missing",
+        "finding": "Required follow-up has not been scheduled.",
+        "evidence": "not_scheduled",
         "confidence": 0.95,
         "priority": "high",
-        "source_field": "followup_appointment_status"
+        "source_field": "followup_status"
       },
       {
-        "barrier_id": "B-S02",
-        "finding": "Transportation home has not been arranged.",
-        "supporting_evidence": "not_arranged",
+        "barrier_id": "transport_missing",
+        "finding": "Transportation has not been arranged.",
+        "evidence": "not_arranged",
         "confidence": 0.95,
         "priority": "high",
         "source_field": "transport_status"
@@ -160,29 +156,31 @@
     "status": "success",
     "finding": "2 pending task(s) detected.",
     "supporting_evidence": {
-      "task_count": 2
+      "task_count": 2,
+      "task_ids": [
+        "schedule_followup",
+        "arrange_transport"
+      ]
     },
     "confidence": 0.95,
     "source_field": "detected_barriers",
     "tasks": [
       {
-        "task_id": "T-CM01",
+        "task_id": "schedule_followup",
         "task_name": "Schedule follow-up appointment",
         "owner_role": "Case Manager",
         "resolves_barriers": [
-          "B-F01",
-          "B-F02"
+          "followup_missing"
         ],
         "priority": "high",
-        "source_field": "followup_appointment_status"
+        "source_field": "followup_status"
       },
       {
-        "task_id": "T-CM04",
+        "task_id": "arrange_transport",
         "task_name": "Arrange patient transport",
         "owner_role": "Case Manager",
         "resolves_barriers": [
-          "B-S02",
-          "B-S07"
+          "transport_missing"
         ],
         "priority": "high",
         "source_field": "transport_status"
@@ -193,8 +191,8 @@
     "agent": "RecommendationAgent",
     "status": "success",
     "llm": {
-      "provider": "groq",
-      "model": "openai/gpt-oss-20b"
+      "provider": "ollama",
+      "model": "medgemma1.5:4b"
     },
     "finding": "2 LLM-generated recommendation(s).",
     "supporting_evidence": {
@@ -205,34 +203,34 @@
     "source_field": "detected_barriers_and_tasks",
     "recommendations": [
       {
-        "recommendation_id": "R-T-CM01",
+        "recommendation_id": "recommendation_schedule_followup",
+        "task_id": "schedule_followup",
         "action": "Schedule follow-up appointment",
-        "rationale": "Follow-up appointment not scheduled; scheduling will resolve barrier B-F01 and B-F02.",
+        "rationale": "The finding 'Required follow-up has not been scheduled.' indicates a barrier. This recommendation proposes scheduling the follow-up appointment to address this barrier.",
         "owner_role": "Case Manager",
         "priority": "high",
         "resolves_barriers": [
-          "B-F01",
-          "B-F02"
+          "followup_missing"
         ],
         "supporting_task_ids": [
-          "T-CM01"
+          "schedule_followup"
         ],
         "source_fields": [
-          "followup_appointment_status"
+          "followup_status"
         ]
       },
       {
-        "recommendation_id": "R-T-CM04",
+        "recommendation_id": "recommendation_arrange_transport",
+        "task_id": "arrange_transport",
         "action": "Arrange patient transport",
-        "rationale": "Transportation to home not arranged; arranging transport will resolve barrier B-S02 and B-S07.",
+        "rationale": "The finding 'Transportation has not been arranged.' indicates a barrier. This recommendation proposes arranging patient transport to address this barrier.",
         "owner_role": "Case Manager",
         "priority": "high",
         "resolves_barriers": [
-          "B-S02",
-          "B-S07"
+          "transport_missing"
         ],
         "supporting_task_ids": [
-          "T-CM04"
+          "arrange_transport"
         ],
         "source_fields": [
           "transport_status"
@@ -245,40 +243,46 @@
     "recommendations_reviewed": 2,
     "results": [
       {
-        "recommendation_id": "R-T-CM01",
+        "recommendation_id": "recommendation_schedule_followup",
+        "task_id": "schedule_followup",
         "action": "Schedule follow-up appointment",
         "policy": {
           "policy_status": "allowed",
+          "task_id": "schedule_followup",
           "action": "Schedule follow-up appointment",
-          "reason": "Action is permitted by the governance policy."
+          "reason": "The recommendation is permitted to continue through the supervised workflow."
         },
         "approval": {
           "approval_status": "auto_safe",
           "requires_human_approval": false,
+          "task_id": "schedule_followup",
           "action": "Schedule follow-up appointment",
-          "reason": "Coordination action may be proposed without clinical execution."
+          "reason": "This is a coordination or educational recommendation and does not require clinical approval."
         }
       },
       {
-        "recommendation_id": "R-T-CM04",
+        "recommendation_id": "recommendation_arrange_transport",
+        "task_id": "arrange_transport",
         "action": "Arrange patient transport",
         "policy": {
           "policy_status": "allowed",
+          "task_id": "arrange_transport",
           "action": "Arrange patient transport",
-          "reason": "Action is permitted by the governance policy."
+          "reason": "The recommendation is permitted to continue through the supervised workflow."
         },
         "approval": {
           "approval_status": "auto_safe",
           "requires_human_approval": false,
+          "task_id": "arrange_transport",
           "action": "Arrange patient transport",
-          "reason": "Coordination action may be proposed without clinical execution."
+          "reason": "This is a coordination or educational recommendation and does not require clinical approval."
         }
       }
     ]
   },
   "final_output": {
     "case_id": "CASE-001",
-    "condition": "HF",
+    "condition": "Heart Failure",
     "discharge_coordination_summary": {
       "barrier_count": 2,
       "task_count": 2,
@@ -287,17 +291,17 @@
     },
     "barriers": [
       {
-        "barrier_id": "B-F01",
-        "finding": "Follow-up appointment has not been scheduled.",
-        "supporting_evidence": "not_scheduled",
+        "barrier_id": "followup_missing",
+        "finding": "Required follow-up has not been scheduled.",
+        "evidence": "not_scheduled",
         "confidence": 0.95,
         "priority": "high",
-        "source_field": "followup_appointment_status"
+        "source_field": "followup_status"
       },
       {
-        "barrier_id": "B-S02",
-        "finding": "Transportation home has not been arranged.",
-        "supporting_evidence": "not_arranged",
+        "barrier_id": "transport_missing",
+        "finding": "Transportation has not been arranged.",
+        "evidence": "not_arranged",
         "confidence": 0.95,
         "priority": "high",
         "source_field": "transport_status"
@@ -305,23 +309,21 @@
     ],
     "pending_tasks": [
       {
-        "task_id": "T-CM01",
+        "task_id": "schedule_followup",
         "task_name": "Schedule follow-up appointment",
         "owner_role": "Case Manager",
         "resolves_barriers": [
-          "B-F01",
-          "B-F02"
+          "followup_missing"
         ],
         "priority": "high",
-        "source_field": "followup_appointment_status"
+        "source_field": "followup_status"
       },
       {
-        "task_id": "T-CM04",
+        "task_id": "arrange_transport",
         "task_name": "Arrange patient transport",
         "owner_role": "Case Manager",
         "resolves_barriers": [
-          "B-S02",
-          "B-S07"
+          "transport_missing"
         ],
         "priority": "high",
         "source_field": "transport_status"
@@ -329,34 +331,34 @@
     ],
     "recommendations": [
       {
-        "recommendation_id": "R-T-CM01",
+        "recommendation_id": "recommendation_schedule_followup",
+        "task_id": "schedule_followup",
         "action": "Schedule follow-up appointment",
-        "rationale": "Follow-up appointment not scheduled; scheduling will resolve barrier B-F01 and B-F02.",
+        "rationale": "The finding 'Required follow-up has not been scheduled.' indicates a barrier. This recommendation proposes scheduling the follow-up appointment to address this barrier.",
         "owner_role": "Case Manager",
         "priority": "high",
         "resolves_barriers": [
-          "B-F01",
-          "B-F02"
+          "followup_missing"
         ],
         "supporting_task_ids": [
-          "T-CM01"
+          "schedule_followup"
         ],
         "source_fields": [
-          "followup_appointment_status"
+          "followup_status"
         ]
       },
       {
-        "recommendation_id": "R-T-CM04",
+        "recommendation_id": "recommendation_arrange_transport",
+        "task_id": "arrange_transport",
         "action": "Arrange patient transport",
-        "rationale": "Transportation to home not arranged; arranging transport will resolve barrier B-S02 and B-S07.",
+        "rationale": "The finding 'Transportation has not been arranged.' indicates a barrier. This recommendation proposes arranging patient transport to address this barrier.",
         "owner_role": "Case Manager",
         "priority": "high",
         "resolves_barriers": [
-          "B-S02",
-          "B-S07"
+          "transport_missing"
         ],
         "supporting_task_ids": [
-          "T-CM04"
+          "arrange_transport"
         ],
         "source_fields": [
           "transport_status"
@@ -365,33 +367,39 @@
     ],
     "governance": [
       {
-        "recommendation_id": "R-T-CM01",
+        "recommendation_id": "recommendation_schedule_followup",
+        "task_id": "schedule_followup",
         "action": "Schedule follow-up appointment",
         "policy": {
           "policy_status": "allowed",
+          "task_id": "schedule_followup",
           "action": "Schedule follow-up appointment",
-          "reason": "Action is permitted by the governance policy."
+          "reason": "The recommendation is permitted to continue through the supervised workflow."
         },
         "approval": {
           "approval_status": "auto_safe",
           "requires_human_approval": false,
+          "task_id": "schedule_followup",
           "action": "Schedule follow-up appointment",
-          "reason": "Coordination action may be proposed without clinical execution."
+          "reason": "This is a coordination or educational recommendation and does not require clinical approval."
         }
       },
       {
-        "recommendation_id": "R-T-CM04",
+        "recommendation_id": "recommendation_arrange_transport",
+        "task_id": "arrange_transport",
         "action": "Arrange patient transport",
         "policy": {
           "policy_status": "allowed",
+          "task_id": "arrange_transport",
           "action": "Arrange patient transport",
-          "reason": "Action is permitted by the governance policy."
+          "reason": "The recommendation is permitted to continue through the supervised workflow."
         },
         "approval": {
           "approval_status": "auto_safe",
           "requires_human_approval": false,
+          "task_id": "arrange_transport",
           "action": "Arrange patient transport",
-          "reason": "Coordination action may be proposed without clinical execution."
+          "reason": "This is a coordination or educational recommendation and does not require clinical approval."
         }
       }
     ],
@@ -401,35 +409,42 @@
   "evaluation": {
     "barriers": {
       "expected": [
-        "B-F01",
-        "B-S02"
+        "followup_missing",
+        "transport_missing"
       ],
       "detected": [
-        "B-F01",
-        "B-S02"
+        "followup_missing",
+        "transport_missing"
       ],
       "matched": [
-        "B-F01",
-        "B-S02"
+        "followup_missing",
+        "transport_missing"
       ],
       "missed": [],
       "extra": []
     },
     "tasks": {
       "expected": [
-        "T-CM01",
-        "T-CM04"
+        "schedule_followup",
+        "arrange_transport"
       ],
       "detected": [
-        "T-CM01",
-        "T-CM04"
+        "schedule_followup",
+        "arrange_transport"
       ],
       "matched": [
-        "T-CM01",
-        "T-CM04"
+        "arrange_transport",
+        "schedule_followup"
       ],
       "missed": [],
       "extra": []
     }
+  },
+  "database": {
+    "status": "saved",
+    "run_id": "2ad57c11-c276-4435-9d78-9dab7bc5ec26",
+    "case_id": "CASE-001",
+    "barriers_saved": 2,
+    "tasks_saved": 2
   }
 }

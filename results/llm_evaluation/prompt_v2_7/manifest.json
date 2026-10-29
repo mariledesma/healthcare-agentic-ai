@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "model": "medgemma1.5:4b",
+  "digest": "433252621ab154668b5d8be6aff6c1b771bacba045e46e6193da8d6ad1630f2c",
+  "host": "http://localhost:11434",
+  "timeout_seconds_per_call": 120.0,
+  "case_ids": [
+    "SYN-42-00001",
+    "SYN-42-00002",
+    "SYN-42-00005",
+    "SYN-42-00007",
+    "SYN-42-00008",
+    "SYN-42-00004",
+    "SYN-42-00022"
+  ],
+  "persistence": "report files only",
+  "limitations": [
+    "Barrier detection is deterministic, not an LLM recall measurement.",
+    "Literal evidence flags are heuristic; semantic factuality and LLM concern recall require human review.",
+    "Same-model, template-generated cases do not establish clinical performance."
+  ]
+}

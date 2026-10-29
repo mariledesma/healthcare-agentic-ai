@@ -1,0 +1,295 @@
+{
+  "model": "medgemma1.5:4b",
+  "digest": "433252621ab154668b5d8be6aff6c1b771bacba045e46e6193da8d6ad1630f2c",
+  "shared_cases": [
+    {
+      "case_id": "SYN-42-00001",
+      "before_status": "completed",
+      "after_status": "completed",
+      "before": {
+        "concerns": [
+          {
+            "finding": "transport_time",
+            "supporting_evidence": "transport_time",
+            "source_field": "transport_time",
+            "priority": "low"
+          }
+        ],
+        "information_gaps": [],
+        "evidence_format_issues": [
+          {
+            "concern": 0,
+            "reason": "Evidence is not a JSON object with field values."
+          }
+        ],
+        "concern_source_coverage": {
+          "missing_source_fields": [],
+          "unexpected_source_fields": [
+            "transport_time"
+          ],
+          "scope": "Source-field coverage only; does not validate concern meaning."
+        },
+        "seconds": 68.854,
+        "prompt_sha256": "32683cc700202714170e35db2d09ac8e923157d5f5fbee3c3126b3e2180bdec9",
+        "recommendation_coverage": {
+          "missed": [],
+          "extra": []
+        },
+        "raw_recommendation_flags": [],
+        "approval_mismatches": []
+      },
+      "after": {
+        "concerns": [],
+        "information_gaps": [],
+        "evidence_format_issues": [],
+        "concern_source_coverage": {
+          "missing_source_fields": [],
+          "unexpected_source_fields": [],
+          "scope": "Source-field coverage only; does not validate concern meaning."
+        },
+        "seconds": 78.209,
+        "prompt_sha256": "fa352d77a5baaba67e1afb4ef51e0f93cc46ae59ebd331c4da4f91f352335a84",
+        "recommendation_coverage": {
+          "missed": [],
+          "extra": []
+        },
+        "raw_recommendation_flags": [],
+        "approval_mismatches": []
+      }
+    },
+    {
+      "case_id": "SYN-42-00002",
+      "before_status": "completed",
+      "after_status": "completed",
+      "before": {
+        "concerns": [
+          {
+            "finding": "The patient's planned discharge window is afternoon, but the transportation time is 14:00. This could potentially conflict with the discharge window.",
+            "supporting_evidence": "transport_time: \"14:00\", planned_discharge_window: \"afternoon\"",
+            "source_field": "transport_time",
+            "priority": "medium"
+          }
+        ],
+        "information_gaps": [],
+        "evidence_format_issues": [
+          {
+            "concern": 0,
+            "reason": "Evidence is not a JSON object with field values."
+          }
+        ],
+        "concern_source_coverage": {
+          "missing_source_fields": [
+            "followup_status"
+          ],
+          "unexpected_source_fields": [
+            "transport_time"
+          ],
+          "scope": "Source-field coverage only; does not validate concern meaning."
+        },
+        "seconds": 91.703,
+        "prompt_sha256": "32683cc700202714170e35db2d09ac8e923157d5f5fbee3c3126b3e2180bdec9",
+        "recommendation_coverage": {
+          "missed": [],
+          "extra": []
+        },
+        "raw_recommendation_flags": [],
+        "approval_mismatches": []
+      },
+      "after": {
+        "concerns": [],
+        "information_gaps": [],
+        "evidence_format_issues": [],
+        "concern_source_coverage": {
+          "missing_source_fields": [
+            "followup_status"
+          ],
+          "unexpected_source_fields": [],
+          "scope": "Source-field coverage only; does not validate concern meaning."
+        },
+        "seconds": 88.336,
+        "prompt_sha256": "fa352d77a5baaba67e1afb4ef51e0f93cc46ae59ebd331c4da4f91f352335a84",
+        "recommendation_coverage": {
+          "missed": [],
+          "extra": []
+        },
+        "raw_recommendation_flags": [],
+        "approval_mismatches": []
+      }
+    },
+    {
+      "case_id": "SYN-42-00005",
+      "before_status": "completed",
+      "after_status": "completed",
+      "before": {
+        "concerns": [
+          {
+            "finding": "medication_reconciliation_status",
+            "supporting_evidence": "medication_reconciliation_status",
+            "source_field": "medication_reconciliation_status",
+            "priority": "medium"
+          }
+        ],
+        "information_gaps": [],
+        "evidence_format_issues": [
+          {
+            "concern": 0,
+            "reason": "Evidence is not a JSON object with field values."
+          }
+        ],
+        "concern_source_coverage": {
+          "missing_source_fields": [],
+          "unexpected_source_fields": [],
+          "scope": "Source-field coverage only; does not validate concern meaning."
+        },
+        "seconds": 99.652,
+        "prompt_sha256": "32683cc700202714170e35db2d09ac8e923157d5f5fbee3c3126b3e2180bdec9",
+        "recommendation_coverage": {
+          "missed": [],
+          "extra": []
+        },
+        "raw_recommendation_flags": [],
+        "approval_mismatches": []
+      },
+      "after": {
+        "concerns": [],
+        "information_gaps": [],
+        "evidence_format_issues": [],
+        "concern_source_coverage": {
+          "missing_source_fields": [
+            "medication_reconciliation_status"
+          ],
+          "unexpected_source_fields": [],
+          "scope": "Source-field coverage only; does not validate concern meaning."
+        },
+        "seconds": 89.168,
+        "prompt_sha256": "fa352d77a5baaba67e1afb4ef51e0f93cc46ae59ebd331c4da4f91f352335a84",
+        "recommendation_coverage": {
+          "missed": [],
+          "extra": []
+        },
+        "raw_recommendation_flags": [],
+        "approval_mismatches": []
+      }
+    },
+    {
+      "case_id": "SYN-42-00007",
+      "before_status": "completed",
+      "after_status": "completed",
+      "before": {
+        "concerns": [
+          {
+            "finding": "medication_availability",
+            "supporting_evidence": "medication_availability",
+            "source_field": "medication_availability",
+            "priority": "low"
+          }
+        ],
+        "information_gaps": [],
+        "evidence_format_issues": [
+          {
+            "concern": 0,
+            "reason": "Evidence is not a JSON object with field values."
+          }
+        ],
+        "concern_source_coverage": {
+          "missing_source_fields": [],
+          "unexpected_source_fields": [],
+          "scope": "Source-field coverage only; does not validate concern meaning."
+        },
+        "seconds": 99.503,
+        "prompt_sha256": "32683cc700202714170e35db2d09ac8e923157d5f5fbee3c3126b3e2180bdec9",
+        "recommendation_coverage": {
+          "missed": [],
+          "extra": []
+        },
+        "raw_recommendation_flags": [],
+        "approval_mismatches": []
+      },
+      "after": {
+        "concerns": [],
+        "information_gaps": [],
+        "evidence_format_issues": [],
+        "concern_source_coverage": {
+          "missing_source_fields": [
+            "medication_availability"
+          ],
+          "unexpected_source_fields": [],
+          "scope": "Source-field coverage only; does not validate concern meaning."
+        },
+        "seconds": 90.291,
+        "prompt_sha256": "fa352d77a5baaba67e1afb4ef51e0f93cc46ae59ebd331c4da4f91f352335a84",
+        "recommendation_coverage": {
+          "missed": [],
+          "extra": []
+        },
+        "raw_recommendation_flags": [],
+        "approval_mismatches": []
+      }
+    },
+    {
+      "case_id": "SYN-42-00008",
+      "before_status": "completed",
+      "after_status": "completed",
+      "before": {
+        "concerns": [
+          {
+            "finding": "pending_labs",
+            "supporting_evidence": "pending_labs",
+            "source_field": "pending_labs",
+            "priority": "low"
+          }
+        ],
+        "information_gaps": [],
+        "evidence_format_issues": [
+          {
+            "concern": 0,
+            "reason": "Evidence is not a JSON object with field values."
+          }
+        ],
+        "concern_source_coverage": {
+          "missing_source_fields": [],
+          "unexpected_source_fields": [],
+          "scope": "Source-field coverage only; does not validate concern meaning."
+        },
+        "seconds": 101.052,
+        "prompt_sha256": "32683cc700202714170e35db2d09ac8e923157d5f5fbee3c3126b3e2180bdec9",
+        "recommendation_coverage": {
+          "missed": [],
+          "extra": []
+        },
+        "raw_recommendation_flags": [],
+        "approval_mismatches": []
+      },
+      "after": {
+        "concerns": [],
+        "information_gaps": [],
+        "evidence_format_issues": [],
+        "concern_source_coverage": {
+          "missing_source_fields": [
+            "pending_labs"
+          ],
+          "unexpected_source_fields": [],
+          "scope": "Source-field coverage only; does not validate concern meaning."
+        },
+        "seconds": 89.654,
+        "prompt_sha256": "fa352d77a5baaba67e1afb4ef51e0f93cc46ae59ebd331c4da4f91f352335a84",
+        "recommendation_coverage": {
+          "missed": [],
+          "extra": []
+        },
+        "raw_recommendation_flags": [],
+        "approval_mismatches": []
+      }
+    }
+  ],
+  "additional_candidate_cases": [
+    "SYN-42-00004",
+    "SYN-42-00022"
+  ],
+  "baseline_only_cases": [],
+  "limitations": [
+    "Evidence-format checks applied equally to saved outputs; baseline was not instructed to use JSON evidence.",
+    "Exact evidence values do not establish that a concern is valid or complete.",
+    "This is a prompt-development comparison on reused synthetic cases, not independent clinical validation."
+  ]
+}

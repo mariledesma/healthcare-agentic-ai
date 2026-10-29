@@ -1,0 +1,17 @@
+{
+  "model": "medgemma1.5:4b",
+  "digest": "433252621ab154668b5d8be6aff6c1b771bacba045e46e6193da8d6ad1630f2c",
+  "case_ids": [
+    "SYN-42-00001",
+    "SYN-42-00002",
+    "SYN-42-00005",
+    "SYN-42-00007",
+    "SYN-42-00008",
+    "SYN-42-00004",
+    "SYN-42-00021",
+    "SYN-42-00022"
+  ],
+  "scope": "Grounded explainer only; standalone analyzer is not rerun or repaired.",
+  "wording_mode": "Detector-supplied choices with exact validation; not free clinical prose",
+  "persistence": "report files only"
+}

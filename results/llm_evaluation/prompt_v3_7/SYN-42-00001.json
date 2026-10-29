@@ -1,0 +1,266 @@
+{
+  "case_id": "SYN-42-00001",
+  "scenario_family": "ready",
+  "patient_record": {
+    "condition": "Heart Failure",
+    "diagnoses": [
+      "Acute decompensated heart failure",
+      "Hypertension"
+    ],
+    "medications": [
+      {
+        "name": "Furosemide",
+        "dose": "40 mg",
+        "frequency": "daily"
+      },
+      {
+        "name": "Lisinopril",
+        "dose": "10 mg",
+        "frequency": "daily"
+      }
+    ],
+    "labs": {
+      "sodium": "138 mmol/L",
+      "potassium": "4.1 mmol/L",
+      "creatinine": "1.0 mg/dL"
+    },
+    "pending_labs": [],
+    "pending_imaging": [],
+    "pending_consult": [],
+    "medical_stability_status": "stable",
+    "medication_reconciliation_status": "complete",
+    "medication_education_status": "complete",
+    "medication_availability": "available",
+    "patient_education_status": "complete",
+    "diet_education_status": "not_required",
+    "mobility_device_education_status": "not_required",
+    "medical_device_education_status": "not_required",
+    "followup_status": "scheduled",
+    "caregiver_status": "available",
+    "transport_status": "arranged",
+    "transport_time": "14:00",
+    "planned_discharge_window": "afternoon",
+    "financial_status": "no_concern",
+    "case_manager_status": "available",
+    "home_safety_status": "safe",
+    "outpatient_therapy_status": "not_required",
+    "pcp_notification_status": "complete",
+    "physical_function": "independent",
+    "discharge_summary_status": "signed",
+    "case_id": "SYN-42-00001",
+    "discharge_summary": "Synthetic case for discharge workflow testing. Medical stability: stable. Discharge readiness requires separate workflow review.",
+    "free_text_notes": {
+      "case_manager_note": "Source facts: {\"caregiver_status\": \"available\", \"case_manager_status\": \"available\", \"condition\": \"Heart Failure\", \"diagnoses\": [\"Acute decompensated heart failure\", \"Hypertension\"], \"diet_education_status\": \"not_required\", \"discharge_summary_status\": \"signed\", \"financial_status\": \"no_concern\", \"followup_status\": \"scheduled\", \"home_safety_status\": \"safe\", \"labs\": {\"creatinine\": \"1.0 mg/dL\", \"potassium\": \"4.1 mmol/L\", \"sodium\": \"138 mmol/L\"}, \"medical_device_education_status\": \"not_required\", \"medical_stability_status\": \"stable\", \"medication_availability\": \"available\", \"medication_education_status\": \"complete\", \"medication_reconciliation_status\": \"complete\", \"medications\": [{\"dose\": \"40 mg\", \"frequency\": \"daily\", \"name\": \"Furosemide\"}, {\"dose\": \"10 mg\", \"frequency\": \"daily\", \"name\": \"Lisinopril\"}], \"mobility_device_education_status\": \"not_required\", \"outpatient_therapy_status\": \"not_required\", \"patient_education_status\": \"complete\", \"pcp_notification_status\": \"complete\", \"pending_consult\": [], \"pending_imaging\": [], \"pending_labs\": [], \"physical_function\": \"independent\", \"planned_discharge_window\": \"afternoon\", \"transport_status\": \"arranged\", \"transport_time\": \"14:00\"}"
+    }
+  },
+  "expected": {
+    "scenario_family": "ready",
+    "template": "case_001_hf.json",
+    "template_sha256": "d679ed1ce55798238d6f30beb94fe733099e10246970cadd4997d11bba720794",
+    "expected_barriers": [],
+    "expected_tasks": [],
+    "split_group": "case_001_hf.json:ready",
+    "structured_duplicate": false
+  },
+  "analysis": {
+    "agent": "CaseAnalyzer",
+    "status": "success",
+    "llm": {
+      "provider": "ollama",
+      "model": "medgemma1.5:4b"
+    },
+    "finding": "Clinical, discharge, and social context analyzed by LLM.",
+    "supporting_evidence": {
+      "concern_count": 1,
+      "information_gap_count": 0
+    },
+    "confidence": 0.9,
+    "source_field": "patient_record",
+    "clinical_summary": "The patient has a history of Heart Failure and Hypertension. Their current medical stability is stable. Labs show sodium 138 mmol/L, potassium 4.1 mmol/L, and creatinine 1.0 mg/dL. Medications include Furosemide 40 mg daily and Lisinopril 10 mg daily. Patient education and medication reconciliation are complete. Physical function is independent. Home safety is safe.",
+    "discharge_summary": "The patient is medically stable and has completed necessary education and medication reconciliation. Discharge is planned for the afternoon. Transport is arranged for 14:00. The discharge summary is signed.",
+    "social_summary": "The patient has an available caregiver and case manager. Financial status is no concern. No outpatient therapy is required. The patient's physical function is independent.",
+    "potential_concerns": [
+      {
+        "finding": "Required follow-up is not scheduled, so follow-up coordination remains incomplete.",
+        "supporting_evidence": "{\"followup_status\": \"scheduled\"}",
+        "source_field": "followup_status",
+        "priority": "high"
+      }
+    ],
+    "information_gaps": []
+  },
+  "barriers": {
+    "agent": "BarrierDetector",
+    "status": "success",
+    "finding": "0 discharge barrier(s) detected.",
+    "supporting_evidence": {
+      "barrier_count": 0,
+      "barrier_ids": []
+    },
+    "confidence": 0.95,
+    "source_field": "patient_record",
+    "barriers": []
+  },
+  "tasks": {
+    "agent": "TaskDetector",
+    "status": "success",
+    "finding": "0 pending task(s) detected.",
+    "supporting_evidence": {
+      "task_count": 0,
+      "task_ids": []
+    },
+    "confidence": 0.95,
+    "source_field": "detected_barriers",
+    "tasks": []
+  },
+  "recommendations": {
+    "agent": "RecommendationAgent",
+    "status": "success",
+    "llm": {
+      "provider": "ollama",
+      "model": "medgemma1.5:4b"
+    },
+    "finding": "0 LLM-generated recommendation(s).",
+    "supporting_evidence": {
+      "barriers_reviewed": 0,
+      "tasks_reviewed": 0
+    },
+    "confidence": 0.9,
+    "source_field": "detected_barriers_and_tasks",
+    "recommendations": []
+  },
+  "governance": [],
+  "final_output": {
+    "case_id": "SYN-42-00001",
+    "condition": "Heart Failure",
+    "discharge_coordination_summary": {
+      "barrier_count": 0,
+      "task_count": 0,
+      "recommendation_count": 0,
+      "human_approval_required_count": 0
+    },
+    "barriers": [],
+    "pending_tasks": [],
+    "recommendations": [],
+    "governance": [],
+    "human_approval_required": [],
+    "final_status": "no_detected_discharge_barriers"
+  },
+  "checks": {
+    "deterministic_barriers": {
+      "missed": [],
+      "extra": []
+    },
+    "deterministic_tasks": {
+      "missed": [],
+      "extra": []
+    },
+    "recommendation_coverage": {
+      "missed": [],
+      "extra": []
+    },
+    "raw_recommendation_flags": [],
+    "literal_evidence_review_flags": [
+      {
+        "finding": "Required follow-up is not scheduled, so follow-up coordination remains incomplete.",
+        "source_field": "followup_status",
+        "reason": "Evidence is not a literal excerpt; human review needed."
+      }
+    ],
+    "approval_mismatches": [],
+    "human_review": {
+      "status": "pending",
+      "missed_llm_concerns": null,
+      "invented_clinical_facts": null,
+      "unsupported_rationales": null,
+      "notes": ""
+    }
+  },
+  "status": "completed",
+  "seconds": 57.841,
+  "llm_calls": [
+    {
+      "schema_name": "case_analysis",
+      "input": {
+        "condition": "Heart Failure",
+        "diagnoses": [
+          "Acute decompensated heart failure",
+          "Hypertension"
+        ],
+        "medications": [
+          {
+            "name": "Furosemide",
+            "dose": "40 mg",
+            "frequency": "daily"
+          },
+          {
+            "name": "Lisinopril",
+            "dose": "10 mg",
+            "frequency": "daily"
+          }
+        ],
+        "labs": {
+          "sodium": "138 mmol/L",
+          "potassium": "4.1 mmol/L",
+          "creatinine": "1.0 mg/dL"
+        },
+        "pending_labs": [],
+        "pending_imaging": [],
+        "pending_consult": [],
+        "medical_stability_status": "stable",
+        "medication_reconciliation_status": "complete",
+        "medication_education_status": "complete",
+        "medication_availability": "available",
+        "patient_education_status": "complete",
+        "diet_education_status": "not_required",
+        "mobility_device_education_status": "not_required",
+        "medical_device_education_status": "not_required",
+        "followup_status": "scheduled",
+        "caregiver_status": "available",
+        "transport_status": "arranged",
+        "transport_time": "14:00",
+        "planned_discharge_window": "afternoon",
+        "financial_status": "no_concern",
+        "case_manager_status": "available",
+        "home_safety_status": "safe",
+        "outpatient_therapy_status": "not_required",
+        "pcp_notification_status": "complete",
+        "physical_function": "independent",
+        "discharge_summary_status": "signed",
+        "case_id": "SYN-42-00001",
+        "discharge_summary": "Synthetic case for discharge workflow testing. Medical stability: stable. Discharge readiness requires separate workflow review.",
+        "free_text_notes": {
+          "case_manager_note": "Source facts: {\"caregiver_status\": \"available\", \"case_manager_status\": \"available\", \"condition\": \"Heart Failure\", \"diagnoses\": [\"Acute decompensated heart failure\", \"Hypertension\"], \"diet_education_status\": \"not_required\", \"discharge_summary_status\": \"signed\", \"financial_status\": \"no_concern\", \"followup_status\": \"scheduled\", \"home_safety_status\": \"safe\", \"labs\": {\"creatinine\": \"1.0 mg/dL\", \"potassium\": \"4.1 mmol/L\", \"sodium\": \"138 mmol/L\"}, \"medical_device_education_status\": \"not_required\", \"medical_stability_status\": \"stable\", \"medication_availability\": \"available\", \"medication_education_status\": \"complete\", \"medication_reconciliation_status\": \"complete\", \"medications\": [{\"dose\": \"40 mg\", \"frequency\": \"daily\", \"name\": \"Furosemide\"}, {\"dose\": \"10 mg\", \"frequency\": \"daily\", \"name\": \"Lisinopril\"}], \"mobility_device_education_status\": \"not_required\", \"outpatient_therapy_status\": \"not_required\", \"patient_education_status\": \"complete\", \"pcp_notification_status\": \"complete\", \"pending_consult\": [], \"pending_imaging\": [], \"pending_labs\": [], \"physical_function\": \"independent\", \"planned_discharge_window\": \"afternoon\", \"transport_status\": \"arranged\", \"transport_time\": \"14:00\"}"
+        }
+      },
+      "prompt_sha256": "efd3f34c61efd3a25f3790e491b769515e5e5110f56f117ca630510d88f951fa",
+      "raw_output": {
+        "clinical_summary": "The patient has a history of Heart Failure and Hypertension. Their current medical stability is stable. Labs show sodium 138 mmol/L, potassium 4.1 mmol/L, and creatinine 1.0 mg/dL. Medications include Furosemide 40 mg daily and Lisinopril 10 mg daily. Patient education and medication reconciliation are complete. Physical function is independent. Home safety is safe.",
+        "discharge_summary": "The patient is medically stable and has completed necessary education and medication reconciliation. Discharge is planned for the afternoon. Transport is arranged for 14:00. The discharge summary is signed.",
+        "social_summary": "The patient has an available caregiver and case manager. Financial status is no concern. No outpatient therapy is required. The patient's physical function is independent.",
+        "potential_concerns": [
+          {
+            "finding": "Required follow-up is not scheduled, so follow-up coordination remains incomplete.",
+            "supporting_evidence": "{\"followup_status\": \"scheduled\"}",
+            "source_field": "followup_status",
+            "priority": "high"
+          }
+        ],
+        "information_gaps": []
+      },
+      "seconds": 56.265
+    },
+    {
+      "schema_name": "recommendation_output",
+      "input": {
+        "barriers": [],
+        "tasks": []
+      },
+      "prompt_sha256": "1cdf562623cb0b66a4ea59a5a5c574ef1f4d9dd272e8cc664a9bf8b167bc5935",
+      "raw_output": {
+        "recommendations": []
+      },
+      "seconds": 1.456
+    }
+  ]
+}

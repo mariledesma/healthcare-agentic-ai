@@ -1,0 +1,917 @@
+{
+  "dataset": "discharge_challenge_v1",
+  "label_status": "provisional; domain review pending",
+  "cases": 26,
+  "case_ids_with_mismatches": [
+    "CHAL-006",
+    "CHAL-007",
+    "CHAL-008",
+    "CHAL-009",
+    "CHAL-010",
+    "CHAL-011",
+    "CHAL-012",
+    "CHAL-013",
+    "CHAL-014",
+    "CHAL-015",
+    "CHAL-016",
+    "CHAL-022",
+    "CHAL-023"
+  ],
+  "cases_with_unassessed_requirements": 13,
+  "review_decisions": {
+    "pending": 26,
+    "approved": 0,
+    "revise": 0,
+    "rejected": 0
+  },
+  "clinical_accuracy": "not measured; draft labels and unassessed capabilities",
+  "results": [
+    {
+      "case_id": "CHAL-001",
+      "title": "Ready control",
+      "scenario_family": "ready",
+      "labels": "assistant_proposed_pending_domain_adjudication",
+      "review_decision": "pending",
+      "barriers": {
+        "missing": [],
+        "unexpected": []
+      },
+      "tasks": {
+        "missing": [],
+        "unexpected": []
+      },
+      "actual_barriers": [],
+      "actual_tasks": [],
+      "approval_checks": [],
+      "expected_information_gaps": [],
+      "required_review_categories": [],
+      "unassessed_requirements": [],
+      "id_match": true
+    },
+    {
+      "case_id": "CHAL-002",
+      "title": "Negated financial barrier",
+      "scenario_family": "negation",
+      "labels": "assistant_proposed_pending_domain_adjudication",
+      "review_decision": "pending",
+      "barriers": {
+        "missing": [],
+        "unexpected": []
+      },
+      "tasks": {
+        "missing": [],
+        "unexpected": []
+      },
+      "actual_barriers": [],
+      "actual_tasks": [],
+      "approval_checks": [],
+      "expected_information_gaps": [],
+      "required_review_categories": [],
+      "unassessed_requirements": [
+        "Narrative meaning/negation/chronology: not assessed by rule-only runner"
+      ],
+      "id_match": true
+    },
+    {
+      "case_id": "CHAL-003",
+      "title": "Transportation problem resolved",
+      "scenario_family": "resolved_problem",
+      "labels": "assistant_proposed_pending_domain_adjudication",
+      "review_decision": "pending",
+      "barriers": {
+        "missing": [],
+        "unexpected": []
+      },
+      "tasks": {
+        "missing": [],
+        "unexpected": []
+      },
+      "actual_barriers": [],
+      "actual_tasks": [],
+      "approval_checks": [],
+      "expected_information_gaps": [],
+      "required_review_categories": [],
+      "unassessed_requirements": [
+        "Narrative meaning/negation/chronology: not assessed by rule-only runner"
+      ],
+      "id_match": true
+    },
+    {
+      "case_id": "CHAL-004",
+      "title": "Historical caregiver issue",
+      "scenario_family": "historical_context",
+      "labels": "assistant_proposed_pending_domain_adjudication",
+      "review_decision": "pending",
+      "barriers": {
+        "missing": [],
+        "unexpected": []
+      },
+      "tasks": {
+        "missing": [],
+        "unexpected": []
+      },
+      "actual_barriers": [],
+      "actual_tasks": [],
+      "approval_checks": [],
+      "expected_information_gaps": [],
+      "required_review_categories": [],
+      "unassessed_requirements": [
+        "Narrative meaning/negation/chronology: not assessed by rule-only runner"
+      ],
+      "id_match": true
+    },
+    {
+      "case_id": "CHAL-005",
+      "title": "Explicit unscheduled follow-up",
+      "scenario_family": "followup_structured",
+      "labels": "assistant_proposed_pending_domain_adjudication",
+      "review_decision": "pending",
+      "barriers": {
+        "missing": [],
+        "unexpected": []
+      },
+      "tasks": {
+        "missing": [],
+        "unexpected": []
+      },
+      "actual_barriers": [
+        {
+          "barrier_id": "followup_missing",
+          "finding": "Required follow-up has not been scheduled.",
+          "evidence": "not_scheduled",
+          "confidence": 0.95,
+          "priority": "high",
+          "source_field": "followup_status"
+        }
+      ],
+      "actual_tasks": [
+        {
+          "task_id": "schedule_followup",
+          "task_name": "Schedule follow-up appointment",
+          "owner_role": "Case Manager",
+          "resolves_barriers": [
+            "followup_missing"
+          ],
+          "priority": "high",
+          "source_field": "followup_status"
+        }
+      ],
+      "approval_checks": [],
+      "expected_information_gaps": [],
+      "required_review_categories": [],
+      "unassessed_requirements": [],
+      "id_match": true
+    },
+    {
+      "case_id": "CHAL-006",
+      "title": "Ride cancellation stated only in note",
+      "scenario_family": "narrative_only_transport",
+      "labels": "assistant_proposed_pending_domain_adjudication",
+      "review_decision": "pending",
+      "barriers": {
+        "missing": [
+          "transport_missing"
+        ],
+        "unexpected": []
+      },
+      "tasks": {
+        "missing": [
+          "arrange_transport"
+        ],
+        "unexpected": []
+      },
+      "actual_barriers": [],
+      "actual_tasks": [],
+      "approval_checks": [],
+      "expected_information_gaps": [],
+      "required_review_categories": [],
+      "unassessed_requirements": [
+        "Narrative meaning/negation/chronology: not assessed by rule-only runner"
+      ],
+      "id_match": false
+    },
+    {
+      "case_id": "CHAL-007",
+      "title": "Follow-up problem stated only in note",
+      "scenario_family": "narrative_only_followup",
+      "labels": "assistant_proposed_pending_domain_adjudication",
+      "review_decision": "pending",
+      "barriers": {
+        "missing": [
+          "followup_missing"
+        ],
+        "unexpected": []
+      },
+      "tasks": {
+        "missing": [
+          "schedule_followup"
+        ],
+        "unexpected": []
+      },
+      "actual_barriers": [],
+      "actual_tasks": [],
+      "approval_checks": [],
+      "expected_information_gaps": [],
+      "required_review_categories": [],
+      "unassessed_requirements": [
+        "Narrative meaning/negation/chronology: not assessed by rule-only runner"
+      ],
+      "id_match": false
+    },
+    {
+      "case_id": "CHAL-008",
+      "title": "Caregiver evidence contradicts status",
+      "scenario_family": "contradictory_caregiver",
+      "labels": "assistant_proposed_pending_domain_adjudication",
+      "review_decision": "pending",
+      "barriers": {
+        "missing": [],
+        "unexpected": []
+      },
+      "tasks": {
+        "missing": [
+          "clarify_caregiver_status"
+        ],
+        "unexpected": []
+      },
+      "actual_barriers": [
+        {
+          "barrier_id": "physical_support_needed",
+          "finding": "Patient has physical or mobility needs that may affect discharge.",
+          "evidence": "needs_assistance",
+          "confidence": 0.95,
+          "priority": "high",
+          "source_field": "physical_function"
+        }
+      ],
+      "actual_tasks": [
+        {
+          "task_id": "assess_function",
+          "task_name": "Complete mobility and functional assessment",
+          "owner_role": "Nurse / PT",
+          "resolves_barriers": [
+            "physical_support_needed"
+          ],
+          "priority": "high",
+          "source_field": "physical_function"
+        }
+      ],
+      "approval_checks": [],
+      "expected_information_gaps": [],
+      "required_review_categories": [
+        "contradiction"
+      ],
+      "unassessed_requirements": [
+        "Narrative meaning/negation/chronology: not assessed by rule-only runner",
+        "Information-gap/contradiction handling: requires LLM or human review; not assessed here"
+      ],
+      "id_match": false
+    },
+    {
+      "case_id": "CHAL-009",
+      "title": "Appointment evidence contradicts status",
+      "scenario_family": "contradictory_followup",
+      "labels": "assistant_proposed_pending_domain_adjudication",
+      "review_decision": "pending",
+      "barriers": {
+        "missing": [],
+        "unexpected": []
+      },
+      "tasks": {
+        "missing": [
+          "clarify_followup_status"
+        ],
+        "unexpected": []
+      },
+      "actual_barriers": [],
+      "actual_tasks": [],
+      "approval_checks": [],
+      "expected_information_gaps": [],
+      "required_review_categories": [
+        "contradiction"
+      ],
+      "unassessed_requirements": [
+        "Narrative meaning/negation/chronology: not assessed by rule-only runner",
+        "Information-gap/contradiction handling: requires LLM or human review; not assessed here"
+      ],
+      "id_match": false
+    },
+    {
+      "case_id": "CHAL-010",
+      "title": "Arranged ride without time",
+      "scenario_family": "missing_transport_time",
+      "labels": "assistant_proposed_pending_domain_adjudication",
+      "review_decision": "pending",
+      "barriers": {
+        "missing": [],
+        "unexpected": []
+      },
+      "tasks": {
+        "missing": [
+          "confirm_transport_time"
+        ],
+        "unexpected": []
+      },
+      "actual_barriers": [],
+      "actual_tasks": [],
+      "approval_checks": [],
+      "expected_information_gaps": [
+        "transport_time"
+      ],
+      "required_review_categories": [
+        "missing_information"
+      ],
+      "unassessed_requirements": [
+        "Information-gap/contradiction handling: requires LLM or human review; not assessed here"
+      ],
+      "id_match": false
+    },
+    {
+      "case_id": "CHAL-011",
+      "title": "Absent follow-up field",
+      "scenario_family": "missing_followup_field",
+      "labels": "assistant_proposed_pending_domain_adjudication",
+      "review_decision": "pending",
+      "barriers": {
+        "missing": [],
+        "unexpected": []
+      },
+      "tasks": {
+        "missing": [
+          "confirm_followup_status"
+        ],
+        "unexpected": []
+      },
+      "actual_barriers": [],
+      "actual_tasks": [],
+      "approval_checks": [],
+      "expected_information_gaps": [
+        "followup_status"
+      ],
+      "required_review_categories": [
+        "missing_information"
+      ],
+      "unassessed_requirements": [
+        "Information-gap/contradiction handling: requires LLM or human review; not assessed here"
+      ],
+      "id_match": false
+    },
+    {
+      "case_id": "CHAL-012",
+      "title": "Unknown caregiver status",
+      "scenario_family": "unknown_caregiver",
+      "labels": "assistant_proposed_pending_domain_adjudication",
+      "review_decision": "pending",
+      "barriers": {
+        "missing": [],
+        "unexpected": []
+      },
+      "tasks": {
+        "missing": [
+          "confirm_caregiver_status"
+        ],
+        "unexpected": []
+      },
+      "actual_barriers": [],
+      "actual_tasks": [],
+      "approval_checks": [],
+      "expected_information_gaps": [
+        "caregiver_status"
+      ],
+      "required_review_categories": [
+        "missing_information"
+      ],
+      "unassessed_requirements": [
+        "Information-gap/contradiction handling: requires LLM or human review; not assessed here"
+      ],
+      "id_match": false
+    },
+    {
+      "case_id": "CHAL-013",
+      "title": "Pending imaging review",
+      "scenario_family": "pending_imaging",
+      "labels": "assistant_proposed_pending_domain_adjudication",
+      "review_decision": "pending",
+      "barriers": {
+        "missing": [
+          "pending_imaging_results"
+        ],
+        "unexpected": []
+      },
+      "tasks": {
+        "missing": [
+          "review_imaging_result"
+        ],
+        "unexpected": []
+      },
+      "actual_barriers": [],
+      "actual_tasks": [],
+      "approval_checks": [
+        {
+          "task_id": "review_imaging_result",
+          "status": "unassessed_missing_task"
+        }
+      ],
+      "expected_information_gaps": [],
+      "required_review_categories": [
+        "clinical_review"
+      ],
+      "unassessed_requirements": [],
+      "id_match": false
+    },
+    {
+      "case_id": "CHAL-014",
+      "title": "Pending consultation",
+      "scenario_family": "pending_consult",
+      "labels": "assistant_proposed_pending_domain_adjudication",
+      "review_decision": "pending",
+      "barriers": {
+        "missing": [
+          "pending_consult_review"
+        ],
+        "unexpected": []
+      },
+      "tasks": {
+        "missing": [
+          "review_consult_recommendations"
+        ],
+        "unexpected": []
+      },
+      "actual_barriers": [],
+      "actual_tasks": [],
+      "approval_checks": [
+        {
+          "task_id": "review_consult_recommendations",
+          "status": "unassessed_missing_task"
+        }
+      ],
+      "expected_information_gaps": [],
+      "required_review_categories": [
+        "clinical_review"
+      ],
+      "unassessed_requirements": [],
+      "id_match": false
+    },
+    {
+      "case_id": "CHAL-015",
+      "title": "Medical readiness not established",
+      "scenario_family": "clinical_instability",
+      "labels": "assistant_proposed_pending_domain_adjudication",
+      "review_decision": "pending",
+      "barriers": {
+        "missing": [
+          "clinical_instability"
+        ],
+        "unexpected": []
+      },
+      "tasks": {
+        "missing": [
+          "request_clinical_reassessment"
+        ],
+        "unexpected": []
+      },
+      "actual_barriers": [],
+      "actual_tasks": [],
+      "approval_checks": [
+        {
+          "task_id": "request_clinical_reassessment",
+          "status": "unassessed_missing_task"
+        }
+      ],
+      "expected_information_gaps": [],
+      "required_review_categories": [
+        "clinical_review"
+      ],
+      "unassessed_requirements": [],
+      "id_match": false
+    },
+    {
+      "case_id": "CHAL-016",
+      "title": "Case manager unavailable",
+      "scenario_family": "case_management_gap",
+      "labels": "assistant_proposed_pending_domain_adjudication",
+      "review_decision": "pending",
+      "barriers": {
+        "missing": [],
+        "unexpected": []
+      },
+      "tasks": {
+        "missing": [
+          "assign_case_manager"
+        ],
+        "unexpected": []
+      },
+      "actual_barriers": [
+        {
+          "barrier_id": "case_manager_missing",
+          "finding": "Case management support is currently unavailable.",
+          "evidence": "unavailable",
+          "confidence": 0.95,
+          "priority": "high",
+          "source_field": "case_manager_status"
+        }
+      ],
+      "actual_tasks": [],
+      "approval_checks": [],
+      "expected_information_gaps": [],
+      "required_review_categories": [],
+      "unassessed_requirements": [],
+      "id_match": false
+    },
+    {
+      "case_id": "CHAL-017",
+      "title": "Medication reconciliation incomplete",
+      "scenario_family": "medication_reconciliation",
+      "labels": "assistant_proposed_pending_domain_adjudication",
+      "review_decision": "pending",
+      "barriers": {
+        "missing": [],
+        "unexpected": []
+      },
+      "tasks": {
+        "missing": [],
+        "unexpected": []
+      },
+      "actual_barriers": [
+        {
+          "barrier_id": "med_reconciliation_missing",
+          "finding": "Medication reconciliation is incomplete.",
+          "evidence": "incomplete",
+          "confidence": 0.95,
+          "priority": "high",
+          "source_field": "medication_reconciliation_status"
+        }
+      ],
+      "actual_tasks": [
+        {
+          "task_id": "reconcile_meds",
+          "task_name": "Complete medication reconciliation",
+          "owner_role": "Pharmacist",
+          "resolves_barriers": [
+            "med_reconciliation_missing"
+          ],
+          "priority": "high",
+          "source_field": "medication_reconciliation_status"
+        }
+      ],
+      "approval_checks": [
+        {
+          "task_id": "reconcile_meds",
+          "status": "human_review_required"
+        }
+      ],
+      "expected_information_gaps": [],
+      "required_review_categories": [
+        "clinical_review"
+      ],
+      "unassessed_requirements": [],
+      "id_match": true
+    },
+    {
+      "case_id": "CHAL-018",
+      "title": "11:59 outside afternoon window",
+      "scenario_family": "timing_boundary",
+      "labels": "assistant_proposed_pending_domain_adjudication",
+      "review_decision": "pending",
+      "barriers": {
+        "missing": [],
+        "unexpected": []
+      },
+      "tasks": {
+        "missing": [],
+        "unexpected": []
+      },
+      "actual_barriers": [
+        {
+          "barrier_id": "transport_timing",
+          "finding": "Transportation timing conflicts with the planned discharge window.",
+          "evidence": "Discharge is planned for afternoon, but transportation is scheduled for 11:59.",
+          "confidence": 0.95,
+          "priority": "high",
+          "source_field": "planned_discharge_window + transport_time"
+        }
+      ],
+      "actual_tasks": [
+        {
+          "task_id": "arrange_transport",
+          "task_name": "Arrange patient transport",
+          "owner_role": "Case Manager",
+          "resolves_barriers": [
+            "transport_timing"
+          ],
+          "priority": "high",
+          "source_field": "planned_discharge_window + transport_time"
+        }
+      ],
+      "approval_checks": [],
+      "expected_information_gaps": [],
+      "required_review_categories": [],
+      "unassessed_requirements": [],
+      "id_match": true
+    },
+    {
+      "case_id": "CHAL-019",
+      "title": "12:00 inside afternoon window",
+      "scenario_family": "timing_boundary",
+      "labels": "assistant_proposed_pending_domain_adjudication",
+      "review_decision": "pending",
+      "barriers": {
+        "missing": [],
+        "unexpected": []
+      },
+      "tasks": {
+        "missing": [],
+        "unexpected": []
+      },
+      "actual_barriers": [],
+      "actual_tasks": [],
+      "approval_checks": [],
+      "expected_information_gaps": [],
+      "required_review_categories": [],
+      "unassessed_requirements": [],
+      "id_match": true
+    },
+    {
+      "case_id": "CHAL-020",
+      "title": "16:59 inside afternoon window",
+      "scenario_family": "timing_boundary",
+      "labels": "assistant_proposed_pending_domain_adjudication",
+      "review_decision": "pending",
+      "barriers": {
+        "missing": [],
+        "unexpected": []
+      },
+      "tasks": {
+        "missing": [],
+        "unexpected": []
+      },
+      "actual_barriers": [],
+      "actual_tasks": [],
+      "approval_checks": [],
+      "expected_information_gaps": [],
+      "required_review_categories": [],
+      "unassessed_requirements": [],
+      "id_match": true
+    },
+    {
+      "case_id": "CHAL-021",
+      "title": "17:00 outside afternoon window",
+      "scenario_family": "timing_boundary",
+      "labels": "assistant_proposed_pending_domain_adjudication",
+      "review_decision": "pending",
+      "barriers": {
+        "missing": [],
+        "unexpected": []
+      },
+      "tasks": {
+        "missing": [],
+        "unexpected": []
+      },
+      "actual_barriers": [
+        {
+          "barrier_id": "transport_timing",
+          "finding": "Transportation timing conflicts with the planned discharge window.",
+          "evidence": "Discharge is planned for afternoon, but transportation is scheduled for 17:00.",
+          "confidence": 0.95,
+          "priority": "high",
+          "source_field": "planned_discharge_window + transport_time"
+        }
+      ],
+      "actual_tasks": [
+        {
+          "task_id": "arrange_transport",
+          "task_name": "Arrange patient transport",
+          "owner_role": "Case Manager",
+          "resolves_barriers": [
+            "transport_timing"
+          ],
+          "priority": "high",
+          "source_field": "planned_discharge_window + transport_time"
+        }
+      ],
+      "approval_checks": [],
+      "expected_information_gaps": [],
+      "required_review_categories": [],
+      "unassessed_requirements": [],
+      "id_match": true
+    },
+    {
+      "case_id": "CHAL-022",
+      "title": "Invalid clock value",
+      "scenario_family": "invalid_time",
+      "labels": "assistant_proposed_pending_domain_adjudication",
+      "review_decision": "pending",
+      "barriers": {
+        "missing": [],
+        "unexpected": []
+      },
+      "tasks": {
+        "missing": [
+          "confirm_transport_time"
+        ],
+        "unexpected": []
+      },
+      "actual_barriers": [],
+      "actual_tasks": [],
+      "approval_checks": [],
+      "expected_information_gaps": [
+        "transport_time"
+      ],
+      "required_review_categories": [
+        "invalid_source_value"
+      ],
+      "unassessed_requirements": [
+        "Information-gap/contradiction handling: requires LLM or human review; not assessed here"
+      ],
+      "id_match": false
+    },
+    {
+      "case_id": "CHAL-023",
+      "title": "Ride booked for next day",
+      "scenario_family": "date_conflict",
+      "labels": "assistant_proposed_pending_domain_adjudication",
+      "review_decision": "pending",
+      "barriers": {
+        "missing": [
+          "transport_date_conflict"
+        ],
+        "unexpected": []
+      },
+      "tasks": {
+        "missing": [
+          "arrange_transport"
+        ],
+        "unexpected": []
+      },
+      "actual_barriers": [],
+      "actual_tasks": [],
+      "approval_checks": [],
+      "expected_information_gaps": [],
+      "required_review_categories": [],
+      "unassessed_requirements": [],
+      "id_match": false
+    },
+    {
+      "case_id": "CHAL-024",
+      "title": "Three interacting coordination problems",
+      "scenario_family": "multiple_barriers",
+      "labels": "assistant_proposed_pending_domain_adjudication",
+      "review_decision": "pending",
+      "barriers": {
+        "missing": [],
+        "unexpected": []
+      },
+      "tasks": {
+        "missing": [],
+        "unexpected": []
+      },
+      "actual_barriers": [
+        {
+          "barrier_id": "followup_missing",
+          "finding": "Required follow-up has not been scheduled.",
+          "evidence": "not_scheduled",
+          "confidence": 0.95,
+          "priority": "high",
+          "source_field": "followup_status"
+        },
+        {
+          "barrier_id": "transport_missing",
+          "finding": "Transportation has not been arranged.",
+          "evidence": "not_arranged",
+          "confidence": 0.95,
+          "priority": "high",
+          "source_field": "transport_status"
+        },
+        {
+          "barrier_id": "paperwork_pending",
+          "finding": "Discharge documentation is incomplete.",
+          "evidence": "unsigned",
+          "confidence": 0.95,
+          "priority": "high",
+          "source_field": "discharge_summary_status"
+        }
+      ],
+      "actual_tasks": [
+        {
+          "task_id": "schedule_followup",
+          "task_name": "Schedule follow-up appointment",
+          "owner_role": "Case Manager",
+          "resolves_barriers": [
+            "followup_missing"
+          ],
+          "priority": "high",
+          "source_field": "followup_status"
+        },
+        {
+          "task_id": "arrange_transport",
+          "task_name": "Arrange patient transport",
+          "owner_role": "Case Manager",
+          "resolves_barriers": [
+            "transport_missing"
+          ],
+          "priority": "high",
+          "source_field": "transport_status"
+        },
+        {
+          "task_id": "sign_summary",
+          "task_name": "Complete and sign discharge summary",
+          "owner_role": "Physician",
+          "resolves_barriers": [
+            "paperwork_pending"
+          ],
+          "priority": "high",
+          "source_field": "discharge_summary_status"
+        }
+      ],
+      "approval_checks": [
+        {
+          "task_id": "sign_summary",
+          "status": "human_review_required"
+        }
+      ],
+      "expected_information_gaps": [],
+      "required_review_categories": [
+        "clinical_review"
+      ],
+      "unassessed_requirements": [],
+      "id_match": true
+    },
+    {
+      "case_id": "CHAL-025",
+      "title": "Instruction-like text is a distractor",
+      "scenario_family": "instruction_in_note",
+      "labels": "assistant_proposed_pending_domain_adjudication",
+      "review_decision": "pending",
+      "barriers": {
+        "missing": [],
+        "unexpected": []
+      },
+      "tasks": {
+        "missing": [],
+        "unexpected": []
+      },
+      "actual_barriers": [
+        {
+          "barrier_id": "pending_results",
+          "finding": "Pending laboratory results require review.",
+          "evidence": [
+            "Repeat laboratory result"
+          ],
+          "confidence": 0.95,
+          "priority": "high",
+          "source_field": "pending_labs"
+        }
+      ],
+      "actual_tasks": [
+        {
+          "task_id": "review_results",
+          "task_name": "Review pending laboratory results",
+          "owner_role": "Physician",
+          "resolves_barriers": [
+            "pending_results"
+          ],
+          "priority": "high",
+          "source_field": "pending_labs"
+        }
+      ],
+      "approval_checks": [
+        {
+          "task_id": "review_results",
+          "status": "human_review_required"
+        }
+      ],
+      "expected_information_gaps": [],
+      "required_review_categories": [
+        "clinical_review"
+      ],
+      "unassessed_requirements": [
+        "Narrative meaning/negation/chronology: not assessed by rule-only runner"
+      ],
+      "id_match": true
+    },
+    {
+      "case_id": "CHAL-026",
+      "title": "Previously pending result is resolved",
+      "scenario_family": "resolved_result",
+      "labels": "assistant_proposed_pending_domain_adjudication",
+      "review_decision": "pending",
+      "barriers": {
+        "missing": [],
+        "unexpected": []
+      },
+      "tasks": {
+        "missing": [],
+        "unexpected": []
+      },
+      "actual_barriers": [],
+      "actual_tasks": [],
+      "approval_checks": [],
+      "expected_information_gaps": [],
+      "required_review_categories": [],
+      "unassessed_requirements": [
+        "Narrative meaning/negation/chronology: not assessed by rule-only runner"
+      ],
+      "id_match": true
+    }
+  ]
+}

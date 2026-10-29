@@ -1,0 +1,109 @@
+{
+  "usage": {
+    "prompt_eval_count": 1405,
+    "eval_count": 231
+  },
+  "case_id": "SYN-42-00002",
+  "analysis": {
+    "agent": "CaseAnalyzer",
+    "status": "success",
+    "llm": {
+      "provider": "ollama",
+      "model": "medgemma1.5:4b"
+    },
+    "finding": "Clinical, discharge, and social context analyzed by LLM.",
+    "supporting_evidence": {
+      "concern_count": 1,
+      "information_gap_count": 0
+    },
+    "confidence": 0.9,
+    "source_field": "patient_record",
+    "clinical_summary": "The patient has a history of Heart Failure and Hypertension. Their current medical stability is stable. Labs show sodium 138 mmol/L, potassium 4.1 mmol/L, and creatinine 1.0 mg/dL.",
+    "discharge_summary": "The patient's discharge summary is signed. Medical stability is stable. Discharge readiness requires separate workflow review.",
+    "social_summary": "The patient has an available caregiver and arranged transport. Financial status is no concern. Home safety is safe. Patient education, diet education, mobility device education, and medical device education are not required. Physical function is independent.",
+    "potential_concerns": [
+      {
+        "finding": "Required follow-up is not scheduled, so follow-up coordination remains incomplete.",
+        "supporting_evidence": "{\"followup_status\": \"not_scheduled\"}",
+        "source_field": "followup_status",
+        "priority": "high"
+      }
+    ],
+    "information_gaps": []
+  },
+  "llm_calls": [
+    {
+      "schema_name": "case_analysis",
+      "input": {
+        "condition": "Heart Failure",
+        "diagnoses": [
+          "Acute decompensated heart failure",
+          "Hypertension"
+        ],
+        "medications": [
+          {
+            "name": "Furosemide",
+            "dose": "40 mg",
+            "frequency": "daily"
+          },
+          {
+            "name": "Lisinopril",
+            "dose": "10 mg",
+            "frequency": "daily"
+          }
+        ],
+        "labs": {
+          "sodium": "138 mmol/L",
+          "potassium": "4.1 mmol/L",
+          "creatinine": "1.0 mg/dL"
+        },
+        "pending_labs": [],
+        "pending_imaging": [],
+        "pending_consult": [],
+        "medical_stability_status": "stable",
+        "medication_reconciliation_status": "complete",
+        "medication_education_status": "complete",
+        "medication_availability": "available",
+        "patient_education_status": "complete",
+        "diet_education_status": "not_required",
+        "mobility_device_education_status": "not_required",
+        "medical_device_education_status": "not_required",
+        "followup_status": "not_scheduled",
+        "caregiver_status": "available",
+        "transport_status": "arranged",
+        "transport_time": "14:00",
+        "planned_discharge_window": "afternoon",
+        "financial_status": "no_concern",
+        "case_manager_status": "available",
+        "home_safety_status": "safe",
+        "outpatient_therapy_status": "not_required",
+        "pcp_notification_status": "complete",
+        "physical_function": "independent",
+        "discharge_summary_status": "signed",
+        "case_id": "SYN-42-00002",
+        "discharge_summary": "Synthetic discharge coordination snapshot. Medical stability: stable. Discharge readiness requires separate workflow review.",
+        "free_text_notes": {
+          "case_manager_note": "Source facts: {\"caregiver_status\": \"available\", \"case_manager_status\": \"available\", \"condition\": \"Heart Failure\", \"diagnoses\": [\"Acute decompensated heart failure\", \"Hypertension\"], \"diet_education_status\": \"not_required\", \"discharge_summary_status\": \"signed\", \"financial_status\": \"no_concern\", \"followup_status\": \"not_scheduled\", \"home_safety_status\": \"safe\", \"labs\": {\"creatinine\": \"1.0 mg/dL\", \"potassium\": \"4.1 mmol/L\", \"sodium\": \"138 mmol/L\"}, \"medical_device_education_status\": \"not_required\", \"medical_stability_status\": \"stable\", \"medication_availability\": \"available\", \"medication_education_status\": \"complete\", \"medication_reconciliation_status\": \"complete\", \"medications\": [{\"dose\": \"40 mg\", \"frequency\": \"daily\", \"name\": \"Furosemide\"}, {\"dose\": \"10 mg\", \"frequency\": \"daily\", \"name\": \"Lisinopril\"}], \"mobility_device_education_status\": \"not_required\", \"outpatient_therapy_status\": \"not_required\", \"patient_education_status\": \"complete\", \"pcp_notification_status\": \"complete\", \"pending_consult\": [], \"pending_imaging\": [], \"pending_labs\": [], \"physical_function\": \"independent\", \"planned_discharge_window\": \"afternoon\", \"transport_status\": \"arranged\", \"transport_time\": \"14:00\"}"
+        }
+      },
+      "prompt_sha256": "efd3f34c61efd3a25f3790e491b769515e5e5110f56f117ca630510d88f951fa",
+      "raw_output": {
+        "clinical_summary": "The patient has a history of Heart Failure and Hypertension. Their current medical stability is stable. Labs show sodium 138 mmol/L, potassium 4.1 mmol/L, and creatinine 1.0 mg/dL.",
+        "discharge_summary": "The patient's discharge summary is signed. Medical stability is stable. Discharge readiness requires separate workflow review.",
+        "social_summary": "The patient has an available caregiver and arranged transport. Financial status is no concern. Home safety is safe. Patient education, diet education, mobility device education, and medical device education are not required. Physical function is independent.",
+        "potential_concerns": [
+          {
+            "finding": "Required follow-up is not scheduled, so follow-up coordination remains incomplete.",
+            "supporting_evidence": "{\"followup_status\": \"not_scheduled\"}",
+            "source_field": "followup_status",
+            "priority": "high"
+          }
+        ],
+        "information_gaps": []
+      },
+      "seconds": 55.736
+    }
+  ],
+  "evidence_format_issues": [],
+  "scope": "Analyzer-only screening on reused development case; no recommender, database or audit writes"
+}

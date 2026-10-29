@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "generator_version": "1.0",
+  "seed": 42,
+  "count": 100,
+  "mode": "template",
+  "model": null,
+  "clinical_review": "required; fixtures are not clinically validated",
+  "unique_structured_cases": 100,
+  "scenario_families": [
+    "caregiver",
+    "case_manager",
+    "device_education",
+    "diet_education",
+    "finances",
+    "followup",
+    "home_safety",
+    "medication_access",
+    "medication_education",
+    "medication_review",
+    "mobility",
+    "mobility_education",
+    "multiple",
+    "paperwork",
+    "patient_education",
+    "pcp",
+    "pending_results",
+    "ready",
+    "therapy",
+    "transport",
+    "transport_timing"
+  ],
+  "limitations": [
+    "No learned population distribution",
+    "No missing-information or contradiction cases in v1",
+    "MedGemma selects a validated introduction only; clinical facts are rendered deterministically"
+  ]
+}

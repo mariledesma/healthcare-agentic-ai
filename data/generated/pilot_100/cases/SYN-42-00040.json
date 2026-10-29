@@ -1,0 +1,51 @@
+{
+  "condition": "COPD",
+  "diagnoses": [
+    "COPD exacerbation",
+    "Hypertension"
+  ],
+  "medications": [
+    {
+      "name": "Albuterol inhaler",
+      "dose": "2 puffs",
+      "frequency": "as needed"
+    },
+    {
+      "name": "Prednisone",
+      "dose": "40 mg",
+      "frequency": "daily"
+    }
+  ],
+  "labs": {
+    "wbc": "10.8 K/uL",
+    "creatinine": "0.9 mg/dL"
+  },
+  "pending_labs": [],
+  "pending_imaging": [],
+  "pending_consult": [],
+  "medical_stability_status": "stable",
+  "medication_reconciliation_status": "complete",
+  "medication_education_status": "complete",
+  "medication_availability": "available",
+  "patient_education_status": "complete",
+  "diet_education_status": "not_required",
+  "mobility_device_education_status": "not_required",
+  "medical_device_education_status": "not_required",
+  "followup_status": "scheduled",
+  "caregiver_status": "available",
+  "transport_status": "arranged",
+  "transport_time": "14:00",
+  "planned_discharge_window": "afternoon",
+  "financial_status": "no_concern",
+  "case_manager_status": "available",
+  "home_safety_status": "safe",
+  "outpatient_therapy_status": "not_required",
+  "pcp_notification_status": "complete",
+  "physical_function": "independent",
+  "discharge_summary_status": "unsigned",
+  "case_id": "SYN-42-00040",
+  "discharge_summary": "Fictional discharge planning review. Medical stability: stable. Discharge readiness requires separate workflow review.",
+  "free_text_notes": {
+    "case_manager_note": "Source facts: {\"caregiver_status\": \"available\", \"case_manager_status\": \"available\", \"condition\": \"COPD\", \"diagnoses\": [\"COPD exacerbation\", \"Hypertension\"], \"diet_education_status\": \"not_required\", \"discharge_summary_status\": \"unsigned\", \"financial_status\": \"no_concern\", \"followup_status\": \"scheduled\", \"home_safety_status\": \"safe\", \"labs\": {\"creatinine\": \"0.9 mg/dL\", \"wbc\": \"10.8 K/uL\"}, \"medical_device_education_status\": \"not_required\", \"medical_stability_status\": \"stable\", \"medication_availability\": \"available\", \"medication_education_status\": \"complete\", \"medication_reconciliation_status\": \"complete\", \"medications\": [{\"dose\": \"2 puffs\", \"frequency\": \"as needed\", \"name\": \"Albuterol inhaler\"}, {\"dose\": \"40 mg\", \"frequency\": \"daily\", \"name\": \"Prednisone\"}], \"mobility_device_education_status\": \"not_required\", \"outpatient_therapy_status\": \"not_required\", \"patient_education_status\": \"complete\", \"pcp_notification_status\": \"complete\", \"pending_consult\": [], \"pending_imaging\": [], \"pending_labs\": [], \"physical_function\": \"independent\", \"planned_discharge_window\": \"afternoon\", \"transport_status\": \"arranged\", \"transport_time\": \"14:00\"}"
+  }
+}

@@ -1,0 +1,184 @@
+{
+  "CHAL-001": {
+    "decision": "approved",
+    "reviewer": "User (explicit approval in chat; name not supplied)",
+    "reviewed_at": "2026-10-27",
+    "proposed_changes": null,
+    "review_notes": "User explicitly approved CHAL-001\u2013005: \"i approve all 5\". Approval covers the workflow expectations presented in chat; clinical credentials and independent clinical validation are not asserted."
+  },
+  "CHAL-002": {
+    "decision": "approved",
+    "reviewer": "User (explicit approval in chat; name not supplied)",
+    "reviewed_at": "2026-10-27",
+    "proposed_changes": null,
+    "review_notes": "User explicitly approved CHAL-001\u2013005: \"i approve all 5\". Approval covers the workflow expectations presented in chat; clinical credentials and independent clinical validation are not asserted."
+  },
+  "CHAL-003": {
+    "decision": "approved",
+    "reviewer": "User (explicit approval in chat; name not supplied)",
+    "reviewed_at": "2026-10-27",
+    "proposed_changes": null,
+    "review_notes": "User explicitly approved CHAL-001\u2013005: \"i approve all 5\". Approval covers the workflow expectations presented in chat; clinical credentials and independent clinical validation are not asserted."
+  },
+  "CHAL-004": {
+    "decision": "approved",
+    "reviewer": "User (explicit approval in chat; name not supplied)",
+    "reviewed_at": "2026-10-27",
+    "proposed_changes": null,
+    "review_notes": "User explicitly approved CHAL-001\u2013005: \"i approve all 5\". Approval covers the workflow expectations presented in chat; clinical credentials and independent clinical validation are not asserted."
+  },
+  "CHAL-005": {
+    "decision": "approved",
+    "reviewer": "User (explicit approval in chat; name not supplied)",
+    "reviewed_at": "2026-10-27",
+    "proposed_changes": null,
+    "review_notes": "User explicitly approved CHAL-001\u2013005: \"i approve all 5\". Approval covers the workflow expectations presented in chat; clinical credentials and independent clinical validation are not asserted."
+  },
+  "CHAL-006": {
+    "decision": "approved",
+    "reviewer": "User (explicit approval in chat; name not supplied)",
+    "reviewed_at": "2026-10-28",
+    "proposed_changes": null,
+    "review_notes": "User explicitly approved CHAL-006\u2013010: \"yes i approve them all\". Approval covers the workflow expectations presented in chat; clinical credentials and independent clinical validation are not asserted."
+  },
+  "CHAL-007": {
+    "decision": "approved",
+    "reviewer": "User (explicit approval in chat; name not supplied)",
+    "reviewed_at": "2026-10-28",
+    "proposed_changes": null,
+    "review_notes": "User explicitly approved CHAL-006\u2013010: \"yes i approve them all\". Approval covers the workflow expectations presented in chat; clinical credentials and independent clinical validation are not asserted."
+  },
+  "CHAL-008": {
+    "decision": "approved",
+    "reviewer": "User (explicit approval in chat; name not supplied)",
+    "reviewed_at": "2026-10-28",
+    "proposed_changes": null,
+    "review_notes": "User explicitly approved CHAL-006\u2013010: \"yes i approve them all\". Approval covers the workflow expectations presented in chat; clinical credentials and independent clinical validation are not asserted."
+  },
+  "CHAL-009": {
+    "decision": "approved",
+    "reviewer": "User (explicit approval in chat; name not supplied)",
+    "reviewed_at": "2026-10-28",
+    "proposed_changes": null,
+    "review_notes": "User explicitly approved CHAL-006\u2013010: \"yes i approve them all\". Approval covers the workflow expectations presented in chat; clinical credentials and independent clinical validation are not asserted."
+  },
+  "CHAL-010": {
+    "decision": "approved",
+    "reviewer": "User (explicit approval in chat; name not supplied)",
+    "reviewed_at": "2026-10-28",
+    "proposed_changes": null,
+    "review_notes": "User explicitly approved CHAL-006\u2013010: \"yes i approve them all\". Approval covers the workflow expectations presented in chat; clinical credentials and independent clinical validation are not asserted."
+  },
+  "CHAL-011": {
+    "decision": "approved",
+    "reviewer": "User (explicit approval in chat; name not supplied)",
+    "reviewed_at": "2026-10-28",
+    "proposed_changes": null,
+    "review_notes": "User explicitly approved CHAL-011\u2013015: \"approve all 5\". Approval covers the workflow expectations presented in chat; clinical credentials and independent clinical validation are not asserted."
+  },
+  "CHAL-012": {
+    "decision": "approved",
+    "reviewer": "User (explicit approval in chat; name not supplied)",
+    "reviewed_at": "2026-10-28",
+    "proposed_changes": null,
+    "review_notes": "User explicitly approved CHAL-011\u2013015: \"approve all 5\". Approval covers the workflow expectations presented in chat; clinical credentials and independent clinical validation are not asserted."
+  },
+  "CHAL-013": {
+    "decision": "approved",
+    "reviewer": "User (explicit approval in chat; name not supplied)",
+    "reviewed_at": "2026-10-28",
+    "proposed_changes": null,
+    "review_notes": "User explicitly approved CHAL-011\u2013015: \"approve all 5\". Approval covers the workflow expectations presented in chat; clinical credentials and independent clinical validation are not asserted."
+  },
+  "CHAL-014": {
+    "decision": "approved",
+    "reviewer": "User (explicit approval in chat; name not supplied)",
+    "reviewed_at": "2026-10-28",
+    "proposed_changes": null,
+    "review_notes": "User explicitly approved CHAL-011\u2013015: \"approve all 5\". Approval covers the workflow expectations presented in chat; clinical credentials and independent clinical validation are not asserted."
+  },
+  "CHAL-015": {
+    "decision": "approved",
+    "reviewer": "User (explicit approval in chat; name not supplied)",
+    "reviewed_at": "2026-10-28",
+    "proposed_changes": null,
+    "review_notes": "User explicitly approved CHAL-011\u2013015: \"approve all 5\". Approval covers the workflow expectations presented in chat; clinical credentials and independent clinical validation are not asserted."
+  },
+  "CHAL-016": {
+    "decision": "approved",
+    "reviewer": "User (explicit approval in chat; name not supplied)",
+    "reviewed_at": "2026-10-28",
+    "proposed_changes": null,
+    "review_notes": "User explicitly approved CHAL-016\u2013020: \"approve\". Approval covers the workflow expectations presented in chat; clinical credentials and independent clinical validation are not asserted."
+  },
+  "CHAL-017": {
+    "decision": "approved",
+    "reviewer": "User (explicit approval in chat; name not supplied)",
+    "reviewed_at": "2026-10-28",
+    "proposed_changes": null,
+    "review_notes": "User explicitly approved CHAL-016\u2013020: \"approve\". Approval covers the workflow expectations presented in chat; clinical credentials and independent clinical validation are not asserted."
+  },
+  "CHAL-018": {
+    "decision": "approved",
+    "reviewer": "User (explicit approval in chat; name not supplied)",
+    "reviewed_at": "2026-10-28",
+    "proposed_changes": null,
+    "review_notes": "User explicitly approved CHAL-016\u2013020: \"approve\". Approval covers the workflow expectations presented in chat; clinical credentials and independent clinical validation are not asserted."
+  },
+  "CHAL-019": {
+    "decision": "approved",
+    "reviewer": "User (explicit approval in chat; name not supplied)",
+    "reviewed_at": "2026-10-28",
+    "proposed_changes": null,
+    "review_notes": "User explicitly approved CHAL-016\u2013020: \"approve\". Approval covers the workflow expectations presented in chat; clinical credentials and independent clinical validation are not asserted."
+  },
+  "CHAL-020": {
+    "decision": "approved",
+    "reviewer": "User (explicit approval in chat; name not supplied)",
+    "reviewed_at": "2026-10-28",
+    "proposed_changes": null,
+    "review_notes": "User explicitly approved CHAL-016\u2013020: \"approve\". Approval covers the workflow expectations presented in chat; clinical credentials and independent clinical validation are not asserted."
+  },
+  "CHAL-021": {
+    "decision": "approved",
+    "reviewer": "User (explicit approval in chat; name not supplied)",
+    "reviewed_at": "2026-10-28",
+    "proposed_changes": null,
+    "review_notes": "User explicitly approved CHAL-021\u2013026: \"yes approve\". Approval covers the workflow expectations presented in chat; clinical credentials and independent clinical validation are not asserted."
+  },
+  "CHAL-022": {
+    "decision": "approved",
+    "reviewer": "User (explicit approval in chat; name not supplied)",
+    "reviewed_at": "2026-10-28",
+    "proposed_changes": null,
+    "review_notes": "User explicitly approved CHAL-021\u2013026: \"yes approve\". Approval covers the workflow expectations presented in chat; clinical credentials and independent clinical validation are not asserted."
+  },
+  "CHAL-023": {
+    "decision": "approved",
+    "reviewer": "User (explicit approval in chat; name not supplied)",
+    "reviewed_at": "2026-10-28",
+    "proposed_changes": null,
+    "review_notes": "User explicitly approved CHAL-021\u2013026: \"yes approve\". Approval covers the workflow expectations presented in chat; clinical credentials and independent clinical validation are not asserted."
+  },
+  "CHAL-024": {
+    "decision": "approved",
+    "reviewer": "User (explicit approval in chat; name not supplied)",
+    "reviewed_at": "2026-10-28",
+    "proposed_changes": null,
+    "review_notes": "User explicitly approved CHAL-021\u2013026: \"yes approve\". Approval covers the workflow expectations presented in chat; clinical credentials and independent clinical validation are not asserted."
+  },
+  "CHAL-025": {
+    "decision": "approved",
+    "reviewer": "User (explicit approval in chat; name not supplied)",
+    "reviewed_at": "2026-10-28",
+    "proposed_changes": null,
+    "review_notes": "User explicitly approved CHAL-021\u2013026: \"yes approve\". Approval covers the workflow expectations presented in chat; clinical credentials and independent clinical validation are not asserted."
+  },
+  "CHAL-026": {
+    "decision": "approved",
+    "reviewer": "User (explicit approval in chat; name not supplied)",
+    "reviewed_at": "2026-10-28",
+    "proposed_changes": null,
+    "review_notes": "User explicitly approved CHAL-021\u2013026: \"yes approve\". Approval covers the workflow expectations presented in chat; clinical credentials and independent clinical validation are not asserted."
+  }
+}

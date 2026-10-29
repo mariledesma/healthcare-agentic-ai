@@ -1,0 +1,422 @@
+{
+  "case_id": "SYN-42-00007",
+  "scenario_family": "medication_access",
+  "patient_record": {
+    "condition": "Heart Failure",
+    "diagnoses": [
+      "Acute decompensated heart failure",
+      "Hypertension"
+    ],
+    "medications": [
+      {
+        "name": "Furosemide",
+        "dose": "40 mg",
+        "frequency": "daily"
+      },
+      {
+        "name": "Lisinopril",
+        "dose": "10 mg",
+        "frequency": "daily"
+      }
+    ],
+    "labs": {
+      "sodium": "138 mmol/L",
+      "potassium": "4.1 mmol/L",
+      "creatinine": "1.0 mg/dL"
+    },
+    "pending_labs": [],
+    "pending_imaging": [],
+    "pending_consult": [],
+    "medical_stability_status": "stable",
+    "medication_reconciliation_status": "complete",
+    "medication_education_status": "complete",
+    "medication_availability": "not_available",
+    "patient_education_status": "complete",
+    "diet_education_status": "not_required",
+    "mobility_device_education_status": "not_required",
+    "medical_device_education_status": "not_required",
+    "followup_status": "scheduled",
+    "caregiver_status": "available",
+    "transport_status": "arranged",
+    "transport_time": "14:00",
+    "planned_discharge_window": "afternoon",
+    "financial_status": "no_concern",
+    "case_manager_status": "available",
+    "home_safety_status": "safe",
+    "outpatient_therapy_status": "not_required",
+    "pcp_notification_status": "complete",
+    "physical_function": "independent",
+    "discharge_summary_status": "signed",
+    "case_id": "SYN-42-00007",
+    "discharge_summary": "Synthetic discharge coordination snapshot. Medical stability: stable. Discharge readiness requires separate workflow review.",
+    "free_text_notes": {
+      "case_manager_note": "Source facts: {\"caregiver_status\": \"available\", \"case_manager_status\": \"available\", \"condition\": \"Heart Failure\", \"diagnoses\": [\"Acute decompensated heart failure\", \"Hypertension\"], \"diet_education_status\": \"not_required\", \"discharge_summary_status\": \"signed\", \"financial_status\": \"no_concern\", \"followup_status\": \"scheduled\", \"home_safety_status\": \"safe\", \"labs\": {\"creatinine\": \"1.0 mg/dL\", \"potassium\": \"4.1 mmol/L\", \"sodium\": \"138 mmol/L\"}, \"medical_device_education_status\": \"not_required\", \"medical_stability_status\": \"stable\", \"medication_availability\": \"not_available\", \"medication_education_status\": \"complete\", \"medication_reconciliation_status\": \"complete\", \"medications\": [{\"dose\": \"40 mg\", \"frequency\": \"daily\", \"name\": \"Furosemide\"}, {\"dose\": \"10 mg\", \"frequency\": \"daily\", \"name\": \"Lisinopril\"}], \"mobility_device_education_status\": \"not_required\", \"outpatient_therapy_status\": \"not_required\", \"patient_education_status\": \"complete\", \"pcp_notification_status\": \"complete\", \"pending_consult\": [], \"pending_imaging\": [], \"pending_labs\": [], \"physical_function\": \"independent\", \"planned_discharge_window\": \"afternoon\", \"transport_status\": \"arranged\", \"transport_time\": \"14:00\"}"
+    }
+  },
+  "expected": {
+    "scenario_family": "medication_access",
+    "template": "case_001_hf.json",
+    "template_sha256": "d679ed1ce55798238d6f30beb94fe733099e10246970cadd4997d11bba720794",
+    "expected_barriers": [
+      "med_unavailable"
+    ],
+    "expected_tasks": [
+      "fill_meds"
+    ],
+    "split_group": "case_001_hf.json:medication_access",
+    "structured_duplicate": false
+  },
+  "analysis": {
+    "agent": "CaseAnalyzer",
+    "status": "success",
+    "llm": {
+      "provider": "ollama",
+      "model": "medgemma1.5:4b"
+    },
+    "finding": "Clinical, discharge, and social context analyzed by LLM.",
+    "supporting_evidence": {
+      "concern_count": 1,
+      "information_gap_count": 0
+    },
+    "confidence": 0.9,
+    "source_field": "patient_record",
+    "clinical_summary": "The patient has a history of Acute decompensated heart failure and Hypertension. Their medical stability is currently stable. They are taking Furosemide and Lisinopril. Laboratory results show sodium 138 mmol/L, potassium 4.1 mmol/L, and creatinine 1.0 mg/dL.",
+    "discharge_summary": "The patient's discharge summary is signed. Discharge readiness requires separate workflow review.",
+    "social_summary": "The patient has an available caregiver. Transportation is arranged for 14:00. The patient's financial status is no concern. The case manager is available. Home safety is safe. Outpatient therapy is not required. Patient education is complete. PCP notification is complete.",
+    "potential_concerns": [
+      {
+        "finding": "medication_availability",
+        "supporting_evidence": "medication_availability",
+        "source_field": "medication_availability",
+        "priority": "low"
+      }
+    ],
+    "information_gaps": []
+  },
+  "barriers": {
+    "agent": "BarrierDetector",
+    "status": "success",
+    "finding": "1 discharge barrier(s) detected.",
+    "supporting_evidence": {
+      "barrier_count": 1,
+      "barrier_ids": [
+        "med_unavailable"
+      ]
+    },
+    "confidence": 0.95,
+    "source_field": "patient_record",
+    "barriers": [
+      {
+        "barrier_id": "med_unavailable",
+        "finding": "Required discharge medication is not available.",
+        "evidence": "not_available",
+        "confidence": 0.95,
+        "priority": "high",
+        "source_field": "medication_availability"
+      }
+    ]
+  },
+  "tasks": {
+    "agent": "TaskDetector",
+    "status": "success",
+    "finding": "1 pending task(s) detected.",
+    "supporting_evidence": {
+      "task_count": 1,
+      "task_ids": [
+        "fill_meds"
+      ]
+    },
+    "confidence": 0.95,
+    "source_field": "detected_barriers",
+    "tasks": [
+      {
+        "task_id": "fill_meds",
+        "task_name": "Fill discharge prescriptions",
+        "owner_role": "Pharmacist",
+        "resolves_barriers": [
+          "med_unavailable"
+        ],
+        "priority": "high",
+        "source_field": "medication_availability"
+      }
+    ]
+  },
+  "recommendations": {
+    "agent": "RecommendationAgent",
+    "status": "success",
+    "llm": {
+      "provider": "ollama",
+      "model": "medgemma1.5:4b"
+    },
+    "finding": "1 LLM-generated recommendation(s).",
+    "supporting_evidence": {
+      "barriers_reviewed": 1,
+      "tasks_reviewed": 1
+    },
+    "confidence": 0.9,
+    "source_field": "detected_barriers_and_tasks",
+    "recommendations": [
+      {
+        "recommendation_id": "recommendation_fill_meds",
+        "task_id": "fill_meds",
+        "action": "Fill discharge prescriptions",
+        "rationale": "The barrier 'med_unavailable' indicates that required discharge medications are not available. This task directly addresses the need to obtain these medications.",
+        "owner_role": "Pharmacist",
+        "priority": "high",
+        "resolves_barriers": [
+          "med_unavailable"
+        ],
+        "supporting_task_ids": [
+          "fill_meds"
+        ],
+        "source_fields": [
+          "medication_availability"
+        ]
+      }
+    ]
+  },
+  "governance": [
+    {
+      "recommendation_id": "recommendation_fill_meds",
+      "task_id": "fill_meds",
+      "action": "Fill discharge prescriptions",
+      "policy": {
+        "policy_status": "allowed",
+        "task_id": "fill_meds",
+        "action": "Fill discharge prescriptions",
+        "reason": "The recommendation is permitted to continue through the supervised workflow."
+      },
+      "approval": {
+        "approval_status": "requires_human_approval",
+        "requires_human_approval": true,
+        "task_id": "fill_meds",
+        "action": "Fill discharge prescriptions",
+        "reason": "This recommendation involves clinical or discharge-sensitive work and requires human review."
+      }
+    }
+  ],
+  "final_output": {
+    "case_id": "SYN-42-00007",
+    "condition": "Heart Failure",
+    "discharge_coordination_summary": {
+      "barrier_count": 1,
+      "task_count": 1,
+      "recommendation_count": 1,
+      "human_approval_required_count": 1
+    },
+    "barriers": [
+      {
+        "barrier_id": "med_unavailable",
+        "finding": "Required discharge medication is not available.",
+        "evidence": "not_available",
+        "confidence": 0.95,
+        "priority": "high",
+        "source_field": "medication_availability"
+      }
+    ],
+    "pending_tasks": [
+      {
+        "task_id": "fill_meds",
+        "task_name": "Fill discharge prescriptions",
+        "owner_role": "Pharmacist",
+        "resolves_barriers": [
+          "med_unavailable"
+        ],
+        "priority": "high",
+        "source_field": "medication_availability"
+      }
+    ],
+    "recommendations": [
+      {
+        "recommendation_id": "recommendation_fill_meds",
+        "task_id": "fill_meds",
+        "action": "Fill discharge prescriptions",
+        "rationale": "The barrier 'med_unavailable' indicates that required discharge medications are not available. This task directly addresses the need to obtain these medications.",
+        "owner_role": "Pharmacist",
+        "priority": "high",
+        "resolves_barriers": [
+          "med_unavailable"
+        ],
+        "supporting_task_ids": [
+          "fill_meds"
+        ],
+        "source_fields": [
+          "medication_availability"
+        ]
+      }
+    ],
+    "governance": [
+      {
+        "recommendation_id": "recommendation_fill_meds",
+        "task_id": "fill_meds",
+        "action": "Fill discharge prescriptions",
+        "policy": {
+          "policy_status": "allowed",
+          "task_id": "fill_meds",
+          "action": "Fill discharge prescriptions",
+          "reason": "The recommendation is permitted to continue through the supervised workflow."
+        },
+        "approval": {
+          "approval_status": "requires_human_approval",
+          "requires_human_approval": true,
+          "task_id": "fill_meds",
+          "action": "Fill discharge prescriptions",
+          "reason": "This recommendation involves clinical or discharge-sensitive work and requires human review."
+        }
+      }
+    ],
+    "human_approval_required": [
+      {
+        "recommendation_id": "recommendation_fill_meds",
+        "action": "Fill discharge prescriptions",
+        "approval_status": "requires_human_approval"
+      }
+    ],
+    "final_status": "human_review_required"
+  },
+  "checks": {
+    "deterministic_barriers": {
+      "missed": [],
+      "extra": []
+    },
+    "deterministic_tasks": {
+      "missed": [],
+      "extra": []
+    },
+    "recommendation_coverage": {
+      "missed": [],
+      "extra": []
+    },
+    "raw_recommendation_flags": [],
+    "literal_evidence_review_flags": [],
+    "approval_mismatches": [],
+    "human_review": {
+      "status": "pending",
+      "missed_llm_concerns": null,
+      "invented_clinical_facts": null,
+      "unsupported_rationales": null,
+      "notes": ""
+    }
+  },
+  "status": "completed",
+  "seconds": 99.503,
+  "llm_calls": [
+    {
+      "schema_name": "case_analysis",
+      "input": {
+        "condition": "Heart Failure",
+        "diagnoses": [
+          "Acute decompensated heart failure",
+          "Hypertension"
+        ],
+        "medications": [
+          {
+            "name": "Furosemide",
+            "dose": "40 mg",
+            "frequency": "daily"
+          },
+          {
+            "name": "Lisinopril",
+            "dose": "10 mg",
+            "frequency": "daily"
+          }
+        ],
+        "labs": {
+          "sodium": "138 mmol/L",
+          "potassium": "4.1 mmol/L",
+          "creatinine": "1.0 mg/dL"
+        },
+        "pending_labs": [],
+        "pending_imaging": [],
+        "pending_consult": [],
+        "medical_stability_status": "stable",
+        "medication_reconciliation_status": "complete",
+        "medication_education_status": "complete",
+        "medication_availability": "not_available",
+        "patient_education_status": "complete",
+        "diet_education_status": "not_required",
+        "mobility_device_education_status": "not_required",
+        "medical_device_education_status": "not_required",
+        "followup_status": "scheduled",
+        "caregiver_status": "available",
+        "transport_status": "arranged",
+        "transport_time": "14:00",
+        "planned_discharge_window": "afternoon",
+        "financial_status": "no_concern",
+        "case_manager_status": "available",
+        "home_safety_status": "safe",
+        "outpatient_therapy_status": "not_required",
+        "pcp_notification_status": "complete",
+        "physical_function": "independent",
+        "discharge_summary_status": "signed",
+        "case_id": "SYN-42-00007",
+        "discharge_summary": "Synthetic discharge coordination snapshot. Medical stability: stable. Discharge readiness requires separate workflow review.",
+        "free_text_notes": {
+          "case_manager_note": "Source facts: {\"caregiver_status\": \"available\", \"case_manager_status\": \"available\", \"condition\": \"Heart Failure\", \"diagnoses\": [\"Acute decompensated heart failure\", \"Hypertension\"], \"diet_education_status\": \"not_required\", \"discharge_summary_status\": \"signed\", \"financial_status\": \"no_concern\", \"followup_status\": \"scheduled\", \"home_safety_status\": \"safe\", \"labs\": {\"creatinine\": \"1.0 mg/dL\", \"potassium\": \"4.1 mmol/L\", \"sodium\": \"138 mmol/L\"}, \"medical_device_education_status\": \"not_required\", \"medical_stability_status\": \"stable\", \"medication_availability\": \"not_available\", \"medication_education_status\": \"complete\", \"medication_reconciliation_status\": \"complete\", \"medications\": [{\"dose\": \"40 mg\", \"frequency\": \"daily\", \"name\": \"Furosemide\"}, {\"dose\": \"10 mg\", \"frequency\": \"daily\", \"name\": \"Lisinopril\"}], \"mobility_device_education_status\": \"not_required\", \"outpatient_therapy_status\": \"not_required\", \"patient_education_status\": \"complete\", \"pcp_notification_status\": \"complete\", \"pending_consult\": [], \"pending_imaging\": [], \"pending_labs\": [], \"physical_function\": \"independent\", \"planned_discharge_window\": \"afternoon\", \"transport_status\": \"arranged\", \"transport_time\": \"14:00\"}"
+        }
+      },
+      "prompt_sha256": "32683cc700202714170e35db2d09ac8e923157d5f5fbee3c3126b3e2180bdec9",
+      "raw_output": {
+        "clinical_summary": "The patient has a history of Acute decompensated heart failure and Hypertension. Their medical stability is currently stable. They are taking Furosemide and Lisinopril. Laboratory results show sodium 138 mmol/L, potassium 4.1 mmol/L, and creatinine 1.0 mg/dL.",
+        "discharge_summary": "The patient's discharge summary is signed. Discharge readiness requires separate workflow review.",
+        "social_summary": "The patient has an available caregiver. Transportation is arranged for 14:00. The patient's financial status is no concern. The case manager is available. Home safety is safe. Outpatient therapy is not required. Patient education is complete. PCP notification is complete.",
+        "potential_concerns": [
+          {
+            "finding": "medication_availability",
+            "supporting_evidence": "medication_availability",
+            "source_field": "medication_availability",
+            "priority": "low"
+          }
+        ],
+        "information_gaps": []
+      },
+      "seconds": 78.425
+    },
+    {
+      "schema_name": "recommendation_output",
+      "input": {
+        "barriers": [
+          {
+            "barrier_id": "med_unavailable",
+            "finding": "Required discharge medication is not available.",
+            "evidence": "not_available",
+            "confidence": 0.95,
+            "priority": "high",
+            "source_field": "medication_availability"
+          }
+        ],
+        "tasks": [
+          {
+            "task_id": "fill_meds",
+            "task_name": "Fill discharge prescriptions",
+            "owner_role": "Pharmacist",
+            "resolves_barriers": [
+              "med_unavailable"
+            ],
+            "priority": "high",
+            "source_field": "medication_availability"
+          }
+        ]
+      },
+      "prompt_sha256": "1cdf562623cb0b66a4ea59a5a5c574ef1f4d9dd272e8cc664a9bf8b167bc5935",
+      "raw_output": {
+        "recommendations": [
+          {
+            "task_id": "fill_meds",
+            "action": "Fill discharge prescriptions",
+            "rationale": "The barrier 'med_unavailable' indicates that required discharge medications are not available. This task directly addresses the need to obtain these medications.",
+            "owner_role": "Pharmacist",
+            "priority": "high",
+            "supporting_barrier_ids": [
+              "med_unavailable"
+            ],
+            "source_fields": [
+              "medication_availability"
+            ]
+          }
+        ]
+      },
+      "seconds": 20.91
+    }
+  ]
+}

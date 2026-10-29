@@ -1,0 +1,402 @@
+{
+  "case_id": "SYN-42-00002",
+  "scenario_family": "followup",
+  "patient_record": {
+    "condition": "Heart Failure",
+    "diagnoses": [
+      "Acute decompensated heart failure",
+      "Hypertension"
+    ],
+    "medications": [
+      {
+        "name": "Furosemide",
+        "dose": "40 mg",
+        "frequency": "daily"
+      },
+      {
+        "name": "Lisinopril",
+        "dose": "10 mg",
+        "frequency": "daily"
+      }
+    ],
+    "labs": {
+      "sodium": "138 mmol/L",
+      "potassium": "4.1 mmol/L",
+      "creatinine": "1.0 mg/dL"
+    },
+    "pending_labs": [],
+    "pending_imaging": [],
+    "pending_consult": [],
+    "medical_stability_status": "stable",
+    "medication_reconciliation_status": "complete",
+    "medication_education_status": "complete",
+    "medication_availability": "available",
+    "patient_education_status": "complete",
+    "diet_education_status": "not_required",
+    "mobility_device_education_status": "not_required",
+    "medical_device_education_status": "not_required",
+    "followup_status": "not_scheduled",
+    "caregiver_status": "available",
+    "transport_status": "arranged",
+    "transport_time": "14:00",
+    "planned_discharge_window": "afternoon",
+    "financial_status": "no_concern",
+    "case_manager_status": "available",
+    "home_safety_status": "safe",
+    "outpatient_therapy_status": "not_required",
+    "pcp_notification_status": "complete",
+    "physical_function": "independent",
+    "discharge_summary_status": "signed",
+    "case_id": "SYN-42-00002",
+    "discharge_summary": "Synthetic discharge coordination snapshot. Medical stability: stable. Discharge readiness requires separate workflow review.",
+    "free_text_notes": {
+      "case_manager_note": "Source facts: {\"caregiver_status\": \"available\", \"case_manager_status\": \"available\", \"condition\": \"Heart Failure\", \"diagnoses\": [\"Acute decompensated heart failure\", \"Hypertension\"], \"diet_education_status\": \"not_required\", \"discharge_summary_status\": \"signed\", \"financial_status\": \"no_concern\", \"followup_status\": \"not_scheduled\", \"home_safety_status\": \"safe\", \"labs\": {\"creatinine\": \"1.0 mg/dL\", \"potassium\": \"4.1 mmol/L\", \"sodium\": \"138 mmol/L\"}, \"medical_device_education_status\": \"not_required\", \"medical_stability_status\": \"stable\", \"medication_availability\": \"available\", \"medication_education_status\": \"complete\", \"medication_reconciliation_status\": \"complete\", \"medications\": [{\"dose\": \"40 mg\", \"frequency\": \"daily\", \"name\": \"Furosemide\"}, {\"dose\": \"10 mg\", \"frequency\": \"daily\", \"name\": \"Lisinopril\"}], \"mobility_device_education_status\": \"not_required\", \"outpatient_therapy_status\": \"not_required\", \"patient_education_status\": \"complete\", \"pcp_notification_status\": \"complete\", \"pending_consult\": [], \"pending_imaging\": [], \"pending_labs\": [], \"physical_function\": \"independent\", \"planned_discharge_window\": \"afternoon\", \"transport_status\": \"arranged\", \"transport_time\": \"14:00\"}"
+    }
+  },
+  "expected": {
+    "scenario_family": "followup",
+    "template": "case_001_hf.json",
+    "template_sha256": "d679ed1ce55798238d6f30beb94fe733099e10246970cadd4997d11bba720794",
+    "expected_barriers": [
+      "followup_missing"
+    ],
+    "expected_tasks": [
+      "schedule_followup"
+    ],
+    "split_group": "case_001_hf.json:followup",
+    "structured_duplicate": false
+  },
+  "analysis": {
+    "agent": "CaseAnalyzer",
+    "status": "success",
+    "llm": {
+      "provider": "ollama",
+      "model": "medgemma1.5:4b"
+    },
+    "finding": "Clinical, discharge, and social context analyzed by LLM.",
+    "supporting_evidence": {
+      "concern_count": 0,
+      "information_gap_count": 0
+    },
+    "confidence": 0.9,
+    "source_field": "patient_record",
+    "clinical_summary": "The patient has Acute decompensated heart failure and Hypertension. Labs show sodium 138 mmol/L, potassium 4.1 mmol/L, and creatinine 1.0 mg/dL. The patient is medically stable.",
+    "discharge_summary": "The discharge summary is signed. The discharge readiness requires separate workflow review.",
+    "social_summary": "The caregiver is available. The financial status is no concern. The home safety is safe. The outpatient therapy is not required. The PCP notification is complete.",
+    "potential_concerns": [],
+    "information_gaps": []
+  },
+  "barriers": {
+    "agent": "BarrierDetector",
+    "status": "success",
+    "finding": "1 discharge barrier(s) detected.",
+    "supporting_evidence": {
+      "barrier_count": 1,
+      "barrier_ids": [
+        "followup_missing"
+      ]
+    },
+    "confidence": 0.95,
+    "source_field": "patient_record",
+    "barriers": [
+      {
+        "barrier_id": "followup_missing",
+        "finding": "Required follow-up has not been scheduled.",
+        "evidence": "not_scheduled",
+        "confidence": 0.95,
+        "priority": "high",
+        "source_field": "followup_status"
+      }
+    ]
+  },
+  "tasks": {
+    "agent": "TaskDetector",
+    "status": "success",
+    "finding": "1 pending task(s) detected.",
+    "supporting_evidence": {
+      "task_count": 1,
+      "task_ids": [
+        "schedule_followup"
+      ]
+    },
+    "confidence": 0.95,
+    "source_field": "detected_barriers",
+    "tasks": [
+      {
+        "task_id": "schedule_followup",
+        "task_name": "Schedule follow-up appointment",
+        "owner_role": "Case Manager",
+        "resolves_barriers": [
+          "followup_missing"
+        ],
+        "priority": "high",
+        "source_field": "followup_status"
+      }
+    ]
+  },
+  "recommendations": {
+    "agent": "RecommendationAgent",
+    "status": "success",
+    "llm": {
+      "provider": "ollama",
+      "model": "medgemma1.5:4b"
+    },
+    "finding": "1 LLM-generated recommendation(s).",
+    "supporting_evidence": {
+      "barriers_reviewed": 1,
+      "tasks_reviewed": 1
+    },
+    "confidence": 0.9,
+    "source_field": "detected_barriers_and_tasks",
+    "recommendations": [
+      {
+        "recommendation_id": "recommendation_schedule_followup",
+        "task_id": "schedule_followup",
+        "action": "Schedule follow-up appointment",
+        "rationale": "The barrier 'followup_missing' indicates that a required follow-up has not been scheduled. This recommendation proposes scheduling the follow-up appointment to address this barrier.",
+        "owner_role": "Case Manager",
+        "priority": "high",
+        "resolves_barriers": [
+          "followup_missing"
+        ],
+        "supporting_task_ids": [
+          "schedule_followup"
+        ],
+        "source_fields": [
+          "followup_status"
+        ]
+      }
+    ]
+  },
+  "governance": [
+    {
+      "recommendation_id": "recommendation_schedule_followup",
+      "task_id": "schedule_followup",
+      "action": "Schedule follow-up appointment",
+      "policy": {
+        "policy_status": "allowed",
+        "task_id": "schedule_followup",
+        "action": "Schedule follow-up appointment",
+        "reason": "The recommendation is permitted to continue through the supervised workflow."
+      },
+      "approval": {
+        "approval_status": "auto_safe",
+        "requires_human_approval": false,
+        "task_id": "schedule_followup",
+        "action": "Schedule follow-up appointment",
+        "reason": "This is a coordination or educational recommendation and does not require clinical approval."
+      }
+    }
+  ],
+  "final_output": {
+    "case_id": "SYN-42-00002",
+    "condition": "Heart Failure",
+    "discharge_coordination_summary": {
+      "barrier_count": 1,
+      "task_count": 1,
+      "recommendation_count": 1,
+      "human_approval_required_count": 0
+    },
+    "barriers": [
+      {
+        "barrier_id": "followup_missing",
+        "finding": "Required follow-up has not been scheduled.",
+        "evidence": "not_scheduled",
+        "confidence": 0.95,
+        "priority": "high",
+        "source_field": "followup_status"
+      }
+    ],
+    "pending_tasks": [
+      {
+        "task_id": "schedule_followup",
+        "task_name": "Schedule follow-up appointment",
+        "owner_role": "Case Manager",
+        "resolves_barriers": [
+          "followup_missing"
+        ],
+        "priority": "high",
+        "source_field": "followup_status"
+      }
+    ],
+    "recommendations": [
+      {
+        "recommendation_id": "recommendation_schedule_followup",
+        "task_id": "schedule_followup",
+        "action": "Schedule follow-up appointment",
+        "rationale": "The barrier 'followup_missing' indicates that a required follow-up has not been scheduled. This recommendation proposes scheduling the follow-up appointment to address this barrier.",
+        "owner_role": "Case Manager",
+        "priority": "high",
+        "resolves_barriers": [
+          "followup_missing"
+        ],
+        "supporting_task_ids": [
+          "schedule_followup"
+        ],
+        "source_fields": [
+          "followup_status"
+        ]
+      }
+    ],
+    "governance": [
+      {
+        "recommendation_id": "recommendation_schedule_followup",
+        "task_id": "schedule_followup",
+        "action": "Schedule follow-up appointment",
+        "policy": {
+          "policy_status": "allowed",
+          "task_id": "schedule_followup",
+          "action": "Schedule follow-up appointment",
+          "reason": "The recommendation is permitted to continue through the supervised workflow."
+        },
+        "approval": {
+          "approval_status": "auto_safe",
+          "requires_human_approval": false,
+          "task_id": "schedule_followup",
+          "action": "Schedule follow-up appointment",
+          "reason": "This is a coordination or educational recommendation and does not require clinical approval."
+        }
+      }
+    ],
+    "human_approval_required": [],
+    "final_status": "discharge_barriers_present"
+  },
+  "checks": {
+    "deterministic_barriers": {
+      "missed": [],
+      "extra": []
+    },
+    "deterministic_tasks": {
+      "missed": [],
+      "extra": []
+    },
+    "recommendation_coverage": {
+      "missed": [],
+      "extra": []
+    },
+    "raw_recommendation_flags": [],
+    "literal_evidence_review_flags": [],
+    "approval_mismatches": [],
+    "human_review": {
+      "status": "pending",
+      "missed_llm_concerns": null,
+      "invented_clinical_facts": null,
+      "unsupported_rationales": null,
+      "notes": ""
+    }
+  },
+  "status": "completed",
+  "seconds": 88.336,
+  "llm_calls": [
+    {
+      "schema_name": "case_analysis",
+      "input": {
+        "condition": "Heart Failure",
+        "diagnoses": [
+          "Acute decompensated heart failure",
+          "Hypertension"
+        ],
+        "medications": [
+          {
+            "name": "Furosemide",
+            "dose": "40 mg",
+            "frequency": "daily"
+          },
+          {
+            "name": "Lisinopril",
+            "dose": "10 mg",
+            "frequency": "daily"
+          }
+        ],
+        "labs": {
+          "sodium": "138 mmol/L",
+          "potassium": "4.1 mmol/L",
+          "creatinine": "1.0 mg/dL"
+        },
+        "pending_labs": [],
+        "pending_imaging": [],
+        "pending_consult": [],
+        "medical_stability_status": "stable",
+        "medication_reconciliation_status": "complete",
+        "medication_education_status": "complete",
+        "medication_availability": "available",
+        "patient_education_status": "complete",
+        "diet_education_status": "not_required",
+        "mobility_device_education_status": "not_required",
+        "medical_device_education_status": "not_required",
+        "followup_status": "not_scheduled",
+        "caregiver_status": "available",
+        "transport_status": "arranged",
+        "transport_time": "14:00",
+        "planned_discharge_window": "afternoon",
+        "financial_status": "no_concern",
+        "case_manager_status": "available",
+        "home_safety_status": "safe",
+        "outpatient_therapy_status": "not_required",
+        "pcp_notification_status": "complete",
+        "physical_function": "independent",
+        "discharge_summary_status": "signed",
+        "case_id": "SYN-42-00002",
+        "discharge_summary": "Synthetic discharge coordination snapshot. Medical stability: stable. Discharge readiness requires separate workflow review.",
+        "free_text_notes": {
+          "case_manager_note": "Source facts: {\"caregiver_status\": \"available\", \"case_manager_status\": \"available\", \"condition\": \"Heart Failure\", \"diagnoses\": [\"Acute decompensated heart failure\", \"Hypertension\"], \"diet_education_status\": \"not_required\", \"discharge_summary_status\": \"signed\", \"financial_status\": \"no_concern\", \"followup_status\": \"not_scheduled\", \"home_safety_status\": \"safe\", \"labs\": {\"creatinine\": \"1.0 mg/dL\", \"potassium\": \"4.1 mmol/L\", \"sodium\": \"138 mmol/L\"}, \"medical_device_education_status\": \"not_required\", \"medical_stability_status\": \"stable\", \"medication_availability\": \"available\", \"medication_education_status\": \"complete\", \"medication_reconciliation_status\": \"complete\", \"medications\": [{\"dose\": \"40 mg\", \"frequency\": \"daily\", \"name\": \"Furosemide\"}, {\"dose\": \"10 mg\", \"frequency\": \"daily\", \"name\": \"Lisinopril\"}], \"mobility_device_education_status\": \"not_required\", \"outpatient_therapy_status\": \"not_required\", \"patient_education_status\": \"complete\", \"pcp_notification_status\": \"complete\", \"pending_consult\": [], \"pending_imaging\": [], \"pending_labs\": [], \"physical_function\": \"independent\", \"planned_discharge_window\": \"afternoon\", \"transport_status\": \"arranged\", \"transport_time\": \"14:00\"}"
+        }
+      },
+      "prompt_sha256": "fa352d77a5baaba67e1afb4ef51e0f93cc46ae59ebd331c4da4f91f352335a84",
+      "raw_output": {
+        "clinical_summary": "The patient has Acute decompensated heart failure and Hypertension. Labs show sodium 138 mmol/L, potassium 4.1 mmol/L, and creatinine 1.0 mg/dL. The patient is medically stable.",
+        "discharge_summary": "The discharge summary is signed. The discharge readiness requires separate workflow review.",
+        "social_summary": "The caregiver is available. The financial status is no concern. The home safety is safe. The outpatient therapy is not required. The PCP notification is complete.",
+        "potential_concerns": [],
+        "information_gaps": []
+      },
+      "seconds": 59.087
+    },
+    {
+      "schema_name": "recommendation_output",
+      "input": {
+        "barriers": [
+          {
+            "barrier_id": "followup_missing",
+            "finding": "Required follow-up has not been scheduled.",
+            "evidence": "not_scheduled",
+            "confidence": 0.95,
+            "priority": "high",
+            "source_field": "followup_status"
+          }
+        ],
+        "tasks": [
+          {
+            "task_id": "schedule_followup",
+            "task_name": "Schedule follow-up appointment",
+            "owner_role": "Case Manager",
+            "resolves_barriers": [
+              "followup_missing"
+            ],
+            "priority": "high",
+            "source_field": "followup_status"
+          }
+        ]
+      },
+      "prompt_sha256": "1cdf562623cb0b66a4ea59a5a5c574ef1f4d9dd272e8cc664a9bf8b167bc5935",
+      "raw_output": {
+        "recommendations": [
+          {
+            "task_id": "schedule_followup",
+            "action": "Schedule follow-up appointment",
+            "rationale": "The barrier 'followup_missing' indicates that a required follow-up has not been scheduled. This recommendation proposes scheduling the follow-up appointment to address this barrier.",
+            "owner_role": "Case Manager",
+            "priority": "high",
+            "supporting_barrier_ids": [
+              "followup_missing"
+            ],
+            "source_fields": [
+              "followup_status"
+            ]
+          }
+        ]
+      },
+      "seconds": 29.129
+    }
+  ]
+}

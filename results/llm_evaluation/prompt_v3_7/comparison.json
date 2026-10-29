@@ -1,0 +1,159 @@
+{
+  "model": "medgemma1.5:4b",
+  "digest": "433252621ab154668b5d8be6aff6c1b771bacba045e46e6193da8d6ad1630f2c",
+  "shared_cases": [
+    {
+      "case_id": "SYN-42-00001",
+      "before_status": "completed",
+      "after_status": "completed",
+      "before": {
+        "concerns": [
+          {
+            "finding": "transport_time",
+            "supporting_evidence": "transport_time",
+            "source_field": "transport_time",
+            "priority": "low"
+          }
+        ],
+        "information_gaps": [],
+        "evidence_format_issues": [
+          {
+            "concern": 0,
+            "reason": "Evidence is not a JSON object with field values."
+          }
+        ],
+        "concern_source_coverage": {
+          "missing_source_fields": [],
+          "unexpected_source_fields": [
+            "transport_time"
+          ],
+          "scope": "Source-field coverage only; does not validate concern meaning."
+        },
+        "seconds": 68.854,
+        "prompt_sha256": "32683cc700202714170e35db2d09ac8e923157d5f5fbee3c3126b3e2180bdec9",
+        "recommendation_coverage": {
+          "missed": [],
+          "extra": []
+        },
+        "raw_recommendation_flags": [],
+        "approval_mismatches": []
+      },
+      "after": {
+        "concerns": [
+          {
+            "finding": "Required follow-up is not scheduled, so follow-up coordination remains incomplete.",
+            "supporting_evidence": "{\"followup_status\": \"scheduled\"}",
+            "source_field": "followup_status",
+            "priority": "high"
+          }
+        ],
+        "information_gaps": [],
+        "evidence_format_issues": [],
+        "concern_source_coverage": {
+          "missing_source_fields": [],
+          "unexpected_source_fields": [
+            "followup_status"
+          ],
+          "scope": "Source-field coverage only; does not validate concern meaning."
+        },
+        "seconds": 57.841,
+        "prompt_sha256": "efd3f34c61efd3a25f3790e491b769515e5e5110f56f117ca630510d88f951fa",
+        "recommendation_coverage": {
+          "missed": [],
+          "extra": []
+        },
+        "raw_recommendation_flags": [],
+        "approval_mismatches": []
+      }
+    },
+    {
+      "case_id": "SYN-42-00002",
+      "before_status": "completed",
+      "after_status": "completed",
+      "before": {
+        "concerns": [
+          {
+            "finding": "The patient's planned discharge window is afternoon, but the transportation time is 14:00. This could potentially conflict with the discharge window.",
+            "supporting_evidence": "transport_time: \"14:00\", planned_discharge_window: \"afternoon\"",
+            "source_field": "transport_time",
+            "priority": "medium"
+          }
+        ],
+        "information_gaps": [],
+        "evidence_format_issues": [
+          {
+            "concern": 0,
+            "reason": "Evidence is not a JSON object with field values."
+          }
+        ],
+        "concern_source_coverage": {
+          "missing_source_fields": [
+            "followup_status"
+          ],
+          "unexpected_source_fields": [
+            "transport_time"
+          ],
+          "scope": "Source-field coverage only; does not validate concern meaning."
+        },
+        "seconds": 91.703,
+        "prompt_sha256": "32683cc700202714170e35db2d09ac8e923157d5f5fbee3c3126b3e2180bdec9",
+        "recommendation_coverage": {
+          "missed": [],
+          "extra": []
+        },
+        "raw_recommendation_flags": [],
+        "approval_mismatches": []
+      },
+      "after": {
+        "concerns": [
+          {
+            "finding": "Required follow-up is not scheduled, so follow-up coordination remains incomplete.",
+            "supporting_evidence": "{\"followup_status\": \"not_scheduled\"}",
+            "source_field": "followup_status",
+            "priority": "high"
+          }
+        ],
+        "information_gaps": [],
+        "evidence_format_issues": [],
+        "concern_source_coverage": {
+          "missing_source_fields": [],
+          "unexpected_source_fields": [],
+          "scope": "Source-field coverage only; does not validate concern meaning."
+        },
+        "seconds": 72.131,
+        "prompt_sha256": "efd3f34c61efd3a25f3790e491b769515e5e5110f56f117ca630510d88f951fa",
+        "recommendation_coverage": {
+          "missed": [],
+          "extra": []
+        },
+        "raw_recommendation_flags": [],
+        "approval_mismatches": []
+      }
+    },
+    {
+      "case_id": "SYN-42-00005",
+      "before_status": "completed",
+      "after_status": "not_completed"
+    },
+    {
+      "case_id": "SYN-42-00007",
+      "before_status": "completed",
+      "after_status": "not_completed"
+    },
+    {
+      "case_id": "SYN-42-00008",
+      "before_status": "completed",
+      "after_status": "not_completed"
+    }
+  ],
+  "additional_candidate_cases": [
+    "SYN-42-00004",
+    "SYN-42-00022"
+  ],
+  "baseline_only_cases": [],
+  "limitations": [
+    "Evidence-format checks applied equally to saved outputs; baseline was not instructed to use JSON evidence.",
+    "Exact evidence values do not establish that a concern is valid or complete.",
+    "This is a prompt-development comparison on reused synthetic cases, not independent clinical validation."
+  ]
+}

@@ -1,0 +1,140 @@
+{
+  "case_id": "SYN-42-00002",
+  "patient_record": {
+    "condition": "Heart Failure",
+    "diagnoses": [
+      "Acute decompensated heart failure",
+      "Hypertension"
+    ],
+    "medications": [
+      {
+        "name": "Furosemide",
+        "dose": "40 mg",
+        "frequency": "daily"
+      },
+      {
+        "name": "Lisinopril",
+        "dose": "10 mg",
+        "frequency": "daily"
+      }
+    ],
+    "labs": {
+      "sodium": "138 mmol/L",
+      "potassium": "4.1 mmol/L",
+      "creatinine": "1.0 mg/dL"
+    },
+    "pending_labs": [],
+    "pending_imaging": [],
+    "pending_consult": [],
+    "medical_stability_status": "stable",
+    "medication_reconciliation_status": "complete",
+    "medication_education_status": "complete",
+    "medication_availability": "available",
+    "patient_education_status": "complete",
+    "diet_education_status": "not_required",
+    "mobility_device_education_status": "not_required",
+    "medical_device_education_status": "not_required",
+    "followup_status": "not_scheduled",
+    "caregiver_status": "available",
+    "transport_status": "arranged",
+    "transport_time": "14:00",
+    "planned_discharge_window": "afternoon",
+    "financial_status": "no_concern",
+    "case_manager_status": "available",
+    "home_safety_status": "safe",
+    "outpatient_therapy_status": "not_required",
+    "pcp_notification_status": "complete",
+    "physical_function": "independent",
+    "discharge_summary_status": "signed",
+    "case_id": "SYN-42-00002",
+    "discharge_summary": "Synthetic discharge coordination snapshot. Medical stability: stable. Discharge readiness requires separate workflow review.",
+    "free_text_notes": {
+      "case_manager_note": "Source facts: {\"caregiver_status\": \"available\", \"case_manager_status\": \"available\", \"condition\": \"Heart Failure\", \"diagnoses\": [\"Acute decompensated heart failure\", \"Hypertension\"], \"diet_education_status\": \"not_required\", \"discharge_summary_status\": \"signed\", \"financial_status\": \"no_concern\", \"followup_status\": \"not_scheduled\", \"home_safety_status\": \"safe\", \"labs\": {\"creatinine\": \"1.0 mg/dL\", \"potassium\": \"4.1 mmol/L\", \"sodium\": \"138 mmol/L\"}, \"medical_device_education_status\": \"not_required\", \"medical_stability_status\": \"stable\", \"medication_availability\": \"available\", \"medication_education_status\": \"complete\", \"medication_reconciliation_status\": \"complete\", \"medications\": [{\"dose\": \"40 mg\", \"frequency\": \"daily\", \"name\": \"Furosemide\"}, {\"dose\": \"10 mg\", \"frequency\": \"daily\", \"name\": \"Lisinopril\"}], \"mobility_device_education_status\": \"not_required\", \"outpatient_therapy_status\": \"not_required\", \"patient_education_status\": \"complete\", \"pcp_notification_status\": \"complete\", \"pending_consult\": [], \"pending_imaging\": [], \"pending_labs\": [], \"physical_function\": \"independent\", \"planned_discharge_window\": \"afternoon\", \"transport_status\": \"arranged\", \"transport_time\": \"14:00\"}"
+    }
+  },
+  "input_sha256": "b202960254ca2751dfa3c5319adb623e69fd185770dd8992d7518bc6955336bc",
+  "expected_barriers": [
+    "followup_missing"
+  ],
+  "detected_barriers": [
+    "followup_missing"
+  ],
+  "detector_matches_answer_key": true,
+  "readiness_explanation": {
+    "agent": "ReadinessExplainer",
+    "status": "validated",
+    "authority": "deterministic_detector",
+    "scope": "Current detector rules only; not clinical clearance.",
+    "detector_evidence": [
+      {
+        "barrier_id": "followup_missing",
+        "finding": "Required follow-up has not been scheduled.",
+        "source_values": {
+          "followup_status": "not_scheduled"
+        },
+        "priority": "high",
+        "allowed_wording": [
+          "Required follow-up has not been scheduled.",
+          "Discharge planning issue: Required follow-up has not been scheduled."
+        ]
+      }
+    ],
+    "explanations": [
+      {
+        "barrier_id": "followup_missing",
+        "explanation": "Required follow-up has not been scheduled.",
+        "source_values": {
+          "followup_status": "not_scheduled"
+        }
+      }
+    ],
+    "raw_response": {
+      "explanations": [
+        {
+          "barrier_id": "followup_missing",
+          "explanation": "Required follow-up has not been scheduled.",
+          "evidence_json": "{\"followup_status\": \"not_scheduled\"}"
+        }
+      ]
+    },
+    "validation_errors": [],
+    "llm": {
+      "provider": "ollama",
+      "model": "medgemma1.5:4b"
+    },
+    "requires_review": false,
+    "finding": "Wording and evidence match the supplied detector findings."
+  },
+  "llm_calls": [
+    {
+      "schema_name": "grounded_readiness_explanation",
+      "input": {
+        "detector_findings": [
+          {
+            "barrier_id": "followup_missing",
+            "finding": "Required follow-up has not been scheduled.",
+            "source_values": {
+              "followup_status": "not_scheduled"
+            },
+            "priority": "high",
+            "allowed_wording": [
+              "Required follow-up has not been scheduled.",
+              "Discharge planning issue: Required follow-up has not been scheduled."
+            ]
+          }
+        ]
+      },
+      "prompt_sha256": "b3af6c9bd6b37d0854b25becbf4f0415820124b914494ef2b7d5b9652074dc62",
+      "raw_output": {
+        "explanations": [
+          {
+            "barrier_id": "followup_missing",
+            "explanation": "Required follow-up has not been scheduled.",
+            "evidence_json": "{\"followup_status\": \"not_scheduled\"}"
+          }
+        ]
+      },
+      "seconds": 23.866
+    }
+  ]
+}
