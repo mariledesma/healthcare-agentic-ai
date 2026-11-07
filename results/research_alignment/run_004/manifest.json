@@ -1,0 +1,10 @@
+{
+  "schema_version": "research-bundle-v1",
+  "files": {
+    "report.json": "5e866fa7ec2ca0774877d6916819d751b7f5e51dc8911e0e05c09b3533cb0b6f",
+    "encoder.json": "54fb029f5577828d072afba071f0ab9c34f2b7e4565ca66f0ebb20cc4af6a2e7",
+    "rl_policies.json": "2f82560e2909b0a7fcbe7a1c69ef93e3145d35cb99c981854c95a03f37699022",
+    "retrieval_reference.json": "dd27af7bb5b43421fc600069a2a2573d7c62ac196a233c1629ad479af5bc857e"
+  },
+  "scope": "Unkeyed hashes; not cryptographic origin authentication."
+}

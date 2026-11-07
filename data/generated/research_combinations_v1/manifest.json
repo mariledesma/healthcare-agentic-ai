@@ -1,0 +1,7 @@
+{
+  "seed": 2718,
+  "count": 240,
+  "generator": "composed-authored-scenarios-v1",
+  "records_sha256": "d898a7888b97aad9ed3080380c49aded4031c9fb9e1495dc81491533bad882c8",
+  "scope": "Assistant-authored synthetic development set; no independent clinical annotation or holdout claim."
+}

@@ -1,3 +1,5 @@
+from policy.policy_engine import PolicyEngine
+
 class ApprovalGate:
     """
     Determines whether a permitted recommendation can remain
@@ -13,10 +15,16 @@ class ApprovalGate:
             "reconcile_meds",
             "fill_meds",
             "review_results",
-            "sign_summary"
+            "sign_summary",
+            "review_imaging_result",
+            "review_consult_recommendations",
+            "request_clinical_reassessment"
         }
 
     def evaluate(self, recommendation):
+        if not isinstance(recommendation, dict):
+            return {"approval_status": "requires_human_approval", "requires_human_approval": True,
+                    "task_id": None, "action": None, "reason": "Malformed recommendation requires review."}
 
         task_id = recommendation.get(
             "task_id"
@@ -25,6 +33,14 @@ class ApprovalGate:
         action = recommendation.get(
             "action"
         )
+
+        policy = PolicyEngine().evaluate(recommendation)
+        if policy['policy_status'] != 'allowed':
+            return {
+                'approval_status': 'blocked' if policy['policy_status'] == 'forbidden' else 'requires_human_approval',
+                'requires_human_approval': True,
+                'task_id': task_id, 'action': action, 'reason': policy['reason']
+            }
 
         if task_id in self.requires_approval:
             return {

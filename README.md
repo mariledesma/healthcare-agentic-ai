@@ -12,6 +12,18 @@ This project investigates whether a supervised agentic AI system can identify di
 
 The prototype combines local language-model reasoning with rule-based barrier and task detection, a clinical hub, audit logging, and PostgreSQL persistence. It uses synthetic patient records and is not intended for clinical deployment.
 
+## Research alignment update
+
+The prototype now includes a bounded evidence-verifying agent, raw-proposal rejection and review routing, integrity manifests with optional HMAC signatures, an offline Q-learning simulator, and a trainable contrastive case encoder. The clinical hub exposes frozen experiments, ablations, retrieval and simulator traces through **Agent Research**.
+
+See [research alignment, measured results and reproduction commands](docs/research_alignment.md). These are implemented research components, not claims of novelty, clinical validation, visual representation learning or improved performance over every baseline. The current contrastive encoder trails the status-token retrieval baseline; the toy RL task is also solved by rules.
+
+## Backend and review readiness
+
+New runs atomically persist their full response, recommendations and governance outcomes. Human reviews are now saved to PostgreSQL, bound to a specific run and recommendation, and safe to retry with the same request UUID. **Run History** restores saved evidence and recorded reviews. `/ready` checks database schema and the configured Ollama model.
+
+Run `python -m db.migrate` for the additive schema update and `python -m scripts.review_check --live` for reproducibility checks. See [backend storage and review behavior](docs/backend_storage.md). Reviewer identities remain self-reported in this local prototype; review decisions never execute clinical actions.
+
 ## Current Capabilities
 
 - Seven synthetic discharge cases, including transportation timing and medication-review scenarios.
@@ -91,7 +103,7 @@ For `reconcile_meds`, the recommendation may be allowed by policy while still re
 
 Forbidden requested operations include placing a discharge order, modifying the medication list, sending a prescription, and signing a discharge summary.
 
-**Current limitation:** an unknown task receives `policy_status: review_required`, but the pipeline still calls the Approval Gate, whose default is `auto_safe` for tasks outside its review set. Unknown-task handling needs a consistent review or blocked outcome before broader use. The current review endpoint records research decisions; it does not provide a clinical authorization or execution service.
+**Governance boundary:** Unknown tasks require human review in both the pipeline and the standalone Approval Gate. Explicitly forbidden operations are blocked. Imaging review, consultation review, and clinician reassessment also require human review. The review endpoint records research decisions; it does not provide clinical authorization or execution.
 
 ## Synthetic Dataset
 
@@ -135,11 +147,11 @@ The database separates a synthetic patient case from each execution of the pipel
 | `detected_barriers` | Run reference, barrier ID, finding, evidence, priority, confidence, and source field |
 | `detected_tasks` | Run reference, task ID, task name, owner role, resolved barrier IDs, priority, and source field |
 
-Running the same case again creates a new `run_id` rather than overwriting the previous execution. The case record itself can be updated, so immutable case-input snapshots and explicit prompt/configuration versions remain future work.
+Running the same case again creates a new `run_id` rather than overwriting the previous execution. The case record itself can be updated; each new run also retains its input snapshot, relevant implementation hashes, and model configuration under `evaluation.research`.
 
-`save_pipeline_run()` commits the related records together and rolls back on a storage error. The pipeline reports database-save errors separately from the analysis result. Database configuration is required at startup because the database module is imported by the pipeline.
+`save_pipeline_run()` commits the related records together and rolls back on a storage error. The pipeline reports database-save errors separately from the analysis result. Database configuration is needed for persistence. Offline reference runs can use `--offline --no-persist` without database configuration.
 
-Recommendations, governance outcomes, and human-review decisions are not yet stored in dedicated database tables. Human-review decisions currently go to JSONL audit logs.
+Recommendations and governance artifacts now have an immutable source snapshot and provenance manifest under each run’s `evaluation.research` JSON. New runs also store full artifacts, recommendations and governance in dedicated tables. Human-review decisions are durably stored in PostgreSQL with secondary JSONL audit logging.
 
 ## Local Setup
 
@@ -246,11 +258,11 @@ healthcare-agentic-ai/
 ## Next Steps
 
 - Review professor feedback and refine research priorities.
-- Make unknown-task governance consistently require review or block progression.
+- Expand independent governance and source-reconciliation evaluation.
 - Expand governance tests for human-review and forbidden-operation paths.
-- Persist recommendations, governance outcomes, and human-review decisions in PostgreSQL.
-- Add database-backed run history to the clinical hub.
-- Record prompt/configuration versions and immutable case inputs for each experiment.
+- Add authenticated reviewer identity and access control to the existing PostgreSQL review workflow.
+- Extend the existing database-backed run history with richer filtering and comparisons.
+- Extend existing code/configuration hashes and immutable run snapshots with dedicated prompt-version identifiers.
 - Compare models across repeated runs with aggregate detection and governance metrics.
 - Expand synthetic case coverage and investigate MIMIC-informed preprocessing and evaluation.
 
@@ -262,3 +274,8 @@ healthcare-agentic-ai/
 - Improve recommendation logic
 - Add automated evaluation metrics across all cases
 - Begin MIMIC-informed preprocessing workflow
+
+
+## Workflow reliability expansion
+
+See [the measured development results](docs/workflow_reliability_update.md) for new workflow rules, test commands, and remaining gaps.

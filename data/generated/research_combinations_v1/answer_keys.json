@@ -1,0 +1,3146 @@
+{
+  "RSC-2718-0001": {
+    "expected_barriers": [
+      "device_education_missing",
+      "followup_missing"
+    ],
+    "expected_tasks": [
+      "schedule_followup",
+      "teach_device"
+    ],
+    "scenario_family": "device_education+followup"
+  },
+  "RSC-2718-0002": {
+    "expected_barriers": [
+      "followup_missing",
+      "med_reconciliation_missing",
+      "patient_education_missing"
+    ],
+    "expected_tasks": [
+      "reconcile_meds",
+      "schedule_followup",
+      "teach_condition"
+    ],
+    "scenario_family": "followup+medication_review+patient_education"
+  },
+  "RSC-2718-0003": {
+    "expected_barriers": [
+      "med_education_missing",
+      "med_unavailable",
+      "mobility_education_missing",
+      "paperwork_pending"
+    ],
+    "expected_tasks": [
+      "fill_meds",
+      "sign_summary",
+      "teach_meds",
+      "teach_mobility_device"
+    ],
+    "scenario_family": "medication_access+medication_education+mobility_education+paperwork"
+  },
+  "RSC-2718-0004": {
+    "expected_barriers": [
+      "med_reconciliation_missing",
+      "paperwork_pending"
+    ],
+    "expected_tasks": [
+      "reconcile_meds",
+      "sign_summary"
+    ],
+    "scenario_family": "medication_review+paperwork"
+  },
+  "RSC-2718-0005": {
+    "expected_barriers": [
+      "med_education_missing"
+    ],
+    "expected_tasks": [
+      "teach_meds"
+    ],
+    "scenario_family": "medication_education"
+  },
+  "RSC-2718-0006": {
+    "expected_barriers": [
+      "therapy_missing"
+    ],
+    "expected_tasks": [
+      "arrange_therapy"
+    ],
+    "scenario_family": "therapy"
+  },
+  "RSC-2718-0007": {
+    "expected_barriers": [
+      "transport_missing"
+    ],
+    "expected_tasks": [
+      "arrange_transport"
+    ],
+    "scenario_family": "transport"
+  },
+  "RSC-2718-0008": {
+    "expected_barriers": [
+      "diet_education_missing",
+      "patient_education_missing",
+      "transport_missing"
+    ],
+    "expected_tasks": [
+      "arrange_transport",
+      "teach_condition",
+      "teach_diet"
+    ],
+    "scenario_family": "diet_education+patient_education+transport"
+  },
+  "RSC-2718-0009": {
+    "expected_barriers": [
+      "med_education_missing",
+      "mobility_education_missing",
+      "pcp_notification_missing"
+    ],
+    "expected_tasks": [
+      "notify_pcp",
+      "teach_meds",
+      "teach_mobility_device"
+    ],
+    "scenario_family": "medication_education+mobility_education+pcp"
+  },
+  "RSC-2718-0010": {
+    "expected_barriers": [
+      "case_manager_missing"
+    ],
+    "expected_tasks": [
+      "assign_case_manager"
+    ],
+    "scenario_family": "case_manager"
+  },
+  "RSC-2718-0011": {
+    "expected_barriers": [
+      "caregiver_missing",
+      "followup_missing",
+      "med_unavailable",
+      "physical_support_needed"
+    ],
+    "expected_tasks": [
+      "assess_function",
+      "confirm_caregiver",
+      "fill_meds",
+      "schedule_followup"
+    ],
+    "scenario_family": "caregiver+followup+medication_access+mobility"
+  },
+  "RSC-2718-0012": {
+    "expected_barriers": [
+      "device_education_missing",
+      "followup_missing",
+      "med_unavailable",
+      "transport_missing"
+    ],
+    "expected_tasks": [
+      "arrange_transport",
+      "fill_meds",
+      "schedule_followup",
+      "teach_device"
+    ],
+    "scenario_family": "device_education+multiple"
+  },
+  "RSC-2718-0013": {
+    "expected_barriers": [
+      "diet_education_missing",
+      "financial_barrier",
+      "therapy_missing"
+    ],
+    "expected_tasks": [
+      "address_finances",
+      "arrange_therapy",
+      "teach_diet"
+    ],
+    "scenario_family": "diet_education+finances+therapy"
+  },
+  "RSC-2718-0014": {
+    "expected_barriers": [
+      "med_education_missing",
+      "med_unavailable",
+      "pending_results"
+    ],
+    "expected_tasks": [
+      "fill_meds",
+      "review_results",
+      "teach_meds"
+    ],
+    "scenario_family": "medication_access+medication_education+pending_results"
+  },
+  "RSC-2718-0015": {
+    "expected_barriers": [
+      "diet_education_missing",
+      "therapy_missing"
+    ],
+    "expected_tasks": [
+      "arrange_therapy",
+      "teach_diet"
+    ],
+    "scenario_family": "diet_education+therapy"
+  },
+  "RSC-2718-0016": {
+    "expected_barriers": [
+      "therapy_missing",
+      "transport_timing"
+    ],
+    "expected_tasks": [
+      "arrange_therapy",
+      "arrange_transport"
+    ],
+    "scenario_family": "therapy+transport_timing"
+  },
+  "RSC-2718-0017": {
+    "expected_barriers": [
+      "case_manager_missing",
+      "transport_missing"
+    ],
+    "expected_tasks": [
+      "arrange_transport",
+      "assign_case_manager"
+    ],
+    "scenario_family": "case_manager+transport"
+  },
+  "RSC-2718-0018": {
+    "expected_barriers": [
+      "med_reconciliation_missing",
+      "therapy_missing"
+    ],
+    "expected_tasks": [
+      "arrange_therapy",
+      "reconcile_meds"
+    ],
+    "scenario_family": "medication_review+therapy"
+  },
+  "RSC-2718-0019": {
+    "expected_barriers": [
+      "caregiver_missing",
+      "financial_barrier"
+    ],
+    "expected_tasks": [
+      "address_finances",
+      "confirm_caregiver"
+    ],
+    "scenario_family": "caregiver+finances"
+  },
+  "RSC-2718-0020": {
+    "expected_barriers": [
+      "home_safety_issue",
+      "patient_education_missing",
+      "therapy_missing"
+    ],
+    "expected_tasks": [
+      "arrange_therapy",
+      "check_home_safety",
+      "teach_condition"
+    ],
+    "scenario_family": "home_safety+patient_education+therapy"
+  },
+  "RSC-2718-0021": {
+    "expected_barriers": [
+      "device_education_missing"
+    ],
+    "expected_tasks": [
+      "teach_device"
+    ],
+    "scenario_family": "device_education"
+  },
+  "RSC-2718-0022": {
+    "expected_barriers": [
+      "home_safety_issue"
+    ],
+    "expected_tasks": [
+      "check_home_safety"
+    ],
+    "scenario_family": "home_safety"
+  },
+  "RSC-2718-0023": {
+    "expected_barriers": [
+      "home_safety_issue",
+      "mobility_education_missing",
+      "pending_results"
+    ],
+    "expected_tasks": [
+      "check_home_safety",
+      "review_results",
+      "teach_mobility_device"
+    ],
+    "scenario_family": "home_safety+mobility_education+pending_results"
+  },
+  "RSC-2718-0024": {
+    "expected_barriers": [
+      "diet_education_missing",
+      "followup_missing"
+    ],
+    "expected_tasks": [
+      "schedule_followup",
+      "teach_diet"
+    ],
+    "scenario_family": "diet_education+followup"
+  },
+  "RSC-2718-0025": {
+    "expected_barriers": [
+      "device_education_missing",
+      "followup_missing",
+      "med_unavailable",
+      "pending_results"
+    ],
+    "expected_tasks": [
+      "fill_meds",
+      "review_results",
+      "schedule_followup",
+      "teach_device"
+    ],
+    "scenario_family": "device_education+followup+medication_access+pending_results"
+  },
+  "RSC-2718-0026": {
+    "expected_barriers": [
+      "med_unavailable",
+      "pending_results",
+      "physical_support_needed"
+    ],
+    "expected_tasks": [
+      "assess_function",
+      "fill_meds",
+      "review_results"
+    ],
+    "scenario_family": "medication_access+mobility+pending_results"
+  },
+  "RSC-2718-0027": {
+    "expected_barriers": [
+      "case_manager_missing",
+      "mobility_education_missing",
+      "pending_results",
+      "therapy_missing"
+    ],
+    "expected_tasks": [
+      "arrange_therapy",
+      "assign_case_manager",
+      "review_results",
+      "teach_mobility_device"
+    ],
+    "scenario_family": "case_manager+mobility_education+pending_results+therapy"
+  },
+  "RSC-2718-0028": {
+    "expected_barriers": [
+      "caregiver_missing",
+      "med_reconciliation_missing",
+      "transport_timing"
+    ],
+    "expected_tasks": [
+      "arrange_transport",
+      "confirm_caregiver",
+      "reconcile_meds"
+    ],
+    "scenario_family": "caregiver+medication_review+transport_timing"
+  },
+  "RSC-2718-0029": {
+    "expected_barriers": [
+      "mobility_education_missing",
+      "physical_support_needed"
+    ],
+    "expected_tasks": [
+      "assess_function",
+      "teach_mobility_device"
+    ],
+    "scenario_family": "mobility+mobility_education"
+  },
+  "RSC-2718-0030": {
+    "expected_barriers": [
+      "med_education_missing",
+      "transport_missing"
+    ],
+    "expected_tasks": [
+      "arrange_transport",
+      "teach_meds"
+    ],
+    "scenario_family": "medication_education+transport"
+  },
+  "RSC-2718-0031": {
+    "expected_barriers": [
+      "diet_education_missing",
+      "home_safety_issue",
+      "med_education_missing"
+    ],
+    "expected_tasks": [
+      "check_home_safety",
+      "teach_diet",
+      "teach_meds"
+    ],
+    "scenario_family": "diet_education+home_safety+medication_education"
+  },
+  "RSC-2718-0032": {
+    "expected_barriers": [
+      "case_manager_missing",
+      "home_safety_issue",
+      "patient_education_missing",
+      "physical_support_needed"
+    ],
+    "expected_tasks": [
+      "assess_function",
+      "assign_case_manager",
+      "check_home_safety",
+      "teach_condition"
+    ],
+    "scenario_family": "case_manager+home_safety+mobility+patient_education"
+  },
+  "RSC-2718-0033": {
+    "expected_barriers": [
+      "caregiver_missing",
+      "case_manager_missing"
+    ],
+    "expected_tasks": [
+      "assign_case_manager",
+      "confirm_caregiver"
+    ],
+    "scenario_family": "caregiver+case_manager"
+  },
+  "RSC-2718-0034": {
+    "expected_barriers": [
+      "caregiver_missing"
+    ],
+    "expected_tasks": [
+      "confirm_caregiver"
+    ],
+    "scenario_family": "caregiver"
+  },
+  "RSC-2718-0035": {
+    "expected_barriers": [
+      "med_unavailable",
+      "patient_education_missing"
+    ],
+    "expected_tasks": [
+      "fill_meds",
+      "teach_condition"
+    ],
+    "scenario_family": "medication_access+patient_education"
+  },
+  "RSC-2718-0036": {
+    "expected_barriers": [
+      "followup_missing",
+      "med_unavailable",
+      "pcp_notification_missing"
+    ],
+    "expected_tasks": [
+      "fill_meds",
+      "notify_pcp",
+      "schedule_followup"
+    ],
+    "scenario_family": "followup+medication_access+pcp"
+  },
+  "RSC-2718-0037": {
+    "expected_barriers": [
+      "device_education_missing",
+      "diet_education_missing",
+      "transport_missing"
+    ],
+    "expected_tasks": [
+      "arrange_transport",
+      "teach_device",
+      "teach_diet"
+    ],
+    "scenario_family": "device_education+diet_education+transport"
+  },
+  "RSC-2718-0038": {
+    "expected_barriers": [
+      "case_manager_missing",
+      "mobility_education_missing",
+      "patient_education_missing"
+    ],
+    "expected_tasks": [
+      "assign_case_manager",
+      "teach_condition",
+      "teach_mobility_device"
+    ],
+    "scenario_family": "case_manager+mobility_education+patient_education"
+  },
+  "RSC-2718-0039": {
+    "expected_barriers": [
+      "diet_education_missing",
+      "med_education_missing",
+      "med_reconciliation_missing",
+      "therapy_missing"
+    ],
+    "expected_tasks": [
+      "arrange_therapy",
+      "reconcile_meds",
+      "teach_diet",
+      "teach_meds"
+    ],
+    "scenario_family": "diet_education+medication_education+medication_review+therapy"
+  },
+  "RSC-2718-0040": {
+    "expected_barriers": [
+      "home_safety_issue",
+      "physical_support_needed"
+    ],
+    "expected_tasks": [
+      "assess_function",
+      "check_home_safety"
+    ],
+    "scenario_family": "home_safety+mobility"
+  },
+  "RSC-2718-0041": {
+    "expected_barriers": [
+      "case_manager_missing",
+      "diet_education_missing",
+      "followup_missing",
+      "med_unavailable",
+      "mobility_education_missing",
+      "transport_missing"
+    ],
+    "expected_tasks": [
+      "arrange_transport",
+      "assign_case_manager",
+      "fill_meds",
+      "schedule_followup",
+      "teach_diet",
+      "teach_mobility_device"
+    ],
+    "scenario_family": "case_manager+diet_education+mobility_education+multiple"
+  },
+  "RSC-2718-0042": {
+    "expected_barriers": [
+      "case_manager_missing",
+      "followup_missing",
+      "med_unavailable",
+      "mobility_education_missing",
+      "pending_results",
+      "transport_missing"
+    ],
+    "expected_tasks": [
+      "arrange_transport",
+      "assign_case_manager",
+      "fill_meds",
+      "review_results",
+      "schedule_followup",
+      "teach_mobility_device"
+    ],
+    "scenario_family": "case_manager+mobility_education+multiple+pending_results"
+  },
+  "RSC-2718-0043": {
+    "expected_barriers": [
+      "caregiver_missing",
+      "pending_results"
+    ],
+    "expected_tasks": [
+      "confirm_caregiver",
+      "review_results"
+    ],
+    "scenario_family": "caregiver+pending_results"
+  },
+  "RSC-2718-0044": {
+    "expected_barriers": [
+      "home_safety_issue",
+      "pending_results"
+    ],
+    "expected_tasks": [
+      "check_home_safety",
+      "review_results"
+    ],
+    "scenario_family": "home_safety+pending_results"
+  },
+  "RSC-2718-0045": {
+    "expected_barriers": [
+      "med_reconciliation_missing"
+    ],
+    "expected_tasks": [
+      "reconcile_meds"
+    ],
+    "scenario_family": "medication_review"
+  },
+  "RSC-2718-0046": {
+    "expected_barriers": [
+      "caregiver_missing",
+      "case_manager_missing",
+      "followup_missing",
+      "pending_results"
+    ],
+    "expected_tasks": [
+      "assign_case_manager",
+      "confirm_caregiver",
+      "review_results",
+      "schedule_followup"
+    ],
+    "scenario_family": "caregiver+case_manager+followup+pending_results"
+  },
+  "RSC-2718-0047": {
+    "expected_barriers": [
+      "financial_barrier",
+      "med_unavailable",
+      "mobility_education_missing",
+      "paperwork_pending"
+    ],
+    "expected_tasks": [
+      "address_finances",
+      "fill_meds",
+      "sign_summary",
+      "teach_mobility_device"
+    ],
+    "scenario_family": "finances+medication_access+mobility_education+paperwork"
+  },
+  "RSC-2718-0048": {
+    "expected_barriers": [
+      "caregiver_missing",
+      "pcp_notification_missing"
+    ],
+    "expected_tasks": [
+      "confirm_caregiver",
+      "notify_pcp"
+    ],
+    "scenario_family": "caregiver+pcp"
+  },
+  "RSC-2718-0049": {
+    "expected_barriers": [
+      "followup_missing",
+      "med_unavailable",
+      "transport_missing"
+    ],
+    "expected_tasks": [
+      "arrange_transport",
+      "fill_meds",
+      "schedule_followup"
+    ],
+    "scenario_family": "multiple"
+  },
+  "RSC-2718-0050": {
+    "expected_barriers": [
+      "med_unavailable",
+      "paperwork_pending"
+    ],
+    "expected_tasks": [
+      "fill_meds",
+      "sign_summary"
+    ],
+    "scenario_family": "medication_access+paperwork"
+  },
+  "RSC-2718-0051": {
+    "expected_barriers": [
+      "caregiver_missing",
+      "device_education_missing",
+      "transport_missing"
+    ],
+    "expected_tasks": [
+      "arrange_transport",
+      "confirm_caregiver",
+      "teach_device"
+    ],
+    "scenario_family": "caregiver+device_education+transport"
+  },
+  "RSC-2718-0052": {
+    "expected_barriers": [
+      "pcp_notification_missing",
+      "transport_timing"
+    ],
+    "expected_tasks": [
+      "arrange_transport",
+      "notify_pcp"
+    ],
+    "scenario_family": "pcp+transport_timing"
+  },
+  "RSC-2718-0053": {
+    "expected_barriers": [
+      "patient_education_missing",
+      "pcp_notification_missing"
+    ],
+    "expected_tasks": [
+      "notify_pcp",
+      "teach_condition"
+    ],
+    "scenario_family": "patient_education+pcp"
+  },
+  "RSC-2718-0054": {
+    "expected_barriers": [
+      "caregiver_missing",
+      "home_safety_issue",
+      "mobility_education_missing"
+    ],
+    "expected_tasks": [
+      "check_home_safety",
+      "confirm_caregiver",
+      "teach_mobility_device"
+    ],
+    "scenario_family": "caregiver+home_safety+mobility_education"
+  },
+  "RSC-2718-0055": {
+    "expected_barriers": [
+      "device_education_missing",
+      "followup_missing",
+      "med_unavailable",
+      "physical_support_needed",
+      "transport_missing"
+    ],
+    "expected_tasks": [
+      "arrange_transport",
+      "assess_function",
+      "fill_meds",
+      "schedule_followup",
+      "teach_device"
+    ],
+    "scenario_family": "device_education+mobility+multiple"
+  },
+  "RSC-2718-0056": {
+    "expected_barriers": [
+      "med_education_missing",
+      "med_reconciliation_missing"
+    ],
+    "expected_tasks": [
+      "reconcile_meds",
+      "teach_meds"
+    ],
+    "scenario_family": "medication_education+medication_review"
+  },
+  "RSC-2718-0057": {
+    "expected_barriers": [
+      "followup_missing",
+      "patient_education_missing",
+      "pending_results"
+    ],
+    "expected_tasks": [
+      "review_results",
+      "schedule_followup",
+      "teach_condition"
+    ],
+    "scenario_family": "followup+patient_education+pending_results"
+  },
+  "RSC-2718-0058": {
+    "expected_barriers": [
+      "caregiver_missing",
+      "case_manager_missing",
+      "transport_timing"
+    ],
+    "expected_tasks": [
+      "arrange_transport",
+      "assign_case_manager",
+      "confirm_caregiver"
+    ],
+    "scenario_family": "caregiver+case_manager+transport_timing"
+  },
+  "RSC-2718-0059": {
+    "expected_barriers": [
+      "caregiver_missing",
+      "diet_education_missing",
+      "pcp_notification_missing",
+      "therapy_missing"
+    ],
+    "expected_tasks": [
+      "arrange_therapy",
+      "confirm_caregiver",
+      "notify_pcp",
+      "teach_diet"
+    ],
+    "scenario_family": "caregiver+diet_education+pcp+therapy"
+  },
+  "RSC-2718-0060": {
+    "expected_barriers": [
+      "caregiver_missing",
+      "diet_education_missing",
+      "med_education_missing"
+    ],
+    "expected_tasks": [
+      "confirm_caregiver",
+      "teach_diet",
+      "teach_meds"
+    ],
+    "scenario_family": "caregiver+diet_education+medication_education"
+  },
+  "RSC-2718-0061": {
+    "expected_barriers": [
+      "pcp_notification_missing"
+    ],
+    "expected_tasks": [
+      "notify_pcp"
+    ],
+    "scenario_family": "pcp"
+  },
+  "RSC-2718-0062": {
+    "expected_barriers": [
+      "case_manager_missing",
+      "physical_support_needed"
+    ],
+    "expected_tasks": [
+      "assess_function",
+      "assign_case_manager"
+    ],
+    "scenario_family": "case_manager+mobility"
+  },
+  "RSC-2718-0063": {
+    "expected_barriers": [
+      "device_education_missing",
+      "transport_timing"
+    ],
+    "expected_tasks": [
+      "arrange_transport",
+      "teach_device"
+    ],
+    "scenario_family": "device_education+transport_timing"
+  },
+  "RSC-2718-0064": {
+    "expected_barriers": [
+      "followup_missing",
+      "home_safety_issue",
+      "med_unavailable",
+      "mobility_education_missing"
+    ],
+    "expected_tasks": [
+      "check_home_safety",
+      "fill_meds",
+      "schedule_followup",
+      "teach_mobility_device"
+    ],
+    "scenario_family": "followup+home_safety+medication_access+mobility_education"
+  },
+  "RSC-2718-0065": {
+    "expected_barriers": [
+      "caregiver_missing",
+      "followup_missing",
+      "med_education_missing",
+      "physical_support_needed"
+    ],
+    "expected_tasks": [
+      "assess_function",
+      "confirm_caregiver",
+      "schedule_followup",
+      "teach_meds"
+    ],
+    "scenario_family": "caregiver+followup+medication_education+mobility"
+  },
+  "RSC-2718-0066": {
+    "expected_barriers": [
+      "case_manager_missing",
+      "med_education_missing"
+    ],
+    "expected_tasks": [
+      "assign_case_manager",
+      "teach_meds"
+    ],
+    "scenario_family": "case_manager+medication_education"
+  },
+  "RSC-2718-0067": {
+    "expected_barriers": [
+      "followup_missing",
+      "pending_results",
+      "physical_support_needed",
+      "therapy_missing"
+    ],
+    "expected_tasks": [
+      "arrange_therapy",
+      "assess_function",
+      "review_results",
+      "schedule_followup"
+    ],
+    "scenario_family": "followup+mobility+pending_results+therapy"
+  },
+  "RSC-2718-0068": {
+    "expected_barriers": [
+      "device_education_missing",
+      "pcp_notification_missing",
+      "physical_support_needed"
+    ],
+    "expected_tasks": [
+      "assess_function",
+      "notify_pcp",
+      "teach_device"
+    ],
+    "scenario_family": "device_education+mobility+pcp"
+  },
+  "RSC-2718-0069": {
+    "expected_barriers": [
+      "financial_barrier",
+      "med_reconciliation_missing",
+      "paperwork_pending",
+      "therapy_missing"
+    ],
+    "expected_tasks": [
+      "address_finances",
+      "arrange_therapy",
+      "reconcile_meds",
+      "sign_summary"
+    ],
+    "scenario_family": "finances+medication_review+paperwork+therapy"
+  },
+  "RSC-2718-0070": {
+    "expected_barriers": [
+      "caregiver_missing",
+      "med_reconciliation_missing",
+      "physical_support_needed",
+      "transport_timing"
+    ],
+    "expected_tasks": [
+      "arrange_transport",
+      "assess_function",
+      "confirm_caregiver",
+      "reconcile_meds"
+    ],
+    "scenario_family": "caregiver+medication_review+mobility+transport_timing"
+  },
+  "RSC-2718-0071": {
+    "expected_barriers": [
+      "financial_barrier",
+      "med_education_missing",
+      "med_reconciliation_missing",
+      "physical_support_needed"
+    ],
+    "expected_tasks": [
+      "address_finances",
+      "assess_function",
+      "reconcile_meds",
+      "teach_meds"
+    ],
+    "scenario_family": "finances+medication_education+medication_review+mobility"
+  },
+  "RSC-2718-0072": {
+    "expected_barriers": [
+      "pending_results",
+      "transport_missing"
+    ],
+    "expected_tasks": [
+      "arrange_transport",
+      "review_results"
+    ],
+    "scenario_family": "pending_results+transport"
+  },
+  "RSC-2718-0073": {
+    "expected_barriers": [
+      "caregiver_missing",
+      "med_unavailable",
+      "physical_support_needed"
+    ],
+    "expected_tasks": [
+      "assess_function",
+      "confirm_caregiver",
+      "fill_meds"
+    ],
+    "scenario_family": "caregiver+medication_access+mobility"
+  },
+  "RSC-2718-0074": {
+    "expected_barriers": [
+      "diet_education_missing",
+      "mobility_education_missing",
+      "paperwork_pending"
+    ],
+    "expected_tasks": [
+      "sign_summary",
+      "teach_diet",
+      "teach_mobility_device"
+    ],
+    "scenario_family": "diet_education+mobility_education+paperwork"
+  },
+  "RSC-2718-0075": {
+    "expected_barriers": [
+      "paperwork_pending",
+      "pending_results"
+    ],
+    "expected_tasks": [
+      "review_results",
+      "sign_summary"
+    ],
+    "scenario_family": "paperwork+pending_results"
+  },
+  "RSC-2718-0076": {
+    "expected_barriers": [
+      "case_manager_missing",
+      "followup_missing",
+      "mobility_education_missing",
+      "physical_support_needed"
+    ],
+    "expected_tasks": [
+      "assess_function",
+      "assign_case_manager",
+      "schedule_followup",
+      "teach_mobility_device"
+    ],
+    "scenario_family": "case_manager+followup+mobility+mobility_education"
+  },
+  "RSC-2718-0077": {
+    "expected_barriers": [
+      "caregiver_missing",
+      "med_reconciliation_missing",
+      "paperwork_pending",
+      "physical_support_needed"
+    ],
+    "expected_tasks": [
+      "assess_function",
+      "confirm_caregiver",
+      "reconcile_meds",
+      "sign_summary"
+    ],
+    "scenario_family": "caregiver+medication_review+mobility+paperwork"
+  },
+  "RSC-2718-0078": {
+    "expected_barriers": [
+      "med_education_missing",
+      "med_reconciliation_missing",
+      "pcp_notification_missing",
+      "transport_timing"
+    ],
+    "expected_tasks": [
+      "arrange_transport",
+      "notify_pcp",
+      "reconcile_meds",
+      "teach_meds"
+    ],
+    "scenario_family": "medication_education+medication_review+pcp+transport_timing"
+  },
+  "RSC-2718-0079": {
+    "expected_barriers": [
+      "financial_barrier",
+      "med_reconciliation_missing",
+      "pcp_notification_missing",
+      "therapy_missing"
+    ],
+    "expected_tasks": [
+      "address_finances",
+      "arrange_therapy",
+      "notify_pcp",
+      "reconcile_meds"
+    ],
+    "scenario_family": "finances+medication_review+pcp+therapy"
+  },
+  "RSC-2718-0080": {
+    "expected_barriers": [
+      "caregiver_missing",
+      "case_manager_missing",
+      "followup_missing",
+      "med_reconciliation_missing"
+    ],
+    "expected_tasks": [
+      "assign_case_manager",
+      "confirm_caregiver",
+      "reconcile_meds",
+      "schedule_followup"
+    ],
+    "scenario_family": "caregiver+case_manager+followup+medication_review"
+  },
+  "RSC-2718-0081": {
+    "expected_barriers": [
+      "device_education_missing",
+      "home_safety_issue",
+      "mobility_education_missing"
+    ],
+    "expected_tasks": [
+      "check_home_safety",
+      "teach_device",
+      "teach_mobility_device"
+    ],
+    "scenario_family": "device_education+home_safety+mobility_education"
+  },
+  "RSC-2718-0082": {
+    "expected_barriers": [
+      "med_education_missing",
+      "med_reconciliation_missing",
+      "med_unavailable",
+      "patient_education_missing"
+    ],
+    "expected_tasks": [
+      "fill_meds",
+      "reconcile_meds",
+      "teach_condition",
+      "teach_meds"
+    ],
+    "scenario_family": "medication_access+medication_education+medication_review+patient_education"
+  },
+  "RSC-2718-0083": {
+    "expected_barriers": [
+      "patient_education_missing",
+      "transport_missing"
+    ],
+    "expected_tasks": [
+      "arrange_transport",
+      "teach_condition"
+    ],
+    "scenario_family": "patient_education+transport"
+  },
+  "RSC-2718-0084": {
+    "expected_barriers": [
+      "physical_support_needed"
+    ],
+    "expected_tasks": [
+      "assess_function"
+    ],
+    "scenario_family": "mobility"
+  },
+  "RSC-2718-0085": {
+    "expected_barriers": [
+      "followup_missing",
+      "med_unavailable",
+      "mobility_education_missing",
+      "transport_missing"
+    ],
+    "expected_tasks": [
+      "arrange_transport",
+      "fill_meds",
+      "schedule_followup",
+      "teach_mobility_device"
+    ],
+    "scenario_family": "mobility_education+multiple"
+  },
+  "RSC-2718-0086": {
+    "expected_barriers": [
+      "device_education_missing",
+      "med_education_missing",
+      "therapy_missing",
+      "transport_timing"
+    ],
+    "expected_tasks": [
+      "arrange_therapy",
+      "arrange_transport",
+      "teach_device",
+      "teach_meds"
+    ],
+    "scenario_family": "device_education+medication_education+therapy+transport_timing"
+  },
+  "RSC-2718-0087": {
+    "expected_barriers": [
+      "followup_missing",
+      "med_reconciliation_missing",
+      "med_unavailable",
+      "transport_missing"
+    ],
+    "expected_tasks": [
+      "arrange_transport",
+      "fill_meds",
+      "reconcile_meds",
+      "schedule_followup"
+    ],
+    "scenario_family": "medication_review+multiple"
+  },
+  "RSC-2718-0088": {
+    "expected_barriers": [
+      "device_education_missing",
+      "paperwork_pending",
+      "pcp_notification_missing"
+    ],
+    "expected_tasks": [
+      "notify_pcp",
+      "sign_summary",
+      "teach_device"
+    ],
+    "scenario_family": "device_education+paperwork+pcp"
+  },
+  "RSC-2718-0089": {
+    "expected_barriers": [
+      "mobility_education_missing",
+      "therapy_missing",
+      "transport_timing"
+    ],
+    "expected_tasks": [
+      "arrange_therapy",
+      "arrange_transport",
+      "teach_mobility_device"
+    ],
+    "scenario_family": "mobility_education+therapy+transport_timing"
+  },
+  "RSC-2718-0090": {
+    "expected_barriers": [
+      "device_education_missing",
+      "mobility_education_missing",
+      "physical_support_needed"
+    ],
+    "expected_tasks": [
+      "assess_function",
+      "teach_device",
+      "teach_mobility_device"
+    ],
+    "scenario_family": "device_education+mobility+mobility_education"
+  },
+  "RSC-2718-0091": {
+    "expected_barriers": [
+      "financial_barrier",
+      "transport_timing"
+    ],
+    "expected_tasks": [
+      "address_finances",
+      "arrange_transport"
+    ],
+    "scenario_family": "finances+transport_timing"
+  },
+  "RSC-2718-0092": {
+    "expected_barriers": [
+      "diet_education_missing",
+      "paperwork_pending",
+      "pcp_notification_missing",
+      "therapy_missing"
+    ],
+    "expected_tasks": [
+      "arrange_therapy",
+      "notify_pcp",
+      "sign_summary",
+      "teach_diet"
+    ],
+    "scenario_family": "diet_education+paperwork+pcp+therapy"
+  },
+  "RSC-2718-0093": {
+    "expected_barriers": [
+      "device_education_missing",
+      "pending_results",
+      "transport_timing"
+    ],
+    "expected_tasks": [
+      "arrange_transport",
+      "review_results",
+      "teach_device"
+    ],
+    "scenario_family": "device_education+pending_results+transport_timing"
+  },
+  "RSC-2718-0094": {
+    "expected_barriers": [
+      "med_reconciliation_missing",
+      "physical_support_needed"
+    ],
+    "expected_tasks": [
+      "assess_function",
+      "reconcile_meds"
+    ],
+    "scenario_family": "medication_review+mobility"
+  },
+  "RSC-2718-0095": {
+    "expected_barriers": [
+      "diet_education_missing",
+      "med_unavailable",
+      "patient_education_missing"
+    ],
+    "expected_tasks": [
+      "fill_meds",
+      "teach_condition",
+      "teach_diet"
+    ],
+    "scenario_family": "diet_education+medication_access+patient_education"
+  },
+  "RSC-2718-0096": {
+    "expected_barriers": [
+      "transport_timing"
+    ],
+    "expected_tasks": [
+      "arrange_transport"
+    ],
+    "scenario_family": "transport_timing"
+  },
+  "RSC-2718-0097": {
+    "expected_barriers": [
+      "followup_missing",
+      "med_unavailable",
+      "physical_support_needed"
+    ],
+    "expected_tasks": [
+      "assess_function",
+      "fill_meds",
+      "schedule_followup"
+    ],
+    "scenario_family": "followup+medication_access+mobility"
+  },
+  "RSC-2718-0098": {
+    "expected_barriers": [
+      "device_education_missing",
+      "patient_education_missing",
+      "therapy_missing"
+    ],
+    "expected_tasks": [
+      "arrange_therapy",
+      "teach_condition",
+      "teach_device"
+    ],
+    "scenario_family": "device_education+patient_education+therapy"
+  },
+  "RSC-2718-0099": {
+    "expected_barriers": [
+      "case_manager_missing",
+      "med_reconciliation_missing",
+      "transport_missing"
+    ],
+    "expected_tasks": [
+      "arrange_transport",
+      "assign_case_manager",
+      "reconcile_meds"
+    ],
+    "scenario_family": "case_manager+medication_review+transport"
+  },
+  "RSC-2718-0100": {
+    "expected_barriers": [
+      "mobility_education_missing",
+      "transport_timing"
+    ],
+    "expected_tasks": [
+      "arrange_transport",
+      "teach_mobility_device"
+    ],
+    "scenario_family": "mobility_education+transport_timing"
+  },
+  "RSC-2718-0101": {
+    "expected_barriers": [
+      "financial_barrier",
+      "home_safety_issue",
+      "patient_education_missing"
+    ],
+    "expected_tasks": [
+      "address_finances",
+      "check_home_safety",
+      "teach_condition"
+    ],
+    "scenario_family": "finances+home_safety+patient_education"
+  },
+  "RSC-2718-0102": {
+    "expected_barriers": [
+      "case_manager_missing",
+      "device_education_missing",
+      "paperwork_pending",
+      "therapy_missing"
+    ],
+    "expected_tasks": [
+      "arrange_therapy",
+      "assign_case_manager",
+      "sign_summary",
+      "teach_device"
+    ],
+    "scenario_family": "case_manager+device_education+paperwork+therapy"
+  },
+  "RSC-2718-0103": {
+    "expected_barriers": [
+      "patient_education_missing",
+      "pcp_notification_missing",
+      "transport_missing"
+    ],
+    "expected_tasks": [
+      "arrange_transport",
+      "notify_pcp",
+      "teach_condition"
+    ],
+    "scenario_family": "patient_education+pcp+transport"
+  },
+  "RSC-2718-0104": {
+    "expected_barriers": [
+      "paperwork_pending",
+      "transport_missing"
+    ],
+    "expected_tasks": [
+      "arrange_transport",
+      "sign_summary"
+    ],
+    "scenario_family": "paperwork+transport"
+  },
+  "RSC-2718-0105": {
+    "expected_barriers": [
+      "caregiver_missing",
+      "financial_barrier",
+      "followup_missing",
+      "med_education_missing",
+      "med_unavailable",
+      "transport_missing"
+    ],
+    "expected_tasks": [
+      "address_finances",
+      "arrange_transport",
+      "confirm_caregiver",
+      "fill_meds",
+      "schedule_followup",
+      "teach_meds"
+    ],
+    "scenario_family": "caregiver+finances+medication_education+multiple"
+  },
+  "RSC-2718-0106": {
+    "expected_barriers": [
+      "caregiver_missing",
+      "home_safety_issue"
+    ],
+    "expected_tasks": [
+      "check_home_safety",
+      "confirm_caregiver"
+    ],
+    "scenario_family": "caregiver+home_safety"
+  },
+  "RSC-2718-0107": {
+    "expected_barriers": [
+      "med_education_missing",
+      "mobility_education_missing",
+      "pending_results",
+      "transport_timing"
+    ],
+    "expected_tasks": [
+      "arrange_transport",
+      "review_results",
+      "teach_meds",
+      "teach_mobility_device"
+    ],
+    "scenario_family": "medication_education+mobility_education+pending_results+transport_timing"
+  },
+  "RSC-2718-0108": {
+    "expected_barriers": [
+      "diet_education_missing",
+      "med_education_missing"
+    ],
+    "expected_tasks": [
+      "teach_diet",
+      "teach_meds"
+    ],
+    "scenario_family": "diet_education+medication_education"
+  },
+  "RSC-2718-0109": {
+    "expected_barriers": [
+      "device_education_missing",
+      "med_unavailable",
+      "paperwork_pending"
+    ],
+    "expected_tasks": [
+      "fill_meds",
+      "sign_summary",
+      "teach_device"
+    ],
+    "scenario_family": "device_education+medication_access+paperwork"
+  },
+  "RSC-2718-0110": {
+    "expected_barriers": [
+      "case_manager_missing",
+      "followup_missing",
+      "therapy_missing",
+      "transport_timing"
+    ],
+    "expected_tasks": [
+      "arrange_therapy",
+      "arrange_transport",
+      "assign_case_manager",
+      "schedule_followup"
+    ],
+    "scenario_family": "case_manager+followup+therapy+transport_timing"
+  },
+  "RSC-2718-0111": {
+    "expected_barriers": [
+      "financial_barrier",
+      "home_safety_issue",
+      "med_unavailable"
+    ],
+    "expected_tasks": [
+      "address_finances",
+      "check_home_safety",
+      "fill_meds"
+    ],
+    "scenario_family": "finances+home_safety+medication_access"
+  },
+  "RSC-2718-0112": {
+    "expected_barriers": [
+      "followup_missing",
+      "med_education_missing",
+      "pending_results",
+      "physical_support_needed"
+    ],
+    "expected_tasks": [
+      "assess_function",
+      "review_results",
+      "schedule_followup",
+      "teach_meds"
+    ],
+    "scenario_family": "followup+medication_education+mobility+pending_results"
+  },
+  "RSC-2718-0113": {
+    "expected_barriers": [
+      "med_reconciliation_missing",
+      "mobility_education_missing",
+      "physical_support_needed",
+      "therapy_missing"
+    ],
+    "expected_tasks": [
+      "arrange_therapy",
+      "assess_function",
+      "reconcile_meds",
+      "teach_mobility_device"
+    ],
+    "scenario_family": "medication_review+mobility+mobility_education+therapy"
+  },
+  "RSC-2718-0114": {
+    "expected_barriers": [
+      "paperwork_pending",
+      "pcp_notification_missing",
+      "pending_results"
+    ],
+    "expected_tasks": [
+      "notify_pcp",
+      "review_results",
+      "sign_summary"
+    ],
+    "scenario_family": "paperwork+pcp+pending_results"
+  },
+  "RSC-2718-0115": {
+    "expected_barriers": [
+      "diet_education_missing",
+      "followup_missing",
+      "home_safety_issue",
+      "med_unavailable",
+      "transport_missing"
+    ],
+    "expected_tasks": [
+      "arrange_transport",
+      "check_home_safety",
+      "fill_meds",
+      "schedule_followup",
+      "teach_diet"
+    ],
+    "scenario_family": "diet_education+home_safety+multiple"
+  },
+  "RSC-2718-0116": {
+    "expected_barriers": [
+      "diet_education_missing",
+      "med_education_missing",
+      "patient_education_missing"
+    ],
+    "expected_tasks": [
+      "teach_condition",
+      "teach_diet",
+      "teach_meds"
+    ],
+    "scenario_family": "diet_education+medication_education+patient_education"
+  },
+  "RSC-2718-0117": {
+    "expected_barriers": [
+      "device_education_missing",
+      "med_unavailable",
+      "patient_education_missing",
+      "therapy_missing"
+    ],
+    "expected_tasks": [
+      "arrange_therapy",
+      "fill_meds",
+      "teach_condition",
+      "teach_device"
+    ],
+    "scenario_family": "device_education+medication_access+patient_education+therapy"
+  },
+  "RSC-2718-0118": {
+    "expected_barriers": [
+      "med_education_missing",
+      "pending_results"
+    ],
+    "expected_tasks": [
+      "review_results",
+      "teach_meds"
+    ],
+    "scenario_family": "medication_education+pending_results"
+  },
+  "RSC-2718-0119": {
+    "expected_barriers": [
+      "diet_education_missing",
+      "med_reconciliation_missing",
+      "mobility_education_missing"
+    ],
+    "expected_tasks": [
+      "reconcile_meds",
+      "teach_diet",
+      "teach_mobility_device"
+    ],
+    "scenario_family": "diet_education+medication_review+mobility_education"
+  },
+  "RSC-2718-0120": {
+    "expected_barriers": [
+      "followup_missing",
+      "med_education_missing",
+      "med_unavailable",
+      "transport_missing"
+    ],
+    "expected_tasks": [
+      "arrange_transport",
+      "fill_meds",
+      "schedule_followup",
+      "teach_meds"
+    ],
+    "scenario_family": "medication_education+multiple"
+  },
+  "RSC-2718-0121": {
+    "expected_barriers": [
+      "med_education_missing",
+      "mobility_education_missing"
+    ],
+    "expected_tasks": [
+      "teach_meds",
+      "teach_mobility_device"
+    ],
+    "scenario_family": "medication_education+mobility_education"
+  },
+  "RSC-2718-0122": {
+    "expected_barriers": [
+      "home_safety_issue",
+      "med_unavailable",
+      "transport_timing"
+    ],
+    "expected_tasks": [
+      "arrange_transport",
+      "check_home_safety",
+      "fill_meds"
+    ],
+    "scenario_family": "home_safety+medication_access+transport_timing"
+  },
+  "RSC-2718-0123": {
+    "expected_barriers": [
+      "case_manager_missing",
+      "followup_missing",
+      "med_education_missing",
+      "med_unavailable",
+      "pcp_notification_missing",
+      "transport_missing"
+    ],
+    "expected_tasks": [
+      "arrange_transport",
+      "assign_case_manager",
+      "fill_meds",
+      "notify_pcp",
+      "schedule_followup",
+      "teach_meds"
+    ],
+    "scenario_family": "case_manager+medication_education+multiple+pcp"
+  },
+  "RSC-2718-0124": {
+    "expected_barriers": [
+      "case_manager_missing",
+      "med_reconciliation_missing"
+    ],
+    "expected_tasks": [
+      "assign_case_manager",
+      "reconcile_meds"
+    ],
+    "scenario_family": "case_manager+medication_review"
+  },
+  "RSC-2718-0125": {
+    "expected_barriers": [
+      "case_manager_missing",
+      "financial_barrier",
+      "med_education_missing"
+    ],
+    "expected_tasks": [
+      "address_finances",
+      "assign_case_manager",
+      "teach_meds"
+    ],
+    "scenario_family": "case_manager+finances+medication_education"
+  },
+  "RSC-2718-0126": {
+    "expected_barriers": [
+      "med_education_missing",
+      "paperwork_pending"
+    ],
+    "expected_tasks": [
+      "sign_summary",
+      "teach_meds"
+    ],
+    "scenario_family": "medication_education+paperwork"
+  },
+  "RSC-2718-0127": {
+    "expected_barriers": [
+      "diet_education_missing"
+    ],
+    "expected_tasks": [
+      "teach_diet"
+    ],
+    "scenario_family": "diet_education"
+  },
+  "RSC-2718-0128": {
+    "expected_barriers": [
+      "case_manager_missing",
+      "followup_missing",
+      "med_unavailable",
+      "transport_missing"
+    ],
+    "expected_tasks": [
+      "arrange_transport",
+      "assign_case_manager",
+      "fill_meds",
+      "schedule_followup"
+    ],
+    "scenario_family": "case_manager+multiple"
+  },
+  "RSC-2718-0129": {
+    "expected_barriers": [
+      "case_manager_missing",
+      "followup_missing",
+      "pending_results",
+      "physical_support_needed"
+    ],
+    "expected_tasks": [
+      "assess_function",
+      "assign_case_manager",
+      "review_results",
+      "schedule_followup"
+    ],
+    "scenario_family": "case_manager+followup+mobility+pending_results"
+  },
+  "RSC-2718-0130": {
+    "expected_barriers": [
+      "device_education_missing",
+      "home_safety_issue",
+      "pcp_notification_missing"
+    ],
+    "expected_tasks": [
+      "check_home_safety",
+      "notify_pcp",
+      "teach_device"
+    ],
+    "scenario_family": "device_education+home_safety+pcp"
+  },
+  "RSC-2718-0131": {
+    "expected_barriers": [
+      "caregiver_missing",
+      "diet_education_missing",
+      "med_reconciliation_missing",
+      "patient_education_missing"
+    ],
+    "expected_tasks": [
+      "confirm_caregiver",
+      "reconcile_meds",
+      "teach_condition",
+      "teach_diet"
+    ],
+    "scenario_family": "caregiver+diet_education+medication_review+patient_education"
+  },
+  "RSC-2718-0132": {
+    "expected_barriers": [
+      "followup_missing",
+      "home_safety_issue",
+      "med_unavailable",
+      "transport_missing"
+    ],
+    "expected_tasks": [
+      "arrange_transport",
+      "check_home_safety",
+      "fill_meds",
+      "schedule_followup"
+    ],
+    "scenario_family": "home_safety+multiple"
+  },
+  "RSC-2718-0133": {
+    "expected_barriers": [
+      "followup_missing",
+      "patient_education_missing",
+      "pcp_notification_missing",
+      "therapy_missing"
+    ],
+    "expected_tasks": [
+      "arrange_therapy",
+      "notify_pcp",
+      "schedule_followup",
+      "teach_condition"
+    ],
+    "scenario_family": "followup+patient_education+pcp+therapy"
+  },
+  "RSC-2718-0134": {
+    "expected_barriers": [
+      "followup_missing",
+      "med_education_missing",
+      "paperwork_pending",
+      "pcp_notification_missing"
+    ],
+    "expected_tasks": [
+      "notify_pcp",
+      "schedule_followup",
+      "sign_summary",
+      "teach_meds"
+    ],
+    "scenario_family": "followup+medication_education+paperwork+pcp"
+  },
+  "RSC-2718-0135": {
+    "expected_barriers": [
+      "diet_education_missing",
+      "paperwork_pending",
+      "pending_results"
+    ],
+    "expected_tasks": [
+      "review_results",
+      "sign_summary",
+      "teach_diet"
+    ],
+    "scenario_family": "diet_education+paperwork+pending_results"
+  },
+  "RSC-2718-0136": {
+    "expected_barriers": [
+      "home_safety_issue",
+      "mobility_education_missing"
+    ],
+    "expected_tasks": [
+      "check_home_safety",
+      "teach_mobility_device"
+    ],
+    "scenario_family": "home_safety+mobility_education"
+  },
+  "RSC-2718-0137": {
+    "expected_barriers": [
+      "followup_missing"
+    ],
+    "expected_tasks": [
+      "schedule_followup"
+    ],
+    "scenario_family": "followup"
+  },
+  "RSC-2718-0138": {
+    "expected_barriers": [
+      "device_education_missing",
+      "med_reconciliation_missing",
+      "pcp_notification_missing",
+      "pending_results"
+    ],
+    "expected_tasks": [
+      "notify_pcp",
+      "reconcile_meds",
+      "review_results",
+      "teach_device"
+    ],
+    "scenario_family": "device_education+medication_review+pcp+pending_results"
+  },
+  "RSC-2718-0139": {
+    "expected_barriers": [
+      "med_reconciliation_missing",
+      "med_unavailable",
+      "transport_missing"
+    ],
+    "expected_tasks": [
+      "arrange_transport",
+      "fill_meds",
+      "reconcile_meds"
+    ],
+    "scenario_family": "medication_access+medication_review+transport"
+  },
+  "RSC-2718-0140": {
+    "expected_barriers": [
+      "financial_barrier"
+    ],
+    "expected_tasks": [
+      "address_finances"
+    ],
+    "scenario_family": "finances"
+  },
+  "RSC-2718-0141": {
+    "expected_barriers": [
+      "caregiver_missing",
+      "mobility_education_missing",
+      "pcp_notification_missing",
+      "transport_missing"
+    ],
+    "expected_tasks": [
+      "arrange_transport",
+      "confirm_caregiver",
+      "notify_pcp",
+      "teach_mobility_device"
+    ],
+    "scenario_family": "caregiver+mobility_education+pcp+transport"
+  },
+  "RSC-2718-0142": {
+    "expected_barriers": [
+      "patient_education_missing",
+      "physical_support_needed"
+    ],
+    "expected_tasks": [
+      "assess_function",
+      "teach_condition"
+    ],
+    "scenario_family": "mobility+patient_education"
+  },
+  "RSC-2718-0143": {
+    "expected_barriers": [
+      "financial_barrier",
+      "paperwork_pending",
+      "pending_results",
+      "physical_support_needed"
+    ],
+    "expected_tasks": [
+      "address_finances",
+      "assess_function",
+      "review_results",
+      "sign_summary"
+    ],
+    "scenario_family": "finances+mobility+paperwork+pending_results"
+  },
+  "RSC-2718-0144": {
+    "expected_barriers": [
+      "device_education_missing",
+      "home_safety_issue",
+      "med_education_missing",
+      "physical_support_needed"
+    ],
+    "expected_tasks": [
+      "assess_function",
+      "check_home_safety",
+      "teach_device",
+      "teach_meds"
+    ],
+    "scenario_family": "device_education+home_safety+medication_education+mobility"
+  },
+  "RSC-2718-0145": {
+    "expected_barriers": [
+      "diet_education_missing",
+      "home_safety_issue",
+      "med_education_missing",
+      "pending_results"
+    ],
+    "expected_tasks": [
+      "check_home_safety",
+      "review_results",
+      "teach_diet",
+      "teach_meds"
+    ],
+    "scenario_family": "diet_education+home_safety+medication_education+pending_results"
+  },
+  "RSC-2718-0146": {
+    "expected_barriers": [
+      "mobility_education_missing",
+      "pending_results",
+      "physical_support_needed"
+    ],
+    "expected_tasks": [
+      "assess_function",
+      "review_results",
+      "teach_mobility_device"
+    ],
+    "scenario_family": "mobility+mobility_education+pending_results"
+  },
+  "RSC-2718-0147": {
+    "expected_barriers": [
+      "patient_education_missing"
+    ],
+    "expected_tasks": [
+      "teach_condition"
+    ],
+    "scenario_family": "patient_education"
+  },
+  "RSC-2718-0148": {
+    "expected_barriers": [
+      "home_safety_issue",
+      "med_reconciliation_missing",
+      "therapy_missing",
+      "transport_missing"
+    ],
+    "expected_tasks": [
+      "arrange_therapy",
+      "arrange_transport",
+      "check_home_safety",
+      "reconcile_meds"
+    ],
+    "scenario_family": "home_safety+medication_review+therapy+transport"
+  },
+  "RSC-2718-0149": {
+    "expected_barriers": [
+      "diet_education_missing",
+      "med_reconciliation_missing",
+      "pending_results",
+      "physical_support_needed"
+    ],
+    "expected_tasks": [
+      "assess_function",
+      "reconcile_meds",
+      "review_results",
+      "teach_diet"
+    ],
+    "scenario_family": "diet_education+medication_review+mobility+pending_results"
+  },
+  "RSC-2718-0150": {
+    "expected_barriers": [
+      "case_manager_missing",
+      "pcp_notification_missing",
+      "physical_support_needed",
+      "therapy_missing"
+    ],
+    "expected_tasks": [
+      "arrange_therapy",
+      "assess_function",
+      "assign_case_manager",
+      "notify_pcp"
+    ],
+    "scenario_family": "case_manager+mobility+pcp+therapy"
+  },
+  "RSC-2718-0151": {
+    "expected_barriers": [
+      "caregiver_missing",
+      "med_unavailable",
+      "pending_results"
+    ],
+    "expected_tasks": [
+      "confirm_caregiver",
+      "fill_meds",
+      "review_results"
+    ],
+    "scenario_family": "caregiver+medication_access+pending_results"
+  },
+  "RSC-2718-0152": {
+    "expected_barriers": [
+      "caregiver_missing",
+      "med_reconciliation_missing"
+    ],
+    "expected_tasks": [
+      "confirm_caregiver",
+      "reconcile_meds"
+    ],
+    "scenario_family": "caregiver+medication_review"
+  },
+  "RSC-2718-0153": {
+    "expected_barriers": [
+      "device_education_missing",
+      "paperwork_pending",
+      "pcp_notification_missing",
+      "physical_support_needed"
+    ],
+    "expected_tasks": [
+      "assess_function",
+      "notify_pcp",
+      "sign_summary",
+      "teach_device"
+    ],
+    "scenario_family": "device_education+mobility+paperwork+pcp"
+  },
+  "RSC-2718-0154": {
+    "expected_barriers": [
+      "case_manager_missing",
+      "med_reconciliation_missing",
+      "med_unavailable",
+      "pcp_notification_missing"
+    ],
+    "expected_tasks": [
+      "assign_case_manager",
+      "fill_meds",
+      "notify_pcp",
+      "reconcile_meds"
+    ],
+    "scenario_family": "case_manager+medication_access+medication_review+pcp"
+  },
+  "RSC-2718-0155": {
+    "expected_barriers": [
+      "financial_barrier",
+      "followup_missing",
+      "physical_support_needed"
+    ],
+    "expected_tasks": [
+      "address_finances",
+      "assess_function",
+      "schedule_followup"
+    ],
+    "scenario_family": "finances+followup+mobility"
+  },
+  "RSC-2718-0156": {
+    "expected_barriers": [
+      "med_education_missing",
+      "patient_education_missing",
+      "physical_support_needed",
+      "therapy_missing"
+    ],
+    "expected_tasks": [
+      "arrange_therapy",
+      "assess_function",
+      "teach_condition",
+      "teach_meds"
+    ],
+    "scenario_family": "medication_education+mobility+patient_education+therapy"
+  },
+  "RSC-2718-0157": {
+    "expected_barriers": [
+      "med_reconciliation_missing",
+      "pending_results",
+      "physical_support_needed"
+    ],
+    "expected_tasks": [
+      "assess_function",
+      "reconcile_meds",
+      "review_results"
+    ],
+    "scenario_family": "medication_review+mobility+pending_results"
+  },
+  "RSC-2718-0158": {
+    "expected_barriers": [
+      "financial_barrier",
+      "followup_missing",
+      "transport_timing"
+    ],
+    "expected_tasks": [
+      "address_finances",
+      "arrange_transport",
+      "schedule_followup"
+    ],
+    "scenario_family": "finances+followup+transport_timing"
+  },
+  "RSC-2718-0159": {
+    "expected_barriers": [
+      "device_education_missing",
+      "paperwork_pending",
+      "patient_education_missing",
+      "transport_missing"
+    ],
+    "expected_tasks": [
+      "arrange_transport",
+      "sign_summary",
+      "teach_condition",
+      "teach_device"
+    ],
+    "scenario_family": "device_education+paperwork+patient_education+transport"
+  },
+  "RSC-2718-0160": {
+    "expected_barriers": [
+      "med_reconciliation_missing",
+      "paperwork_pending",
+      "therapy_missing"
+    ],
+    "expected_tasks": [
+      "arrange_therapy",
+      "reconcile_meds",
+      "sign_summary"
+    ],
+    "scenario_family": "medication_review+paperwork+therapy"
+  },
+  "RSC-2718-0161": {
+    "expected_barriers": [
+      "followup_missing",
+      "pending_results"
+    ],
+    "expected_tasks": [
+      "review_results",
+      "schedule_followup"
+    ],
+    "scenario_family": "followup+pending_results"
+  },
+  "RSC-2718-0162": {
+    "expected_barriers": [
+      "physical_support_needed",
+      "transport_timing"
+    ],
+    "expected_tasks": [
+      "arrange_transport",
+      "assess_function"
+    ],
+    "scenario_family": "mobility+transport_timing"
+  },
+  "RSC-2718-0163": {
+    "expected_barriers": [
+      "home_safety_issue",
+      "paperwork_pending",
+      "therapy_missing"
+    ],
+    "expected_tasks": [
+      "arrange_therapy",
+      "check_home_safety",
+      "sign_summary"
+    ],
+    "scenario_family": "home_safety+paperwork+therapy"
+  },
+  "RSC-2718-0164": {
+    "expected_barriers": [
+      "diet_education_missing",
+      "paperwork_pending",
+      "therapy_missing"
+    ],
+    "expected_tasks": [
+      "arrange_therapy",
+      "sign_summary",
+      "teach_diet"
+    ],
+    "scenario_family": "diet_education+paperwork+therapy"
+  },
+  "RSC-2718-0165": {
+    "expected_barriers": [
+      "caregiver_missing",
+      "physical_support_needed"
+    ],
+    "expected_tasks": [
+      "assess_function",
+      "confirm_caregiver"
+    ],
+    "scenario_family": "caregiver+mobility"
+  },
+  "RSC-2718-0166": {
+    "expected_barriers": [
+      "case_manager_missing",
+      "pending_results"
+    ],
+    "expected_tasks": [
+      "assign_case_manager",
+      "review_results"
+    ],
+    "scenario_family": "case_manager+pending_results"
+  },
+  "RSC-2718-0167": {
+    "expected_barriers": [
+      "case_manager_missing",
+      "mobility_education_missing"
+    ],
+    "expected_tasks": [
+      "assign_case_manager",
+      "teach_mobility_device"
+    ],
+    "scenario_family": "case_manager+mobility_education"
+  },
+  "RSC-2718-0168": {
+    "expected_barriers": [
+      "mobility_education_missing",
+      "patient_education_missing",
+      "transport_missing"
+    ],
+    "expected_tasks": [
+      "arrange_transport",
+      "teach_condition",
+      "teach_mobility_device"
+    ],
+    "scenario_family": "mobility_education+patient_education+transport"
+  },
+  "RSC-2718-0169": {
+    "expected_barriers": [
+      "device_education_missing",
+      "home_safety_issue",
+      "paperwork_pending"
+    ],
+    "expected_tasks": [
+      "check_home_safety",
+      "sign_summary",
+      "teach_device"
+    ],
+    "scenario_family": "device_education+home_safety+paperwork"
+  },
+  "RSC-2718-0170": {
+    "expected_barriers": [
+      "diet_education_missing",
+      "home_safety_issue",
+      "med_unavailable"
+    ],
+    "expected_tasks": [
+      "check_home_safety",
+      "fill_meds",
+      "teach_diet"
+    ],
+    "scenario_family": "diet_education+home_safety+medication_access"
+  },
+  "RSC-2718-0171": {
+    "expected_barriers": [
+      "followup_missing",
+      "med_education_missing",
+      "mobility_education_missing",
+      "pcp_notification_missing"
+    ],
+    "expected_tasks": [
+      "notify_pcp",
+      "schedule_followup",
+      "teach_meds",
+      "teach_mobility_device"
+    ],
+    "scenario_family": "followup+medication_education+mobility_education+pcp"
+  },
+  "RSC-2718-0172": {
+    "expected_barriers": [
+      "device_education_missing",
+      "financial_barrier",
+      "med_unavailable",
+      "pending_results"
+    ],
+    "expected_tasks": [
+      "address_finances",
+      "fill_meds",
+      "review_results",
+      "teach_device"
+    ],
+    "scenario_family": "device_education+finances+medication_access+pending_results"
+  },
+  "RSC-2718-0173": {
+    "expected_barriers": [
+      "followup_missing",
+      "med_reconciliation_missing",
+      "med_unavailable",
+      "pending_results",
+      "transport_missing"
+    ],
+    "expected_tasks": [
+      "arrange_transport",
+      "fill_meds",
+      "reconcile_meds",
+      "review_results",
+      "schedule_followup"
+    ],
+    "scenario_family": "medication_review+multiple+pending_results"
+  },
+  "RSC-2718-0174": {
+    "expected_barriers": [
+      "case_manager_missing",
+      "med_education_missing",
+      "mobility_education_missing"
+    ],
+    "expected_tasks": [
+      "assign_case_manager",
+      "teach_meds",
+      "teach_mobility_device"
+    ],
+    "scenario_family": "case_manager+medication_education+mobility_education"
+  },
+  "RSC-2718-0175": {
+    "expected_barriers": [
+      "home_safety_issue",
+      "med_education_missing",
+      "transport_missing"
+    ],
+    "expected_tasks": [
+      "arrange_transport",
+      "check_home_safety",
+      "teach_meds"
+    ],
+    "scenario_family": "home_safety+medication_education+transport"
+  },
+  "RSC-2718-0176": {
+    "expected_barriers": [
+      "caregiver_missing",
+      "patient_education_missing",
+      "pending_results"
+    ],
+    "expected_tasks": [
+      "confirm_caregiver",
+      "review_results",
+      "teach_condition"
+    ],
+    "scenario_family": "caregiver+patient_education+pending_results"
+  },
+  "RSC-2718-0177": {
+    "expected_barriers": [
+      "mobility_education_missing"
+    ],
+    "expected_tasks": [
+      "teach_mobility_device"
+    ],
+    "scenario_family": "mobility_education"
+  },
+  "RSC-2718-0178": {
+    "expected_barriers": [
+      "device_education_missing",
+      "med_reconciliation_missing",
+      "med_unavailable",
+      "pending_results"
+    ],
+    "expected_tasks": [
+      "fill_meds",
+      "reconcile_meds",
+      "review_results",
+      "teach_device"
+    ],
+    "scenario_family": "device_education+medication_access+medication_review+pending_results"
+  },
+  "RSC-2718-0179": {
+    "expected_barriers": [
+      "paperwork_pending"
+    ],
+    "expected_tasks": [
+      "sign_summary"
+    ],
+    "scenario_family": "paperwork"
+  },
+  "RSC-2718-0180": {
+    "expected_barriers": [
+      "therapy_missing",
+      "transport_missing"
+    ],
+    "expected_tasks": [
+      "arrange_therapy",
+      "arrange_transport"
+    ],
+    "scenario_family": "therapy+transport"
+  },
+  "RSC-2718-0181": {
+    "expected_barriers": [
+      "financial_barrier",
+      "home_safety_issue",
+      "med_unavailable",
+      "paperwork_pending"
+    ],
+    "expected_tasks": [
+      "address_finances",
+      "check_home_safety",
+      "fill_meds",
+      "sign_summary"
+    ],
+    "scenario_family": "finances+home_safety+medication_access+paperwork"
+  },
+  "RSC-2718-0182": {
+    "expected_barriers": [
+      "diet_education_missing",
+      "med_reconciliation_missing",
+      "med_unavailable",
+      "transport_timing"
+    ],
+    "expected_tasks": [
+      "arrange_transport",
+      "fill_meds",
+      "reconcile_meds",
+      "teach_diet"
+    ],
+    "scenario_family": "diet_education+medication_access+medication_review+transport_timing"
+  },
+  "RSC-2718-0183": {
+    "expected_barriers": [
+      "caregiver_missing",
+      "med_reconciliation_missing",
+      "paperwork_pending",
+      "therapy_missing"
+    ],
+    "expected_tasks": [
+      "arrange_therapy",
+      "confirm_caregiver",
+      "reconcile_meds",
+      "sign_summary"
+    ],
+    "scenario_family": "caregiver+medication_review+paperwork+therapy"
+  },
+  "RSC-2718-0184": {
+    "expected_barriers": [
+      "financial_barrier",
+      "transport_missing"
+    ],
+    "expected_tasks": [
+      "address_finances",
+      "arrange_transport"
+    ],
+    "scenario_family": "finances+transport"
+  },
+  "RSC-2718-0185": {
+    "expected_barriers": [
+      "diet_education_missing",
+      "physical_support_needed"
+    ],
+    "expected_tasks": [
+      "assess_function",
+      "teach_diet"
+    ],
+    "scenario_family": "diet_education+mobility"
+  },
+  "RSC-2718-0186": {
+    "expected_barriers": [
+      "case_manager_missing",
+      "financial_barrier",
+      "med_unavailable",
+      "pending_results"
+    ],
+    "expected_tasks": [
+      "address_finances",
+      "assign_case_manager",
+      "fill_meds",
+      "review_results"
+    ],
+    "scenario_family": "case_manager+finances+medication_access+pending_results"
+  },
+  "RSC-2718-0187": {
+    "expected_barriers": [
+      "case_manager_missing",
+      "followup_missing",
+      "med_reconciliation_missing",
+      "med_unavailable"
+    ],
+    "expected_tasks": [
+      "assign_case_manager",
+      "fill_meds",
+      "reconcile_meds",
+      "schedule_followup"
+    ],
+    "scenario_family": "case_manager+followup+medication_access+medication_review"
+  },
+  "RSC-2718-0188": {
+    "expected_barriers": [
+      "case_manager_missing",
+      "diet_education_missing",
+      "followup_missing"
+    ],
+    "expected_tasks": [
+      "assign_case_manager",
+      "schedule_followup",
+      "teach_diet"
+    ],
+    "scenario_family": "case_manager+diet_education+followup"
+  },
+  "RSC-2718-0189": {
+    "expected_barriers": [
+      "paperwork_pending",
+      "pcp_notification_missing",
+      "physical_support_needed",
+      "transport_timing"
+    ],
+    "expected_tasks": [
+      "arrange_transport",
+      "assess_function",
+      "notify_pcp",
+      "sign_summary"
+    ],
+    "scenario_family": "mobility+paperwork+pcp+transport_timing"
+  },
+  "RSC-2718-0190": {
+    "expected_barriers": [
+      "followup_missing",
+      "med_education_missing",
+      "physical_support_needed",
+      "therapy_missing"
+    ],
+    "expected_tasks": [
+      "arrange_therapy",
+      "assess_function",
+      "schedule_followup",
+      "teach_meds"
+    ],
+    "scenario_family": "followup+medication_education+mobility+therapy"
+  },
+  "RSC-2718-0191": {
+    "expected_barriers": [
+      "med_unavailable",
+      "paperwork_pending",
+      "patient_education_missing"
+    ],
+    "expected_tasks": [
+      "fill_meds",
+      "sign_summary",
+      "teach_condition"
+    ],
+    "scenario_family": "medication_access+paperwork+patient_education"
+  },
+  "RSC-2718-0192": {
+    "expected_barriers": [
+      "home_safety_issue",
+      "med_unavailable"
+    ],
+    "expected_tasks": [
+      "check_home_safety",
+      "fill_meds"
+    ],
+    "scenario_family": "home_safety+medication_access"
+  },
+  "RSC-2718-0193": {
+    "expected_barriers": [
+      "caregiver_missing",
+      "home_safety_issue",
+      "pcp_notification_missing",
+      "pending_results"
+    ],
+    "expected_tasks": [
+      "check_home_safety",
+      "confirm_caregiver",
+      "notify_pcp",
+      "review_results"
+    ],
+    "scenario_family": "caregiver+home_safety+pcp+pending_results"
+  },
+  "RSC-2718-0194": {
+    "expected_barriers": [
+      "med_reconciliation_missing",
+      "paperwork_pending",
+      "therapy_missing",
+      "transport_timing"
+    ],
+    "expected_tasks": [
+      "arrange_therapy",
+      "arrange_transport",
+      "reconcile_meds",
+      "sign_summary"
+    ],
+    "scenario_family": "medication_review+paperwork+therapy+transport_timing"
+  },
+  "RSC-2718-0195": {
+    "expected_barriers": [
+      "financial_barrier",
+      "med_unavailable"
+    ],
+    "expected_tasks": [
+      "address_finances",
+      "fill_meds"
+    ],
+    "scenario_family": "finances+medication_access"
+  },
+  "RSC-2718-0196": {
+    "expected_barriers": [
+      "med_reconciliation_missing",
+      "paperwork_pending",
+      "therapy_missing",
+      "transport_missing"
+    ],
+    "expected_tasks": [
+      "arrange_therapy",
+      "arrange_transport",
+      "reconcile_meds",
+      "sign_summary"
+    ],
+    "scenario_family": "medication_review+paperwork+therapy+transport"
+  },
+  "RSC-2718-0197": {
+    "expected_barriers": [
+      "followup_missing",
+      "mobility_education_missing",
+      "paperwork_pending",
+      "pending_results"
+    ],
+    "expected_tasks": [
+      "review_results",
+      "schedule_followup",
+      "sign_summary",
+      "teach_mobility_device"
+    ],
+    "scenario_family": "followup+mobility_education+paperwork+pending_results"
+  },
+  "RSC-2718-0198": {
+    "expected_barriers": [
+      "financial_barrier",
+      "pcp_notification_missing",
+      "physical_support_needed"
+    ],
+    "expected_tasks": [
+      "address_finances",
+      "assess_function",
+      "notify_pcp"
+    ],
+    "scenario_family": "finances+mobility+pcp"
+  },
+  "RSC-2718-0199": {
+    "expected_barriers": [
+      "device_education_missing",
+      "med_education_missing",
+      "med_unavailable",
+      "transport_timing"
+    ],
+    "expected_tasks": [
+      "arrange_transport",
+      "fill_meds",
+      "teach_device",
+      "teach_meds"
+    ],
+    "scenario_family": "device_education+medication_access+medication_education+transport_timing"
+  },
+  "RSC-2718-0200": {
+    "expected_barriers": [
+      "home_safety_issue",
+      "therapy_missing",
+      "transport_timing"
+    ],
+    "expected_tasks": [
+      "arrange_therapy",
+      "arrange_transport",
+      "check_home_safety"
+    ],
+    "scenario_family": "home_safety+therapy+transport_timing"
+  },
+  "RSC-2718-0201": {
+    "expected_barriers": [
+      "case_manager_missing",
+      "device_education_missing",
+      "pcp_notification_missing"
+    ],
+    "expected_tasks": [
+      "assign_case_manager",
+      "notify_pcp",
+      "teach_device"
+    ],
+    "scenario_family": "case_manager+device_education+pcp"
+  },
+  "RSC-2718-0202": {
+    "expected_barriers": [
+      "device_education_missing",
+      "diet_education_missing",
+      "home_safety_issue",
+      "med_unavailable"
+    ],
+    "expected_tasks": [
+      "check_home_safety",
+      "fill_meds",
+      "teach_device",
+      "teach_diet"
+    ],
+    "scenario_family": "device_education+diet_education+home_safety+medication_access"
+  },
+  "RSC-2718-0203": {
+    "expected_barriers": [
+      "case_manager_missing",
+      "patient_education_missing",
+      "therapy_missing",
+      "transport_timing"
+    ],
+    "expected_tasks": [
+      "arrange_therapy",
+      "arrange_transport",
+      "assign_case_manager",
+      "teach_condition"
+    ],
+    "scenario_family": "case_manager+patient_education+therapy+transport_timing"
+  },
+  "RSC-2718-0204": {
+    "expected_barriers": [
+      "followup_missing",
+      "med_reconciliation_missing",
+      "pending_results",
+      "physical_support_needed"
+    ],
+    "expected_tasks": [
+      "assess_function",
+      "reconcile_meds",
+      "review_results",
+      "schedule_followup"
+    ],
+    "scenario_family": "followup+medication_review+mobility+pending_results"
+  },
+  "RSC-2718-0205": {
+    "expected_barriers": [
+      "med_education_missing",
+      "physical_support_needed"
+    ],
+    "expected_tasks": [
+      "assess_function",
+      "teach_meds"
+    ],
+    "scenario_family": "medication_education+mobility"
+  },
+  "RSC-2718-0206": {
+    "expected_barriers": [
+      "financial_barrier",
+      "pcp_notification_missing",
+      "therapy_missing"
+    ],
+    "expected_tasks": [
+      "address_finances",
+      "arrange_therapy",
+      "notify_pcp"
+    ],
+    "scenario_family": "finances+pcp+therapy"
+  },
+  "RSC-2718-0207": {
+    "expected_barriers": [
+      "device_education_missing",
+      "financial_barrier",
+      "med_education_missing",
+      "med_unavailable"
+    ],
+    "expected_tasks": [
+      "address_finances",
+      "fill_meds",
+      "teach_device",
+      "teach_meds"
+    ],
+    "scenario_family": "device_education+finances+medication_access+medication_education"
+  },
+  "RSC-2718-0208": {
+    "expected_barriers": [
+      "device_education_missing",
+      "financial_barrier",
+      "mobility_education_missing"
+    ],
+    "expected_tasks": [
+      "address_finances",
+      "teach_device",
+      "teach_mobility_device"
+    ],
+    "scenario_family": "device_education+finances+mobility_education"
+  },
+  "RSC-2718-0209": {
+    "expected_barriers": [
+      "financial_barrier",
+      "med_reconciliation_missing",
+      "patient_education_missing",
+      "pcp_notification_missing"
+    ],
+    "expected_tasks": [
+      "address_finances",
+      "notify_pcp",
+      "reconcile_meds",
+      "teach_condition"
+    ],
+    "scenario_family": "finances+medication_review+patient_education+pcp"
+  },
+  "RSC-2718-0210": {
+    "expected_barriers": [
+      "case_manager_missing",
+      "device_education_missing",
+      "med_reconciliation_missing"
+    ],
+    "expected_tasks": [
+      "assign_case_manager",
+      "reconcile_meds",
+      "teach_device"
+    ],
+    "scenario_family": "case_manager+device_education+medication_review"
+  },
+  "RSC-2718-0211": {
+    "expected_barriers": [
+      "followup_missing",
+      "med_unavailable",
+      "pcp_notification_missing",
+      "transport_missing"
+    ],
+    "expected_tasks": [
+      "arrange_transport",
+      "fill_meds",
+      "notify_pcp",
+      "schedule_followup"
+    ],
+    "scenario_family": "multiple+pcp"
+  },
+  "RSC-2718-0212": {
+    "expected_barriers": [
+      "case_manager_missing",
+      "device_education_missing",
+      "pending_results",
+      "therapy_missing"
+    ],
+    "expected_tasks": [
+      "arrange_therapy",
+      "assign_case_manager",
+      "review_results",
+      "teach_device"
+    ],
+    "scenario_family": "case_manager+device_education+pending_results+therapy"
+  },
+  "RSC-2718-0213": {
+    "expected_barriers": [
+      "patient_education_missing",
+      "pending_results",
+      "therapy_missing"
+    ],
+    "expected_tasks": [
+      "arrange_therapy",
+      "review_results",
+      "teach_condition"
+    ],
+    "scenario_family": "patient_education+pending_results+therapy"
+  },
+  "RSC-2718-0214": {
+    "expected_barriers": [
+      "followup_missing",
+      "med_reconciliation_missing",
+      "med_unavailable",
+      "mobility_education_missing",
+      "paperwork_pending",
+      "transport_missing"
+    ],
+    "expected_tasks": [
+      "arrange_transport",
+      "fill_meds",
+      "reconcile_meds",
+      "schedule_followup",
+      "sign_summary",
+      "teach_mobility_device"
+    ],
+    "scenario_family": "medication_review+mobility_education+multiple+paperwork"
+  },
+  "RSC-2718-0215": {
+    "expected_barriers": [
+      "caregiver_missing",
+      "transport_timing"
+    ],
+    "expected_tasks": [
+      "arrange_transport",
+      "confirm_caregiver"
+    ],
+    "scenario_family": "caregiver+transport_timing"
+  },
+  "RSC-2718-0216": {
+    "expected_barriers": [
+      "case_manager_missing",
+      "med_unavailable"
+    ],
+    "expected_tasks": [
+      "assign_case_manager",
+      "fill_meds"
+    ],
+    "scenario_family": "case_manager+medication_access"
+  },
+  "RSC-2718-0217": {
+    "expected_barriers": [
+      "med_unavailable",
+      "pcp_notification_missing",
+      "pending_results"
+    ],
+    "expected_tasks": [
+      "fill_meds",
+      "notify_pcp",
+      "review_results"
+    ],
+    "scenario_family": "medication_access+pcp+pending_results"
+  },
+  "RSC-2718-0218": {
+    "expected_barriers": [
+      "device_education_missing",
+      "med_reconciliation_missing",
+      "patient_education_missing",
+      "transport_missing"
+    ],
+    "expected_tasks": [
+      "arrange_transport",
+      "reconcile_meds",
+      "teach_condition",
+      "teach_device"
+    ],
+    "scenario_family": "device_education+medication_review+patient_education+transport"
+  },
+  "RSC-2718-0219": {
+    "expected_barriers": [
+      "followup_missing",
+      "med_education_missing"
+    ],
+    "expected_tasks": [
+      "schedule_followup",
+      "teach_meds"
+    ],
+    "scenario_family": "followup+medication_education"
+  },
+  "RSC-2718-0220": {
+    "expected_barriers": [
+      "med_unavailable",
+      "mobility_education_missing",
+      "therapy_missing"
+    ],
+    "expected_tasks": [
+      "arrange_therapy",
+      "fill_meds",
+      "teach_mobility_device"
+    ],
+    "scenario_family": "medication_access+mobility_education+therapy"
+  },
+  "RSC-2718-0221": {
+    "expected_barriers": [
+      "pending_results"
+    ],
+    "expected_tasks": [
+      "review_results"
+    ],
+    "scenario_family": "pending_results"
+  },
+  "RSC-2718-0222": {
+    "expected_barriers": [
+      "caregiver_missing",
+      "followup_missing",
+      "med_reconciliation_missing"
+    ],
+    "expected_tasks": [
+      "confirm_caregiver",
+      "reconcile_meds",
+      "schedule_followup"
+    ],
+    "scenario_family": "caregiver+followup+medication_review"
+  },
+  "RSC-2718-0223": {
+    "expected_barriers": [
+      "device_education_missing",
+      "med_unavailable",
+      "patient_education_missing",
+      "transport_missing"
+    ],
+    "expected_tasks": [
+      "arrange_transport",
+      "fill_meds",
+      "teach_condition",
+      "teach_device"
+    ],
+    "scenario_family": "device_education+medication_access+patient_education+transport"
+  },
+  "RSC-2718-0224": {
+    "expected_barriers": [
+      "device_education_missing",
+      "med_unavailable"
+    ],
+    "expected_tasks": [
+      "fill_meds",
+      "teach_device"
+    ],
+    "scenario_family": "device_education+medication_access"
+  },
+  "RSC-2718-0225": {
+    "expected_barriers": [
+      "mobility_education_missing",
+      "pending_results",
+      "therapy_missing"
+    ],
+    "expected_tasks": [
+      "arrange_therapy",
+      "review_results",
+      "teach_mobility_device"
+    ],
+    "scenario_family": "mobility_education+pending_results+therapy"
+  },
+  "RSC-2718-0226": {
+    "expected_barriers": [
+      "device_education_missing",
+      "med_education_missing",
+      "patient_education_missing",
+      "physical_support_needed"
+    ],
+    "expected_tasks": [
+      "assess_function",
+      "teach_condition",
+      "teach_device",
+      "teach_meds"
+    ],
+    "scenario_family": "device_education+medication_education+mobility+patient_education"
+  },
+  "RSC-2718-0227": {
+    "expected_barriers": [
+      "device_education_missing",
+      "paperwork_pending",
+      "patient_education_missing"
+    ],
+    "expected_tasks": [
+      "sign_summary",
+      "teach_condition",
+      "teach_device"
+    ],
+    "scenario_family": "device_education+paperwork+patient_education"
+  },
+  "RSC-2718-0228": {
+    "expected_barriers": [
+      "diet_education_missing",
+      "home_safety_issue",
+      "med_education_missing",
+      "transport_timing"
+    ],
+    "expected_tasks": [
+      "arrange_transport",
+      "check_home_safety",
+      "teach_diet",
+      "teach_meds"
+    ],
+    "scenario_family": "diet_education+home_safety+medication_education+transport_timing"
+  },
+  "RSC-2718-0229": {
+    "expected_barriers": [
+      "med_education_missing",
+      "med_unavailable",
+      "patient_education_missing"
+    ],
+    "expected_tasks": [
+      "fill_meds",
+      "teach_condition",
+      "teach_meds"
+    ],
+    "scenario_family": "medication_access+medication_education+patient_education"
+  },
+  "RSC-2718-0230": {
+    "expected_barriers": [
+      "case_manager_missing",
+      "patient_education_missing",
+      "transport_timing"
+    ],
+    "expected_tasks": [
+      "arrange_transport",
+      "assign_case_manager",
+      "teach_condition"
+    ],
+    "scenario_family": "case_manager+patient_education+transport_timing"
+  },
+  "RSC-2718-0231": {
+    "expected_barriers": [
+      "home_safety_issue",
+      "med_reconciliation_missing",
+      "mobility_education_missing",
+      "transport_timing"
+    ],
+    "expected_tasks": [
+      "arrange_transport",
+      "check_home_safety",
+      "reconcile_meds",
+      "teach_mobility_device"
+    ],
+    "scenario_family": "home_safety+medication_review+mobility_education+transport_timing"
+  },
+  "RSC-2718-0232": {
+    "expected_barriers": [
+      "med_unavailable",
+      "mobility_education_missing",
+      "patient_education_missing",
+      "pending_results"
+    ],
+    "expected_tasks": [
+      "fill_meds",
+      "review_results",
+      "teach_condition",
+      "teach_mobility_device"
+    ],
+    "scenario_family": "medication_access+mobility_education+patient_education+pending_results"
+  },
+  "RSC-2718-0233": {
+    "expected_barriers": [
+      "case_manager_missing",
+      "followup_missing",
+      "med_reconciliation_missing",
+      "mobility_education_missing"
+    ],
+    "expected_tasks": [
+      "assign_case_manager",
+      "reconcile_meds",
+      "schedule_followup",
+      "teach_mobility_device"
+    ],
+    "scenario_family": "case_manager+followup+medication_review+mobility_education"
+  },
+  "RSC-2718-0234": {
+    "expected_barriers": [
+      "diet_education_missing",
+      "mobility_education_missing",
+      "transport_missing"
+    ],
+    "expected_tasks": [
+      "arrange_transport",
+      "teach_diet",
+      "teach_mobility_device"
+    ],
+    "scenario_family": "diet_education+mobility_education+transport"
+  },
+  "RSC-2718-0235": {
+    "expected_barriers": [
+      "device_education_missing",
+      "home_safety_issue"
+    ],
+    "expected_tasks": [
+      "check_home_safety",
+      "teach_device"
+    ],
+    "scenario_family": "device_education+home_safety"
+  },
+  "RSC-2718-0236": {
+    "expected_barriers": [
+      "device_education_missing",
+      "financial_barrier",
+      "followup_missing",
+      "patient_education_missing"
+    ],
+    "expected_tasks": [
+      "address_finances",
+      "schedule_followup",
+      "teach_condition",
+      "teach_device"
+    ],
+    "scenario_family": "device_education+finances+followup+patient_education"
+  },
+  "RSC-2718-0237": {
+    "expected_barriers": [
+      "caregiver_missing",
+      "financial_barrier",
+      "patient_education_missing",
+      "transport_timing"
+    ],
+    "expected_tasks": [
+      "address_finances",
+      "arrange_transport",
+      "confirm_caregiver",
+      "teach_condition"
+    ],
+    "scenario_family": "caregiver+finances+patient_education+transport_timing"
+  },
+  "RSC-2718-0238": {
+    "expected_barriers": [
+      "case_manager_missing",
+      "home_safety_issue",
+      "med_reconciliation_missing",
+      "mobility_education_missing"
+    ],
+    "expected_tasks": [
+      "assign_case_manager",
+      "check_home_safety",
+      "reconcile_meds",
+      "teach_mobility_device"
+    ],
+    "scenario_family": "case_manager+home_safety+medication_review+mobility_education"
+  },
+  "RSC-2718-0239": {
+    "expected_barriers": [
+      "home_safety_issue",
+      "therapy_missing"
+    ],
+    "expected_tasks": [
+      "arrange_therapy",
+      "check_home_safety"
+    ],
+    "scenario_family": "home_safety+therapy"
+  },
+  "RSC-2718-0240": {
+    "expected_barriers": [
+      "followup_missing",
+      "med_education_missing",
+      "med_unavailable"
+    ],
+    "expected_tasks": [
+      "fill_meds",
+      "schedule_followup",
+      "teach_meds"
+    ],
+    "scenario_family": "followup+medication_access+medication_education"
+  }
+}

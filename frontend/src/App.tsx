@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import "./App.css";
+import { HistoryPanel, type SavedReview } from "./HistoryPanel";
+import { ResearchPanel, type WorkflowResearch } from "./ResearchPanel";
 
 
 type LLMInfo = {
@@ -87,7 +89,9 @@ type ReadinessExplanation = {
 };
 
 
-type CaseResult = {
+export type CaseResult = WorkflowResearch & {
+  source_case_file?: string;
+  database?: { status: string; run_id?: string };
   case_id: string;
   condition: string;
 
@@ -137,6 +141,7 @@ type CaseResult = {
 
   final_output?: {
     final_status?: string;
+    agent_review_required?: boolean;
   };
 
   evaluation?: {
@@ -153,6 +158,8 @@ type ReviewDecision =
 
 
 type RecordedReview = {
+  reviewerRole?: string;
+  reviewedAt?: string;
   decision: ReviewDecision;
   reviewStatus: string;
 };
@@ -296,11 +303,24 @@ function App() {
   >({});
 
 
+  const reviewRequests = useRef<Record<string, string>>({});
+
+  function restoreRun(saved: CaseResult, reviews: SavedReview[]) {
+    setResult(saved);
+    if (saved.source_case_file) setCaseFile(saved.source_case_file);
+    setReviewDecisions(Object.fromEntries(reviews.map(r => [r.recommendation_id, { decision: r.decision, reviewStatus: r.review_status, reviewerRole: r.reviewer_role, reviewedAt: r.created_at }])));
+    setReviewNotes(Object.fromEntries(reviews.map(r => [r.recommendation_id, r.notes ?? ""])));
+    setReviewLoading({});
+    setError("");
+    setActiveSection("overview");
+    reviewRequests.current = {};
+  }
+
   // =======================================================
   // RUN CASE
   // =======================================================
 
-  async function runCase() {
+  async function runCase(offline = false) {
 
     setLoading(true);
 
@@ -323,7 +343,7 @@ function App() {
 
       const response =
         await fetch(
-          `http://127.0.0.1:8000/cases/${caseFile}/run`,
+          `http://127.0.0.1:8000/cases/${encodeURIComponent(caseFile)}/run?offline=${offline}&persist=${!offline}`,
           {
             method: "POST"
           }
@@ -446,6 +466,15 @@ function App() {
     }
 
 
+    const runId = result.database?.run_id;
+    if (result.database?.status !== "saved" || !runId) {
+      setError("Save a pipeline run to the database before recording a review. Offline references are not reviewable saved runs.");
+      return;
+    }
+    const requestKey = JSON.stringify([runId, recommendation.recommendation_id, decision, reviewNotes[recommendation.recommendation_id] ?? null]);
+    const requestId = reviewRequests.current[requestKey] ?? crypto.randomUUID();
+    reviewRequests.current[requestKey] = requestId;
+
     const recommendationId =
       recommendation
         .recommendation_id;
@@ -477,6 +506,8 @@ function App() {
             },
 
             body: JSON.stringify({
+              run_id: runId,
+              request_id: requestId,
               case_id:
                 result.case_id,
 
@@ -515,13 +546,15 @@ function App() {
 
       const data =
         await response.json();
-
+      delete reviewRequests.current[requestKey];
 
       setReviewDecisions(
         (previous) => ({
           ...previous,
 
           [recommendationId]: {
+            reviewerRole: data.human_review?.reviewer_role,
+            reviewedAt: data.human_review?.created_at,
             decision:
               decision,
 
@@ -574,6 +607,13 @@ function App() {
 
     return (
       <>
+        {result.final_output?.agent_review_required && (
+          <section className="clinical-panel" role="status">
+            <h2>Evidence or proposal review required</h2>
+            <p>The agent found source-quality issues, rejected proposals, or missing recommendations. Inspect Agent Research before recording a review decision.</p>
+            <button onClick={() => setActiveSection("research")}>Inspect agent review</button>
+          </section>
+        )}
 
         {result.readiness_explanation && (
           <section className="clinical-panel">
@@ -1434,6 +1474,8 @@ function App() {
     return (
 
       <>
+        {result?.database?.status !== "saved" && <p role="status">Review decisions require a saved database run. Run Analysis with persistence enabled, or open a saved run from Run History.</p>}
+
 
         <section className="clinical-panel">
 
@@ -1697,7 +1739,7 @@ function App() {
                           <button
                             className="review-button review-approve"
                             disabled={
-                              isSubmitting
+                              isSubmitting || result?.database?.status !== "saved"
                             }
                             onClick={() =>
                               submitHumanReview(
@@ -1713,7 +1755,7 @@ function App() {
                           <button
                             className="review-button review-reject"
                             disabled={
-                              isSubmitting
+                              isSubmitting || result?.database?.status !== "saved"
                             }
                             onClick={() =>
                               submitHumanReview(
@@ -1729,7 +1771,7 @@ function App() {
                           <button
                             className="review-button review-flag"
                             disabled={
-                              isSubmitting
+                              isSubmitting || result?.database?.status !== "saved"
                             }
                             onClick={() =>
                               submitHumanReview(
@@ -1782,11 +1824,14 @@ function App() {
 
                         <p>
 
-                          Decision recorded in the audit log.
+                          Decision saved to the database.
 
                           No clinical action was automatically executed.
 
                         </p>
+                        {recordedReview.reviewerRole && <p>Reviewer label: {recordedReview.reviewerRole}</p>}
+                        {recordedReview.reviewedAt && <p>Recorded: {new Date(recordedReview.reviewedAt).toLocaleString()}</p>}
+                        {reviewNotes[recommendation.recommendation_id] && <p>Review notes: {reviewNotes[recommendation.recommendation_id]}</p>}
 
                       </div>
 
@@ -2074,6 +2119,12 @@ function App() {
   // =======================================================
 
   function renderWorkspace() {
+    if (activeSection === "history") {
+      return <HistoryPanel onOpen={restoreRun} />;
+    }
+    if (activeSection === "research") {
+      return <ResearchPanel key={caseFile} result={result} caseFile={caseFile} />;
+    }
 
     if (!result) {
 
@@ -2239,7 +2290,7 @@ function App() {
 
 
           <button
-            onClick={runCase}
+            onClick={() => runCase()}
             disabled={loading}
           >
 
@@ -2249,6 +2300,7 @@ function App() {
 
           </button>
 
+          <button onClick={() => runCase(true)} disabled={loading}>Run offline reference</button>
         </div>
 
 
@@ -2317,7 +2369,7 @@ function App() {
 
               <span
                 className={
-                  humanReviewItems.length
+                  (humanReviewItems.length || result.final_output?.agent_review_required)
                     ? "status-badge status-danger"
                     : "status-badge status-success"
                 }
@@ -2325,7 +2377,7 @@ function App() {
 
                 {humanReviewItems.length
                   ? `${humanReviewItems.length} Required`
-                  : "None"}
+                  : result.final_output?.agent_review_required ? "Evidence Review" : "None"}
 
               </span>
 
@@ -2377,6 +2429,10 @@ function App() {
 
 
         <aside className="sidebar">
+          <button className={activeSection === "history" ? "nav-item active" : "nav-item"}
+            onClick={() => setActiveSection("history")}>Run History</button>
+          <button className={activeSection === "research" ? "nav-item active" : "nav-item"}
+            onClick={() => setActiveSection("research")}>Agent Research</button>
 
 
           <button

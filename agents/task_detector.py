@@ -40,6 +40,15 @@ class TaskDetector:
                 }
             )
 
+        for barrier_id, task_id, name, role, field in (
+            ('pending_imaging_results', 'review_imaging_result', 'Request clinician review of pending imaging results', 'Physician', 'pending_imaging'),
+            ('pending_consult_review', 'review_consult_recommendations', 'Request review of outstanding consultation recommendations', 'Physician', 'pending_consult'),
+            ('clinical_instability', 'request_clinical_reassessment', 'Request clinician reassessment of documented instability', 'Physician', 'medical_stability_status'),
+            ('case_manager_missing', 'assign_case_manager', 'Request assignment of a covering case manager', 'Case Management Supervisor', 'case_manager_status'),
+        ):
+            if barrier_id in barrier_ids:
+                add_task(task_id, name, role, [barrier_id], field)
+
         # =====================================================
         # MEDICATION TASKS
         # =====================================================
@@ -197,14 +206,19 @@ class TaskDetector:
             barrier_id
             for barrier_id in [
                 "transport_missing",
-                "transport_timing"
+                "transport_timing",
+                "transport_date_conflict"
             ]
             if barrier_id in barrier_ids
         ]
 
         if transport_barriers:
 
-            if "transport_timing" in transport_barriers:
+            if 'transport_date_conflict' in transport_barriers:
+                source_field = 'planned_discharge_date + transport_date'
+                if 'transport_timing' in transport_barriers:
+                    source_field += ' + planned_discharge_window + transport_time'
+            elif "transport_timing" in transport_barriers:
                 source_field = (
                     "planned_discharge_window + transport_time"
                 )

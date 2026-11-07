@@ -1,7 +1,7 @@
 import os
 
 from dotenv import load_dotenv
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, event
 from sqlalchemy.orm import DeclarativeBase
 from sqlalchemy.orm import sessionmaker
 
@@ -20,10 +20,15 @@ if not DATABASE_URL:
     )
 
 
-engine = create_engine(
-    DATABASE_URL,
-    pool_pre_ping=True
-)
+engine_options = {"pool_pre_ping": True}
+if DATABASE_URL.startswith("postgresql"):
+    engine_options["connect_args"] = {"connect_timeout": 5}
+engine = create_engine(DATABASE_URL, **engine_options)
+
+if engine.dialect.name == "sqlite":
+    @event.listens_for(engine, "connect")
+    def enable_foreign_keys(connection, _):
+        connection.execute("PRAGMA foreign_keys=ON")
 
 
 SessionLocal = sessionmaker(
@@ -38,12 +43,6 @@ class Base(DeclarativeBase):
 
 
 def init_database():
-    """
-    Create all database tables that do not already exist.
-    """
-
-    from db import models
-
-    Base.metadata.create_all(
-        bind=engine
-    )
+    """Initialize using the versioned additive migration."""
+    from db.migrate import migrate
+    return migrate()

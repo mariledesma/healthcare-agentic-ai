@@ -26,7 +26,7 @@ SCENARIOS = [
     ('pcp', {'pcp_notification_status': 'incomplete'}, ['pcp_notification_missing'], ['notify_pcp']),
     ('finances', {'financial_status': 'barrier'}, ['financial_barrier'], ['address_finances']),
     ('home_safety', {'home_safety_status': 'needs_assessment'}, ['home_safety_issue'], ['check_home_safety']),
-    ('case_manager', {'case_manager_status': 'unavailable'}, ['case_manager_missing'], []),
+    ('case_manager', {'case_manager_status': 'unavailable'}, ['case_manager_missing'], ['assign_case_manager']),
     ('paperwork', {'discharge_summary_status': 'unsigned'}, ['paperwork_pending'], ['sign_summary']),
     ('mobility', {'physical_function': 'needs_assistance'}, ['physical_support_needed'], ['assess_function']),
     ('multiple', {'followup_status': 'not_scheduled', 'transport_status': 'not_arranged', 'transport_time': None, 'medication_availability': 'not_available'}, ['followup_missing', 'transport_missing', 'med_unavailable'], ['schedule_followup', 'arrange_transport', 'fill_meds']),
@@ -137,7 +137,7 @@ def generate(output, count=100, seed=42, model=None):
         (output / 'cases' / f"{record['case_id']}.json").write_text(json.dumps(record, indent=2) + '\n')
         answers[record['case_id']] = answer
     (output / 'answer_keys.json').write_text(json.dumps(answers, indent=2) + '\n')
-    manifest = {'schema_version': 1, 'generator_version': '1.0', 'seed': seed, 'count': count, 'mode': 'restricted_medgemma_wording' if model else 'template', 'model': model, 'clinical_review': 'required; fixtures are not clinically validated', 'unique_structured_cases': len(seen), 'scenario_families': sorted({a['scenario_family'] for _, a in planned}), 'limitations': ['No learned population distribution', 'No missing-information or contradiction cases in v1', 'MedGemma selects a validated introduction only; clinical facts are rendered deterministically']}
+    manifest = {'schema_version': 1, 'generator_version': '1.1', 'seed': seed, 'count': count, 'mode': 'restricted_medgemma_wording' if model else 'template', 'model': model, 'clinical_review': 'required; fixtures are not clinically validated', 'unique_structured_cases': len(seen), 'scenario_families': sorted({a['scenario_family'] for _, a in planned}), 'limitations': ['No learned population distribution', 'No missing-information or contradiction cases in v1', 'MedGemma selects a validated introduction only; clinical facts are rendered deterministically']}
     (output / 'manifest.json').write_text(json.dumps(manifest, indent=2) + '\n')
     return manifest
 

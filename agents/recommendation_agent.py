@@ -27,7 +27,10 @@ Rules:
 9. Do not authorize discharge.
 10. Do not execute clinical actions.
 11. Recommendations are proposals only.
-12. Every recommendation will be checked by deterministic governance.
+12. Return exactly one recommendation per supplied task. Copy priority, source_fields
+    (a one-element list containing the task source_field), and resolves_barriers
+    (as supporting_barrier_ids) exactly.
+13. Every recommendation will be checked by deterministic governance.
 """
 
         input_data = {
@@ -102,80 +105,29 @@ Rules:
             schema=schema
         )
 
-        task_lookup = {
-            task["task_id"]: task
-            for task in tasks
-        }
-
+        # Preserve raw proposals before verification; never silently repair or drop them.
+        raw_items = result.get("recommendations") if isinstance(result, dict) else None
         recommendations = []
-
-        for item in result["recommendations"]:
-            task_id = item["task_id"]
-
-            # Ignore anything the LLM invents.
-            if task_id not in task_lookup:
-                continue
-
-            canonical_task = task_lookup[
-                task_id
-            ]
-
-            recommendations.append(
-                {
-                    "recommendation_id": (
-                        f"recommendation_{task_id}"
-                    ),
-
-                    # Stable machine-readable ID
+        if isinstance(raw_items, list):
+            for index, item in enumerate(raw_items):
+                if not isinstance(item, dict):
+                    recommendations.append(item)
+                    continue
+                task_id = item.get("task_id")
+                recommendations.append({
+                    "recommendation_id": f"recommendation_{task_id}_{index}",
                     "task_id": task_id,
-
-                    # Human-readable action
-                    "action": canonical_task[
-                        "task_name"
-                    ],
-
-                    "rationale": item[
-                        "rationale"
-                    ],
-
-                    "owner_role": canonical_task[
-                        "owner_role"
-                    ],
-
-                    "priority": item[
-                        "priority"
-                    ],
-
-                    "resolves_barriers": (
-                        canonical_task[
-                            "resolves_barriers"
-                        ]
-                    ),
-
-                    "supporting_task_ids": [
-                        task_id
-                    ],
-
-                    "source_fields": [
-                        canonical_task[
-                            "source_field"
-                        ]
-                    ]
-                }
-            )
-
-        priority_order = {
-            "high": 1,
-            "medium": 2,
-            "low": 3
-        }
-
-        recommendations.sort(
-            key=lambda item: priority_order.get(
-                item["priority"],
-                99
-            )
-        )
+                    "action": item.get("action"),
+                    "rationale": item.get("rationale"),
+                    "owner_role": item.get("owner_role"),
+                    "priority": item.get("priority"),
+                    "resolves_barriers": item.get("supporting_barrier_ids"),
+                    "supporting_task_ids": [task_id],
+                    "source_fields": item.get("source_fields"),
+                    **({"requested_operation": item["requested_operation"]} if "requested_operation" in item else {})
+                })
+        else:
+            recommendations = [raw_items]
 
         return {
             "agent": "RecommendationAgent",
@@ -201,5 +153,6 @@ Rules:
                 "detected_barriers_and_tasks"
             ),
 
+            "raw_response": result,
             "recommendations": recommendations
         }

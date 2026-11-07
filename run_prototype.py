@@ -1,6 +1,7 @@
 
 import argparse
 import json
+import os
 from pathlib import Path
 
 from agents.input_reader import InputReader
@@ -15,7 +16,13 @@ from policy.policy_engine import PolicyEngine
 from policy.approval_gate import ApprovalGate
 
 from evaluation.audit_logger import AuditLogger
-from db.repository import save_pipeline_run
+try:
+    from db.repository import save_pipeline_run
+except (ImportError, ValueError):
+    save_pipeline_run = None
+
+from research.agent import WorkflowAgent
+from research.provenance import seal
 
 
 # ---------------------------------------------------------
@@ -39,7 +46,7 @@ def compare_ids(expected, detected):
 # Main agentic pipeline
 # ---------------------------------------------------------
 
-def run_pipeline(case_file):
+def run_pipeline(case_file, use_llm=True, persist=True):
     input_reader = InputReader()
     case_analyzer = CaseAnalyzer()
     barrier_detector = BarrierDetector()
@@ -92,7 +99,9 @@ def run_pipeline(case_file):
     # Retain standalone model output as unverified research data.
     # Its failure must not prevent the independent deterministic assessment.
     try:
-        analysis_result = case_analyzer.analyze(patient_record)
+        analysis_result = case_analyzer.analyze(patient_record) if use_llm else {
+            "agent": "CaseAnalyzer", "status": "disabled", "finding": "Offline rules baseline; no model called.",
+            "llm": {"provider": "none", "model": "none"}}
     except Exception as error:
         analysis_result = {
             "agent": "CaseAnalyzer", "status": "error",
@@ -142,7 +151,10 @@ def run_pipeline(case_file):
 
     # This explanation uses only detector findings and their actual source values.
     # Rejected model output stays visible, and never replaces detector evidence.
-    readiness_explanation = ReadinessExplainer().explain(patient_record, barriers)
+    readiness_explanation = ReadinessExplainer().explain(patient_record, barriers) if use_llm else {
+        "status": "disabled", "requires_review": False, "validation_errors": [],
+        "detector_evidence": [], "raw_response": None, "explanations": [], "llm": None,
+        "finding": "Offline rules baseline; no generated explanation."}
     audit_logger.log(
         case_id=case_id, module="ReadinessExplainer", action="explain_detector_evidence",
         status=readiness_explanation["status"],
@@ -182,12 +194,25 @@ def run_pipeline(case_file):
     # 5. LLM Recommendation Agent
     # -----------------------------------------------------
 
-    recommendation_result = recommendation_agent.generate(
-        barriers,
-        tasks
-    )
+    try:
+        recommendation_result = recommendation_agent.generate(barriers, tasks) if use_llm and tasks else {
+            "agent": "RecommendationAgent", "status": "disabled" if not use_llm else "not_needed",
+            "llm": {"provider": "none", "model": "none"},
+            "recommendations": [{"recommendation_id": "reference_" + t["task_id"],
+                "task_id": t["task_id"], "action": t["task_name"], "owner_role": t["owner_role"],
+                "priority": t["priority"], "resolves_barriers": t["resolves_barriers"],
+                "source_fields": [t["source_field"]], "rationale": "Deterministic reference proposal; not model generated."}
+                for t in tasks] if not use_llm else []}
+    except Exception as error:
+        recommendation_result = {"agent": "RecommendationAgent", "status": "error",
+            "llm": recommendation_agent.llm.get_metadata(), "recommendations": [],
+            "error": f"{type(error).__name__}: {error}"}
 
-    recommendations = recommendation_result["recommendations"]
+    agent_workflow = WorkflowAgent().run(patient_record, barriers, tasks, recommendation_result["recommendations"])
+    verification = agent_workflow.get("verification", {"accepted": [], "rejected": [], "missing_task_ids": [], "requires_review": True})
+    recommendations = verification["accepted"]
+    audit_logger.log(case_id=case_id, module="WorkflowAgent", action="inspect_verify_route",
+                     status=agent_workflow["status"], details=agent_workflow)
 
     audit_logger.log(
         case_id=case_id,
@@ -243,6 +268,10 @@ def run_pipeline(case_file):
                 recommendation
             )
 
+        route = next((r for r in agent_workflow.get("routes", []) if r["task_id"] == recommendation["task_id"]), None)
+        if route:
+            policy_result, approval_result = route["policy"], route["approval"]
+
         governance_item = {
             "recommendation_id": recommendation["recommendation_id"],
             "task_id": recommendation.get("task_id"),
@@ -281,6 +310,10 @@ def run_pipeline(case_file):
         governance_results=governance_results,
         readiness_explanation=readiness_explanation
     )
+
+    final_output["agent_review_required"] = agent_workflow["decision"] == "request_human_review"
+    if final_output["agent_review_required"]:
+        final_output["final_status"] = "human_review_required"
 
     audit_logger.log(
         case_id=case_id,
@@ -329,6 +362,7 @@ def run_pipeline(case_file):
     # -----------------------------------------------------
 
     result = {
+        "source_case_file": Path(case_file).name,
         "case_id": case_id,
         "condition": patient_record["condition"],
 
@@ -345,6 +379,8 @@ def run_pipeline(case_file):
             "ReadinessExplainer",
             "TaskDetector",
             "RecommendationAgent",
+            "WorkflowAgent",
+            "EvidenceVerification",
             "PolicyEngine",
             "ApprovalGate",
             "AuditLogger",
@@ -358,7 +394,9 @@ def run_pipeline(case_file):
         "readiness_explanation": readiness_explanation,
         "barrier_detector": barrier_result,
         "task_detector": task_result,
-        "recommendation_agent": recommendation_result,
+        "recommendation_agent": {**recommendation_result, "recommendations": recommendations},
+        "agent_workflow": agent_workflow,
+        "safety_verification": verification,
 
         "governance": {
             "status": "completed",
@@ -373,6 +411,21 @@ def run_pipeline(case_file):
             "tasks": task_evaluation
         }
     }
+
+    integrity_artifacts = {"barriers": barriers, "tasks": tasks, "agent_workflow": agent_workflow,
+                          "recommendation_result": recommendation_result, "governance": governance_results}
+    result["integrity_artifacts"] = integrity_artifacts
+    result["provenance"] = seal(patient_record, integrity_artifacts, {
+        "use_llm": use_llm, "llm": result["llm_configuration"], "agent_max_steps": 8}, signing_key=os.getenv("RESEARCH_PROVENANCE_HMAC_KEY"))
+    # Store an immutable per-run research snapshot in the existing JSON evaluation
+    # column, so changing patient_cases later does not erase the evidence for this run.
+    result["evaluation"]["research"] = {
+        "schema_version": "research-run-v1", "input_snapshot": patient_record,
+        "integrity_artifacts": integrity_artifacts, "provenance": result["provenance"],
+        "agent_review_required": final_output["agent_review_required"]}
+    if not persist:
+        result["database"] = {"status": "disabled"}
+        return result
 
     # -----------------------------------------------------
     # 10. PostgreSQL Persistence
@@ -455,9 +508,11 @@ def main():
         help="Path to the synthetic patient JSON file"
     )
 
+    parser.add_argument("--offline", action="store_true", help="Deterministic reference proposals; no model calls")
+    parser.add_argument("--no-persist", action="store_true", help="Do not write PostgreSQL records")
     args = parser.parse_args()
 
-    result = run_pipeline(args.case_file)
+    result = run_pipeline(args.case_file, use_llm=not args.offline, persist=not args.no_persist)
 
     output_path = save_result(result)
 

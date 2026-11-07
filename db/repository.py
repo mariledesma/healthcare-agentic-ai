@@ -1,13 +1,14 @@
 import uuid
+import copy
 
-from sqlalchemy import select
+from sqlalchemy import select, func
 
 from db.database import SessionLocal
 from db.models import (
     PatientCase,
     PipelineRun,
     DetectedBarrier,
-    DetectedTask
+    DetectedTask, RunArtifact, RecommendationRecord, GovernanceRecord
 )
 
 
@@ -42,50 +43,21 @@ def save_pipeline_run(
         # 1. STORE OR UPDATE PATIENT CASE
         # =================================================
 
-        patient_case = session.get(
-            PatientCase,
-            case_id
-        )
-
-
-        if patient_case is None:
-
-            patient_case = PatientCase(
-                case_id=case_id,
-
-                condition=patient_record.get(
-                    "condition",
-                    "Unknown"
-                ),
-
-                source_file=source_file,
-
-                case_data=patient_record
-            )
-
-            session.add(
-                patient_case
-            )
-
+        values = {"case_id": case_id, "condition": patient_record.get("condition", "Unknown"),
+                  "source_file": source_file, "case_data": patient_record}
+        if session.bind.dialect.name in ("postgresql", "sqlite"):
+            if session.bind.dialect.name == "postgresql":
+                from sqlalchemy.dialects.postgresql import insert
+            else:
+                from sqlalchemy.dialects.sqlite import insert
+            statement = insert(PatientCase).values(**values)
+            session.execute(statement.on_conflict_do_update(index_elements=[PatientCase.case_id],
+                set_={k:values[k] for k in ("condition","source_file","case_data")} | {"updated_at":func.now()}))
         else:
-
-            # Update case information in case
-            # the synthetic case changes later.
-
-            patient_case.condition = (
-                patient_record.get(
-                    "condition",
-                    patient_case.condition
-                )
-            )
-
-            patient_case.source_file = (
-                source_file
-            )
-
-            patient_case.case_data = (
-                patient_record
-            )
+            patient_case = session.get(PatientCase,case_id)
+            if patient_case is None: session.add(PatientCase(**values))
+            else:
+                for key,value in values.items(): setattr(patient_case,key,value)
 
 
         # Make sure patient case exists before
@@ -280,6 +252,28 @@ def save_pipeline_run(
             )
 
 
+        # Save normalized proposals/governance and the full immutable response in
+        # the same transaction as the case, run, barriers and tasks.
+        from research.provenance import digest, verify
+        payload = copy.deepcopy(result)
+        if not verify(payload["provenance"], patient_record, payload["integrity_artifacts"]):
+            raise ValueError("Pipeline provenance does not match the source or artifacts")
+        proposals = result.get("recommendation_agent", {}).get("recommendations", [])
+        outcomes = result.get("governance", {}).get("results", [])
+        proposal_ids = [p["recommendation_id"] for p in proposals]
+        if len(set(proposal_ids)) != len(proposal_ids) or set(proposal_ids) != {o["recommendation_id"] for o in outcomes}:
+            raise ValueError("Recommendation/governance identities are inconsistent")
+        for proposal in proposals:
+            session.add(RecommendationRecord(run_id=run_id, recommendation_id=proposal["recommendation_id"],
+                task_id=proposal["task_id"], proposal=proposal))
+        session.flush()
+        for outcome in outcomes:
+            session.add(GovernanceRecord(run_id=run_id, recommendation_id=outcome["recommendation_id"],
+                policy_status=outcome["policy"]["policy_status"], approval_status=outcome["approval"]["approval_status"],
+                outcome=outcome))
+        session.add(RunArtifact(run_id=run_id,input_sha256=digest(patient_record),
+                                payload_sha256=digest(payload),payload=payload))
+
         # =================================================
         # 5. COMMIT EVERYTHING
         # =================================================
@@ -294,9 +288,9 @@ def save_pipeline_run(
             "barriers_saved": len(
                 barriers
             ),
-            "tasks_saved": len(
-                tasks
-            )
+            "tasks_saved": len(tasks),
+            "recommendations_saved": len(proposals), "governance_saved": len(outcomes),
+            "artifact_saved": True
         }
 
 
@@ -543,7 +537,7 @@ def get_run_tasks(
 
         statement = (
             select(
-                DetectedTask
+                DetectedTask, RunArtifact, RecommendationRecord, GovernanceRecord
             )
             .where(
                 DetectedTask.run_id

@@ -15,6 +15,10 @@ class PolicyEngine:
         # This does not mean the AI is allowed to execute them.
         self.allowed_tasks = {
             "schedule_followup",
+            "assign_case_manager",
+            "review_imaging_result",
+            "review_consult_recommendations",
+            "request_clinical_reassessment",
             "arrange_transport",
             "confirm_caregiver",
             "arrange_therapy",
@@ -48,6 +52,9 @@ class PolicyEngine:
         }
 
     def evaluate(self, recommendation):
+        if not isinstance(recommendation, dict):
+            return {"policy_status": "review_required", "task_id": None, "action": None,
+                    "reason": "Malformed recommendation requires review."}
 
         task_id = recommendation.get(
             "task_id"
@@ -67,10 +74,7 @@ class PolicyEngine:
         # Explicitly forbidden execution
         # -------------------------------------------------
 
-        if (
-            requested_operation
-            in self.forbidden_operations
-        ):
+        if isinstance(requested_operation, str) and requested_operation in self.forbidden_operations:
             return {
                 "policy_status": "forbidden",
                 "task_id": task_id,
@@ -85,7 +89,11 @@ class PolicyEngine:
         # Recognized recommendation
         # -------------------------------------------------
 
-        if task_id in self.allowed_tasks:
+        if requested_operation is not None:
+            return {"policy_status": "review_required", "task_id": task_id, "action": action,
+                    "reason": "Unknown or malformed execution operation requires review."}
+
+        if isinstance(task_id, str) and task_id in self.allowed_tasks:
             return {
                 "policy_status": "allowed",
                 "task_id": task_id,

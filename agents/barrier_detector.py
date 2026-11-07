@@ -1,3 +1,6 @@
+from datetime import date
+import re
+
 class BarrierDetector:
     """
     Detect discharge barriers using deterministic rules.
@@ -31,12 +34,9 @@ class BarrierDetector:
         if not planned_discharge_window or not transport_time:
             return False
 
-        try:
-            hour = int(
-                str(transport_time).split(":")[0]
-            )
-        except (ValueError, IndexError, AttributeError):
+        if not isinstance(transport_time, str) or not re.fullmatch(r'(?:[01][0-9]|2[0-3]):[0-5][0-9]', transport_time):
             return False
+        hour = int(transport_time[:2])
 
         window = str(
             planned_discharge_window
@@ -110,6 +110,20 @@ class BarrierDetector:
                 pending_labs,
                 "pending_labs"
             )
+
+        # Explicit workflow statuses only; no diagnosis inferred from symptoms.
+        for field, barrier_id, finding in (
+            ('pending_imaging', 'pending_imaging_results', 'Pending imaging results require clinician review.'),
+            ('pending_consult', 'pending_consult_review', 'Outstanding consultation recommendations require clinician review.'),
+        ):
+            value = patient_record.get(field)
+            if isinstance(value, list) and any(isinstance(x, str) and x.strip() for x in value):
+                add_barrier(barrier_id, finding, value, field)
+
+        if patient_record.get('medical_stability_status') == 'unstable':
+            add_barrier('clinical_instability',
+                        'The record documents medical instability requiring clinician reassessment.',
+                        'unstable', 'medical_stability_status')
 
         physical_function = patient_record.get(
             "physical_function"
@@ -403,6 +417,22 @@ class BarrierDetector:
                 ),
                 "planned_discharge_window + transport_time"
             )
+
+        # Date comparisons require two explicit valid ISO dates. Missing/invalid
+        # dates are not evidence of a date conflict; clarification is separate.
+        planned_date = patient_record.get('planned_discharge_date')
+        transport_date = patient_record.get('transport_date')
+        if transport_status == 'arranged':
+            try:
+                valid_dates = all(isinstance(v, str) and re.fullmatch(r'[0-9]{4}-[0-9]{2}-[0-9]{2}', v)
+                                  for v in (planned_date, transport_date))
+                if valid_dates and date.fromisoformat(planned_date) != date.fromisoformat(transport_date):
+                    add_barrier('transport_date_conflict',
+                                'Transportation date differs from the planned discharge date.',
+                                {'planned_discharge_date': planned_date, 'transport_date': transport_date},
+                                'planned_discharge_date + transport_date')
+            except ValueError:
+                pass
 
         # -----------------------------------------------------
         # Home safety

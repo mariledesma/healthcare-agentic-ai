@@ -1303,3 +1303,24 @@ textarea {
   }
 
 }
+
+/* Research controls keep metrics separate from patient-care decisions. */
+.research-view { display: grid; gap: 20px; }
+.research-view h2 { margin-top: 0; }
+.research-view li { margin-bottom: 10px; line-height: 1.5; }
+.research-view pre { white-space: pre-wrap; overflow-wrap: anywhere; background: #f4f5f7; padding: 16px; }
+.research-view details { margin: 16px 0; }
+.research-view summary { cursor: pointer; font-weight: bold; }
+.research-view button { padding: 10px 16px; margin: 6px 0; cursor: pointer; }
+.research-view select { padding: 8px; }
+.research-metrics { display: flex; flex-wrap: wrap; gap: 16px; margin: 20px 0; }
+.research-metrics > div { flex: 1; min-width: 150px; padding: 20px; border: 1px solid #ccd5de; background: #f3f7fb; }
+.research-metrics strong { display: block; font-size: 28px; margin-bottom: 8px; }
+.research-metrics span { color: #394d60; }
+.research-digest { display: block; overflow-wrap: anywhere; }
+.research-table-wrap { overflow-x: auto; }
+.research-view table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+.research-view caption { text-align: left; font-weight: bold; padding-bottom: 12px; }
+.research-view th, .research-view td { text-align: left; padding: 10px; border-bottom: 1px solid #d8dfe6; }
+.research-view th { background: #eef2f6; }
+.research-error { color: #9a2020; }

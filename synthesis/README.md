@@ -14,7 +14,7 @@ Optional local Ollama wording (use an installed model name):
 python -m synthesis.generate --output data/generated/pilot_medgemma --count 100 --seed 42 --model medgemma1.5:4b
 ```
 
-The generator reuses diagnoses, medication doses, and labs from the five existing clinical fixtures. It does not invent treatments or claim clinical validation. Twenty-one explicitly authored scenarios cover ready cases, individual workflow barriers, a transport timing conflict, and combined barriers. There is intentionally no task expectation for case_manager_missing because the current TaskDetector has no corresponding task rule; review this workflow gap separately.
+The generator reuses diagnoses, medication doses, and labs from the five existing clinical fixtures. It does not invent treatments or claim clinical validation. Twenty-one explicitly authored scenarios cover ready cases, individual workflow barriers, a transport timing conflict, and combined barriers. Generator version 1.1 includes assign_case_manager for case_manager_missing, matching the approved workflow expansion. Existing version 1.0 outputs remain unchanged and retain their older expectations; generate into a new directory when using version 1.1.
 
 Patient inputs are in cases/. Expected answers and scenario metadata are exclusively in answer_keys.json. manifest.json records seed, generator version, source mode, count, coverage, and limitations. Each answer entry records the source fixture hash, scenario family, split group, and duplicate flag. All variants sharing a split_group must stay in the same partition. Keep independently authored cases as a frozen evaluation set; this generated suite is for regression coverage, not clinical performance measurement.
 

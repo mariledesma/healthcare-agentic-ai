@@ -1,3 +1,5 @@
+import os
+import logging
 from pathlib import Path
 from typing import Literal, Optional
 
@@ -15,7 +17,7 @@ from run_prototype import run_pipeline
 
 app = FastAPI(
     title="Healthcare Agentic AI API",
-    version="0.2.0"
+    version="0.4.0"
 )
 
 
@@ -31,7 +33,8 @@ app.add_middleware(
 )
 
 
-CASE_DIRECTORY = Path("data/synthetic")
+ROOT_DIRECTORY = Path(__file__).resolve().parents[1]
+CASE_DIRECTORY = ROOT_DIRECTORY / "data/synthetic"
 
 audit_logger = AuditLogger()
 
@@ -39,23 +42,6 @@ audit_logger = AuditLogger()
 # =========================================================
 # HUMAN REVIEW REQUEST
 # =========================================================
-
-class HumanReviewRequest(BaseModel):
-    case_id: str
-    recommendation_id: str
-    task_id: str
-    action: str
-
-    decision: Literal[
-        "approved",
-        "rejected",
-        "flagged"
-    ]
-
-    reviewer_role: str = "Research Reviewer"
-
-    notes: Optional[str] = None
-
 
 # =========================================================
 # ROOT
@@ -66,7 +52,7 @@ def root():
     return {
         "name": "Healthcare Agentic AI",
         "status": "running",
-        "version": "0.2.0"
+        "version": "0.4.0"
     }
 
 
@@ -109,12 +95,11 @@ def get_cases():
 # =========================================================
 
 @app.post("/cases/{case_filename}/run")
-def run_case(case_filename: str):
+def run_case(case_filename: str, offline: bool = False, persist: bool = True):
 
-    case_path = (
-        CASE_DIRECTORY
-        / case_filename
-    )
+    case_path = (CASE_DIRECTORY / case_filename).resolve()
+    if case_path.parent != CASE_DIRECTORY.resolve() or not case_path.name.startswith("case_"):
+        raise HTTPException(status_code=400, detail="Invalid case filename")
 
     if not case_path.exists():
         raise HTTPException(
@@ -133,15 +118,16 @@ def run_case(case_filename: str):
 
     try:
         result = run_pipeline(
-            str(case_path)
+            str(case_path), use_llm=not offline, persist=persist
         )
 
         return result
 
     except Exception as error:
+        logging.getLogger(__name__).exception("Pipeline failed for %s", case_filename)
         raise HTTPException(
             status_code=500,
-            detail=str(error)
+            detail="Pipeline failed; check local server logs"
         )
 
 
@@ -149,94 +135,76 @@ def run_case(case_filename: str):
 # HUMAN REVIEW
 # =========================================================
 
-@app.post("/reviews")
-def submit_review(
-    review: HumanReviewRequest
-):
-    """
-    Record a human decision about an AI recommendation.
+# Durable review and history routes are loaded when database configuration exists.
+try:
+    from api.storage_routes import router as storage_router
+    from api.readiness import check_dependencies
+except (ImportError, ValueError):
+    storage_router = None
+    check_dependencies = None
 
-    Important:
-    This endpoint records the decision only.
-
-    It does NOT:
-    - execute the recommendation
-    - modify medications
-    - send prescriptions
-    - authorize discharge
-    - sign clinical documentation
-    """
-
-    # -----------------------------------------------------
-    # Create readable status
-    # -----------------------------------------------------
-
-    if review.decision == "approved":
-        review_status = "human_approved"
-
-    elif review.decision == "rejected":
-        review_status = "human_rejected"
-
-    else:
-        review_status = "human_flagged"
+if storage_router is not None:
+    app.include_router(storage_router)
 
 
-    # -----------------------------------------------------
-    # Write decision to the audit log
-    # -----------------------------------------------------
+@app.get("/ready")
+def ready():
+    from fastapi.responses import JSONResponse
+    if check_dependencies is None:
+        return JSONResponse(status_code=503,content={"status":"not_ready","reason":"Database configuration is missing"})
+    result=check_dependencies()
+    return JSONResponse(status_code=200 if result['status']=='ready' else 503,content=result)
 
-    log_entry = audit_logger.log(
-        case_id=review.case_id,
-        module="HumanReview",
-        action=review.action,
-        status=review_status,
-        details={
-            "recommendation_id": (
-                review.recommendation_id
-            ),
-            "task_id": review.task_id,
-            "decision": review.decision,
-            "reviewer_role": (
-                review.reviewer_role
-            ),
-            "notes": review.notes,
-            "execution_performed": False
-        }
-    )
+# Research artifacts are trained offline, frozen, and never confer clinical authority.
+from research import service as research_service
+from research.provenance import verify as verify_integrity, authenticate
+from agents.input_reader import InputReader
 
 
-    # -----------------------------------------------------
-    # Response
-    # -----------------------------------------------------
+class SimulationRequest(BaseModel):
+    scenario: Literal["coordination", "clinical", "uncertain", "forbidden"]
+    shield: bool = True
 
-    return {
-        "status": "success",
 
-        "case_id": review.case_id,
+class IntegrityRequest(BaseModel):
+    manifest: dict
+    record: dict
+    artifacts: dict
 
-        "recommendation_id": (
-            review.recommendation_id
-        ),
 
-        "task_id": review.task_id,
+@app.get("/research")
+def research_summary():
+    try:
+        return research_service.summary()
+    except (OSError, ValueError, KeyError, TypeError) as error:
+        raise HTTPException(status_code=503, detail="Research bundle is unavailable or failed its integrity check") from error
 
-        "action": review.action,
 
-        "human_review": {
-            "decision": review.decision,
-            "review_status": review_status,
-            "reviewer_role": (
-                review.reviewer_role
-            ),
-            "notes": review.notes
-        },
+@app.get("/research/cases/{case_filename}/neighbors")
+def research_neighbors(case_filename: str):
+    path = (CASE_DIRECTORY / case_filename).resolve()
+    if path.parent != CASE_DIRECTORY.resolve() or not path.name.startswith("case_") or path.suffix != ".json":
+        raise HTTPException(status_code=400, detail="Invalid case filename")
+    loaded = InputReader().read(path)
+    if loaded['status'] != 'success':
+        raise HTTPException(status_code=404, detail="Case not found or invalid")
+    try:
+        return research_service.neighbors(loaded['patient_record'])
+    except (OSError, ValueError, KeyError, TypeError) as error:
+        raise HTTPException(status_code=503, detail="Research bundle is unavailable or invalid") from error
 
-        "execution_performed": False,
 
-        "message": (
-            "Human review decision recorded. "
-            "No clinical action was executed."
-        ),
+@app.post("/research/simulate")
+def research_simulation(request: SimulationRequest):
+    try:
+        return research_service.simulate(request.scenario, request.shield)
+    except (OSError, ValueError, KeyError, TypeError) as error:
+        raise HTTPException(status_code=503, detail="Research bundle is unavailable or invalid") from error
 
-        "audit_entry": log_entry
-    }
+
+@app.post("/research/verify-integrity")
+def research_integrity(request: IntegrityRequest):
+    matches = verify_integrity(request.manifest, request.record, request.artifacts)
+    return {"matches_manifest": matches,
+            "key_holder_authenticated": matches and authenticate(request.manifest, os.getenv("RESEARCH_PROVENANCE_HMAC_KEY")),
+            "clinical_truth_verified": False, "execution_performed": False}

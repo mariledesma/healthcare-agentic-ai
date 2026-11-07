@@ -1,17 +1,6 @@
-from db.database import init_database
-
-
-def main():
-    print(
-        "Creating Healthcare Agentic AI database tables..."
-    )
-
-    init_database()
-
-    print(
-        "Database tables created successfully."
-    )
-
+"""Initialize the database with the versioned additive migration."""
+import json
+from db.migrate import migrate
 
 if __name__ == "__main__":
-    main()
+    print(json.dumps(migrate(), indent=2))

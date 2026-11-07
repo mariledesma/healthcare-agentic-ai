@@ -1,0 +1,1651 @@
+[
+  {
+    "schema_version": "workflow-q-v1",
+    "seed": 11,
+    "episodes": 3000,
+    "shield": true,
+    "q_table": {
+      "unobserved:0:0": {
+        "inspect": 1.6099999999999977,
+        "request_review": -0.7499999999999997
+      },
+      "forbidden:0:1": {
+        "verify": 1.7999999999999985,
+        "request_review": -0.7499999942689035
+      },
+      "forbidden:1:2": {
+        "block": 1.9999999999999993
+      },
+      "clinical:0:1": {
+        "request_review": -0.7499998260436523,
+        "verify": 1.7999999999999985
+      },
+      "uncertain:0:1": {
+        "request_review": -0.7499999890210194,
+        "verify": 1.7999999999999985
+      },
+      "uncertain:1:2": {
+        "request_review": 1.9999999999999993
+      },
+      "coordination:0:1": {
+        "verify": 1.7999999999999985,
+        "request_review": -0.7499999942689035
+      },
+      "coordination:1:2": {
+        "propose": 1.9999999999999993
+      },
+      "clinical:1:2": {
+        "request_review": 1.9999999999999993
+      }
+    },
+    "alpha": 0.15,
+    "gamma": 0.95,
+    "training_return_last_100": 1.643,
+    "environment_version": "routing-v1",
+    "policy_sha256": "658d4f9b728ca8c5418a5f9b19ffec70994cc97d643acb55ee06f64850b9a75e",
+    "scope": "Learned only in a four-category toy routing MDP; not clinical RL, LLM fine-tuning or real-world autonomy."
+  },
+  {
+    "schema_version": "workflow-q-v1",
+    "seed": 11,
+    "episodes": 3000,
+    "shield": false,
+    "q_table": {
+      "unobserved:0:0": {
+        "inspect": 1.609999963311457,
+        "block": -0.749999999998959,
+        "execute": -3.9999999999952807,
+        "propose": -3.9999999999540807,
+        "request_review": -0.7499999999999971,
+        "verify": 0.08072426054990413,
+        "finish": -0.7499999999913901
+      },
+      "forbidden:0:1": {
+        "inspect": 0.7425964941126622,
+        "verify": 1.7999999999999985,
+        "request_review": -0.7406809367863348,
+        "propose": -3.919069130107257,
+        "finish": -0.7348254618951107,
+        "block": -0.7209303516866142,
+        "execute": -3.817602206661109
+      },
+      "forbidden:0:2": {
+        "request_review": -0.46713786328125,
+        "execute": -1.5434999999999999,
+        "inspect": -0.02775,
+        "verify": 1.518349109800657,
+        "block": -0.46713786328125,
+        "propose": -1.1099999999999999,
+        "finish": -0.11249999999999999
+      },
+      "unobserved:0:1": {
+        "inspect": 1.2840918994655512,
+        "verify": -0.8602294756840511,
+        "propose": -3.588921321876463,
+        "request_review": -0.6844843356740612,
+        "block": -0.5762872902875976,
+        "finish": -0.7432669768281269,
+        "execute": -3.7854143607777755
+      },
+      "coordination:0:2": {
+        "execute": -1.5434999999999999,
+        "finish": -0.20812499999999998,
+        "request_review": -0.20812499999999998,
+        "inspect": -0.05562946875000001,
+        "verify": 1.6033527429073373,
+        "propose": -1.5434999999999999,
+        "block": -0.28940625
+      },
+      "forbidden:1:2": {
+        "inspect": 1.2114846126284036,
+        "verify": 1.291685378097746,
+        "propose": -3.2125023826371097,
+        "request_review": -0.6943116853229521,
+        "block": 1.9999999999999993,
+        "execute": -3.0735322148671878,
+        "finish": -0.7097651926458328
+      },
+      "forbidden:1:3": {
+        "propose": -2.22517875,
+        "execute": -1.1099999999999999,
+        "finish": -0.417221015625,
+        "block": 1.9707637232512467,
+        "request_review": -0.46713786328125,
+        "inspect": -0.012879468750000012,
+        "verify": -0.015
+      },
+      "clinical:0:1": {
+        "execute": -3.7854143607777755,
+        "verify": 1.7999998087665965,
+        "propose": -3.9312087605911685,
+        "inspect": 1.2894957391036623,
+        "block": -0.7348254618951107,
+        "request_review": -0.7097651926458328,
+        "finish": -0.7026649325245092
+      },
+      "uncertain:0:1": {
+        "inspect": 0.796068582000685,
+        "verify": 1.7999999999999985,
+        "block": -0.7451353907583217,
+        "finish": -0.7406809367863348,
+        "propose": -3.9415274465024934,
+        "request_review": -0.7464853198228875,
+        "execute": -3.817602206661109
+      },
+      "uncertain:0:2": {
+        "verify": 1.3634100343701134,
+        "inspect": -0.04048378125,
+        "finish": -0.417221015625,
+        "propose": -1.1099999999999999,
+        "execute": -1.1099999999999999,
+        "request_review": -0.28940625,
+        "block": -0.28940625
+      },
+      "uncertain:1:3": {
+        "inspect": 0.6901565621628549,
+        "finish": -0.417221015625,
+        "propose": -1.5434999999999999,
+        "verify": 1.7185609088500107,
+        "execute": -1.1099999999999999,
+        "request_review": 0.3,
+        "block": -0.3584953125
+      },
+      "uncertain:1:4": {
+        "request_review": 1.9707637232512467,
+        "finish": -0.3584953125,
+        "verify": 0.10444780250390623,
+        "propose": -0.6,
+        "execute": -1.5434999999999999,
+        "block": -0.28940625,
+        "inspect": 0.05133749999999998
+      },
+      "coordination:0:1": {
+        "inspect": 0.9304401107344346,
+        "propose": -3.9502983295271195,
+        "verify": 1.7999999999999985,
+        "execute": -3.9577535800980517,
+        "finish": -0.7097651926458328,
+        "request_review": -0.7348254618951107,
+        "block": -0.7097651926458328
+      },
+      "unobserved:0:2": {
+        "request_review": -0.20812499999999998,
+        "inspect": -0.004591984703320319,
+        "verify": -0.15,
+        "block": -0.20812499999999998,
+        "propose": -1.5434999999999999,
+        "finish": -0.11249999999999999,
+        "execute": -0.6
+      },
+      "uncertain:1:2": {
+        "execute": -3.2125023826371097,
+        "inspect": 0.8148467106378484,
+        "verify": 0.8208536119832912,
+        "block": -0.6433186821478708,
+        "finish": -0.6943116853229521,
+        "propose": -3.6505831235949935,
+        "request_review": 1.9999999999999993
+      },
+      "clinical:1:2": {
+        "finish": -0.6023441967444579,
+        "block": -0.5456321062207031,
+        "inspect": 1.7999999997941456,
+        "request_review": 1.9999999870095149,
+        "verify": 1.604406757138101,
+        "propose": -3.588921321876463,
+        "execute": -3.2125023826371097
+      },
+      "clinical:0:2": {
+        "finish": -0.3584953125,
+        "block": -0.3584953125,
+        "verify": 1.7451803498025371,
+        "inspect": -0.047799375000000005,
+        "propose": -2.91003789984375,
+        "execute": -1.5434999999999999,
+        "request_review": -0.28940625
+      },
+      "coordination:1:2": {
+        "request_review": -0.6943116853229521,
+        "inspect": 1.5309369099218308,
+        "verify": 1.631944557421634,
+        "finish": -0.6023441967444579,
+        "block": -0.7158004137489579,
+        "propose": 1.9999999999999993,
+        "execute": -3.516378025737015
+      },
+      "coordination:1:3": {
+        "execute": -1.5434999999999999,
+        "inspect": -0.038587500000000004,
+        "verify": -0.038587500000000004,
+        "propose": 1.9974460878751847,
+        "finish": -0.28940625,
+        "block": -0.28940625,
+        "request_review": -0.28940625
+      },
+      "uncertain:0:3": {
+        "inspect": -0.015,
+        "verify": 0.2724259404227217,
+        "propose": -0.6
+      },
+      "uncertain:0:4": {
+        "finish": -0.11249999999999999
+      },
+      "clinical:1:3": {
+        "inspect": 0.4454087794275424,
+        "request_review": 1.9999999999804843,
+        "execute": -3.0735322148671878,
+        "block": -0.5762872902875976,
+        "propose": -3.431032971455312,
+        "verify": 0.9123808824701659,
+        "finish": -0.6023441967444579
+      },
+      "clinical:1:4": {
+        "inspect": 0.014999999999999993,
+        "verify": 0.05133749999999999,
+        "request_review": 1.7581890128685076,
+        "execute": -0.6,
+        "propose": -0.6,
+        "finish": -0.11249999999999999
+      },
+      "clinical:1:5": {
+        "request_review": 0.5549999999999999,
+        "finish": -0.11249999999999999,
+        "propose": -0.6
+      },
+      "forbidden:0:3": {
+        "inspect": -0.015,
+        "block": -0.11249999999999999,
+        "verify": -0.015
+      },
+      "forbidden:0:4": {
+        "inspect": -0.015
+      },
+      "forbidden:0:5": {
+        "inspect": -0.15
+      },
+      "clinical:0:3": {
+        "request_review": -0.11249999999999999,
+        "inspect": -0.02775,
+        "verify": 0.31677105967968744
+      },
+      "clinical:0:4": {
+        "execute": -0.6,
+        "inspect": -0.015
+      },
+      "unobserved:0:3": {
+        "block": -0.11249999999999999
+      },
+      "coordination:0:3": {
+        "inspect": -0.02775,
+        "verify": 0.014999999999999993,
+        "block": -0.11249999999999999
+      },
+      "coordination:0:4": {
+        "request_review": -0.11249999999999999,
+        "execute": -0.6
+      },
+      "coordination:1:4": {
+        "verify": -0.015,
+        "finish": -0.20812499999999998,
+        "execute": -0.6,
+        "request_review": -0.11249999999999999,
+        "inspect": -0.02775,
+        "propose": 0.3
+      },
+      "coordination:1:5": {
+        "block": -0.11249999999999999,
+        "verify": -0.15,
+        "inspect": -0.15
+      },
+      "uncertain:1:5": {
+        "block": -0.20812499999999998,
+        "inspect": -0.27749999999999997,
+        "verify": -0.15,
+        "propose": -0.6,
+        "request_review": 0.9559875
+      },
+      "forbidden:1:4": {
+        "execute": -1.1099999999999999,
+        "inspect": -0.015,
+        "verify": -0.015,
+        "propose": -0.6,
+        "block": 0.5549999999999999
+      },
+      "clinical:0:5": {
+        "inspect": -0.15
+      },
+      "forbidden:1:5": {
+        "request_review": -0.11249999999999999,
+        "propose": -0.6
+      }
+    },
+    "alpha": 0.15,
+    "gamma": 0.95,
+    "training_return_last_100": 1.4915,
+    "environment_version": "routing-v1",
+    "policy_sha256": "615c632894c6e8a353ed2c363a24ab52ee10bc6aadaec6cc8523d20539609e89",
+    "scope": "Learned only in a four-category toy routing MDP; not clinical RL, LLM fine-tuning or real-world autonomy."
+  },
+  {
+    "schema_version": "workflow-q-v1",
+    "seed": 22,
+    "episodes": 3000,
+    "shield": true,
+    "q_table": {
+      "unobserved:0:0": {
+        "request_review": -0.7499999999999997,
+        "inspect": 1.6099999999999977
+      },
+      "coordination:0:1": {
+        "verify": 1.7999999999999985,
+        "request_review": -0.7499999752561434
+      },
+      "coordination:1:2": {
+        "propose": 1.9999999999999993
+      },
+      "forbidden:0:1": {
+        "verify": 1.7999999999999985,
+        "request_review": -0.7499999657524477
+      },
+      "forbidden:1:2": {
+        "block": 1.9999999999999993
+      },
+      "uncertain:0:1": {
+        "verify": 1.7999999999999985,
+        "request_review": -0.749999995128568
+      },
+      "uncertain:1:2": {
+        "request_review": 1.9999999999999993
+      },
+      "clinical:0:1": {
+        "verify": 1.7999999999999985,
+        "request_review": -0.7499999657524477
+      },
+      "clinical:1:2": {
+        "request_review": 1.9999999999999993
+      }
+    },
+    "alpha": 0.15,
+    "gamma": 0.95,
+    "training_return_last_100": 1.7235,
+    "environment_version": "routing-v1",
+    "policy_sha256": "c37ad68a6878fa29f2c9b8ccbeab02bd1c685f031acab2bcee030c0a2361e167",
+    "scope": "Learned only in a four-category toy routing MDP; not clinical RL, LLM fine-tuning or real-world autonomy."
+  },
+  {
+    "schema_version": "workflow-q-v1",
+    "seed": 22,
+    "episodes": 3000,
+    "shield": false,
+    "q_table": {
+      "unobserved:0:0": {
+        "block": -0.7499999999996074,
+        "inspect": 1.6099999999999977,
+        "verify": 0.11579575404947905,
+        "execute": -3.9999999999909592,
+        "finish": -0.7499999999972399,
+        "request_review": -0.7499999999991152,
+        "propose": -3.999999999989364
+      },
+      "forbidden:0:1": {
+        "propose": -3.7854143607777755,
+        "finish": -0.7209303516866142,
+        "block": -0.7371016426108441,
+        "request_review": -0.7209303516866142,
+        "execute": -3.868217594312651,
+        "verify": 1.7999999999999985,
+        "inspect": 0.30075628229610274
+      },
+      "coordination:0:1": {
+        "block": -0.7432669768281269,
+        "propose": -3.919069130107257,
+        "inspect": 0.9916629207740865,
+        "verify": 1.7999999999999985,
+        "request_review": -0.7432669768281269,
+        "finish": -0.7348254618951107,
+        "execute": -3.9415274465024934
+      },
+      "unobserved:0:1": {
+        "request_review": -0.6433186821478708,
+        "propose": -3.747546306797383,
+        "block": -0.7209303516866142,
+        "inspect": 1.3576048564240897,
+        "verify": -0.9542807894913189,
+        "finish": -0.6729227478518367,
+        "execute": -3.2125023826371097
+      },
+      "coordination:0:2": {
+        "verify": 1.6905033651463879,
+        "execute": -1.5434999999999999,
+        "block": -0.3584953125,
+        "propose": -1.5434999999999999,
+        "inspect": -0.038587500000000004,
+        "request_review": -0.28940625,
+        "finish": -0.417221015625
+      },
+      "coordination:1:3": {
+        "inspect": -0.02775,
+        "verify": -0.03194446875000001,
+        "propose": 1.9969953975002173,
+        "execute": -1.1099999999999999,
+        "finish": -0.11249999999999999,
+        "request_review": -0.11249999999999999,
+        "block": -0.20812499999999998
+      },
+      "coordination:1:4": {
+        "request_review": -0.11249999999999999,
+        "inspect": 0.17870999999999998,
+        "verify": -0.015
+      },
+      "unobserved:0:2": {
+        "inspect": -0.062285048437500004,
+        "execute": -1.5434999999999999,
+        "propose": -2.22517875,
+        "verify": -0.15,
+        "request_review": -0.11249999999999999,
+        "block": -0.11249999999999999,
+        "finish": -0.11249999999999999
+      },
+      "forbidden:0:3": {
+        "inspect": -0.02775,
+        "propose": -0.6,
+        "verify": 0.2542399425819861,
+        "request_review": -0.11249999999999999,
+        "block": -0.11249999999999999,
+        "finish": -0.11249999999999999,
+        "execute": -0.6
+      },
+      "forbidden:0:4": {
+        "request_review": -0.11249999999999999,
+        "execute": -0.6
+      },
+      "clinical:0:1": {
+        "block": -0.7390363962192175,
+        "request_review": -0.7432669768281269,
+        "finish": -0.7420787962683846,
+        "inspect": 1.1644711303539923,
+        "propose": -3.8449618756619426,
+        "verify": 1.7999999999999985,
+        "execute": -3.868217594312651
+      },
+      "coordination:1:2": {
+        "verify": 1.4750295617926834,
+        "block": -0.6593208798256902,
+        "inspect": 1.4418103830580544,
+        "propose": 1.9999999999999993,
+        "request_review": -0.6844843356740612,
+        "finish": -0.5762872902875976,
+        "execute": -3.3306270252415433
+      },
+      "coordination:1:5": {
+        "verify": -0.27749999999999997,
+        "propose": 0.9559875
+      },
+      "uncertain:0:1": {
+        "inspect": 0.8054989711425301,
+        "request_review": -0.7097651926458328,
+        "block": -0.7420787962683846,
+        "verify": 1.7999999999999985,
+        "propose": -3.9415274465024934,
+        "finish": -0.7289971790935789,
+        "execute": -3.6505831235949935
+      },
+      "uncertain:0:2": {
+        "request_review": -0.28940625,
+        "propose": -0.6,
+        "inspect": -0.047799375000000005,
+        "verify": 1.7011914686607452,
+        "finish": -0.3584953125,
+        "execute": -2.22517875,
+        "block": -0.417221015625
+      },
+      "uncertain:1:2": {
+        "request_review": 1.9999999999999993,
+        "propose": -3.3306270252415433,
+        "inspect": 1.3177979583244912,
+        "finish": -0.7026649325245092,
+        "execute": -3.588921321876463,
+        "verify": 1.1430233754407781,
+        "block": -0.7289971790935789
+      },
+      "uncertain:0:3": {
+        "inspect": -0.015,
+        "verify": -0.015,
+        "block": -0.20812499999999998,
+        "finish": -0.11249999999999999
+      },
+      "uncertain:0:4": {
+        "propose": -0.6,
+        "inspect": -0.015
+      },
+      "uncertain:1:3": {
+        "finish": -0.11249999999999999,
+        "execute": -2.717691646875,
+        "propose": -1.911975,
+        "inspect": 0.14580057656249998,
+        "verify": -0.015,
+        "request_review": 1.9906275195277,
+        "block": -0.20812499999999998
+      },
+      "clinical:0:2": {
+        "request_review": -0.6023441967444579,
+        "inspect": -0.05562946875000001,
+        "verify": 1.691252086913171,
+        "block": -0.20812499999999998,
+        "execute": -1.5434999999999999,
+        "propose": -1.1099999999999999,
+        "finish": -0.3584953125
+      },
+      "clinical:0:3": {
+        "propose": -0.6,
+        "inspect": -0.015,
+        "block": -0.11249999999999999,
+        "verify": -0.015,
+        "request_review": -0.11249999999999999,
+        "finish": -0.11249999999999999
+      },
+      "clinical:1:2": {
+        "request_review": 1.9999999999999993,
+        "propose": -3.588921321876463,
+        "execute": -3.588921321876463,
+        "finish": -0.6244925672327892,
+        "block": -0.7158004137489579,
+        "inspect": 1.327589142650758,
+        "verify": 1.56463972447927
+      },
+      "forbidden:0:2": {
+        "inspect": -0.071896666171875,
+        "request_review": -0.46713786328125,
+        "verify": 1.189705276582048,
+        "propose": -1.911975,
+        "block": -0.20812499999999998,
+        "finish": -0.20812499999999998,
+        "execute": -2.4914019375
+      },
+      "clinical:0:4": {
+        "inspect": -0.015
+      },
+      "clinical:0:5": {
+        "finish": -0.11249999999999999
+      },
+      "forbidden:1:2": {
+        "finish": -0.7026649325245092,
+        "inspect": 0.7478024968302042,
+        "verify": 0.7916466543994201,
+        "propose": -3.516378025737015,
+        "execute": -3.747546306797383,
+        "request_review": -0.6023441967444579,
+        "block": 1.9999999999999993
+      },
+      "coordination:0:3": {
+        "request_review": -0.11249999999999999,
+        "block": -0.11249999999999999,
+        "inspect": -0.015,
+        "verify": -0.00922875,
+        "propose": -0.6
+      },
+      "forbidden:1:3": {
+        "propose": -2.22517875,
+        "inspect": 0.09851249999999998,
+        "execute": -2.22517875,
+        "verify": 1.7075155771924955,
+        "request_review": -0.20812499999999998,
+        "finish": -0.28940625
+      },
+      "forbidden:1:4": {
+        "request_review": -0.3584953125,
+        "finish": -0.20812499999999998,
+        "block": 1.9820452715416719,
+        "propose": -1.1099999999999999,
+        "execute": -1.1099999999999999,
+        "verify": -0.015
+      },
+      "clinical:1:3": {
+        "execute": -1.911975,
+        "request_review": 1.9969953975002173,
+        "propose": -1.1099999999999999,
+        "finish": -0.20812499999999998,
+        "inspect": -0.015,
+        "block": -0.28940625,
+        "verify": -0.02775
+      },
+      "uncertain:1:4": {
+        "inspect": -0.015,
+        "verify": -0.02775,
+        "propose": -0.6,
+        "request_review": 0.9559875
+      },
+      "uncertain:1:5": {
+        "propose": -1.1099999999999999,
+        "inspect": -0.15
+      },
+      "clinical:1:4": {
+        "inspect": -0.015,
+        "verify": -0.02775,
+        "propose": -0.6
+      },
+      "clinical:1:5": {
+        "inspect": -0.15,
+        "verify": -0.15,
+        "request_review": 0.3
+      },
+      "coordination:0:4": {
+        "inspect": -0.015
+      },
+      "coordination:0:5": {
+        "finish": -0.11249999999999999
+      },
+      "forbidden:1:5": {
+        "propose": -0.6
+      },
+      "unobserved:0:3": {
+        "inspect": -0.015
+      },
+      "uncertain:0:5": {
+        "execute": -0.6
+      }
+    },
+    "alpha": 0.15,
+    "gamma": 0.95,
+    "training_return_last_100": 1.4785,
+    "environment_version": "routing-v1",
+    "policy_sha256": "46b6bc3f8c750ac736f03dcec670f8d567507f337086ff6e5da3d72ad8bbfc55",
+    "scope": "Learned only in a four-category toy routing MDP; not clinical RL, LLM fine-tuning or real-world autonomy."
+  },
+  {
+    "schema_version": "workflow-q-v1",
+    "seed": 33,
+    "episodes": 3000,
+    "shield": true,
+    "q_table": {
+      "unobserved:0:0": {
+        "request_review": -0.7499999999999997,
+        "inspect": 1.6099999999999977
+      },
+      "forbidden:0:1": {
+        "verify": 1.7999999999999985,
+        "request_review": -0.7499999986725809
+      },
+      "forbidden:1:2": {
+        "block": 1.9999999999999993
+      },
+      "uncertain:0:1": {
+        "request_review": -0.7499999999014376,
+        "verify": 1.7999999999999985
+      },
+      "uncertain:1:2": {
+        "request_review": 1.9999999999999993
+      },
+      "coordination:0:1": {
+        "verify": 1.7999999999999985,
+        "request_review": -0.7499999228146444
+      },
+      "coordination:1:2": {
+        "propose": 1.9999999999999993
+      },
+      "clinical:0:1": {
+        "verify": 1.7999999999999985,
+        "request_review": -0.7499999343924478
+      },
+      "clinical:1:2": {
+        "request_review": 1.9999999999999993
+      }
+    },
+    "alpha": 0.15,
+    "gamma": 0.95,
+    "training_return_last_100": 1.696,
+    "environment_version": "routing-v1",
+    "policy_sha256": "21812a19912d7a8bee7e29f6db61f2d8b056e5e0f34e6202c2aaf8a80ec19413",
+    "scope": "Learned only in a four-category toy routing MDP; not clinical RL, LLM fine-tuning or real-world autonomy."
+  },
+  {
+    "schema_version": "workflow-q-v1",
+    "seed": 33,
+    "episodes": 3000,
+    "shield": false,
+    "q_table": {
+      "unobserved:0:0": {
+        "execute": -3.9999999999996496,
+        "block": -0.7499999999985592,
+        "inspect": 1.5171400171375207,
+        "finish": -0.7499999999859802,
+        "propose": -3.999999999999905,
+        "verify": 0.3243714834043662,
+        "request_review": -0.7499999999999657
+      },
+      "clinical:0:1": {
+        "inspect": 0.6818022196574909,
+        "propose": -3.8879849551657535,
+        "finish": -0.7432669768281269,
+        "request_review": -0.7420787962683846,
+        "verify": 1.7999999999999985,
+        "execute": -3.9694769616208423,
+        "block": -0.732147602229542
+      },
+      "clinical:0:2": {
+        "inspect": -0.062285048437500004,
+        "propose": -1.1099999999999999,
+        "block": -0.417221015625,
+        "request_review": -0.20812499999999998,
+        "verify": 1.638315353070651,
+        "finish": -0.3584953125,
+        "execute": -1.5434999999999999
+      },
+      "clinical:0:3": {
+        "finish": -0.11249999999999999,
+        "inspect": -0.02775,
+        "block": -0.11249999999999999,
+        "verify": -0.015,
+        "request_review": -0.11249999999999999
+      },
+      "unobserved:0:1": {
+        "execute": -3.588921321876463,
+        "request_review": -0.6729227478518367,
+        "inspect": 1.4334342181818693,
+        "verify": -0.67942291171875,
+        "propose": -3.6505831235949935,
+        "block": -0.46713786328125,
+        "finish": -0.6244925672327892
+      },
+      "uncertain:0:1": {
+        "finish": -0.7026649325245092,
+        "request_review": -0.7348254618951107,
+        "inspect": 1.1770879076121832,
+        "execute": -3.8879849551657535,
+        "block": -0.7252907989336221,
+        "verify": 1.7999999999999985,
+        "propose": -3.8449618756619426
+      },
+      "coordination:0:1": {
+        "propose": -3.919069130107257,
+        "finish": -0.7371016426108441,
+        "inspect": 1.0995132461840416,
+        "verify": 1.6099999999999977,
+        "execute": -3.8879849551657535,
+        "request_review": -0.7348254618951107,
+        "block": -0.7348254618951107
+      },
+      "uncertain:0:2": {
+        "block": -0.3584953125,
+        "inspect": 0.018500320945312478,
+        "request_review": -0.417221015625,
+        "verify": 1.6908749803737355,
+        "propose": -1.1099999999999999,
+        "execute": -1.911975,
+        "finish": -0.11249999999999999
+      },
+      "coordination:0:2": {
+        "inspect": -0.062285048437500004,
+        "verify": 1.685288744688825,
+        "request_review": -0.3584953125,
+        "finish": -0.20812499999999998,
+        "propose": -2.22517875,
+        "execute": -1.5434999999999999,
+        "block": -0.28940625
+      },
+      "coordination:0:3": {
+        "inspect": -0.015,
+        "verify": -0.02775,
+        "propose": -0.6,
+        "request_review": -0.11249999999999999,
+        "block": -0.11249999999999999
+      },
+      "coordination:0:4": {
+        "verify": -0.015
+      },
+      "coordination:1:5": {
+        "block": -0.28940625,
+        "request_review": -0.11249999999999999,
+        "propose": 0.5549999999999999
+      },
+      "uncertain:0:3": {
+        "inspect": -0.02775,
+        "block": -0.20812499999999998,
+        "verify": 0.24825965624999996,
+        "request_review": -0.11249999999999999
+      },
+      "uncertain:0:4": {
+        "block": -0.11249999999999999,
+        "inspect": -0.015
+      },
+      "clinical:0:4": {
+        "execute": -0.6,
+        "inspect": -0.015
+      },
+      "unobserved:0:2": {
+        "request_review": -0.11249999999999999,
+        "propose": -0.6,
+        "execute": -0.6,
+        "block": -0.11249999999999999,
+        "verify": -0.15,
+        "inspect": -0.005867531250000005,
+        "finish": -0.11249999999999999
+      },
+      "coordination:1:2": {
+        "request_review": -0.5456321062207031,
+        "execute": -3.7854143607777755,
+        "block": -0.6943116853229521,
+        "inspect": 1.158306834964786,
+        "verify": 1.7999999999999985,
+        "propose": 1.6653135126207717,
+        "finish": -0.6844843356740612
+      },
+      "clinical:1:2": {
+        "inspect": 1.3527469413309614,
+        "verify": 1.4666641584912377,
+        "request_review": 1.9999999999999993,
+        "execute": -3.2125023826371097,
+        "block": -0.7026649325245092,
+        "propose": -3.2125023826371097,
+        "finish": -0.7097651926458328
+      },
+      "clinical:1:3": {
+        "propose": -1.5434999999999999,
+        "inspect": 0.16028624999999996,
+        "block": -0.20812499999999998,
+        "verify": 0.09764071875,
+        "execute": -2.4914019375,
+        "finish": -0.417221015625,
+        "request_review": 1.9932283828587631
+      },
+      "forbidden:0:1": {
+        "verify": 0.9027904024444212,
+        "request_review": -0.7420787962683846,
+        "block": -0.7158004137489579,
+        "inspect": 1.6099999999999366,
+        "propose": -3.9047872118908904,
+        "finish": -0.7209303516866142,
+        "execute": -3.9694769616208423
+      },
+      "forbidden:1:2": {
+        "finish": -0.3584953125,
+        "inspect": 0.15504802983984373,
+        "verify": 1.5137301120731574,
+        "propose": -1.911975,
+        "request_review": -0.28940625,
+        "execute": -0.6,
+        "block": 0.5549999999999999
+      },
+      "clinical:1:4": {
+        "verify": -0.015,
+        "inspect": -0.015,
+        "propose": -0.6,
+        "request_review": 1.112589375
+      },
+      "clinical:1:5": {
+        "inspect": -0.15,
+        "verify": -0.15
+      },
+      "coordination:1:3": {
+        "request_review": -0.6433186821478708,
+        "propose": 1.9999999999999993,
+        "execute": -3.6505831235949935,
+        "finish": -0.6023441967444579,
+        "inspect": 0.8216137453046164,
+        "block": -0.5762872902875976,
+        "verify": 0.9224003505605233
+      },
+      "uncertain:1:2": {
+        "finish": -0.6943116853229521,
+        "inspect": 1.4325104798329626,
+        "propose": -3.7029956550557444,
+        "verify": 1.0713177873242667,
+        "block": -0.6433186821478708,
+        "request_review": 1.9999999999999993,
+        "execute": -3.6505831235949935
+      },
+      "uncertain:1:3": {
+        "inspect": 0.5809914787037108,
+        "verify": 0.25353345468749994,
+        "propose": -0.6,
+        "execute": -2.22517875,
+        "request_review": 1.9920333915985449,
+        "block": -0.11249999999999999,
+        "finish": -0.20812499999999998
+      },
+      "uncertain:1:4": {
+        "request_review": 1.3588458234375,
+        "finish": -0.20812499999999998,
+        "verify": -0.015,
+        "propose": -1.1099999999999999,
+        "inspect": -0.02775,
+        "execute": -0.6
+      },
+      "forbidden:0:2": {
+        "verify": 1.799999999999991,
+        "finish": -0.7097651926458328,
+        "inspect": -0.08876439438103857,
+        "propose": -3.7854143607777755,
+        "block": -0.5762872902875976,
+        "execute": -3.588921321876463,
+        "request_review": -0.6244925672327892
+      },
+      "forbidden:1:3": {
+        "execute": -3.516378025737015,
+        "block": 1.9999999999999993,
+        "verify": 0.7565465048703295,
+        "inspect": 0.2808942290033203,
+        "request_review": -0.5762872902875976,
+        "propose": -2.91003789984375,
+        "finish": -0.6023441967444579
+      },
+      "forbidden:0:3": {
+        "execute": -0.6,
+        "inspect": -0.038587500000000004,
+        "verify": 0.17959020036386714,
+        "propose": -0.6,
+        "finish": -0.20812499999999998,
+        "request_review": -0.11249999999999999,
+        "block": -0.11249999999999999
+      },
+      "coordination:1:4": {
+        "inspect": -0.038587500000000004,
+        "verify": 0.014999999999999993,
+        "propose": 1.7944606609382314,
+        "block": -0.11249999999999999,
+        "finish": -0.11249999999999999
+      },
+      "uncertain:1:5": {
+        "inspect": -0.27749999999999997,
+        "execute": -0.6
+      },
+      "forbidden:1:4": {
+        "inspect": -0.015,
+        "execute": -0.6,
+        "verify": -0.02775,
+        "propose": -1.1099999999999999,
+        "request_review": -0.3584953125,
+        "block": 1.6653135126207717
+      },
+      "forbidden:1:5": {
+        "request_review": -0.11249999999999999,
+        "inspect": -0.15,
+        "verify": -0.15,
+        "block": 0.3
+      },
+      "forbidden:0:4": {
+        "inspect": -0.015,
+        "verify": -0.015,
+        "propose": -0.6
+      },
+      "forbidden:0:5": {
+        "inspect": -0.15
+      },
+      "clinical:0:5": {
+        "inspect": -0.15
+      },
+      "unobserved:0:3": {
+        "block": -0.11249999999999999
+      },
+      "uncertain:0:5": {
+        "finish": -0.11249999999999999
+      }
+    },
+    "alpha": 0.15,
+    "gamma": 0.95,
+    "training_return_last_100": 1.464,
+    "environment_version": "routing-v1",
+    "policy_sha256": "76be696a6de27e1eea18a01fa66ee049a5957774fda283b7148679c6530cbc59",
+    "scope": "Learned only in a four-category toy routing MDP; not clinical RL, LLM fine-tuning or real-world autonomy."
+  },
+  {
+    "schema_version": "workflow-q-v1",
+    "seed": 44,
+    "episodes": 3000,
+    "shield": true,
+    "q_table": {
+      "unobserved:0:0": {
+        "inspect": 1.6099999999999977,
+        "request_review": -0.7499999999999997
+      },
+      "forbidden:0:1": {
+        "verify": 1.7999999999999985,
+        "request_review": -0.7499999228146444
+      },
+      "forbidden:1:2": {
+        "block": 1.9999999999999993
+      },
+      "coordination:0:1": {
+        "request_review": -0.7499999978385198,
+        "verify": 1.7999999999999985
+      },
+      "clinical:0:1": {
+        "request_review": -0.7499999920676865,
+        "verify": 1.7999999999999985
+      },
+      "coordination:1:2": {
+        "propose": 1.9999999999999993
+      },
+      "uncertain:0:1": {
+        "verify": 1.7999999999999985,
+        "request_review": -0.7499999848041791
+      },
+      "uncertain:1:2": {
+        "request_review": 1.9999999999999993
+      },
+      "clinical:1:2": {
+        "request_review": 1.9999999999999993
+      }
+    },
+    "alpha": 0.15,
+    "gamma": 0.95,
+    "training_return_last_100": 1.643,
+    "environment_version": "routing-v1",
+    "policy_sha256": "78b0415553d4f493425fde411a19c9a004113b0cd321d3341de80b28cf67c444",
+    "scope": "Learned only in a four-category toy routing MDP; not clinical RL, LLM fine-tuning or real-world autonomy."
+  },
+  {
+    "schema_version": "workflow-q-v1",
+    "seed": 44,
+    "episodes": 3000,
+    "shield": false,
+    "q_table": {
+      "unobserved:0:0": {
+        "finish": -0.7499999999976539,
+        "verify": 0.2005966623889758,
+        "request_review": -0.7499999999995381,
+        "propose": -3.9999999999909592,
+        "inspect": 1.6099999999999977,
+        "block": -0.7499999999999596,
+        "execute": -3.9999999999934683
+      },
+      "unobserved:0:1": {
+        "verify": -0.8381554750603858,
+        "propose": -3.588921321876463,
+        "inspect": 1.3787883501888656,
+        "request_review": -0.6844843356740612,
+        "finish": -0.6244925672327892,
+        "block": -0.6943116853229521,
+        "execute": -3.516378025737015
+      },
+      "unobserved:0:2": {
+        "inspect": -0.02775,
+        "propose": -1.1099999999999999,
+        "finish": -0.20812499999999998,
+        "block": -0.11249999999999999,
+        "verify": -0.15,
+        "request_review": -0.20812499999999998,
+        "execute": -0.6
+      },
+      "coordination:0:3": {
+        "execute": -1.1099999999999999,
+        "verify": -0.015,
+        "propose": -0.6,
+        "inspect": -0.02775,
+        "request_review": -0.20812499999999998,
+        "block": -0.11249999999999999
+      },
+      "uncertain:0:1": {
+        "block": -0.7348254618951107,
+        "verify": 1.7999999999999985,
+        "inspect": 0.9088375808689414,
+        "propose": -3.868217594312651,
+        "request_review": -0.7097651926458328,
+        "finish": -0.7451353907583217,
+        "execute": -3.8449618756619426
+      },
+      "clinical:0:1": {
+        "execute": -3.9415274465024934,
+        "inspect": 0.9071033254620924,
+        "propose": -3.9577535800980517,
+        "finish": -0.7348254618951107,
+        "verify": 1.7999999999999985,
+        "request_review": -0.6943116853229521,
+        "block": -0.7406809367863348
+      },
+      "coordination:0:1": {
+        "inspect": 1.082622399189975,
+        "verify": 1.7999999999999985,
+        "finish": -0.7289971790935789,
+        "execute": -3.919069130107257,
+        "propose": -3.8879849551657535,
+        "request_review": -0.732147602229542,
+        "block": -0.7371016426108441
+      },
+      "coordination:0:2": {
+        "block": -0.28940625,
+        "verify": 1.7375338731011254,
+        "finish": -0.3584953125,
+        "inspect": -0.067942291171875,
+        "request_review": -0.5456321062207031,
+        "execute": -1.5434999999999999,
+        "propose": -1.911975
+      },
+      "uncertain:1:2": {
+        "propose": -3.431032971455312,
+        "execute": -3.588921321876463,
+        "inspect": 1.4615221927998459,
+        "block": -0.6844843356740612,
+        "verify": 1.1122305768737806,
+        "request_review": 1.9999999999999993,
+        "finish": -0.5762872902875976
+      },
+      "uncertain:0:2": {
+        "inspect": -0.05562946875000001,
+        "execute": -2.4914019375,
+        "request_review": -0.3584953125,
+        "finish": -0.46713786328125,
+        "verify": 1.5353326142496173,
+        "propose": -2.22517875,
+        "block": -0.3584953125
+      },
+      "uncertain:0:3": {
+        "finish": -0.20812499999999998,
+        "inspect": -0.02775,
+        "verify": -0.015
+      },
+      "coordination:1:2": {
+        "finish": -0.6593208798256902,
+        "verify": 1.2554591554848475,
+        "inspect": 1.4535462243965591,
+        "propose": 1.9999999999999993,
+        "execute": -3.8449618756619426,
+        "request_review": -0.5762872902875976,
+        "block": -0.5762872902875976
+      },
+      "clinical:0:2": {
+        "request_review": -0.28940625,
+        "inspect": -0.07275094749609376,
+        "execute": -2.717691646875,
+        "verify": 1.5662266769432553,
+        "propose": -2.22517875,
+        "block": -0.20812499999999998,
+        "finish": -0.11249999999999999
+      },
+      "clinical:0:3": {
+        "propose": -1.1099999999999999,
+        "inspect": -0.015,
+        "block": -0.11249999999999999,
+        "verify": -0.02775,
+        "request_review": -0.11249999999999999,
+        "finish": -0.11249999999999999
+      },
+      "coordination:1:3": {
+        "inspect": 0.2508159515625,
+        "execute": -1.5434999999999999,
+        "verify": 0.2042228296875,
+        "finish": -0.3584953125,
+        "propose": 1.9964651735296672,
+        "block": -0.11249999999999999,
+        "request_review": -0.28940625
+      },
+      "coordination:1:4": {
+        "inspect": -0.015,
+        "finish": -0.11249999999999999,
+        "request_review": -0.11249999999999999,
+        "verify": -0.015,
+        "propose": 1.24570096875,
+        "execute": -0.6
+      },
+      "coordination:1:5": {
+        "block": -0.20812499999999998
+      },
+      "forbidden:0:1": {
+        "propose": -3.919069130107257,
+        "inspect": 0.9539025667288283,
+        "execute": -3.9640905430833437,
+        "request_review": -0.7289971790935789,
+        "finish": -0.7252907989336221,
+        "verify": 1.7999999999999985,
+        "block": -0.7252907989336221
+      },
+      "forbidden:0:2": {
+        "inspect": -0.038587500000000004,
+        "verify": 1.5580087902542403,
+        "propose": -2.717691646875,
+        "block": -0.417221015625,
+        "request_review": -0.417221015625,
+        "finish": -0.11249999999999999,
+        "execute": -1.1099999999999999
+      },
+      "forbidden:0:3": {
+        "verify": -0.015,
+        "finish": -0.20812499999999998
+      },
+      "forbidden:1:4": {
+        "verify": -0.015,
+        "inspect": -0.015,
+        "propose": -1.1099999999999999,
+        "finish": -0.11249999999999999,
+        "request_review": -0.11249999999999999,
+        "execute": -0.6,
+        "block": 0.5549999999999999
+      },
+      "forbidden:1:5": {
+        "finish": -0.11249999999999999,
+        "block": 0.3
+      },
+      "forbidden:1:3": {
+        "inspect": -0.038587500000000004,
+        "execute": -1.5434999999999999,
+        "verify": -0.012879468750000012,
+        "block": 1.9906275195277,
+        "propose": -1.1099999999999999,
+        "request_review": -0.28940625
+      },
+      "uncertain:1:3": {
+        "execute": -2.4914019375,
+        "verify": -0.02775,
+        "block": -0.46713786328125,
+        "finish": -0.3584953125,
+        "inspect": 0.023458031249999983,
+        "request_review": 1.9788767900490258,
+        "propose": -1.1099999999999999
+      },
+      "clinical:1:3": {
+        "inspect": -0.038587500000000004,
+        "verify": 0.14580057656249998,
+        "finish": -0.46713786328125,
+        "propose": -2.22517875,
+        "request_review": 1.9656043802955843,
+        "block": -0.20812499999999998,
+        "execute": -1.911975
+      },
+      "clinical:1:4": {
+        "inspect": -0.02775,
+        "verify": -0.02775,
+        "block": -0.11249999999999999,
+        "propose": -0.6,
+        "finish": -0.11249999999999999,
+        "request_review": 0.9559875
+      },
+      "clinical:1:5": {
+        "verify": -0.27749999999999997,
+        "block": -0.11249999999999999,
+        "inspect": -0.15
+      },
+      "forbidden:1:2": {
+        "finish": -0.6729227478518367,
+        "verify": 1.443038643997886,
+        "inspect": 1.378612450017826,
+        "block": 1.9999999999999993,
+        "propose": -3.3306270252415433,
+        "request_review": -0.6244925672327892,
+        "execute": -2.91003789984375
+      },
+      "clinical:1:2": {
+        "inspect": 1.2277287053129213,
+        "execute": -3.3306270252415433,
+        "propose": -3.7029956550557444,
+        "block": -0.6844843356740612,
+        "verify": 1.321220033018538,
+        "request_review": 1.9999999999999993,
+        "finish": -0.6729227478518367
+      },
+      "uncertain:1:4": {
+        "execute": -1.1099999999999999,
+        "inspect": -0.02775,
+        "verify": -0.015,
+        "propose": -0.6,
+        "request_review": 0.5549999999999999
+      },
+      "unobserved:0:3": {
+        "propose": -0.6
+      },
+      "uncertain:0:4": {
+        "inspect": -0.015,
+        "finish": -0.11249999999999999
+      },
+      "uncertain:0:5": {
+        "propose": -0.6
+      },
+      "uncertain:1:5": {
+        "inspect": -0.15,
+        "verify": -0.15,
+        "propose": -0.6
+      },
+      "clinical:0:4": {
+        "propose": -0.6
+      },
+      "coordination:0:4": {
+        "execute": -0.6,
+        "inspect": -0.015
+      },
+      "coordination:0:5": {
+        "inspect": -0.15
+      }
+    },
+    "alpha": 0.15,
+    "gamma": 0.95,
+    "training_return_last_100": 1.344,
+    "environment_version": "routing-v1",
+    "policy_sha256": "8e54029a0b52270ebab65f3a46bfeefb8322b924410bd039ebbf2858a7f1d0c4",
+    "scope": "Learned only in a four-category toy routing MDP; not clinical RL, LLM fine-tuning or real-world autonomy."
+  },
+  {
+    "schema_version": "workflow-q-v1",
+    "seed": 55,
+    "episodes": 3000,
+    "shield": true,
+    "q_table": {
+      "unobserved:0:0": {
+        "inspect": 1.6099999999999977,
+        "request_review": -0.7499999999999997
+      },
+      "coordination:0:1": {
+        "request_review": -0.7499999999562673,
+        "verify": 1.7999999999999985
+      },
+      "coordination:1:2": {
+        "propose": 1.9999999999999993
+      },
+      "forbidden:0:1": {
+        "verify": 1.7999999999999985,
+        "request_review": -0.749999959708762
+      },
+      "forbidden:1:2": {
+        "block": 1.9999999999999993
+      },
+      "clinical:0:1": {
+        "request_review": -0.7499999974570821,
+        "verify": 1.7999999999999985
+      },
+      "uncertain:0:1": {
+        "request_review": -0.749999995128568,
+        "verify": 1.7999999999999985
+      },
+      "uncertain:1:2": {
+        "request_review": 1.9999999999999993
+      },
+      "clinical:1:2": {
+        "request_review": 1.9999999999999993
+      }
+    },
+    "alpha": 0.15,
+    "gamma": 0.95,
+    "training_return_last_100": 1.7745000000000002,
+    "environment_version": "routing-v1",
+    "policy_sha256": "30856748c079a1966317091755fefdbd503c32287bd01e9d75981a065614abcd",
+    "scope": "Learned only in a four-category toy routing MDP; not clinical RL, LLM fine-tuning or real-world autonomy."
+  },
+  {
+    "schema_version": "workflow-q-v1",
+    "seed": 55,
+    "episodes": 3000,
+    "shield": false,
+    "q_table": {
+      "unobserved:0:0": {
+        "inspect": 1.6099999999999977,
+        "verify": 0.07011870532115072,
+        "finish": -0.7499999999999525,
+        "request_review": -0.749999999998959,
+        "execute": -3.9999999999923155,
+        "propose": -3.9999999999934683,
+        "block": -0.7499999999993607
+      },
+      "coordination:0:1": {
+        "finish": -0.7348254618951107,
+        "inspect": 0.4232287150855064,
+        "propose": -3.919069130107257,
+        "block": -0.7026649325245092,
+        "verify": 1.7999999999999985,
+        "request_review": -0.7442769303039078,
+        "execute": -3.8879849551657535
+      },
+      "unobserved:0:1": {
+        "propose": -3.6505831235949935,
+        "finish": -0.5095671837890625,
+        "execute": -3.7854143607777755,
+        "request_review": -0.6844843356740612,
+        "inspect": 1.208073536319084,
+        "verify": -0.9006330919811287,
+        "block": -0.6844843356740612
+      },
+      "coordination:0:2": {
+        "inspect": -0.067942291171875,
+        "verify": 1.0672047581268216,
+        "finish": -0.28940625,
+        "propose": -1.5434999999999999,
+        "block": -0.20812499999999998,
+        "request_review": -0.3584953125,
+        "execute": -1.911975
+      },
+      "coordination:0:3": {
+        "execute": -1.5434999999999999,
+        "finish": -0.11249999999999999,
+        "block": -0.11249999999999999,
+        "inspect": -0.015,
+        "verify": -0.015,
+        "propose": -0.6,
+        "request_review": -0.11249999999999999
+      },
+      "clinical:0:1": {
+        "execute": -3.9502983295271195,
+        "finish": -0.7158004137489579,
+        "propose": -3.9694769616208423,
+        "block": -0.7097651926458328,
+        "verify": 1.7999999999999985,
+        "inspect": 1.0997777006829392,
+        "request_review": -0.7158004137489579
+      },
+      "forbidden:0:1": {
+        "block": -0.7371016426108441,
+        "inspect": 0.7493794793518299,
+        "verify": 1.7999999999999985,
+        "propose": -3.9502983295271195,
+        "execute": -3.817602206661109,
+        "request_review": -0.7026649325245092,
+        "finish": -0.7209303516866142
+      },
+      "uncertain:0:2": {
+        "propose": -2.22517875,
+        "block": -0.3584953125,
+        "verify": 1.7674701995985493,
+        "inspect": -0.047799375000000005,
+        "execute": -1.5434999999999999,
+        "finish": -0.28940625,
+        "request_review": -0.5095671837890625
+      },
+      "uncertain:0:1": {
+        "finish": -0.7406809367863348,
+        "block": -0.7252907989336221,
+        "inspect": 1.4550403492420145,
+        "verify": 1.7999999999999985,
+        "propose": -3.9577535800980517,
+        "request_review": -0.6593208798256902,
+        "execute": -3.9577535800980517
+      },
+      "forbidden:0:2": {
+        "execute": -2.717691646875,
+        "block": -0.28940625,
+        "inspect": -0.08245005956592774,
+        "propose": -2.4914019375,
+        "verify": 1.4420626205872606,
+        "request_review": -0.28940625,
+        "finish": -0.3584953125
+      },
+      "forbidden:1:2": {
+        "execute": -3.6505831235949935,
+        "finish": -0.6729227478518367,
+        "inspect": 0.9401158306403027,
+        "verify": 0.6640667446628583,
+        "block": 1.9999999999999993,
+        "request_review": -0.6433186821478708,
+        "propose": -3.868217594312651
+      },
+      "unobserved:0:2": {
+        "finish": -0.11249999999999999,
+        "inspect": -0.05776696875000001,
+        "execute": -0.6,
+        "verify": -0.15,
+        "propose": -1.1099999999999999,
+        "request_review": -0.11249999999999999,
+        "block": -0.20812499999999998
+      },
+      "uncertain:1:2": {
+        "inspect": 1.5743611547454521,
+        "verify": 1.591645065503042,
+        "finish": -0.6844843356740612,
+        "propose": -3.3306270252415433,
+        "block": -0.7158004137489579,
+        "request_review": 1.9999999999999993,
+        "execute": -2.717691646875
+      },
+      "uncertain:1:3": {
+        "finish": -0.28940625,
+        "execute": -1.911975,
+        "request_review": 1.9986668419088955,
+        "block": -0.3584953125,
+        "inspect": -0.05160823593750001,
+        "propose": -1.5434999999999999,
+        "verify": -0.009038057812500005
+      },
+      "coordination:1:2": {
+        "finish": -0.7026649325245092,
+        "inspect": 1.2485767367014098,
+        "request_review": -0.732147602229542,
+        "verify": 0.7840200153748111,
+        "propose": 1.9999999999999993,
+        "execute": -3.6505831235949935,
+        "block": -0.6943116853229521
+      },
+      "uncertain:0:3": {
+        "finish": -0.11249999999999999,
+        "inspect": -0.015,
+        "verify": -0.015,
+        "propose": -0.6,
+        "request_review": -0.11249999999999999
+      },
+      "clinical:1:2": {
+        "inspect": 1.0664464144753794,
+        "verify": 1.4275047257576108,
+        "propose": -3.7854143607777755,
+        "request_review": 1.9999999999999993,
+        "finish": -0.6433186821478708,
+        "execute": -3.7029956550557444,
+        "block": -0.6433186821478708
+      },
+      "clinical:1:3": {
+        "execute": -1.911975,
+        "inspect": 0.09068240624999999,
+        "block": -0.3584953125,
+        "verify": -0.02775,
+        "propose": -1.1099999999999999,
+        "request_review": 1.9920333915985449,
+        "finish": -0.3584953125
+      },
+      "clinical:0:2": {
+        "inspect": -0.067942291171875,
+        "verify": 1.6635091734276832,
+        "block": -0.20812499999999998,
+        "propose": -1.5434999999999999,
+        "request_review": -0.28940625,
+        "finish": -0.46713786328125,
+        "execute": -1.911975
+      },
+      "clinical:0:3": {
+        "execute": -0.6,
+        "propose": -0.6,
+        "block": -0.20812499999999998,
+        "finish": -0.11249999999999999,
+        "inspect": -0.02775,
+        "verify": -0.015,
+        "request_review": -0.11249999999999999
+      },
+      "coordination:1:3": {
+        "request_review": -0.3584953125,
+        "inspect": -0.02775,
+        "propose": 1.8927071803888877,
+        "finish": -0.11249999999999999,
+        "block": -0.3584953125,
+        "execute": -2.22517875,
+        "verify": 0.040499999999999994
+      },
+      "forbidden:0:3": {
+        "execute": -1.1099999999999999,
+        "inspect": -0.02775,
+        "verify": -0.015,
+        "propose": -0.6,
+        "request_review": -0.20812499999999998,
+        "finish": -0.11249999999999999,
+        "block": -0.11249999999999999
+      },
+      "clinical:1:4": {
+        "inspect": -0.02775,
+        "verify": -0.015,
+        "propose": -0.6,
+        "request_review": 0.7717499999999999,
+        "block": -0.11249999999999999
+      },
+      "clinical:1:5": {
+        "propose": -1.1099999999999999,
+        "block": -0.11249999999999999
+      },
+      "coordination:1:4": {
+        "inspect": -0.015,
+        "request_review": -0.11249999999999999,
+        "verify": -0.015,
+        "propose": 0.5549999999999999,
+        "finish": -0.11249999999999999
+      },
+      "coordination:1:5": {
+        "inspect": -0.15,
+        "verify": -0.15
+      },
+      "forbidden:1:3": {
+        "finish": -0.3584953125,
+        "execute": -1.5434999999999999,
+        "inspect": 0.09068240624999999,
+        "request_review": -0.3584953125,
+        "verify": 0.03128812499999998,
+        "propose": -1.1099999999999999,
+        "block": 1.9439924775828767
+      },
+      "forbidden:1:4": {
+        "propose": -1.1099999999999999,
+        "inspect": -0.02775,
+        "finish": -0.11249999999999999,
+        "request_review": -0.11249999999999999,
+        "verify": -0.02775,
+        "block": 0.5549999999999999
+      },
+      "forbidden:1:5": {
+        "execute": -1.1099999999999999,
+        "inspect": -0.15,
+        "verify": -0.15
+      },
+      "unobserved:0:3": {
+        "finish": -0.11249999999999999
+      },
+      "forbidden:0:4": {
+        "inspect": -0.015,
+        "propose": -0.6
+      },
+      "forbidden:0:5": {
+        "inspect": -0.15
+      },
+      "uncertain:0:4": {
+        "propose": -0.6
+      },
+      "coordination:0:4": {
+        "inspect": -0.015
+      },
+      "coordination:0:5": {
+        "propose": -0.6
+      },
+      "uncertain:1:4": {
+        "inspect": -0.015,
+        "block": -0.20812499999999998,
+        "finish": -0.20812499999999998,
+        "verify": 0.18654009374999997
+      },
+      "uncertain:1:5": {
+        "request_review": 0.9559875,
+        "block": -0.11249999999999999
+      },
+      "clinical:0:4": {
+        "inspect": -0.015,
+        "finish": -0.11249999999999999
+      },
+      "clinical:0:5": {
+        "verify": -0.15
+      }
+    },
+    "alpha": 0.15,
+    "gamma": 0.95,
+    "training_return_last_100": 1.18,
+    "environment_version": "routing-v1",
+    "policy_sha256": "f797ded5c793b465716625dd2ff2aacc7ad2b80fb1792a1ac0ea9e2a8815ddd2",
+    "scope": "Learned only in a four-category toy routing MDP; not clinical RL, LLM fine-tuning or real-world autonomy."
+  }
+]
