@@ -1,3 +1,6 @@
+from copy import deepcopy
+
+
 class OutputComposer:
     def compose(
         self,
@@ -8,6 +11,16 @@ class OutputComposer:
         governance_results,
         readiness_explanation=None
     ):
+        # Structural acceptance does not verify the rationale. Only the
+        # checked task fields and the system-assigned identifier enter the plan.
+        plan_fields = (
+            "recommendation_id", "task_id", "action", "owner_role", "priority",
+            "resolves_barriers", "source_fields",
+        )
+        recommendations = [
+            {key: deepcopy(item[key]) for key in plan_fields}
+            for item in recommendations
+        ]
         human_approval_required = []
 
         for item in governance_results:

@@ -394,7 +394,11 @@ def run_pipeline(case_file, use_llm=True, persist=True):
         "readiness_explanation": readiness_explanation,
         "barrier_detector": barrier_result,
         "task_detector": task_result,
-        "recommendation_agent": {**recommendation_result, "recommendations": recommendations},
+        "recommendation_agent": {
+            **{key: value for key, value in recommendation_result.items()
+               if key not in {"raw_response", "recommendations"}},
+            "recommendations": final_output["recommendations"],
+        },
         "agent_workflow": agent_workflow,
         "safety_verification": verification,
 

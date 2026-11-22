@@ -35,7 +35,6 @@ type Recommendation = {
   recommendation_id: string;
   task_id: string;
   action: string;
-  rationale: string;
   owner_role: string;
   priority: string;
   resolves_barriers: string[];
@@ -946,12 +945,6 @@ function App() {
                   </div>
 
 
-                  <p>
-                    {
-                      recommendation
-                        .rationale
-                    }
-                  </p>
 
 
                   <span className="compact-meta">
@@ -1308,12 +1301,6 @@ function App() {
               </div>
 
 
-              <p>
-                {
-                  recommendation
-                    .rationale
-                }
-              </p>
 
 
               <div className="detail-footer">
@@ -1587,13 +1574,7 @@ function App() {
                           Recommendation
                         </span>
 
-                        <p>
-                          {
-                            recommendation
-                              .rationale
-                          }
-                        </p>
-
+                        <p>{recommendation.action}</p>
                       </div>
 
 
